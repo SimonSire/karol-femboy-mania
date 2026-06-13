@@ -24,6 +24,11 @@ default isMatysiakAnger = False
 default femboyChoices = 0
 default casinoLovesYou = 0
 
+#simon bar thingiesss
+default hasbeenbar = 0
+default barguybad = 0
+
+#bors
 default wrenchCasinoShingas = 0         #0 = never met robux, 1 = you made robux win, 2 = you made robux lose
 default pielaCasinoShingas = 0          #0 = never met piela, 1 = is being ignored, 2 = told to fuck off, 3 = agreed to help
 default wiktorCasinoShingas = 0
