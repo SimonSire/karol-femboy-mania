@@ -1,0 +1,121 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1" id="kfgOi4FyqEn85wM8esph">
+    <mxGraphModel dx="1664" dy="874" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="sbcVLnDCB_gXDM_pBERo-27" edge="1" parent="1" source="sbcVLnDCB_gXDM_pBERo-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="sbcVLnDCB_gXDM_pBERo-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sbcVLnDCB_gXDM_pBERo-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="bar seuquence" vertex="1">
+          <mxGeometry height="60" width="120" x="510" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="sbcVLnDCB_gXDM_pBERo-37" edge="1" parent="1" source="sbcVLnDCB_gXDM_pBERo-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="sbcVLnDCB_gXDM_pBERo-36">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sbcVLnDCB_gXDM_pBERo-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="lie about bartender" vertex="1">
+          <mxGeometry height="60" width="120" x="150" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="sbcVLnDCB_gXDM_pBERo-15" edge="1" parent="1" source="sbcVLnDCB_gXDM_pBERo-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="sbcVLnDCB_gXDM_pBERo-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sbcVLnDCB_gXDM_pBERo-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="tell the truth" vertex="1">
+          <mxGeometry height="60" width="120" x="500" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="sbcVLnDCB_gXDM_pBERo-6" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="389.9999999999999" y="410" as="sourcePoint" />
+            <mxPoint x="390" y="410" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sbcVLnDCB_gXDM_pBERo-16" edge="1" parent="1" source="sbcVLnDCB_gXDM_pBERo-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="sbcVLnDCB_gXDM_pBERo-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sbcVLnDCB_gXDM_pBERo-10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="if zlink dei" vertex="1">
+          <mxGeometry height="60" width="120" x="430" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="sbcVLnDCB_gXDM_pBERo-33" edge="1" parent="1" source="sbcVLnDCB_gXDM_pBERo-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="sbcVLnDCB_gXDM_pBERo-32">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sbcVLnDCB_gXDM_pBERo-11" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="drugs karol" vertex="1">
+          <mxGeometry height="60" width="120" x="420" y="525" as="geometry" />
+        </mxCell>
+        <mxCell id="sbcVLnDCB_gXDM_pBERo-12" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="karol walk away and bartender sad" vertex="1">
+          <mxGeometry height="60" width="140" x="610" y="525" as="geometry" />
+        </mxCell>
+        <mxCell id="sbcVLnDCB_gXDM_pBERo-17" edge="1" parent="1" source="sbcVLnDCB_gXDM_pBERo-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="sbcVLnDCB_gXDM_pBERo-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sbcVLnDCB_gXDM_pBERo-13" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="if zlink not&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&amp;nbsp;dei&lt;/span&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="620" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="sbcVLnDCB_gXDM_pBERo-14" edge="1" parent="1" source="sbcVLnDCB_gXDM_pBERo-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.441;entryY=0.013;entryDx=0;entryDy=0;entryPerimeter=0;" target="sbcVLnDCB_gXDM_pBERo-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sbcVLnDCB_gXDM_pBERo-23" edge="1" parent="1" source="sbcVLnDCB_gXDM_pBERo-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="sbcVLnDCB_gXDM_pBERo-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sbcVLnDCB_gXDM_pBERo-29" edge="1" parent="1" source="sbcVLnDCB_gXDM_pBERo-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="sbcVLnDCB_gXDM_pBERo-28">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sbcVLnDCB_gXDM_pBERo-19" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="ask if u met his brother" vertex="1">
+          <mxGeometry height="60" width="120" x="510" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="sbcVLnDCB_gXDM_pBERo-21" edge="1" parent="1" source="sbcVLnDCB_gXDM_pBERo-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="sbcVLnDCB_gXDM_pBERo-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sbcVLnDCB_gXDM_pBERo-22" edge="1" parent="1" source="sbcVLnDCB_gXDM_pBERo-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="sbcVLnDCB_gXDM_pBERo-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sbcVLnDCB_gXDM_pBERo-20" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="yea i met him" vertex="1">
+          <mxGeometry height="60" width="120" x="320" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="sbcVLnDCB_gXDM_pBERo-31" edge="1" parent="1" source="sbcVLnDCB_gXDM_pBERo-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="sbcVLnDCB_gXDM_pBERo-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sbcVLnDCB_gXDM_pBERo-43" edge="1" parent="1" source="sbcVLnDCB_gXDM_pBERo-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="sbcVLnDCB_gXDM_pBERo-42">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sbcVLnDCB_gXDM_pBERo-28" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="nah never seen" vertex="1">
+          <mxGeometry height="60" width="120" x="910" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="sbcVLnDCB_gXDM_pBERo-35" edge="1" parent="1" source="sbcVLnDCB_gXDM_pBERo-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="sbcVLnDCB_gXDM_pBERo-34">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sbcVLnDCB_gXDM_pBERo-30" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="drink" vertex="1">
+          <mxGeometry height="60" width="120" x="860" y="570" as="geometry" />
+        </mxCell>
+        <mxCell id="sbcVLnDCB_gXDM_pBERo-32" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="karol wakes up alone" vertex="1">
+          <mxGeometry height="60" width="120" x="420" y="640" as="geometry" />
+        </mxCell>
+        <mxCell id="sbcVLnDCB_gXDM_pBERo-34" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="karol beats him close to death" vertex="1">
+          <mxGeometry height="60" width="120" x="910" y="780" as="geometry" />
+        </mxCell>
+        <mxCell id="sbcVLnDCB_gXDM_pBERo-39" edge="1" parent="1" source="sbcVLnDCB_gXDM_pBERo-36" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="sbcVLnDCB_gXDM_pBERo-38">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sbcVLnDCB_gXDM_pBERo-36" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="gets ver happy" vertex="1">
+          <mxGeometry height="60" width="120" x="150" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="sbcVLnDCB_gXDM_pBERo-41" edge="1" parent="1" source="sbcVLnDCB_gXDM_pBERo-38" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="sbcVLnDCB_gXDM_pBERo-40">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sbcVLnDCB_gXDM_pBERo-38" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="shits himself" vertex="1">
+          <mxGeometry height="60" width="120" x="150" y="620" as="geometry" />
+        </mxCell>
+        <mxCell id="sbcVLnDCB_gXDM_pBERo-40" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="karol walk away and bartender shitting" vertex="1">
+          <mxGeometry height="60" width="140" x="140" y="730" as="geometry" />
+        </mxCell>
+        <mxCell id="sbcVLnDCB_gXDM_pBERo-45" edge="1" parent="1" source="sbcVLnDCB_gXDM_pBERo-42" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="sbcVLnDCB_gXDM_pBERo-44">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sbcVLnDCB_gXDM_pBERo-42" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="refuse" vertex="1">
+          <mxGeometry height="60" width="120" x="1030" y="570" as="geometry" />
+        </mxCell>
+        <mxCell id="sbcVLnDCB_gXDM_pBERo-44" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="walk waay&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="1030" y="680" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

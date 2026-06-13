@@ -1262,7 +1262,7 @@ label casinoRIGHT:
                                                     "the bartender doesnt seem to be anywhere"
                                                     menu:
                                                         "leave the bar":
-                                                            jump allgoodbar
+                                                            jump casinoRIGHT
 
                                                 b2 "no.."
                                                 b2 "no, that's not funny."
@@ -1276,12 +1276,12 @@ label casinoRIGHT:
                                                         b2 "GET OUT."
                                                         k "heyy"
                                                         b2 "LEAVE ME BE"
-                                                        jump uhohbar
+                                                        jump casinoRIGHT
 
                                                     "Backtrack":
                                                         k "wait— i didn't mean—"
                                                         b2 "no. you said enough."
-                                                        jump uhohbar
+                                                        jump casinoRIGHT
                             "no, haven'tr": 
                                 k "Your brother huh? Doesn;t ring any bells. Didnt see anyone like that"
                                 b2 "it's a shame, he is such a good bartender, maybe evebn the best int he world."
