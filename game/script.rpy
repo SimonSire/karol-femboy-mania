@@ -16,6 +16,7 @@ define wb = Character("Gambler", color="#091811")
 define br = Character("Broke robux", color="#9f3db3")
 define sx = Character("Sexy Gamemaster", color="#39b308")
 define pl = Character("Undersized delinquent", color="#a87698")
+define b2 = Character("Bartender 2", color="#120c63")
 
 default isPathetic = True
 default isZlinkDie = False
