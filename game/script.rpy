@@ -17,6 +17,7 @@ define br = Character("Broke robux", color="#9f3db3")
 define sx = Character("Sexy Gamemaster", color="#39b308")
 define pl = Character("Undersized delinquent", color="#a87698")
 define b2 = Character("Bartender 2", color="#120c63")
+define j = Character("Judge", color="#186d45")
 
 default isPathetic = True
 default isZlinkDie = False
@@ -2799,13 +2800,65 @@ label _CASINO_LEAVING_HERE______________________________________________________
 
         "you get dragged into the court room"
 
-        show trump with moveinbottom
-        "s"
-        show obama with moveinbottom
-        "s"
-        show sleepy with moveinbottom
-        "sds"
-            
+        play sound cloth
+        show judge 1 with dissolve
+
+        un "hey hey"
+        j "hello i am the judge"
+        j "So.. Karol mijas. You have the right to legal reprsentation.."
+        j "An attorney will-  imean was provided to you.."
+        j "altough..."
+        j "he unfortunately was killed on the way here"
+        j "however i have received his bag, so you may use it for your defense"
+
+        play sound dia1
+        show lawyerbag
+
+        "you have received your (disceased) lawyers bag"
+
+        hide lawyerbag
+        play sound courthammer
+        j "so... lets commence the trial"
+        j "explain to me whats happened"
+        p1 "alright so.. this guy right here punched a man in the bathroom"
+
+        menu:
+            "Use the particle accelerator":
+                "huh"
+            "Use the rat":
+                "hm"
+            "Use the weird looking device":
+                "huh"
+        
+
+        p2 "wait i compltetly forgot"
+        p2 "the guy murdered a bunch of people"
+
+        j "in that case the defendant stands accused of multiple murder charges and resisting arrest"
+        j "is this true? or will u waste of my more time"
+        play sound appear
+        show dryleft with moveinleft
+        p2 "yes your honour that is correct we have found concrete "    
+        extend "concrete eveideince that is"
+        j "lets hear that evidence you found"
+        play sound appear
+        show zlink right with moveinright
+        p1 "alright so...."
+        extend "\nwe first found a car.."
+        extend "\nand the windshield was aaaallll bloody"
+        p1 "pretty scary stuff"
+        p1 "but then.."
+        extend "not too far on the ground we saw something disturbing.."
+        p2 "it was a man.."
+        extend "a dead man.. long gone"
+        p1 "we actually confiscated the car"
+        hide dryleft with dissolve
+        show carblood with moveinleft
+        
+        
+        "they drag the car into the court"
+        show dryleft with dissolve
+        p2 "here it is, our concrete evidence of the first murder"
 
     label end:
         scene black
