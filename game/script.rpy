@@ -2788,7 +2788,13 @@ label outsidecasino:
     scene court
 
     "you get dragged into the court room"
-    
+
+    show trump with moveinbottom
+    "s"
+    show obama with moveinbottom
+    "s"
+    show sleepy with moveinbottom
+    "sds"    
 
 label end:
     scene black
