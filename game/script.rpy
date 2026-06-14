@@ -1315,16 +1315,77 @@ label casinoRIGHT:
                                     menu:
                                         "leave the bar":
                                             jump allgoodbar
+                            play sound win
+                            show foundbeer
+                            "you have now beer!!!! zywiec!!!"
+                            hide foundbeer
+                            play sound cloth
                             show hand beer with moveinbottom
                             k "oh yeaah"
                             show hand drink
                             play sound drink
                             k "oh yeaah"
+                            stop music fadeout 0.5
+                            play sound boom
+                            scene casbarevil
+                            show bartwin horse
                             #ooh what the fuckk
                             #changes into horse
                             k "you.."
                             k "MOTHERFUKCER!!"
                             show fists with moveinbottom
+                            menu:
+                                "FIGHT":
+                                    hide fists
+                                    show bartwin horse with hpunch
+                                    show fists2
+                                    play sound bad
+                                    $ renpy.pause(0.5, hard=True)
+                                    hide fists2
+                                    show fists
+
+                            show fists
+                            hide fists2
+                            play sound hose1
+                            menu:
+                                "FIGHT":
+                                    hide fists
+                                    show bartwin horse with hpunch
+                                    show fists2
+                                    play sound bad
+                                    $ renpy.pause(0.5, hard=True)
+                                    hide fists2
+                                    show fists
+
+                            show fists
+                            hide fists2
+                            play sound hose2
+                            menu:
+                                "FIGHT":
+                                    hide fists
+                                    show bartwin horse with hpunch
+                                    show fists2
+                                    play sound bad
+                                    $ renpy.pause(0.5, hard=True)
+                                    hide fists2
+                                    show fists
+
+                            show fists
+                            hide fists2
+                            play sound hose1
+                            menu:
+                                "FIGHT":
+                                    hide fists
+                                    show bartwin horse with hpunch
+                                    show fists2
+                                    play sound bad
+                                    $ renpy.pause(0.5, hard=True)
+                                    hide fists2
+                                    show fists
+
+                            show fists
+                            hide fists2
+                            play sound hose3
                     else:
                         if not barguybad:
                             b2 "oh did u change ur mind??"
@@ -2675,12 +2736,14 @@ label outsidecasino:
     play sound cloth
     show dryleft with moveinleft
     hide bobis 1 with dissolve
-    show bobis 4 with dissolve
+    
     
 
     p2 "look who we have here"
     p2 "you got some nerve runnin away from me"
 
+    show zlink 1 with moveinright
+    play sound cloth
     p1 "ugghhh, why did you even let him escape in the first place"
 
     if isPathetic:
@@ -2694,7 +2757,8 @@ label outsidecasino:
     p2 "would be pretty mean, wouldn'nt it, karol mijas?"
     p1 "yeah we found your car and ID"
 
-    
+    show bobis4 with moveinbottom
+    play sound cloth
     bb "Sir, he was making trouble at our place"
     bb "JAIL HIM!"
     bb "JAIL HIM! PUNISH HIM!"
@@ -2702,8 +2766,29 @@ label outsidecasino:
     p2 "You're coming with me pal"
     
     play sound cloth
-    hide bobis 1 with dissolve
-    "he just dissappears"
+    hide bobis4 with dissolve
+    "the management guy disapepars and then uhh"
+    "the police officers put you in their car"
+
+    scene policecar
+    "they put you in the car look this is the car!"
+
+    p2 "haaang tight buddy, a court room has been already prepared for you"
+
+    scene later
+    play sound later
+    "one enteri later"
+
+    scene courthall1
+
+    play sound foot
+    "you go in court"
+
+    play sound foot
+    scene court
+
+    "you get dragged into the court room"
+    
 
 label end:
     scene black
