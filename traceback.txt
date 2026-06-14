@@ -1,46 +1,20 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-NameError: name 'b2' is not defined
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "game/script.rpy", line 1173, in script
-    b2 "iiiiiiimmmm the bartender here :)"
-Exception: Sayer 'b2' is not defined.
+  File "game/script.rpy", line 2687, in script
+    label loop:
+Exception: Possible infinite loop.
 
 -- Full Traceback ------------------------------------------------------------
 
 Traceback (most recent call last):
-  File "renpy/ast.py", line 625, in eval_who
-    return renpy.python.py_eval(who)
-           ~~~~~~~~~~~~~~~~~~~~^^^^^
-  File "renpy/python.py", line 1305, in py_eval
-    return py_eval_bytecode(code, globals, locals)
-           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
-  File "renpy/python.py", line 1298, in py_eval_bytecode
-    return eval(bytecode, globals, locals)
-           ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "<none>", line 1, in <module>
-NameError: name 'b2' is not defined
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "game/script.rpy", line 1173, in script
-    b2 "iiiiiiimmmm the bartender here :)"
-  File "renpy/ast.py", line 2923, in execute
-    Say.execute(self)
-    ~~~~~~~~~~~^^^^^^
-  File "renpy/ast.py", line 956, in execute
-    who = eval_who(self.who, self.who_fast)
-          ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "renpy/ast.py", line 627, in eval_who
-    raise Exception("Sayer '%s' is not defined." % who)
-Exception: Sayer 'b2' is not defined.
+  File "game/script.rpy", line 2687, in script
+    label loop:
+  File "renpy/execution.py", line 62, in check_infinite_loop
+    raise Exception("Possible infinite loop.")
+Exception: Possible infinite loop.
 
 Windows-11-10.0.26200-SP0 AMD64
 Ren'Py 8.5.0.25111603
 Karol Femboy mania v2 fuck_you
-Sun Jun 14 01:22:09 2026
+Mon Jun 15 01:05:50 2026

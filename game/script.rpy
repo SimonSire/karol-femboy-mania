@@ -19,6 +19,9 @@ define pl = Character("Undersized delinquent", color="#a87698")
 define b2 = Character("Bartender 2", color="#120c63")
 define j = Character("Judge", color="#186d45")
 
+define t = Character("Trump", color="#614e12")
+define ob = Character("Obama", color="#503528")
+
 default isPathetic = True
 default isZlinkDie = False
 default isMatysiakAnger = False
@@ -29,6 +32,9 @@ default casinoLovesYou = 0
 #simon bar thingiesss
 default hasbeenbar = 0
 default barguybad = 0
+
+#courts
+default shitcourt = 0
 
 #bors
 default wrenchCasinoShingas = 0         #0 = never met robux, 1 = you made robux win, 2 = you made robux lose
@@ -2766,16 +2772,31 @@ label _CASINO_LEAVING_HERE______________________________________________________
 
         p2 "aaaand i didnt want to shoot him while he was running away"
         p2 "would be pretty mean, wouldn'nt it, karol mijas?"
-        p1 "yeah we found your car and ID"
+
+        menu:
+            "Yeah":
+                k "so unbelievably mean that would've been man"
+            "NO":
+                k "honestly, you should've just shot me"
+        p1 "so yeah we found your car and ID"
+        p1 "so we know  who you are now and itsnot looking good for you at all, tbh"
 
         show bobis4 with moveinbottom
         play sound cloth
         bb "Sir, he was making trouble at our place"
+        play sound impact1
+        with vpunch
         bb "JAIL HIM!"
-        bb "JAIL HIM! PUNISH HIM!"
+        play sound impact2
+        with vpunch
+        extend " PUNISH HIM!"
 
-        p2 "You're coming with me pal"
+        p2 "is that so?"
+
+        p2 "Either way, you're coming with me pal"
+        p1 "dont't worry, he will be punished accordingly"
         
+        bb "okaym ill levae you to  it"
         play sound cloth
         hide bobis4 with dissolve
         "the management guy disapepars and then uhh"
@@ -2783,6 +2804,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
 
         scene policecar
         "they put you in the car look this is the car!"
+        extend "impossible!! its the car!!"
 
         p2 "haaang tight buddy, a court room has been already prepared for you"
 
@@ -2790,11 +2812,25 @@ label _CASINO_LEAVING_HERE______________________________________________________
         play sound later
         "one enteri later"
 
-        scene courthall1
+        
+        jump courtarrive
+        
 
+        
+
+    label courtarrive:
+        scene courthall1
         play sound foot
         "you go in court"
+        if not shitcourt:
+            jump courtregular
+        else:
+            jump courtPresidents
 
+        
+        
+
+    label courtregular:
         play sound foot
         scene court
 
@@ -2802,14 +2838,13 @@ label _CASINO_LEAVING_HERE______________________________________________________
 
         play sound cloth
         show judge 1 with dissolve
-
         un "hey hey"
         j "hello i am the judge"
         j "So.. Karol mijas. You have the right to legal reprsentation.."
-        j "An attorney will-  imean was provided to you.."
-        j "altough..."
+        j "By the rules, an attorney will-  i mean was provided to you.."
+        j "however..."
         j "he unfortunately was killed on the way here"
-        j "however i have received his bag, so you may use it for your defense"
+        j "i have however received his bag, so you may use it for your defense"
 
         play sound dia1
         show lawyerbag
@@ -2820,15 +2855,15 @@ label _CASINO_LEAVING_HERE______________________________________________________
         play sound courthammer
         j "so... lets commence the trial"
         j "explain to me whats happened"
+        play sound appear
+        show dryleft with moveinleft
         p1 "alright so.. this guy right here punched a man in the bathroom"
 
         menu:
-            "Use the particle accelerator":
-                "huh"
-            "Use the rat":
-                "hm"
-            "Use the weird looking device":
-                "huh"
+            "NO!! That's a lie!":
+                k "I DID NOT!!!"
+            "Yeah":
+                k "Yes, i punches that guy in the bathroom, for good reason too"
         
 
         p2 "wait i compltetly forgot"
@@ -2836,11 +2871,11 @@ label _CASINO_LEAVING_HERE______________________________________________________
 
         j "in that case the defendant stands accused of multiple murder charges and resisting arrest"
         j "is this true? or will u waste of my more time"
-        play sound appear
-        show dryleft with moveinleft
+        
         p2 "yes your honour that is correct we have found concrete "    
         extend "concrete eveideince that is"
-        j "lets hear that evidence you found"
+        p2 "im very sorry about not starting with this idk whats wron with me"    
+        j "well lets hear that evidence you found"
         play sound appear
         show zlink right with moveinright
         p1 "alright so...."
@@ -2859,6 +2894,124 @@ label _CASINO_LEAVING_HERE______________________________________________________
         "they drag the car into the court"
         show dryleft with dissolve
         p2 "here it is, our concrete evidence of the first murder"
+
+
+        "its not looking very good for you.."
+        menu: 
+            "Open the lawyers bag":
+                play sound zip
+                "you open the bag"
+        play sound drumroll
+        "inside... you find:"
+
+        play sound dia1
+        show foundtime
+        "A mysterious device! Fascinating!!!"
+
+        play sound dia1
+        show foundnose
+        "A nose and glasses thing! Dunno whats its called. "
+        extend "I'm sorry for being such a unreliable narrator.. "
+        extend "i really dont know whats it called. sorry :("
+
+        play sound dia1
+        show foundcontrol
+        "A controller!!"
+
+        menu:
+            "Use the strange device":
+                "huh"
+            "Use the fake nose and glasses":
+                "hm"
+            "Use the controller":
+                "huh"
+
+    label courtPresidents:
+        scene court
+        "woa look its th ecourtuoom"
+        play sound appear
+        show judge 1
+        un "heeey hello"
+        j "hello i am the judge"
+        j "So.. Karol mijas. YOu rea the defendast, and your laawayer thas been appointed to you is on the way."
+        play sound appear
+        hide judge 1
+        show trump with dissolve
+        t "hey hey, hello im here because im very interested in this case, very interested indeed"
+        t "some people are saying this is the greatest court case of all time. I don't know if that's true, but a lot of very smart people are saying it."
+        t "everyobodys asking 'Are you going to the court case' and i said 'maybe', and quite frankly ive never seen a courtroom like this with such trmendous energy before"
+        hide trump
+        play sound appear
+        show judge 1 with dissolve
+        j "hey ths is my courtroom im the judge"
+        play sound appear
+        hide judge 1
+        show trump with dissolve
+        t "uuhh, no, frankly speaking, i am the president here and uh you gotta listen to me, alright, is that clear?"
+        t "hey barrack, get over here"
+        play sound cloth
+        show obama with moveinright
+        ob "ye trump, what is it trump"
+        t "what do you think of this.. highly interesting court case tremeendous, even, absoloutely tremendous"
+        ob "well, i dont know trump, maybe we should let the court actually work things out and uuh see how this court case goes huh"
+        t "alright, alright, but believe me, ive seen a lot of courtrooms, and this courtroom? its top tier, maybe even one of the best"
+
+        hide trump
+        play sound appear
+        show judge 1 with dissolve
+        j "ahem, the accused stands accused for murder"
+        play sound appear
+        hide judge 1
+        show trump with dissolve
+        t "amuder? murder you say.. people tell me all the time, murder is pretty bad, no really, i wonder how this 'Karol mijas' is going to deal with this  massive accusation.. quite a massive accusation this is"
+
+        hide trump
+        play sound appear
+        show judge 1 with dissolve
+        j "will the police officers provide us with neccesary information?"
+
+        play sound appear
+        show dryleft with moveinleft
+        p2 "yes your honour"
+        play sound appear
+        hide judge 1
+        show trump with dissolve
+        t "hey sleepy joe, i think you should listen to this. i bet nobodys seen anything like it"
+        play sound shleeping
+        hide dryleft with dissolve
+        show sleepy with dissolve
+        
+        "seems hes deep asleep"
+        ob "maybe we should just let him sleep, donald"
+        t "alright, alright, okay, police guy, you may continue"
+
+        play sound appear
+        show dryleft with moveinleft
+        p2 "so, in any case, we first got a call about a murder in a bar"
+
+        play sound cloth
+        show zlink right with moveinright
+        p1 "when we arrived at the scene, we saw a dead bartender, dead on the ground"
+        p2 "quite a gruesome sight."
+
+        t "a dead bartender... sad. really sasd."
+        extend "but ive seen a lot of things like this-maybe more than anybody, and, frankly its a verry cmplex situation."
+        
+        p2 "in the building, we encountered.. "
+        play sound impact1
+        with hpunch
+        extend "the DEFENDANT!"
+        p1 "i encountered him further in the building, his fists, covered in blood"
+
+        t "quite frankly im wondering, what the defendant would say to this.."
+
+        menu:
+            "I dont know":
+                "sds"
+            "What do i put here next":
+                "aaa"
+        
+
 
     label end:
         scene black
