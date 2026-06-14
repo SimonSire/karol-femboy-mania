@@ -16,4 +16,13 @@ jajasdj
 
 uuuh idk
 
-[click this to go play eh the map man what else u gon do](https://steamcommunity.com/sharedfiles/filedetails/?id=3317964979 "Go play the map")
+[click this to go play eh the map man what else u gon do<supS>](https://steamcommunity.com/sharedfiles/filedetails/?id=3317964979 "Go play the map")
+
+```javascript
+var s = "FUCK U LEAVE GET OUT WHILE U CAN!!!!";
+alert(s);
+```
+
+### here i drywalk he sasy you should play the game!!! or work on it:
+
+![alt text](https://github.com/SimonSire/karol-femboy-mania/blob/main/game/images/dry2.png "Hellooo THIS IS drrywalk")
