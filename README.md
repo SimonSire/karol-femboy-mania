@@ -1,4 +1,4 @@
-# karol femboy mania
+<h1 align="center">Karol Femboy Mania</h1>
 
 ![Made with renpy](https://img.shields.io/badge/made_with-RENPY_MOTHERFUCKER-FF7F7F.svg?style=flat-square&logo=renpy)
 
@@ -19,7 +19,9 @@ hello thius is karl femboy mania this is where we can work on it or download the
 * and uh coolness
 * pretty revolutionary
 
-
+<p align="center">
+    <img src="https://github.com/SimonSire/karol-femboy-mania/blob/main/thingforreadme/maman.gif "MAIL MAN" width="700">
+</p>
 
 ![alt text](https://github.com/SimonSire/karol-femboy-mania/blob/main/game/images/wiktor%201.png "Hellooo welcome to the game here is wiktor greeting you")
 
