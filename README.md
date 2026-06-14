@@ -2,7 +2,7 @@
 
 ![Made with renpy](https://img.shields.io/badge/made_with-RENPY_MOTHERFUCKER-FF7F7F.svg?style=flat-square&logo=renpy)
 
-![Last Commit](https://img.shields.io/github/last-commit/SimonSire/karol-femboy-mania?style=for-the-badge)
+![Last Commit](https://img.shields.io/github/last-commit/SimonSire/karol-femboy-mania)
 
 hello thius is karl femboy mania this is where we can work on it or download the game when we have a playabe versio
 
@@ -23,7 +23,7 @@ hello thius is karl femboy mania this is where we can work on it or download the
 
 ![alt text](https://github.com/SimonSire/karol-femboy-mania/blob/main/game/images/wiktor%201.png "Hellooo welcome to the game here is wiktor greeting you")
 
-![alt text](https://github.com/SimonSire/karol-femboy-mania/thingforreadme/maman.gif "Hellooo welcome to the game here is wiktor greeting you")
+MAILMAN![alt text](https://github.com/SimonSire/karol-femboy-mania/blob/main/thingforreadme/maman.gif "MAIL MAN")
 
 
 uuuh idk
