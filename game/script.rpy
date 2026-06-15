@@ -4,7 +4,24 @@
 
 # atp im just adding pointless shit
 
-define k = Character("Karol Mijas", color="#ffe864")
+init python:
+    def karolTalks(event, **kwargs):
+        shit = 0
+        while shit < 50:
+            if karolTalkingShit:
+                sound_dongus = renpy.random.randint(0,2)
+                if event == "show":
+                    if sound_dongus == 0:
+                        renpy.sound.queue("karoltalk 1.mp3", channel="sound", loop=False)
+                    elif sound_dongus == 1:
+                        renpy.sound.queue("karoltalk 2.mp3", channel="sound", loop=False)
+                    elif sound_dongus == 2:
+                        renpy.sound.queue("karoltalk 3.mp3", channel="sound", loop=False)
+                elif event == "slow_done" or event == "end":
+                    renpy.sound.stop(channel="sound")
+            shit += 1
+
+define k = Character("Karol Mijas", color="#ffe864", callback=karolTalks)
 define un = Character("???")
 define d = Character("papa Mijas", color="#706316")
 define do = Character("Domin", color="#a32d76")
@@ -82,6 +99,7 @@ default drywallAttack = 0
 default matysiakAttack = 0
 
 default debugMode = False
+default karolTalkingShit = True
 
 #gambel machine
 define interval = 0.1 
@@ -140,6 +158,7 @@ init python: #PYTHON FUNCTIONS AND THINGIESS
         "karolcue4.mp3",
         "karolcue5.mp3"
     ]
+
 
     def drag_placed(drags, drop):
         global shapeDraggable, shapeDroppable, doShapesMatch
@@ -715,11 +734,10 @@ label _1ST_SECTION_ORIGINAL_GAME_HERE___________________________________________
         play sound dad2
         d "son."
 
-        play voice dad3s5
-        d "you have "
-        play sound dad3s6
-        with vpunch
-        extend "{color=#e34236}3 days to move out."
+        play sound dad3
+        d "you have {color=#de1809}3 days to move out.{/color}"
+        ##with vpunch
+        ##extend "{color=#e34236}3 days to move out." ##simon u fucked this shit up it aint working unless u split the voice line
 
         play sound dad4
 
@@ -887,22 +905,22 @@ label _1ST_SECTION_ORIGINAL_GAME_HERE___________________________________________
 
     label house:
         play music karoltheme_poor fadein 5.0 volume 0.2
-        play sound foot
+        play audio foot
         show house1
         k "this house looks pretty good so far"
-        play sound foot
+        play audio foot
         show door1
         k "that's the front door right there!"
-        play sound foot
+        play audio foot
         show door2
-        play sound knock
+        play audio knock
         "*Karol Mijas knocks on the door*"
         
         play sound dom11
         do "Karol Mijas, is that you? Come in."
 
         show lv2
-        play sound door
+        play audio door
 
         show domin with moveinbottom
 
