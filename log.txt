@@ -1,34 +1,33 @@
-2026-06-15 10:53:44 UTC
+2026-06-15 15:45:56 UTC
 Windows-11-10.0.26200-SP0
 Ren'Py 8.5.0.25111603
 
 Early init took 31 ms
-Loading error handling took 25 ms
-Loading script took 1032 ms
-Loading save slot metadata took 33 ms
+Loading error handling took 23 ms
+Loading script took 506 ms
+Loading save slot metadata took 22 ms
 Loading persistent took 0 ms
-Running init code took 157 ms
+Running init code took 47 ms
 Loading analysis data took 4 ms
 Analyze and compile ATL took 1 ms
 Reloading save slot metadata took 9 ms
-Backing up script files to 'C:\\Users\\MyPC\\AppData\\Roaming/RenPy/backups\\karol femboy mania':
-Dump and make backups took 27 ms
+Dump and make backups took 22 ms
 Cleaning cache took 0 ms
-Making clean stores took 0 ms
-Initial gc took 28 ms
+Making clean stores took 1 ms
+Initial gc took 24 ms
 DPI scale factor: 1.000000
 nvdrs: Loaded, about to disable thread optimizations.
 nvdrs: b"Couldn't load nvlib." (can be ignored)
-Creating interface object took 21 ms
+Creating interface object took 27 ms
 Init translation took 0 ms
 Cleaning stores took 0 ms
-Load screen analysis took 1 ms
-Analyze screens took 6 ms
-Save screen analysis took 9 ms
+Load screen analysis took 12 ms
+Analyze screens took 0 ms
+Save screen analysis took 0 ms
 Save pyanalysis took 0 ms
 Save bytecode took 18 ms
-Running _start took 1 ms
-Interface start took 161 ms
+Running _start took 0 ms
+Interface start took 144 ms
 
 Initializing gl2 renderer:
 primary display bounds: (0, 0, 1920, 1080)
@@ -38,13 +37,13 @@ Vendor: 'ATI Technologies Inc.'
 Renderer: 'AMD Radeon RX 9060 XT'
 Version: '4.6.0 Compatibility Profile Context 26.6.1.260513'
 Display Info: <Info({'bitsize': 32, 'bytesize': 4, 'masks': (16711680, 65280, 255, 0), 'shifts': (16, 8, 0, 0), 'losses': (0, 0, 0, 8), 'current_w': 1920, 'current_h': 1080, 'refresh_rate': 59, 'hw': False, 'wm': True, 'video_mem': 268435456, 'blit_hw': False, 'blit_hw_CC': False, 'blit_hw_A': False, 'blit_sw': False, 'blit_sw_CC': False, 'blit_sw_A': False})>
-Screen sizes: virtual=(1920, 1080) physical=(1390, 782) drawable=(1390, 782)
+Screen sizes: virtual=(1920, 1080) physical=(1415, 796) drawable=(1415, 796)
 Maximum texture size: 4096x4096
 Resetting cache.
-Early init took 4 ms
-Loading error handling took 14 ms
-Loading script took 338 ms
-Loading save slot metadata took 16 ms
+Early init took 5 ms
+Loading error handling took 16 ms
+Loading script took 394 ms
+Loading save slot metadata took 14 ms
 Loading persistent took 0 ms
 Running init code took 21 ms
 Loading analysis data took 3 ms
@@ -53,19 +52,19 @@ Reloading save slot metadata took 8 ms
 Backing up script files to 'C:\\Users\\MyPC\\AppData\\Roaming/RenPy/backups\\karol femboy mania':
 Dump and make backups took 25 ms
 Cleaning cache took 0 ms
-Making clean stores took 1 ms
-Initial gc took 33 ms
+Making clean stores took 0 ms
+Initial gc took 36 ms
 DPI scale factor: 1.000000
-Creating interface object took 0 ms
+Creating interface object took 1 ms
 Init translation took 0 ms
-Cleaning stores took 1 ms
+Cleaning stores took 0 ms
 Load screen analysis took 0 ms
 Analyze screens took 7 ms
 Save screen analysis took 9 ms
 Save pyanalysis took 0 ms
 Save bytecode took 0 ms
 Running _start took 1 ms
-Interface start took 143 ms
+Interface start took 152 ms
 
 Initializing gl2 renderer:
 primary display bounds: (0, 0, 1920, 1080)
@@ -75,5 +74,225 @@ Vendor: 'ATI Technologies Inc.'
 Renderer: 'AMD Radeon RX 9060 XT'
 Version: '4.6.0 Compatibility Profile Context 26.6.1.260513'
 Display Info: <Info({'bitsize': 32, 'bytesize': 4, 'masks': (16711680, 65280, 255, 0), 'shifts': (16, 8, 0, 0), 'losses': (0, 0, 0, 8), 'current_w': 1920, 'current_h': 1080, 'refresh_rate': 59, 'hw': False, 'wm': True, 'video_mem': 268435456, 'blit_hw': False, 'blit_hw_CC': False, 'blit_hw_A': False, 'blit_sw': False, 'blit_sw_CC': False, 'blit_sw_A': False})>
-Screen sizes: virtual=(1920, 1080) physical=(1390, 782) drawable=(1390, 782)
+Screen sizes: virtual=(1920, 1080) physical=(1415, 796) drawable=(1415, 796)
+Maximum texture size: 4096x4096
+Resetting cache.
+Early init took 4 ms
+Loading error handling took 8 ms
+Loading script took 371 ms
+Loading save slot metadata took 19 ms
+Loading persistent took 0 ms
+Running init code took 24 ms
+Loading analysis data took 3 ms
+Analyze and compile ATL took 2 ms
+Reloading save slot metadata took 10 ms
+Backing up script files to 'C:\\Users\\MyPC\\AppData\\Roaming/RenPy/backups\\karol femboy mania':
+Dump and make backups took 26 ms
+Cleaning cache took 1 ms
+Making clean stores took 0 ms
+Initial gc took 37 ms
+DPI scale factor: 1.000000
+Creating interface object took 0 ms
+Init translation took 1 ms
+Cleaning stores took 0 ms
+Load screen analysis took 1 ms
+Analyze screens took 7 ms
+Save screen analysis took 9 ms
+Save pyanalysis took 0 ms
+Save bytecode took 0 ms
+Running _start took 1 ms
+Interface start took 163 ms
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'ATI Technologies Inc.'
+Renderer: 'AMD Radeon RX 9060 XT'
+Version: '4.6.0 Compatibility Profile Context 26.6.1.260513'
+Display Info: <Info({'bitsize': 32, 'bytesize': 4, 'masks': (16711680, 65280, 255, 0), 'shifts': (16, 8, 0, 0), 'losses': (0, 0, 0, 8), 'current_w': 1920, 'current_h': 1080, 'refresh_rate': 59, 'hw': False, 'wm': True, 'video_mem': 268435456, 'blit_hw': False, 'blit_hw_CC': False, 'blit_hw_A': False, 'blit_sw': False, 'blit_sw_CC': False, 'blit_sw_A': False})>
+Screen sizes: virtual=(1920, 1080) physical=(1415, 796) drawable=(1415, 796)
+Maximum texture size: 4096x4096
+Resetting cache.
+Early init took 4 ms
+Loading error handling took 8 ms
+Loading script took 344 ms
+Loading save slot metadata took 15 ms
+Loading persistent took 0 ms
+Running init code took 20 ms
+Loading analysis data took 3 ms
+Analyze and compile ATL took 1 ms
+Reloading save slot metadata took 8 ms
+Backing up script files to 'C:\\Users\\MyPC\\AppData\\Roaming/RenPy/backups\\karol femboy mania':
+Dump and make backups took 23 ms
+Cleaning cache took 0 ms
+Making clean stores took 0 ms
+Initial gc took 37 ms
+DPI scale factor: 1.000000
+Creating interface object took 0 ms
+Init translation took 1 ms
+Cleaning stores took 0 ms
+Load screen analysis took 0 ms
+Analyze screens took 6 ms
+Save screen analysis took 9 ms
+Save pyanalysis took 0 ms
+Save bytecode took 0 ms
+Running _start took 0 ms
+Interface start took 154 ms
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'ATI Technologies Inc.'
+Renderer: 'AMD Radeon RX 9060 XT'
+Version: '4.6.0 Compatibility Profile Context 26.6.1.260513'
+Display Info: <Info({'bitsize': 32, 'bytesize': 4, 'masks': (16711680, 65280, 255, 0), 'shifts': (16, 8, 0, 0), 'losses': (0, 0, 0, 8), 'current_w': 1920, 'current_h': 1080, 'refresh_rate': 59, 'hw': False, 'wm': True, 'video_mem': 268435456, 'blit_hw': False, 'blit_hw_CC': False, 'blit_hw_A': False, 'blit_sw': False, 'blit_sw_CC': False, 'blit_sw_A': False})>
+Screen sizes: virtual=(1920, 1080) physical=(1415, 796) drawable=(1415, 796)
+Maximum texture size: 4096x4096
+Resetting cache.
+Early init took 4 ms
+Loading error handling took 6 ms
+Loading script took 353 ms
+Loading save slot metadata took 16 ms
+Loading persistent took 0 ms
+Running init code took 22 ms
+Loading analysis data took 3 ms
+Analyze and compile ATL took 2 ms
+Reloading save slot metadata took 9 ms
+Backing up script files to 'C:\\Users\\MyPC\\AppData\\Roaming/RenPy/backups\\karol femboy mania':
+Dump and make backups took 25 ms
+Cleaning cache took 0 ms
+Making clean stores took 0 ms
+Initial gc took 44 ms
+DPI scale factor: 1.000000
+Creating interface object took 0 ms
+Init translation took 1 ms
+Cleaning stores took 0 ms
+Load screen analysis took 0 ms
+Analyze screens took 7 ms
+Save screen analysis took 12 ms
+Save pyanalysis took 0 ms
+Save bytecode took 0 ms
+Running _start took 1 ms
+Interface start took 170 ms
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'ATI Technologies Inc.'
+Renderer: 'AMD Radeon RX 9060 XT'
+Version: '4.6.0 Compatibility Profile Context 26.6.1.260513'
+Display Info: <Info({'bitsize': 32, 'bytesize': 4, 'masks': (16711680, 65280, 255, 0), 'shifts': (16, 8, 0, 0), 'losses': (0, 0, 0, 8), 'current_w': 1920, 'current_h': 1080, 'refresh_rate': 59, 'hw': False, 'wm': True, 'video_mem': 268435456, 'blit_hw': False, 'blit_hw_CC': False, 'blit_hw_A': False, 'blit_sw': False, 'blit_sw_CC': False, 'blit_sw_A': False})>
+Screen sizes: virtual=(1920, 1080) physical=(1415, 796) drawable=(1415, 796)
+Maximum texture size: 4096x4096
+Resetting cache.
+Early init took 5 ms
+Loading error handling took 7 ms
+Loading script took 380 ms
+Loading save slot metadata took 15 ms
+Loading persistent took 0 ms
+Running init code took 23 ms
+Loading analysis data took 3 ms
+Analyze and compile ATL took 2 ms
+Reloading save slot metadata took 9 ms
+Backing up script files to 'C:\\Users\\MyPC\\AppData\\Roaming/RenPy/backups\\karol femboy mania':
+Dump and make backups took 25 ms
+Cleaning cache took 0 ms
+Making clean stores took 1 ms
+Initial gc took 41 ms
+DPI scale factor: 1.000000
+Creating interface object took 0 ms
+Init translation took 0 ms
+Cleaning stores took 0 ms
+Load screen analysis took 0 ms
+Analyze screens took 7 ms
+Save screen analysis took 9 ms
+Save pyanalysis took 0 ms
+Save bytecode took 0 ms
+Running _start took 1 ms
+Interface start took 177 ms
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'ATI Technologies Inc.'
+Renderer: 'AMD Radeon RX 9060 XT'
+Version: '4.6.0 Compatibility Profile Context 26.6.1.260513'
+Display Info: <Info({'bitsize': 32, 'bytesize': 4, 'masks': (16711680, 65280, 255, 0), 'shifts': (16, 8, 0, 0), 'losses': (0, 0, 0, 8), 'current_w': 1920, 'current_h': 1080, 'refresh_rate': 59, 'hw': False, 'wm': True, 'video_mem': 268435456, 'blit_hw': False, 'blit_hw_CC': False, 'blit_hw_A': False, 'blit_sw': False, 'blit_sw_CC': False, 'blit_sw_A': False})>
+Screen sizes: virtual=(1920, 1080) physical=(1415, 796) drawable=(1415, 796)
+Maximum texture size: 4096x4096
+Resetting cache.
+Early init took 5 ms
+Loading error handling took 6 ms
+Loading script took 67 ms
+Loading save slot metadata took 15 ms
+Loading persistent took 0 ms
+Running init code took 25 ms
+Loading analysis data took 3 ms
+Analyze and compile ATL took 1 ms
+Reloading save slot metadata took 9 ms
+Dump and make backups took 23 ms
+Cleaning cache took 0 ms
+Making clean stores took 0 ms
+Initial gc took 38 ms
+DPI scale factor: 1.000000
+Creating interface object took 0 ms
+Init translation took 1 ms
+Cleaning stores took 0 ms
+Load screen analysis took 11 ms
+Analyze screens took 2 ms
+Save screen analysis took 0 ms
+Save pyanalysis took 0 ms
+Save bytecode took 0 ms
+Running _start took 0 ms
+Interface start took 187 ms
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'ATI Technologies Inc.'
+Renderer: 'AMD Radeon RX 9060 XT'
+Version: '4.6.0 Compatibility Profile Context 26.6.1.260513'
+Display Info: <Info({'bitsize': 32, 'bytesize': 4, 'masks': (16711680, 65280, 255, 0), 'shifts': (16, 8, 0, 0), 'losses': (0, 0, 0, 8), 'current_w': 1920, 'current_h': 1080, 'refresh_rate': 59, 'hw': False, 'wm': True, 'video_mem': 268435456, 'blit_hw': False, 'blit_hw_CC': False, 'blit_hw_A': False, 'blit_sw': False, 'blit_sw_CC': False, 'blit_sw_A': False})>
+Screen sizes: virtual=(1920, 1080) physical=(1415, 796) drawable=(1415, 796)
+Maximum texture size: 4096x4096
+Resetting cache.
+Early init took 5 ms
+Loading error handling took 7 ms
+Loading script took 78 ms
+Loading save slot metadata took 18 ms
+Loading persistent took 0 ms
+Running init code took 28 ms
+Loading analysis data took 3 ms
+Analyze and compile ATL took 2 ms
+Reloading save slot metadata took 9 ms
+Dump and make backups took 24 ms
+Cleaning cache took 0 ms
+Making clean stores took 0 ms
+Initial gc took 47 ms
+DPI scale factor: 1.000000
+Creating interface object took 0 ms
+Init translation took 1 ms
+Cleaning stores took 0 ms
+Load screen analysis took 13 ms
+Analyze screens took 1 ms
+Save screen analysis took 0 ms
+Save pyanalysis took 0 ms
+Save bytecode took 0 ms
+Running _start took 0 ms
+Interface start took 181 ms
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'ATI Technologies Inc.'
+Renderer: 'AMD Radeon RX 9060 XT'
+Version: '4.6.0 Compatibility Profile Context 26.6.1.260513'
+Display Info: <Info({'bitsize': 32, 'bytesize': 4, 'masks': (16711680, 65280, 255, 0), 'shifts': (16, 8, 0, 0), 'losses': (0, 0, 0, 8), 'current_w': 1920, 'current_h': 1080, 'refresh_rate': 59, 'hw': False, 'wm': True, 'video_mem': 268435456, 'blit_hw': False, 'blit_hw_CC': False, 'blit_hw_A': False, 'blit_sw': False, 'blit_sw_CC': False, 'blit_sw_A': False})>
+Screen sizes: virtual=(1920, 1080) physical=(1415, 796) drawable=(1415, 796)
 Maximum texture size: 4096x4096

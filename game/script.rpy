@@ -2840,7 +2840,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
         scene courthall1
         play sound foot
         "you go in court"
-        if shitcourt:
+        if not shitcourt:
             jump courtregular
         else:
             jump courtPresidents
@@ -2892,8 +2892,6 @@ label _CASINO_LEAVING_HERE______________________________________________________
                         if didyankdoor:
                             k "fucker yanked my ENTIRE door away after punching a hole trought the metal"
                             k "some sick fuck i tell y ou"
-                    "Say nothing more":
-                        pass
             "Yeah":
                 k "Yes, i punches that guy in the bathroom, for good reason too"
                 j "good reason you say?"
@@ -2902,17 +2900,61 @@ label _CASINO_LEAVING_HERE______________________________________________________
                 play sound impact1
                 with hpunch
                 extend " {b}{color=#851911}taking a shit!!{/b}"
-        
 
-        p2 "hold on wait i compltetly forgot"
-        p2 "the guy murdered a bunch of people"
+                j "..."
 
+
+                p2 "..."
+
+                k "its a horribl wy to invade someones privacy guys"
+                k "its a MASSIVE VIOLATIO N OF YM PRIVACY"
+
+        play sound hammer1
+        j "Order! ORDER IN THE COURT!"
+        j "Did he atleast knock?"
+
+        menu:
+            "He did":
+                if didyankdoor:
+                    k "He tore the fucking door{nw=0.0}"
+                    play sound impact1
+                    extends "{color=#6b5512} off of its hinges"
+                else:
+                    k "He was banging on my door furiously~!!"
+        j "and what exactly were you doiing in the bathroom?"
+        menu:
+            "Taking a shit":
+                k "Like i said,  i was taking ashit dipshit"
+            "What do u fuckin think":
+                $ judgepissedlevel += 2
+                k "What do you fucking think i was doing?"
+                k "are you retarded?"
+                play sound hammer2
+                j "FUCK YOU!"
+                j "IM THE JUDHGE"
+                j "imthe FUCKING judge YOU DONTT ALK TO ME THAT WAY!!"
+
+        j "can someone fact check this?"
+        p2 "your honour, i can confirm he was inddeed taking shit."
+        j "how so?"
+        p2 "after we transported him here he left a giant shit stain in the back of our patrol car"
+
+        j "wery well.. we may continue"
+
+
+        p2 "hold on wait "
+        extend "i compltetly forgot"
+        p2 "the guy {color=#de1809}murdered{/color} a bunch of people"
+
+        j "are you serious?"
+        j "then what were we discussing just now?"
+        p2 "there was a mix up, there was never any fight"
         j "in that case the defendant stands accused of multiple murder charges and resisting arrest"
         j "is this true? or will u waste of my more time"
         
         p2 "yes your honour that is correct we have found concrete "    
         extend "concrete eveideince that is"
-        p2 "im very sorry about not starting with this idk whats wron with me"    
+        p2 "im very sorry about not starting with this it must be the caffeine"    
         j "well lets hear that evidence you found"
         play sound appear
         show zlink right with moveinright
@@ -2922,6 +2964,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
         menu:
             "Thas crazy":
                 k "this so crazy"
+                play sound hammer1
                 j "will the defendant please shut the fuck up"
                 $ judgepissedlevel += 1
                 "seems youre really getting on his nerves"
@@ -2937,13 +2980,19 @@ label _CASINO_LEAVING_HERE______________________________________________________
         extend " A pickle shaped man."
         extend " Long gone.. No longer with us."
         p1 "we actually confiscated the car"
-        extend ". And the man!"
         hide dryleft with dissolve
         play sound metaldrag
         show carblood with moveinleft
+        #$ renpy.pause(1, hard=True)
+        "they drag the car inside"
+        hide carbloodpick
+        hide dryleft with dissolve
+        show carbloodpick
+        play sound cloth
+        p1 "we also got the man"
         
         
-        "they drag the car into the court"
+    
         show dryleft with dissolve
         p2 "here it is, our concrete evidence of the first murder"
 
@@ -2959,13 +3008,48 @@ label _CASINO_LEAVING_HERE______________________________________________________
             "Say nothing":
                 pass
             "I thought it was a road bump!!":
-                pass
+                k "But i thought it was a road bump on the highway!"
+
+        j "well, we're just going to have to ask to have ask the witness!"
+
+        stop music fadeout 3.0
+
+        j "mster pickle nan, could you please tell the court what happened?"
+
+        play sound nin1
+        "..."
+
+        j "take your time."
+
+        play sound nin2
+        "..."
+
+        p2 "you honor-"
+
+        play sound hammer2
+        j "NO INTERRUPTIONS"
+        j "the witness is testifying"
+        j "go right ahead, mr pickle"
+
+        play sound nin3
+        "..."
+
+        j "mr pickle?"
+
+        play sound nin4
+        "..."
+
+        p2 "hes dead."
+
+        j "wery vell.."
+        j "let it be known, the witness is not cooperating"
 
         "its not looking very good for you.."
         menu: 
             "Open the lawyers bag":
                 play sound zip
                 "you open the bag"
+                
         play sound drumroll
         "inside... you find:"
 
@@ -2990,7 +3074,14 @@ label _CASINO_LEAVING_HERE______________________________________________________
                 "hm"
             "Use the controller":
                 "you take the controller"
+                hide foundnose
+                hide foundtime
                 k "let me skip this damn npcs cutscenee"
+                play sound appear
+                show hands control with moveinbottom
+                menu:
+                    "press button on controller":
+                        "you click it"
 
     label courtPresidents:
         play music ace2 fadein 1.0 volume 0.05
@@ -3020,7 +3111,9 @@ label _CASINO_LEAVING_HERE______________________________________________________
         t "hey barrack, get over here"
         play sound cloth
         show obama with moveinright
-        ob "ye trump, what is it trump"
+        ob "hello i am your president barac obmana"
+        t "yeah"
+        ob "yes trump, what is it trump?"
         t "what do you think of this.. highly interesting court case tremeendous, even, absoloutely tremendous"
         ob "well, i dont know trump, maybe we should let the court actually work things out and uuh see how this court case goes huh"
         t "alright, alright, but believe me, ive seen a lot of courtrooms, and this courtroom? its top tier, maybe even one of the best"
