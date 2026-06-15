@@ -1,5 +1,6 @@
 ﻿    # hello welcome to the script of karolfemboymania where there are barely any femboys at the moment as i write this
 # and no im not adding any rn
+# dont worry im not gonna be adding any either
 
 # atp im just adding pointless shit
 
@@ -17,8 +18,8 @@ define br = Character("Broke robux", color="#9f3db3")
 define sx = Character("Sexy Gamemaster", color="#39b308")
 define pl = Character("Undersized delinquent", color="#a87698")
 define b2 = Character("Bartender 2", color="#120c63")
-define j = Character("Judge", color="#186d45")
 
+define j = Character("Judge", color="#186d45")
 define t = Character("Trump", color="#614e12")
 define ob = Character("Obama", color="#503528")
 
@@ -31,10 +32,14 @@ default casinoLovesYou = 0
 
 #simon bar thingiesss
 default hasbeenbar = 0
-default barguybad = 0
+default barguybad = 0   #0 is neutral?, 1 is like happy, 2 is you told the truth
 
 #courts
-default shitcourt = 0
+default didyankdoor = 0
+default staysilent = 0
+
+default shitcourt = 1
+default judgepissedlevel = 0
 
 #bors
 default wrenchCasinoShingas = 0         #0 = never met robux, 1 = you made robux win, 2 = you made robux lose
@@ -710,11 +715,11 @@ label _1ST_SECTION_ORIGINAL_GAME_HERE___________________________________________
         play sound dad2
         d "son."
 
-        play sound bad
-        show dad with vpunch
-
-        play sound dad3
-        d "you have 3 days to move out."
+        play voice dad3s5
+        d "you have "
+        play sound dad3s6
+        with vpunch
+        extend "{color=#e34236}3 days to move out."
 
         play sound dad4
 
@@ -1174,7 +1179,10 @@ label _END_OFORIGINAL_PART_AND_NOW_ESCAPING_BAR_________________________________
                 "I didn't do this!!":
                     k "You gotta believe me!! I didn't do this!"
                     p2 "sure pally-o broskiti-o whatever you say"
-                    p2 "lil bro's dead on the floor and yo fists are COVERED in blood"
+                    p2 "lil bro's dead on the floor and yo fists are{nw=0.0}"
+                    play sound impact2
+                    with vpunch
+                    extend "{b} COVERED{/b} in {color=#de1809}blood"
                     p2 "Just look at you. What a sorry sight."
                     menu:
                             "It was not me man":
@@ -1432,6 +1440,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
                                 play sound door
                                 jump gocasino
                             "I wanna piss right now, where are the toilets at":
+                                #$ shitcourt = 1
                                 bb "Right this way sir"
                                 play sound door
                                 scene bath0
@@ -1498,6 +1507,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
                                                                                 $ renpy.pause(1.0, hard=True)
                                                                                 jump bathdisc
                                                                             "Continue shitting":
+                                                                                $ didyankdoor = 1
                                                                                 play sound breakdoor
                                                                                 scene bathfist
                                                                                 $ renpy.pause(3.0, hard=True)
@@ -1691,7 +1701,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
                                 "don't anwser":
                                     show bartwin surpris
                                     play sound bart10
-                                    b2 "why didnt you answer"
+                                    b2 "{b}why didnt you answer"
                                     play sound bart11
                                     menu:
                                         b2 "it's a simple question"
@@ -1710,10 +1720,13 @@ label _CASINO_ENTRY_HERE________________________________________________________
                             b2 "i wouldnt be here without him"
                             play sound bart16
                             b2 "i only became a bartender because of him"
-                            play sound ew
+                            play sound bart17
                             b2 "he said to me: 'Im the bartender here, i beliebe in you brother'"
+                            play sound bart18
                             b2 "if not for him.. i.. i dont know wheere i would be right now"
+                            play sound bart19
                             b2 "anyway, my brother actally work s at a bar like a around the corsen"
+                            play sound bart20
                             b2 "maybe you've even met him? he is such a good guy im sure you forget him if you had met him!!"
                             menu:
                                 b2 "maybe you've even met him? he is such a good guy im sure you forget him if you had met him!!"
@@ -1780,12 +1793,14 @@ label _CASINO_ENTRY_HERE________________________________________________________
                                                             jump casinoRIGHT
                                 "no, haven'tr": 
                                     k "Your brother huh? Doesn;t ring any bells. Didnt see anyone like that"
+                                    play sound bart21
                                     b2 "it's a shame, he is such a good bartender, maybe evebn the best int he world."
                                     jump allgoodbar
                             label uhohbar:
                                 k "as"
                             label allgoodbar:
                                 show bartwin default
+                                play sound bart22
                                 b2 "OOoh! I've got a quesiton!! Do you have any siblings?"
                                 menu:
                                     "No":
@@ -1794,8 +1809,11 @@ label _CASINO_ENTRY_HERE________________________________________________________
                                         k "Yeah, i have a siblings"
                                         k "actually, that's a lie"
                                         show bartwin surpris
+                                        play sound bart23
+                                        with vpunch
                                         b2 "what?"
                                         k "But I have some cousin! A cousin was over at my house one time and i smashed her head against the glass This Glass is cracked because i slammed my cousins head into it at a family reunion //quote from iamnottkl dms (2023-06-03 15:49)"
+                                play sound bart24
                                 b2 "But htats so mean, why would you do that"
                                 show bartwin default
                                 b2 "riiighttt.. so.. this is a bar"
@@ -2822,7 +2840,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
         scene courthall1
         play sound foot
         "you go in court"
-        if not shitcourt:
+        if shitcourt:
             jump courtregular
         else:
             jump courtPresidents
@@ -2833,17 +2851,18 @@ label _CASINO_LEAVING_HERE______________________________________________________
     label courtregular:
         play sound foot
         scene court
-
+        play music ace2 fadein 1.0 volume 0.1
         "you get dragged into the court room"
 
         play sound cloth
         show judge 1 with dissolve
         un "hey hey"
         j "hello i am the judge"
+        
         j "So.. Karol mijas. You have the right to legal reprsentation.."
         j "By the rules, an attorney will-  i mean was provided to you.."
         j "however..."
-        j "he unfortunately was killed on the way here"
+        j "he unfortunately was {color=#de1809}killed{/color} on the way here"
         j "i have however received his bag, so you may use it for your defense"
 
         play sound dia1
@@ -2854,6 +2873,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
         hide lawyerbag
         play sound courthammer
         j "so... lets commence the trial"
+        play music ace1 fadein 1.0 volume 0.3
         j "explain to me whats happened"
         play sound appear
         show dryleft with moveinleft
@@ -2862,11 +2882,29 @@ label _CASINO_LEAVING_HERE______________________________________________________
         menu:
             "NO!! That's a lie!":
                 k "I DID NOT!!!"
+                $ judgepissedlevel += 1
+                "The judges expression doesn't look good.."
+                extend " he looks pretty pissed off"
+                menu:
+                    "Here's what happened":
+                        k "I was taking a shit. okay?"
+                        k "and this fucker, i dont know who he is, barges into my stall"
+                        if didyankdoor:
+                            k "fucker yanked my ENTIRE door away after punching a hole trought the metal"
+                            k "some sick fuck i tell y ou"
+                    "Say nothing more":
+                        pass
             "Yeah":
                 k "Yes, i punches that guy in the bathroom, for good reason too"
+                j "good reason you say?"
+                k "he invaded my personal space!"
+                k "while i was.."
+                play sound impact1
+                with hpunch
+                extend " {b}{color=#851911}taking a shit!!{/b}"
         
 
-        p2 "wait i compltetly forgot"
+        p2 "hold on wait i compltetly forgot"
         p2 "the guy murdered a bunch of people"
 
         j "in that case the defendant stands accused of multiple murder charges and resisting arrest"
@@ -2881,13 +2919,27 @@ label _CASINO_LEAVING_HERE______________________________________________________
         p1 "alright so...."
         extend "\nwe first found a car.."
         extend "\nand the windshield was aaaallll bloody"
+        menu:
+            "Thas crazy":
+                k "this so crazy"
+                j "will the defendant please shut the fuck up"
+                $ judgepissedlevel += 1
+                "seems youre really getting on his nerves"
+                p2 "in any case.."
+            "Say nothing":
+                pass
         p1 "pretty scary stuff"
         p1 "but then.."
         extend "not too far on the ground we saw something disturbing.."
         p2 "it was a man.."
-        extend "a dead man.. long gone"
+        extend "a pickle"
+        extend ". A man."
+        extend " A pickle shaped man."
+        extend " Long gone.. No longer with us."
         p1 "we actually confiscated the car"
+        extend ". And the man!"
         hide dryleft with dissolve
+        play sound metaldrag
         show carblood with moveinleft
         
         
@@ -2895,6 +2947,19 @@ label _CASINO_LEAVING_HERE______________________________________________________
         show dryleft with dissolve
         p2 "here it is, our concrete evidence of the first murder"
 
+        menu:
+            "Not my car":
+                k "Whata re you talk about?"
+                k "This isnt my car"
+                p2 "Yes"
+                extend " ,yes it is"
+                p1 "Look at it! the car s yellow"
+                p1 "and guess what"
+                extend "YOU are also yellow"
+            "Say nothing":
+                pass
+            "I thought it was a road bump!!":
+                pass
 
         "its not looking very good for you.."
         menu: 
@@ -2924,15 +2989,19 @@ label _CASINO_LEAVING_HERE______________________________________________________
             "Use the fake nose and glasses":
                 "hm"
             "Use the controller":
-                "huh"
+                "you take the controller"
+                k "let me skip this damn npcs cutscenee"
 
     label courtPresidents:
+        play music ace2 fadein 1.0 volume 0.05
         scene court
         "woa look its th ecourtuoom"
         play sound appear
         show judge 1
         un "heeey hello"
         j "hello i am the judge"
+        play sound hammer2
+        j "ORDER IN THE COURT NOW"
         j "So.. Karol mijas. YOu rea the defendast, and your laawayer thas been appointed to you is on the way."
         play sound appear
         hide judge 1
@@ -2959,11 +3028,16 @@ label _CASINO_LEAVING_HERE______________________________________________________
         hide trump
         play sound appear
         show judge 1 with dissolve
-        j "ahem, the accused stands accused for murder"
+        play music ace1 fadein 5.0 volume 0.1
+        j "ahem, the accused stands accused for..{nw=0.5}"
+        play sound applause1
+        extend " {color=#db190b}murder!!{/color}"
         play sound appear
         hide judge 1
         show trump with dissolve
-        t "amuder? murder you say.. people tell me all the time, murder is pretty bad, no really, i wonder how this 'Karol mijas' is going to deal with this  massive accusation.. quite a massive accusation this is"
+        play sound impact2
+        t "{color=#db190b}Murderrr???"
+        t "murder you say.. people tell me all the time, murder is pretty bad, no really, i wonder how this 'Karol mijas' is going to deal with this  massive accusation.. quite a massive accusation this is"
 
         hide trump
         play sound appear
@@ -2983,7 +3057,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
         
         "seems hes deep asleep"
         ob "maybe we should just let him sleep, donald"
-        t "alright, alright, okay, police guy, you may continue"
+        t "alright, alright, okay, dry looking guy, you may continue"
 
         play sound appear
         show dryleft with moveinleft
@@ -3000,16 +3074,21 @@ label _CASINO_LEAVING_HERE______________________________________________________
         p2 "in the building, we encountered.. "
         play sound impact1
         with hpunch
-        extend "the DEFENDANT!"
+        extend "the {color=#db190b}{b}DEFENDANT!{/b}"
         p1 "i encountered him further in the building, his fists, covered in blood"
 
         t "quite frankly im wondering, what the defendant would say to this.."
 
         menu:
             "I dont know":
-                "sds"
-            "What do i put here next":
-                "aaa"
+                k "damn these are some WILD accusations guys"
+            "Stay silent":
+                $ staysilent += 1
+                "you stay silent"
+                "smart move, as your lawyer still isnt present"
+                t "okay, okay, the silent treatment"
+            "Victim was a horse":
+                k "g"
         
 
 

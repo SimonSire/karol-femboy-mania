@@ -1,20 +1,30 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 2687, in script
-    label loop:
-Exception: Possible infinite loop.
+  File "game/script.rpy", line 1510, in script
+    $ didyankdoor = true
+  File "game/script.rpy", line 1510, in <module>
+    $ didyankdoor = true
+                    ^^^^
+NameError: name 'true' is not defined. Did you mean: 'True'?
 
 -- Full Traceback ------------------------------------------------------------
 
 Traceback (most recent call last):
-  File "game/script.rpy", line 2687, in script
-    label loop:
-  File "renpy/execution.py", line 62, in check_infinite_loop
-    raise Exception("Possible infinite loop.")
-Exception: Possible infinite loop.
+  File "game/script.rpy", line 1510, in script
+    $ didyankdoor = true
+  File "renpy/ast.py", line 1187, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/python.py", line 1273, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "game/script.rpy", line 1510, in <module>
+    $ didyankdoor = true
+                    ^^^^
+NameError: name 'true' is not defined. Did you mean: 'True'?
 
 Windows-11-10.0.26200-SP0 AMD64
 Ren'Py 8.5.0.25111603
 Karol Femboy mania v2 fuck_you
-Mon Jun 15 01:05:50 2026
+Mon Jun 15 13:46:45 2026

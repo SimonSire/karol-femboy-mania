@@ -50,17 +50,17 @@ define gui.muted_color = '#a366a3'
 define gui.hover_muted_color = '#c199c1'
 
 ## The colors used for dialogue and menu choice text.
-define gui.text_color = '#412c0c'
+define gui.text_color = '#35240b'
 define gui.interface_text_color = '#404040'
 
 
 ## Fonts and Font Sizes ########################################################
 
 ## The font used for in-game text.
-define gui.text_font = "DejaVuSans.ttf"
+define gui.text_font = "fonts/JMH Typewriter.ttf"
 
 ## The font used for character names.
-define gui.name_text_font = "DejaVuSans.ttf"
+define gui.name_text_font = "fonts/Cat Comic.ttf"
 
 ## The font used for out-of-game text.
 define gui.interface_text_font = "DejaVuSans.ttf"
@@ -69,7 +69,7 @@ define gui.interface_text_font = "DejaVuSans.ttf"
 define gui.text_size = 33
 
 ## The size of character names.
-define gui.name_text_size = 45
+define gui.name_text_size = 59
 
 ## The size of text in the game's user interface.
 define gui.interface_text_size = 33
