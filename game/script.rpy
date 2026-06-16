@@ -2840,7 +2840,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
         scene courthall1
         play sound foot
         "you go in court"
-        if not shitcourt:
+        if shitcourt:
             jump courtregular
         else:
             jump courtPresidents
@@ -2878,6 +2878,9 @@ label _CASINO_LEAVING_HERE______________________________________________________
         play sound appear
         show dryleft with moveinleft
         p1 "alright so.. this guy right here punched a man in the bathroom"
+
+        #argument cards
+        #if u pick a racist one trump shows up and you win if not you lose
 
         menu:
             "NO!! That's a lie!":
@@ -3099,7 +3102,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
         show trump with dissolve
         t "hey hey, hello im here because im very interested in this case, very interested indeed"
         t "some people are saying this is the greatest court case of all time. I don't know if that's true, but a lot of very smart people are saying it."
-        t "everyobodys asking 'Are you going to the court case' and i said 'maybe', and quite frankly ive never seen a courtroom like this with such trmendous energy before"
+        t "everyobodys asking 'Are you going to the court case' and i said 'maybe', maybe i am, and quite frankly ive never seen a courtroom like this with such trmendous energy before"
         hide trump
         play sound appear
         show judge 1 with dissolve
@@ -3131,6 +3134,8 @@ label _CASINO_LEAVING_HERE______________________________________________________
         play sound impact2
         t "{color=#db190b}Murderrr???"
         t "murder you say.. people tell me all the time, murder is pretty bad, no really, i wonder how this 'Karol mijas' is going to deal with this  massive accusation.. quite a massive accusation this is"
+    
+
 
         hide trump
         play sound appear
@@ -3163,6 +3168,11 @@ label _CASINO_LEAVING_HERE______________________________________________________
 
         t "a dead bartender... sad. really sasd."
         extend "but ive seen a lot of things like this-maybe more than anybody, and, frankly its a verry cmplex situation."
+        t "I wonder if he was an american.. "
+        t "or one of those pesky latinos, monkeys, mexicans, whatever you can call them"
+        ob "hey trump, i think we should not express thees feelings right now"
+        ob "we can talk about them later in the white house"
+        t "sure sure, im just making a statement"
         
         p2 "in the building, we encountered.. "
         play sound impact1
@@ -3173,6 +3183,8 @@ label _CASINO_LEAVING_HERE______________________________________________________
         t "quite frankly im wondering, what the defendant would say to this.."
 
         menu:
+            "It was tomoto soup":
+                k "Uh no, that wasnt blood, it was tomato soup on my fists"
             "I dont know":
                 k "damn these are some WILD accusations guys"
             "Stay silent":
