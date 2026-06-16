@@ -729,6 +729,131 @@ screen DEBUGmode:
             hover "camerabuttonhover.png"
             action [SetVariable("matysiakLocation",10)]
 
+#sexy guy \/\/\/
+screen shapeholesscreen:
+    fixed:
+        image "shapeholes.png"
+
+screen holesfit1:
+
+    draggroup:
+        drag:
+            drag_name "square"
+            xpos 475
+            ypos 675
+            child "placeholdergoop.png"
+            draggable False
+            droppable True
+        drag:
+            drag_name "rombus"
+            xpos 705
+            ypos 835
+            child "placeholdergoop.png"
+            draggable False
+            droppable True
+        drag:
+            drag_name "circle"
+            xpos 938
+            ypos 673
+            child "placeholdergoop.png"
+            draggable False
+            droppable True
+        drag:
+            drag_name "star"
+            xpos 1165
+            ypos 835
+            child "placeholdergoop.png"
+            draggable False
+            droppable True
+        drag:
+            drag_name "triangle"
+            xpos 1405
+            ypos 673
+            child "placeholdergoop.png"
+            draggable False
+            droppable True
+        if sexyguyCasinoShingas == 0:
+            drag:
+                drag_name "star"
+                xalign 0.5
+                yalign 0.5
+                child "shapestar2.png"
+                draggable True
+                droppable False
+                dragged drag_placed
+        elif sexyguyCasinoShingas == 1:
+            drag:
+                drag_name "rombus"
+                xalign 0.5
+                yalign 0.5
+                child "shaperombus1.png"
+                draggable True
+                droppable False
+                dragged drag_placed
+        elif sexyguyCasinoShingas == 2:
+            drag:
+                drag_name "circle"
+                xalign 0.5
+                yalign 0.5
+                child "shapeball1.png"
+                draggable True
+                droppable False
+                dragged drag_placed
+        elif sexyguyCasinoShingas == 3:
+            drag:
+                drag_name "triangle"
+                xalign 0.5
+                yalign 0.5
+                child "shapetriang1.png"
+                draggable True
+                droppable False
+                dragged drag_placed
+        elif sexyguyCasinoShingas == 4:
+            drag:
+                drag_name "rombus"
+                xalign 0.5
+                yalign 0.5
+                child "shaperombus2.png"
+                draggable True
+                droppable False
+                dragged drag_placed
+        elif sexyguyCasinoShingas == 5:
+            drag:
+                drag_name "square"
+                xalign 0.5
+                yalign 0.5
+                child "shapesquare1.png"
+                draggable True
+                droppable False
+                dragged drag_placed
+        elif sexyguyCasinoShingas == 6:
+            drag:
+                drag_name "star"
+                xalign 0.5
+                yalign 0.5
+                child "shapestar1.png"
+                draggable True
+                droppable False
+                dragged drag_placed
+        elif sexyguyCasinoShingas == 7:
+            drag:
+                drag_name "circle"
+                xalign 0.5
+                yalign 0.5
+                child "shapeball2.png"
+                draggable True
+                droppable False
+                dragged drag_placed
+        else:
+            drag:
+                drag_name "notashape"
+                xalign 0.5
+                yalign 0.5
+                child "gambelunused.png"
+                draggable True
+                droppable False
+                dragged drag_placed
+
 
 # The game starts here.
 ######################################################################################################################################################
@@ -2043,133 +2168,6 @@ label _CASINO_ENTRY_HERE________________________________________________________
             "Go back":
                 play sound door
                 jump casinoMAIN
-
-
-    screen shapeholesscreen:
-        fixed:
-            image "shapeholes.png"
-
-    screen holesfit1:
-
-        draggroup:
-            drag:
-                drag_name "square"
-                xpos 475
-                ypos 675
-                child "placeholdergoop.png"
-                draggable False
-                droppable True
-            drag:
-                drag_name "rombus"
-                xpos 705
-                ypos 835
-                child "placeholdergoop.png"
-                draggable False
-                droppable True
-            drag:
-                drag_name "circle"
-                xpos 938
-                ypos 673
-                child "placeholdergoop.png"
-                draggable False
-                droppable True
-            drag:
-                drag_name "star"
-                xpos 1165
-                ypos 835
-                child "placeholdergoop.png"
-                draggable False
-                droppable True
-            drag:
-                drag_name "triangle"
-                xpos 1405
-                ypos 673
-                child "placeholdergoop.png"
-                draggable False
-                droppable True
-            if sexyguyCasinoShingas == 0:
-                drag:
-                    drag_name "star"
-                    xalign 0.5
-                    yalign 0.5
-                    child "shapestar2.png"
-                    draggable True
-                    droppable False
-                    dragged drag_placed
-            elif sexyguyCasinoShingas == 1:
-                drag:
-                    drag_name "rombus"
-                    xalign 0.5
-                    yalign 0.5
-                    child "shaperombus1.png"
-                    draggable True
-                    droppable False
-                    dragged drag_placed
-            elif sexyguyCasinoShingas == 2:
-                drag:
-                    drag_name "circle"
-                    xalign 0.5
-                    yalign 0.5
-                    child "shapeball1.png"
-                    draggable True
-                    droppable False
-                    dragged drag_placed
-            elif sexyguyCasinoShingas == 3:
-                drag:
-                    drag_name "triangle"
-                    xalign 0.5
-                    yalign 0.5
-                    child "shapetriang1.png"
-                    draggable True
-                    droppable False
-                    dragged drag_placed
-            elif sexyguyCasinoShingas == 4:
-                drag:
-                    drag_name "rombus"
-                    xalign 0.5
-                    yalign 0.5
-                    child "shaperombus2.png"
-                    draggable True
-                    droppable False
-                    dragged drag_placed
-            elif sexyguyCasinoShingas == 5:
-                drag:
-                    drag_name "square"
-                    xalign 0.5
-                    yalign 0.5
-                    child "shapesquare1.png"
-                    draggable True
-                    droppable False
-                    dragged drag_placed
-            elif sexyguyCasinoShingas == 6:
-                drag:
-                    drag_name "star"
-                    xalign 0.5
-                    yalign 0.5
-                    child "shapestar1.png"
-                    draggable True
-                    droppable False
-                    dragged drag_placed
-            elif sexyguyCasinoShingas == 7:
-                drag:
-                    drag_name "circle"
-                    xalign 0.5
-                    yalign 0.5
-                    child "shapeball2.png"
-                    draggable True
-                    droppable False
-                    dragged drag_placed
-            else:
-                drag:
-                    drag_name "notashape"
-                    xalign 0.5
-                    yalign 0.5
-                    child "gambelunused.png"
-                    draggable True
-                    droppable False
-                    dragged drag_placed
-
-
 
 
     label sexyshapefittinggame:
