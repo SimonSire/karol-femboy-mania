@@ -11,7 +11,7 @@ init python:
         shit = 0
         while shit < 50:
             if karolTalkingShit:
-                sound_dongus = renpy.random.randint(0,2)
+                sound_dongus = renpy.random.randint(0,4)
                 if event == "show":
                     if sound_dongus == 0:
                         renpy.sound.queue("karoltalk 1.mp3", channel="karolChannel", loop=False)
@@ -19,6 +19,10 @@ init python:
                         renpy.sound.queue("karoltalk 2.mp3", channel="karolChannel", loop=False)
                     elif sound_dongus == 2:
                         renpy.sound.queue("karoltalk 3.mp3", channel="karolChannel", loop=False)
+                    elif sound_dongus == 3:
+                        renpy.sound.queue("karoltalk 4.mp3", channel="karolChannel", loop=False)
+                    elif sound_dongus == 4:
+                        renpy.sound.queue("karoltalk 5.mp3", channel="karolChannel", loop=False)
                 elif event == "slow_done" or event == "end":
                     renpy.sound.stop(channel="karolChannel")
             shit += 1
