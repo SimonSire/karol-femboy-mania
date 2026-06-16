@@ -5,6 +5,8 @@
 # atp im just adding pointless shit
 
 init python:
+    renpy.music.register_channel("karolChannel", mixer="sfx")
+
     def karolTalks(event, **kwargs):
         shit = 0
         while shit < 50:
@@ -12,13 +14,13 @@ init python:
                 sound_dongus = renpy.random.randint(0,2)
                 if event == "show":
                     if sound_dongus == 0:
-                        renpy.sound.queue("karoltalk 1.mp3", channel="sound", loop=False)
+                        renpy.sound.queue("karoltalk 1.mp3", channel="karolChannel", loop=False)
                     elif sound_dongus == 1:
-                        renpy.sound.queue("karoltalk 2.mp3", channel="sound", loop=False)
+                        renpy.sound.queue("karoltalk 2.mp3", channel="karolChannel", loop=False)
                     elif sound_dongus == 2:
-                        renpy.sound.queue("karoltalk 3.mp3", channel="sound", loop=False)
+                        renpy.sound.queue("karoltalk 3.mp3", channel="karolChannel", loop=False)
                 elif event == "slow_done" or event == "end":
-                    renpy.sound.stop(channel="sound")
+                    renpy.sound.stop(channel="karolChannel")
             shit += 1
 
 define k = Character("Karol Mijas", color="#ffe864", callback=karolTalks)
@@ -1745,7 +1747,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
                             play sound bart19
                             b2 "anyway, my brother actally work s at a bar like a around the corsen"
                             play sound bart20
-                            b2 "maybe you've even met him? he is such a good guy im sure you forget him if you had met him!!"
+                            #b2 "maybe you've even met him? he is such a good guy im sure you forget him if you had met him!!"
                             menu:
                                 b2 "maybe you've even met him? he is such a good guy im sure you forget him if you had met him!!"
                                 "yes actually":
