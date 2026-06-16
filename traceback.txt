@@ -1,46 +1,45 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-NameError: name 'J' is not defined
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "game/script.rpy", line 2933, in script
-    J "IM THE JUDHGE"
-Exception: Sayer 'J' is not defined.
+  File "game/script.rpy", line 720, in script
+    k "Ohh man I looove sitting here makking games in Godot and jerkind off"
+  File "game/script.rpy", line 17, in karolTalks
+    renpy.voice.queue("karoltalk 2.mp3", channel="voice", loop=False)
+    ^^^^^^^^^^^                                                      
+AttributeError: module 'renpy.exports' has no attribute 'voice'. Did you mean: 'Choice'?
 
 -- Full Traceback ------------------------------------------------------------
 
 Traceback (most recent call last):
-  File "renpy/ast.py", line 625, in eval_who
-    return renpy.python.py_eval(who)
-           ~~~~~~~~~~~~~~~~~~~~^^^^^
-  File "renpy/python.py", line 1305, in py_eval
-    return py_eval_bytecode(code, globals, locals)
-           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
-  File "renpy/python.py", line 1298, in py_eval_bytecode
-    return eval(bytecode, globals, locals)
-           ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "<none>", line 1, in <module>
-NameError: name 'J' is not defined
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "game/script.rpy", line 2933, in script
-    J "IM THE JUDHGE"
-  File "renpy/ast.py", line 2923, in execute
+  File "game/script.rpy", line 720, in script
+    k "Ohh man I looove sitting here makking games in Godot and jerkind off"
+  File "renpy/ast.py", line 2925, in execute
     Say.execute(self)
     ~~~~~~~~~~~^^^^^^
-  File "renpy/ast.py", line 956, in execute
-    who = eval_who(self.who, self.who_fast)
-          ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "renpy/ast.py", line 627, in eval_who
-    raise Exception("Sayer '%s' is not defined." % who)
-Exception: Sayer 'J' is not defined.
+  File "renpy/ast.py", line 991, in execute
+    renpy.exports.say(who, what, *args, **kwargs)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/exports/sayexports.py", line 129, in say
+    who(what, *args, **kwargs)
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/character.py", line 1565, in __call__
+    self.do_display(who, what, cb_args=self.cb_args, dtt=dtt, **display_args)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/character.py", line 1220, in do_display
+    display_say(who, what, self.do_show, **display_args)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/character.py", line 757, in display_say
+    pause_callback("show")
+    ~~~~~~~~~~~~~~^^^^^^^^
+  File "renpy/character.py", line 90, in __call__
+    c(*args, **kwargs)
+    ~^^^^^^^^^^^^^^^^^
+  File "game/script.rpy", line 17, in karolTalks
+    renpy.voice.queue("karoltalk 2.mp3", channel="voice", loop=False)
+    ^^^^^^^^^^^                                                      
+AttributeError: module 'renpy.exports' has no attribute 'voice'. Did you mean: 'Choice'?
 
-Windows-11-10.0.26200-SP0 AMD64
-Ren'Py 8.5.0.25111603
+Windows-10-10.0.19045-SP0 AMD64
+Ren'Py 8.5.2.26010301
 Karol Femboy mania v2 fuck_you
-Mon Jun 15 18:00:07 2026
+Tue Jun 16 00:29:09 2026

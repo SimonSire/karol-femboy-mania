@@ -4,7 +4,45 @@
 
 # atp im just adding pointless shit
 
-define k = Character("Karol Mijas", color="#ffe864")
+init python:
+    renpy.music.register_channel("karolChannel", mixer="sfx")
+
+    def karolTalks(event, **kwargs):
+        shit = 0
+        while shit < 50:
+            if karolTalkingShit and karolTalkingMad:
+                sound_dongus = renpy.random.randint(0,4)
+                if event == "show":
+                    if sound_dongus == 0:
+                        renpy.sound.queue("karoltalkMad 1.mp3", channel="karolChannel", loop=False)
+                    elif sound_dongus == 1:
+                        renpy.sound.queue("karoltalkMad 2.mp3", channel="karolChannel", loop=False)
+                    elif sound_dongus == 2:
+                        renpy.sound.queue("karoltalkMad 3.mp3", channel="karolChannel", loop=False)
+                    elif sound_dongus == 3:
+                        renpy.sound.queue("karoltalkMad 4.mp3", channel="karolChannel", loop=False)
+                    elif sound_dongus == 4:
+                        renpy.sound.queue("karoltalkMad 5.mp3", channel="karolChannel", loop=False)
+                elif event == "slow_done" or event == "end":
+                    renpy.sound.stop(channel="karolChannel")
+            elif karolTalkingShit and not karolTalkingMad:
+                sound_dongus = renpy.random.randint(0,4)
+                if event == "show":
+                    if sound_dongus == 0:
+                        renpy.sound.queue("karoltalk 1.mp3", channel="karolChannel", loop=False)
+                    elif sound_dongus == 1:
+                        renpy.sound.queue("karoltalk 2.mp3", channel="karolChannel", loop=False)
+                    elif sound_dongus == 2:
+                        renpy.sound.queue("karoltalk 3.mp3", channel="karolChannel", loop=False)
+                    elif sound_dongus == 3:
+                        renpy.sound.queue("karoltalk 4.mp3", channel="karolChannel", loop=False)
+                    elif sound_dongus == 4:
+                        renpy.sound.queue("karoltalk 5.mp3", channel="karolChannel", loop=False)
+                elif event == "slow_done" or event == "end":
+                    renpy.sound.stop(channel="karolChannel")
+            shit += 1
+
+define k = Character("Karol Mijas", color="#ffe864", callback=karolTalks)
 define un = Character("???")
 define d = Character("papa Mijas", color="#706316")
 define do = Character("Domin", color="#a32d76")
@@ -82,6 +120,8 @@ default drywallAttack = 0
 default matysiakAttack = 0
 
 default debugMode = False
+default karolTalkingShit = True
+default karolTalkingMad = False
 
 #gambel machine
 define interval = 0.1 
@@ -140,6 +180,7 @@ init python: #PYTHON FUNCTIONS AND THINGIESS
         "karolcue4.mp3",
         "karolcue5.mp3"
     ]
+
 
     def drag_placed(drags, drop):
         global shapeDraggable, shapeDroppable, doShapesMatch
@@ -688,6 +729,131 @@ screen DEBUGmode:
             hover "camerabuttonhover.png"
             action [SetVariable("matysiakLocation",10)]
 
+#sexy guy \/\/\/
+screen shapeholesscreen:
+    fixed:
+        image "shapeholes.png"
+
+screen holesfit1:
+
+    draggroup:
+        drag:
+            drag_name "square"
+            xpos 475
+            ypos 675
+            child "placeholdergoop.png"
+            draggable False
+            droppable True
+        drag:
+            drag_name "rombus"
+            xpos 705
+            ypos 835
+            child "placeholdergoop.png"
+            draggable False
+            droppable True
+        drag:
+            drag_name "circle"
+            xpos 938
+            ypos 673
+            child "placeholdergoop.png"
+            draggable False
+            droppable True
+        drag:
+            drag_name "star"
+            xpos 1165
+            ypos 835
+            child "placeholdergoop.png"
+            draggable False
+            droppable True
+        drag:
+            drag_name "triangle"
+            xpos 1405
+            ypos 673
+            child "placeholdergoop.png"
+            draggable False
+            droppable True
+        if sexyguyCasinoShingas == 0:
+            drag:
+                drag_name "star"
+                xalign 0.5
+                yalign 0.5
+                child "shapestar2.png"
+                draggable True
+                droppable False
+                dragged drag_placed
+        elif sexyguyCasinoShingas == 1:
+            drag:
+                drag_name "rombus"
+                xalign 0.5
+                yalign 0.5
+                child "shaperombus1.png"
+                draggable True
+                droppable False
+                dragged drag_placed
+        elif sexyguyCasinoShingas == 2:
+            drag:
+                drag_name "circle"
+                xalign 0.5
+                yalign 0.5
+                child "shapeball1.png"
+                draggable True
+                droppable False
+                dragged drag_placed
+        elif sexyguyCasinoShingas == 3:
+            drag:
+                drag_name "triangle"
+                xalign 0.5
+                yalign 0.5
+                child "shapetriang1.png"
+                draggable True
+                droppable False
+                dragged drag_placed
+        elif sexyguyCasinoShingas == 4:
+            drag:
+                drag_name "rombus"
+                xalign 0.5
+                yalign 0.5
+                child "shaperombus2.png"
+                draggable True
+                droppable False
+                dragged drag_placed
+        elif sexyguyCasinoShingas == 5:
+            drag:
+                drag_name "square"
+                xalign 0.5
+                yalign 0.5
+                child "shapesquare1.png"
+                draggable True
+                droppable False
+                dragged drag_placed
+        elif sexyguyCasinoShingas == 6:
+            drag:
+                drag_name "star"
+                xalign 0.5
+                yalign 0.5
+                child "shapestar1.png"
+                draggable True
+                droppable False
+                dragged drag_placed
+        elif sexyguyCasinoShingas == 7:
+            drag:
+                drag_name "circle"
+                xalign 0.5
+                yalign 0.5
+                child "shapeball2.png"
+                draggable True
+                droppable False
+                dragged drag_placed
+        else:
+            drag:
+                drag_name "notashape"
+                xalign 0.5
+                yalign 0.5
+                child "gambelunused.png"
+                draggable True
+                droppable False
+                dragged drag_placed
+
 
 # The game starts here.
 ######################################################################################################################################################
@@ -715,11 +881,10 @@ label _1ST_SECTION_ORIGINAL_GAME_HERE___________________________________________
         play sound dad2
         d "son."
 
-        play voice dad3s5
-        d "you have "
-        play sound dad3s6
-        with vpunch
-        extend "{color=#e34236}3 days to move out."
+        play sound dad3
+        d "you have {color=#de1809}3 days to move out.{/color}"
+        ##with vpunch
+        ##extend "{color=#e34236}3 days to move out." ##simon u fucked this shit up it aint working unless u split the voice line
 
         play sound dad4
 
@@ -746,7 +911,7 @@ label _1ST_SECTION_ORIGINAL_GAME_HERE___________________________________________
         k "i have to..."
 
         show phone with moveinbottom
-
+        
         k "call my friends! maybe someone can take me"
         
         show phcall
@@ -887,22 +1052,22 @@ label _1ST_SECTION_ORIGINAL_GAME_HERE___________________________________________
 
     label house:
         play music karoltheme_poor fadein 5.0 volume 0.2
-        play sound foot
+        play audio foot
         show house1
         k "this house looks pretty good so far"
-        play sound foot
+        play audio foot
         show door1
         k "that's the front door right there!"
-        play sound foot
+        play audio foot
         show door2
-        play sound knock
+        play audio knock
         "*Karol Mijas knocks on the door*"
         
         play sound dom11
         do "Karol Mijas, is that you? Come in."
 
         show lv2
-        play sound door
+        play audio door
 
         show domin with moveinbottom
 
@@ -1051,8 +1216,12 @@ label _1ST_SECTION_ORIGINAL_GAME_HERE___________________________________________
             play sound bad
             show horse1 with vpunch
             play music horseishere volume 0.5
+
+            $ karolTalkingMad = True
             k "You fucker!"
             k "Why the long face?"
+            $ karolTalkingMad = False
+
             show fists with moveinbottom
             menu:
                 "FIGHT":
@@ -1177,6 +1346,7 @@ label _END_OFORIGINAL_PART_AND_NOW_ESCAPING_BAR_________________________________
                     k "yeah"
                     p2 "uh huh"
                 "I didn't do this!!":
+                    $ karolTalkingMad = True
                     k "You gotta believe me!! I didn't do this!"
                     p2 "sure pally-o broskiti-o whatever you say"
                     p2 "lil bro's dead on the floor and yo fists are{nw=0.0}"
@@ -1187,6 +1357,7 @@ label _END_OFORIGINAL_PART_AND_NOW_ESCAPING_BAR_________________________________
                     menu:
                             "It was not me man":
                                 k "Beleive me pleasee it was not me"
+                                $ karolTalkingMad = False
                                 k "I wouldnt do this to anybody.."
                                 p2 "yeah im like, pretty sure you did it"
                                 k "actually.."
@@ -1195,6 +1366,7 @@ label _END_OFORIGINAL_PART_AND_NOW_ESCAPING_BAR_________________________________
                                 p2 "you got like a.. screw loose or something?"
                                 p2 "anyway.."
                             "Okay fine i did this, me":
+                                $ karolTalkingMad = False
                                 k "Okay okay i did this, it was me, me!"
                                 p2 "good, good.. a confession."
                                 p2 "perfect, in fact"
@@ -1212,6 +1384,7 @@ label _END_OFORIGINAL_PART_AND_NOW_ESCAPING_BAR_________________________________
 
     label fight:
         show bfists with moveinbottom
+        $ karolTalkingMad = True
         k "I'm nOT GOING DOWN WITHOUT A FIGHT"
         $ renpy.pause(0.2, hard=True)
         hide bfists
@@ -1237,6 +1410,7 @@ label _END_OFORIGINAL_PART_AND_NOW_ESCAPING_BAR_________________________________
                     menu:
                             "FIGHT":
                                 k "take this AND tTHIS!!"
+                                $ karolTalkingMad = False
                                 $ renpy.pause(0.5, hard=True)
                                 hide bfists
                                 show bfists2
@@ -1467,6 +1641,9 @@ label _CASINO_ENTRY_HERE________________________________________________________
                                             
 
                                             play sound bang2
+                                            $ renpy.pause(2)
+                                            $ karolTalkingMad = True
+                                            k "man IM SHITTING HERE LEAVE ME BEE"
 
                                             un "I ATE A KEBAB"
                                             un "All the other stalls are BROKEN"
@@ -1483,6 +1660,9 @@ label _CASINO_ENTRY_HERE________________________________________________________
                                                 play sound bang3
 
                                                 un "HEY MAN i cant hold it anymore OPEN UP"
+
+                                                k "FUCK OFF"
+
                                                 menu:
                                                     "Keep shitting":
                                                         play sound dia4
@@ -1514,6 +1694,10 @@ label _CASINO_ENTRY_HERE________________________________________________________
                                                                                 scene bathnodoor
                                                                                 play sound doorcrash
                                                                                 "he yanks the door away"
+
+                                                                                k "HEY WHAT THE FUCK mann"
+                                                                                $ karolTalkingMad = False
+
                                                                                 jump bathdisc
 
 
@@ -1727,7 +1911,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
                             play sound bart19
                             b2 "anyway, my brother actally work s at a bar like a around the corsen"
                             play sound bart20
-                            b2 "maybe you've even met him? he is such a good guy im sure you forget him if you had met him!!"
+                            #b2 "maybe you've even met him? he is such a good guy im sure you forget him if you had met him!!"
                             menu:
                                 b2 "maybe you've even met him? he is such a good guy im sure you forget him if you had met him!!"
                                 "yes actually":
@@ -1846,7 +2030,10 @@ label _CASINO_ENTRY_HERE________________________________________________________
                                 #ooh what the fuckk
                                 #changes into horse
                                 k "you.."
+                                $ karolTalkingMad = True
                                 k "MOTHERFUKCER!!"
+                                $ karolTalkingMad = False
+
                                 show fists with moveinbottom
                                 menu:
                                     "FIGHT":
@@ -1955,7 +2142,11 @@ label _CASINO_ENTRY_HERE________________________________________________________
                     br "i am so unbelievably happy right now"
                     hide wrencher 5 with dissolve
                     "the man gives you a little kiss on your cheek and leaves the room extremly happy"
-                    k "well this was pretty awesome"
+                    k "well this was pretty{nw=0.5}"
+                    $ karolTalkingMad = True
+                    extend " AWESOME" 
+                    $ karolTalkingMad = False
+
                     $ wrenchCasinoShingas = 1
                     $ casinoLovesYou = casinoLovesYou + 1
                     $ casinoMajorHappens = casinoMajorHappens + 1
@@ -1977,133 +2168,6 @@ label _CASINO_ENTRY_HERE________________________________________________________
             "Go back":
                 play sound door
                 jump casinoMAIN
-
-
-    screen shapeholesscreen:
-        fixed:
-            image "shapeholes.png"
-
-    screen holesfit1:
-
-        draggroup:
-            drag:
-                drag_name "square"
-                xpos 475
-                ypos 675
-                child "placeholdergoop.png"
-                draggable False
-                droppable True
-            drag:
-                drag_name "rombus"
-                xpos 705
-                ypos 835
-                child "placeholdergoop.png"
-                draggable False
-                droppable True
-            drag:
-                drag_name "circle"
-                xpos 938
-                ypos 673
-                child "placeholdergoop.png"
-                draggable False
-                droppable True
-            drag:
-                drag_name "star"
-                xpos 1165
-                ypos 835
-                child "placeholdergoop.png"
-                draggable False
-                droppable True
-            drag:
-                drag_name "triangle"
-                xpos 1405
-                ypos 673
-                child "placeholdergoop.png"
-                draggable False
-                droppable True
-            if sexyguyCasinoShingas == 0:
-                drag:
-                    drag_name "star"
-                    xalign 0.5
-                    yalign 0.5
-                    child "shapestar2.png"
-                    draggable True
-                    droppable False
-                    dragged drag_placed
-            elif sexyguyCasinoShingas == 1:
-                drag:
-                    drag_name "rombus"
-                    xalign 0.5
-                    yalign 0.5
-                    child "shaperombus1.png"
-                    draggable True
-                    droppable False
-                    dragged drag_placed
-            elif sexyguyCasinoShingas == 2:
-                drag:
-                    drag_name "circle"
-                    xalign 0.5
-                    yalign 0.5
-                    child "shapeball1.png"
-                    draggable True
-                    droppable False
-                    dragged drag_placed
-            elif sexyguyCasinoShingas == 3:
-                drag:
-                    drag_name "triangle"
-                    xalign 0.5
-                    yalign 0.5
-                    child "shapetriang1.png"
-                    draggable True
-                    droppable False
-                    dragged drag_placed
-            elif sexyguyCasinoShingas == 4:
-                drag:
-                    drag_name "rombus"
-                    xalign 0.5
-                    yalign 0.5
-                    child "shaperombus2.png"
-                    draggable True
-                    droppable False
-                    dragged drag_placed
-            elif sexyguyCasinoShingas == 5:
-                drag:
-                    drag_name "square"
-                    xalign 0.5
-                    yalign 0.5
-                    child "shapesquare1.png"
-                    draggable True
-                    droppable False
-                    dragged drag_placed
-            elif sexyguyCasinoShingas == 6:
-                drag:
-                    drag_name "star"
-                    xalign 0.5
-                    yalign 0.5
-                    child "shapestar1.png"
-                    draggable True
-                    droppable False
-                    dragged drag_placed
-            elif sexyguyCasinoShingas == 7:
-                drag:
-                    drag_name "circle"
-                    xalign 0.5
-                    yalign 0.5
-                    child "shapeball2.png"
-                    draggable True
-                    droppable False
-                    dragged drag_placed
-            else:
-                drag:
-                    drag_name "notashape"
-                    xalign 0.5
-                    yalign 0.5
-                    child "gambelunused.png"
-                    draggable True
-                    droppable False
-                    dragged drag_placed
-
-
 
 
     label sexyshapefittinggame:
@@ -2230,7 +2294,9 @@ label _CASINO_ENTRY_HERE________________________________________________________
                 pl "im still looking for a hacker man"
             menu:
                 "whyyy":
+                    $ karolTalkingMad = True
                     k "What th fuck do you wan t from me"
+                    $ karolTalkingMad = False
                     pl "I need som e hacker man to get into those serwers"
                     pl "And hack themm and get some moneey for us"
                     pl "and we get rich"
@@ -2245,7 +2311,9 @@ label _CASINO_ENTRY_HERE________________________________________________________
                                     pl " thats so great i knew i could count on yo u"
                                     $ pielaCasinoShingas = 3
                                 "Kindly disagree":
+                                    $ karolTalkingMad = True
                                     k "no man fuck off already this is bullshit"
+                                    $ karolTalkingMad = False
                                     pl "man youre a dick i hate you now now"
                                     hide transpiela with moveoutleft
                                     $ pielaCasinoShingas = 2
@@ -2445,6 +2513,9 @@ label _CASINO_ENTRY_HERE________________________________________________________
         else:
             play sound disappointment
             "damn it u lost"
+            $ karolTalkingMad = True
+            k "FUCK"
+            $ karolTalkingMad = False
         menu:
             "keep gambling":
                 call gambelplaying
@@ -2632,7 +2703,11 @@ label _CASINO_ENTRY_HERE________________________________________________________
                     $ renpy.pause(5.1, hard=True)
                     scene casleftdark
                     "it seemns that all the lights went oUT"
-                    k "oh noo shit shIT SHIt SHIT"
+                    k "oh noo shit{nw=0.5}"
+                    $ karolTalkingMad = True
+                    extend " shIT SHIt SHIT"
+                    $ karolTalkingMad = False
+
                     "the rooms start to smell lik some kind of drywalll"
                     "you may be fucked buddy"
                     jump casinodoorlock
@@ -2684,11 +2759,13 @@ label _CASINO_ENTRY_HERE________________________________________________________
         play sound dia1
         show foundbattery
         "and a small big batery!"
+        $ karolTalkingMad = True
         k "YES i will COMBINE those items inorder to survive this NIGHT!"
+        $ karolTalkingMad = False
         hide foundflashlight
         hide foundbutton
         hide foundbattery
-        "you hear a man making some DRY steps back somewher there"
+        "you hear a man making some {b}{color=#FFFFFF}DRY{/color}{/b} steps back somewher there"
         if isMatysiakAnger:
             "and thers some kebab shaped farts in company with him!!!"
         else:
@@ -2884,22 +2961,28 @@ label _CASINO_LEAVING_HERE______________________________________________________
 
         menu:
             "NO!! That's a lie!":
+                $ karolTalkingMad = True
                 k "I DID NOT!!!"
                 $ judgepissedlevel += 1
                 "The judges expression doesn't look good.."
                 extend " he looks pretty pissed off"
                 menu:
                     "Here's what happened":
+                        
                         k "I was taking a shit. okay?"
                         k "and this fucker, i dont know who he is, barges into my stall"
                         if didyankdoor:
                             k "fucker yanked my ENTIRE door away after punching a hole trought the metal"
                             k "some sick fuck i tell y ou"
+                $ karolTalkingMad = False
+
             "Yeah":
+                
                 k "Yes, i punches that guy in the bathroom, for good reason too"
                 j "good reason you say?"
                 k "he invaded my personal space!"
                 k "while i was.."
+                $ karolTalkingMad = True
                 play sound impact1
                 with hpunch
                 extend " {b}{color=#851911}taking a shit!!{/b}"
@@ -2911,6 +2994,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
 
                 k "its a horribl wy to invade someones privacy guys"
                 k "its a MASSIVE VIOLATIO N OF YM PRIVACY"
+                $ karolTalkingMad = False
 
         play sound hammer1
         j "Order! ORDER IN THE COURT!"
@@ -2921,8 +3005,10 @@ label _CASINO_LEAVING_HERE______________________________________________________
                 if didyankdoor:
                     k "He tore the fucking door{nw=0.0}"
                     play sound impact1
+                    $ karolTalkingMad = True
                     extends "{color=#6b5512} off of its hinges"
                 else:
+                    $ karolTalkingMad = True
                     k "He was banging on my door furiously~!!"
         j "and what exactly were you doiing in the bathroom?"
         menu:
@@ -2937,6 +3023,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
                 j "IM THE JUDHGE"
                 j "imthe FUCKING judge YOU DONTT ALK TO ME THAT WAY!!"
 
+        $ karolTalkingMad = False
         j "can someone fact check this?"
         p2 "your honour, i can confirm he was inddeed taking shit."
         j "how so?"
@@ -3011,7 +3098,9 @@ label _CASINO_LEAVING_HERE______________________________________________________
             "Say nothing":
                 pass
             "I thought it was a road bump!!":
+                $ karolTalkingMad = True
                 k "But i thought it was a road bump on the highway!"
+                $ karolTalkingMad = False
 
         j "well, we're just going to have to ask to have ask the witness!"
 
@@ -3079,6 +3168,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
                 "you take the controller"
                 hide foundnose
                 hide foundtime
+                hide foundcontrol
                 k "let me skip this damn npcs cutscenee"
                 play sound appear
                 show hands control with moveinbottom
@@ -3186,7 +3276,10 @@ label _CASINO_LEAVING_HERE______________________________________________________
             "It was tomoto soup":
                 k "Uh no, that wasnt blood, it was tomato soup on my fists"
             "I dont know":
-                k "damn these are some WILD accusations guys"
+                k "damn these are some {nw=0.5}"
+                $ karolTalkingMad = True
+                extend "WILD accusations guys"
+                $ karolTalkingMad = False
             "Stay silent":
                 $ staysilent += 1
                 "you stay silent"
