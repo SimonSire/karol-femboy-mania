@@ -299,8 +299,8 @@ screen door_buttons:
     zorder 128
     imagebutton:
         xalign 0.2 yalign 0.5
-        idle "buttoleft.png"
-        hover "buttolefthover.png"
+        idle "UI/buttoleft.png"
+        hover "UI/buttolefthover.png"
         if flashBattery >= 0:
             hovered [Show("flashleft"), SetVariable("hoverTime", renpy.get_game_runtime() )]
         unhovered [Hide("flashleft"), SetVariable("hoverTime",0)]
@@ -308,8 +308,8 @@ screen door_buttons:
 
     imagebutton:
         xalign 0.8 yalign 0.5
-        idle "buttoright.png"
-        hover "buttorighthover.png"
+        idle "UI/buttoright.png"
+        hover "UI/buttorighthover.png"
         if flashBattery >= 0:
             hovered [Show("flashright"), SetVariable("hoverTime", renpy.get_game_runtime() )]
         unhovered [Hide("flashright"), SetVariable("hoverTime",0)]
@@ -317,8 +317,8 @@ screen door_buttons:
 
     imagebutton:
         xalign 0.5 yalign 0.1
-        idle "buttotop.png"
-        hover "buttotophover.png"
+        idle "UI/buttotop.png"
+        hover "UI/buttotophover.png"
         if flashBattery >= 0:
             hovered [Show("flashtop"), SetVariable("hoverTime", renpy.get_game_runtime() )]
         unhovered [Hide("flashtop"), SetVariable("hoverTime",0)]
@@ -326,8 +326,8 @@ screen door_buttons:
 
     imagebutton:
         xalign 0.5 yalign 0.9
-        idle "buttodown.png"
-        hover "buttodownhover.png"
+        idle "UI/buttodown.png"
+        hover "UI/buttodownhover.png"
         if flashBattery >= 0:
             action [Hide("door_buttons"), Show("cameraview")]
         else:
@@ -351,32 +351,32 @@ screen door_buttons:
         if (hoverTime > 0) and flashBright:
             if flashBattery > 33:
                 if renpy.random.randint(0,1) == 0:
-                    image "batterypainbright" zoom 1.5
+                    image "battery/batterypainbright.png" zoom 1.5
                 else:
-                    image "batterypainbright2" zoom 1.5
+                    image "battery/batterypainbright2.png" zoom 1.5
             else:
                 if renpy.random.randint(0,1) == 0:
-                    image "batterymorepainbright" zoom 1.5
+                    image "battery/batterymorepainbright.png" zoom 1.5
                 else:
-                    image "batterymorepainbright2" zoom 1.5
+                    image "battery/batterymorepainbright2.png" zoom 1.5
         elif flashBattery < 0:
-            image "batterydead" zoom 1.5
+            image "battery/batterydead.png" zoom 1.5
         else:
             if flashBattery >= 67:
                 if flashBright:
-                    image "batteryfatbright" zoom 1.5
+                    image "battery/batteryfatbright.png" zoom 1.5
                 else:
-                    image "batteryjoyfull" zoom 1.5
+                    image "battery/batteryjoyfull.png" zoom 1.5
             elif flashBattery <= 33:
                 if flashBright:
-                    image "batteryalmostcrybright" zoom 1.5
+                    image "battery/batteryalmostcrybright.png" zoom 1.5
                 else:
-                    image "batterytired" zoom 1.5
+                    image "battery/batterytired.png" zoom 1.5
             else:
                 if flashBright:
-                    image "batteryworrybright" zoom 1.5
+                    image "battery/batteryworrybright.png" zoom 1.5
                 else:
-                    image "batterypickle" zoom 1.5
+                    image "battery/batterypickle.png" zoom 1.5
 
     fixed:
         if actionDoorLeft > 0:
@@ -531,28 +531,28 @@ screen cameraview:
             if drywallLocation == 7:
                 image "cam dry1"
             if matysiakLocation == 7:
-                image "cam matysiakright" xalign 0.5 yalign 0.5
+                image "cam mat4"
     if cameraSelect == 8:
         fixed:
             image "cam cas8"
             if drywallLocation == 8:
                 image "cam dry1"
             if matysiakLocation == 8:
-                image "cam matysiakright" xalign 0.5 yalign 0.5
+                image "cam mat1" xalign 0.8
     if cameraSelect == 9:
         fixed:
             image "cam cas9"
             if drywallLocation == 9:
                 image "cam dry1"
             if matysiakLocation == 9:
-                image "cam matysiakright" xalign 0.5 yalign 0.5
+                image "cam mat7"
     if cameraSelect == 10:
         fixed:
             image "cam cas10"
             if drywallLocation == 10:
                 image "cam dry1"
             if matysiakLocation == 10:
-                image "cam matysiakright" xalign 0.5 yalign 0.5
+                image "cam mat7"
 
     fixed:
         image "cam overlay"
@@ -560,65 +560,65 @@ screen cameraview:
 
     imagebutton:
         xalign 0.5 yalign 0.9
-        idle "buttodown.png"
-        hover "buttodownhover.png"
+        idle "UI/buttodown.png"
+        hover "UI/buttodownhover.png"
         action [Show("door_buttons"), Hide("cameraview")]
     
     imagebutton:    #room1
         xpos 1480 ypos 463
-        idle "camerabutton.png"
-        hover "camerabuttonhover.png"
+        idle "UI/camerabutton.png"
+        hover "UI/camerabuttonhover.png"
         action [SetVariable("cameraSelect",1)]
     imagebutton:    #room2
         xpos 1590 ypos 511
-        idle "camerabutton.png"
-        hover "camerabuttonhover.png"
+        idle "UI/camerabutton.png"
+        hover "UI/camerabuttonhover.png"
         action [SetVariable("cameraSelect",2)]
     imagebutton:    #room3
         xpos 1405 ypos 543
-        idle "camerabutton.png"
-        hover "camerabuttonhover.png"
+        idle "UI/camerabutton.png"
+        hover "UI/camerabuttonhover.png"
         action [SetVariable("cameraSelect",3)]
     imagebutton:    #room4
         xpos 1385 ypos 603
-        idle "camerabutton.png"
-        hover "camerabuttonhover.png"
+        idle "UI/camerabutton.png"
+        hover "UI/camerabuttonhover.png"
         action [SetVariable("cameraSelect",4)]
     imagebutton:    #room5
         xpos 1528 ypos 605
-        idle "camerabutton.png"
-        hover "camerabuttonhover.png"
+        idle "UI/camerabutton.png"
+        hover "UI/camerabuttonhover.png"
         action [SetVariable("cameraSelect",5)]
     imagebutton:    #room6
         xpos 1640 ypos 665
-        idle "camerabutton.png"
-        hover "camerabuttonhover.png"
+        idle "UI/camerabutton.png"
+        hover "UI/camerabuttonhover.png"
         action [SetVariable("cameraSelect",6)]
     imagebutton:    #room7
         xpos 1400 ypos 805
-        idle "camerabutton.png"
-        hover "camerabuttonhover.png"
+        idle "UI/camerabutton.png"
+        hover "UI/camerabuttonhover.png"
         action [SetVariable("cameraSelect",7)]
     imagebutton:    #room8
         xpos 1520 ypos 785
-        idle "camerabutton.png"
-        hover "camerabuttonhover.png"
+        idle "UI/camerabutton.png"
+        hover "UI/camerabuttonhover.png"
         action [SetVariable("cameraSelect",8)]
     imagebutton:    #room9
         xpos 1440 ypos 900
-        idle "camerabutton.png"
-        hover "camerabuttonhover.png"
+        idle "UI/camerabutton.png"
+        hover "UI/camerabuttonhover.png"
         action [SetVariable("cameraSelect",9)]
     imagebutton:    #room10
         xpos 1636 ypos 844
-        idle "camerabutton.png"
-        hover "camerabuttonhover.png"
+        idle "UI/camerabutton.png"
+        hover "UI/camerabuttonhover.png"
         action [SetVariable("cameraSelect",10)]
 
     imagebutton:
         xpos 1520 ypos 521
-        idle "audiobutton.png"
-        hover "audiobuttonhover.png"
+        idle "UI/audiobutton.png"
+        hover "UI/audiobuttonhover.png"
         if (audioCooldownStart + 20) < renpy.get_game_runtime():
             action [SetVariable("audioCooldownStart",renpy.get_game_runtime()), Function(menGoToSound),SetVariable("flashBattery", flashBattery - 2), Play("audio", casinoAudioCueFile[renpy.random.randint(0,4)])]
 
@@ -636,12 +636,12 @@ screen DEBUGmode:
         yalign 0.9
         spacing 20
         imagebutton:
-            idle "camerabutton.png"
-            hover "camerabuttonhover.png"
+            idle "UI/camerabutton.png"
+            hover "UI/camerabuttonhover.png"
             action [SetVariable("starttime",min(starttime + 10, renpy.get_game_runtime()))]
         imagebutton:
-            idle "camerabutton.png"
-            hover "camerabuttonhover.png"
+            idle "UI/camerabutton.png"
+            hover "UI/camerabuttonhover.png"
             action [SetVariable("starttime",starttime - 10)]
 
     grid 4 5:
@@ -649,84 +649,84 @@ screen DEBUGmode:
         yalign 0.5
         spacing 20
         imagebutton:
-            idle "camerabutton.png"
-            hover "camerabuttonhover.png"
+            idle "UI/camerabutton.png"
+            hover "UI/camerabuttonhover.png"
             action [SetVariable("drywallLocation",1)]
         imagebutton:
-            idle "camerabutton.png"
-            hover "camerabuttonhover.png"
+            idle "UI/camerabutton.png"
+            hover "UI/camerabuttonhover.png"
             action [SetVariable("drywallLocation",2)]
         imagebutton:
-            idle "camerabutton.png"
-            hover "camerabuttonhover.png"
+            idle "UI/camerabutton.png"
+            hover "UI/camerabuttonhover.png"
             action [SetVariable("matysiakLocation",1)]
         imagebutton:
-            idle "camerabutton.png"
-            hover "camerabuttonhover.png"
+            idle "UI/camerabutton.png"
+            hover "UI/camerabuttonhover.png"
             action [SetVariable("matysiakLocation",2)]
         imagebutton:
-            idle "camerabutton.png"
-            hover "camerabuttonhover.png"
+            idle "UI/camerabutton.png"
+            hover "UI/camerabuttonhover.png"
             action [SetVariable("drywallLocation",3)]
         imagebutton:
-            idle "camerabutton.png"
-            hover "camerabuttonhover.png"
+            idle "UI/camerabutton.png"
+            hover "UI/camerabuttonhover.png"
             action [SetVariable("drywallLocation",4)]
         imagebutton:
-            idle "camerabutton.png"
-            hover "camerabuttonhover.png"
+            idle "UI/camerabutton.png"
+            hover "UI/camerabuttonhover.png"
             action [SetVariable("matysiakLocation",3)]
         imagebutton:
-            idle "camerabutton.png"
-            hover "camerabuttonhover.png"
+            idle "UI/camerabutton.png"
+            hover "UI/camerabuttonhover.png"
             action [SetVariable("matysiakLocation",4)]
         imagebutton:
-            idle "camerabutton.png"
-            hover "camerabuttonhover.png"
+            idle "UI/camerabutton.png"
+            hover "UI/camerabuttonhover.png"
             action [SetVariable("drywallLocation",5)]
         imagebutton:
-            idle "camerabutton.png"
-            hover "camerabuttonhover.png"
+            idle "UI/camerabutton.png"
+            hover "UI/camerabuttonhover.png"
             action [SetVariable("drywallLocation",6)]
         imagebutton:
-            idle "camerabutton.png"
-            hover "camerabuttonhover.png"
+            idle "UI/camerabutton.png"
+            hover "UI/camerabuttonhover.png"
             action [SetVariable("matysiakLocation",5)]
         imagebutton:
-            idle "camerabutton.png"
-            hover "camerabuttonhover.png"
+            idle "UI/camerabutton.png"
+            hover "UI/camerabuttonhover.png"
             action [SetVariable("matysiakLocation",6)]
         imagebutton:
-            idle "camerabutton.png"
-            hover "camerabuttonhover.png"
+            idle "UI/camerabutton.png"
+            hover "UI/camerabuttonhover.png"
             action [SetVariable("drywallLocation",7)]
         imagebutton:
-            idle "camerabutton.png"
-            hover "camerabuttonhover.png"
+            idle "UI/camerabutton.png"
+            hover "UI/camerabuttonhover.png"
             action [SetVariable("drywallLocation",8)]
         imagebutton:
-            idle "camerabutton.png"
-            hover "camerabuttonhover.png"
+            idle "UI/camerabutton.png"
+            hover "UI/camerabuttonhover.png"
             action [SetVariable("matysiakLocation",7)]
         imagebutton:
-            idle "camerabutton.png"
-            hover "camerabuttonhover.png"
+            idle "UI/camerabutton.png"
+            hover "UI/camerabuttonhover.png"
             action [SetVariable("matysiakLocation",8)]
         imagebutton:
-            idle "camerabutton.png"
-            hover "camerabuttonhover.png"
+            idle "UI/camerabutton.png"
+            hover "UI/camerabuttonhover.png"
             action [SetVariable("drywallLocation",9)]
         imagebutton:
-            idle "camerabutton.png"
-            hover "camerabuttonhover.png"
+            idle "UI/camerabutton.png"
+            hover "UI/camerabuttonhover.png"
             action [SetVariable("drywallLocation",10)]
         imagebutton:
-            idle "camerabutton.png"
-            hover "camerabuttonhover.png"
+            idle "UI/camerabutton.png"
+            hover "UI/camerabuttonhover.png"
             action [SetVariable("matysiakLocation",9)]
         imagebutton:
-            idle "camerabutton.png"
-            hover "camerabuttonhover.png"
+            idle "UI/camerabutton.png"
+            hover "UI/camerabuttonhover.png"
             action [SetVariable("matysiakLocation",10)]
 
 #sexy guy \/\/\/
@@ -2529,23 +2529,23 @@ label _CASINO_ENTRY_HERE________________________________________________________
 
     label extremely:
         play music cool1 fadein 2.0 volume 0.4
-        scene arccool1
+        scene arccool 1
         menu:
             "START":
                 play sound coin
                 $ renpy.pause(1.0, hard=True)
                 play sound cam
                 play music cool volume 0.4
-                scene arccool2
+                scene arccool 2
         menu:
             "FORWARD":
                 play sound cam
-                scene arccool3
+                scene arccool 3
                 $ renpy.pause(1.0, hard=True)
         menu:
             "FORWARD":
                 play sound cam
-                scene arccool4
+                scene arccool 4
                 $ renpy.pause(1.0, hard=True)
                 show combine1 with dissolve
         menu:
@@ -2563,7 +2563,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
         menu:
             "FORWARD":
                 play sound cam
-                scene arccool5
+                scene arccool 5
                 $ renpy.pause(1.0, hard=True)
                 show combine2 with dissolve
         menu:
@@ -2581,24 +2581,24 @@ label _CASINO_ENTRY_HERE________________________________________________________
         menu:
             "FORWARD":
                 play sound cam
-                scene arccool6
+                scene arccool 6
                 $ renpy.pause(1.0, hard=True)
         menu:
             "INTERACT":
                 play sound cam
-                scene arccool7
+                scene arccool 7
                 $ renpy.pause(1.3, hard=True)
                 play sound door
-                scene arccool8
+                scene arccool 8
         menu:
             "FORWARD":
                 play sound cam
-                scene arccool9
+                scene arccool 9
                 $ renpy.pause(1.0, hard=True)
         menu:
             "FORWARD":
                 play sound cam
-                scene arccool10
+                scene arccool 10
                 $ renpy.pause(1.0, hard=True)
                 show combine1 with dissolve
         menu:
@@ -2616,7 +2616,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
         menu:
             "FORWARD":
                 play sound cam
-                scene arccool11
+                scene arccool 11
                 $ renpy.pause(1.0, hard=True)
                 show combine1 with dissolve
         if not isZlinkDie:
@@ -2635,12 +2635,12 @@ label _CASINO_ENTRY_HERE________________________________________________________
             menu:
                 "FORWARD":
                     play sound cam
-                    scene arccool12
+                    scene arccool 12
                     $ renpy.pause(1.0, hard=True)
             menu:           
                 "CROUCH DOWN":
                     play sound cam
-                    scene arccool13
+                    scene arccool 13
                     stop music
                     play sound win
                     $ renpy.pause(3.0, hard=True)
@@ -2876,7 +2876,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
         p1 "so yeah we found your car and ID"
         p1 "so we know  who you are now and itsnot looking good for you at all, tbh"
 
-        show bobis4 with moveinbottom
+        show bobis right with moveinbottom
         play sound cloth
         bb "Sir, he was making trouble at our place"
         play sound impact1
@@ -2893,7 +2893,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
         
         bb "okaym ill levae you to  it"
         play sound cloth
-        hide bobis4 with dissolve
+        hide bobis right with dissolve
         "the management guy disapepars and then uhh"
         "the police officers put you in their car"
 
