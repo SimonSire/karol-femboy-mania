@@ -24,7 +24,6 @@
 /dialogue.tab
 /dialogue.txt
 /strings.json
-/game/saves
-/game/cache
-/game/cache
+game/saves
+game/cache
 log.txt
