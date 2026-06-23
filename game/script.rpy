@@ -730,7 +730,8 @@ screen DEBUGmode:
             action [SetVariable("matysiakLocation",10)]
 
 #sexy guy \/\/\/
-screen shapeholesscreen:
+screen shapeholesscreen:#is this even necessery?????????
+    zorder -10
     fixed:
         image "shapeholes.png"
 
@@ -2172,8 +2173,10 @@ label _CASINO_ENTRY_HERE________________________________________________________
 
     label sexyshapefittinggame:
         scene castableidk
-        "THE DIALOG HERE IS PLACEHOLDER I THINK"
+        show shapeholes
+        #"THE DIALOG HERE IS PLACEHOLDER I THINK"
         if sexyguyCasinoShingas == 0:
+            show sexyguy 6
             sx "Hello there, im the gamemaster"#dialog here is subject to change i think il see maybe mayhaps_____________________
             sx "Would you like to play my game?"
             menu:
@@ -2182,98 +2185,122 @@ label _CASINO_ENTRY_HERE________________________________________________________
                 "not":
                     k "nah im not gonna"
                     sx "Thats a shame, come back if you change your mind!"
+                    hide sexyguy 6
+                    hide shapeholes
                     jump casinoFORW
-            show screen shapeholesscreen
-            "fill my holes"
-            show wrencher 5
+            sx "Great! Lets begin"
+            show sexyguy 2
+            sx "Im gonna explain the rules to you now"
+            sx "Its pretty simple"
+            show sexyguy 1
+            sx "Im gonna give you some precious BLOCKS, one by one"
+            sx "And YOU have to fit them to their respecting shaped hole"
+            k "yeah okay"
+            sx "Great, now I am gonna give you the first piece..."
 
-            call screen holesfit1
-            if doShapesMatch:
-                "GOOD"
-            elif shapeDroppable == "square":
-                "SQUARE HOLE"
-                $ sexyguyMadnessLevel = sexyguyMadnessLevel + 2
-            else:
-                "IDIOT"
-                $ sexyguyMadnessLevel = sexyguyMadnessLevel + 1
+    label sexyshapegamewhole:  
 
-            $ sexyguyCasinoShingas = 1
-            call screen holesfit1
-            if doShapesMatch:
-                "GOOD"
-            elif shapeDroppable == "square":
-                "SQUARE HOLE"
-                $ sexyguyMadnessLevel = sexyguyMadnessLevel + 2
-            else:
-                "IDIOT"
-                $ sexyguyMadnessLevel = sexyguyMadnessLevel + 1
+        call screen holesfit1
+        if doShapesMatch:
+            sx "Woah! Correct!"
+            show sexyguy 2
+            sx "Cant believe you managed to get it right on the first try!"
+            show sexyguy 1
+        elif shapeDroppable == "square":
+            k "square hole"
+            show sexyguy 2
+            sx "Thats a wrong one buddy!"
+            show sexyguy 1
+            sx "Try again with this new piece!"
+            $ sexyguyMadnessLevel = sexyguyMadnessLevel + 2
+        else:
+            show sexyguy 2
+            sx "Thats a wrong one buddy!"
+            show sexyguy 1
+            sx "Try again with this new piece!"
+            $ sexyguyMadnessLevel = sexyguyMadnessLevel + 1
 
-            $ sexyguyCasinoShingas = 2
-            call screen holesfit1
-            if doShapesMatch:
-                "GOOD"
-            elif shapeDroppable == "square":
-                "SQUARE HOLE"
-                $ sexyguyMadnessLevel = sexyguyMadnessLevel + 2
-            else:
-                "IDIOT"
-                $ sexyguyMadnessLevel = sexyguyMadnessLevel + 1
+        $ sexyguyCasinoShingas = 1
+        call screen holesfit1
+        if doShapesMatch:
+            "Yes! You're pretty good at this!"
+        elif shapeDroppable == "square":
+            k "square hole"
+            show sexyguy 2
+            "Nope, thats not a good hole!"
+            $ sexyguyMadnessLevel = sexyguyMadnessLevel + 2
+        else:
+            show sexyguy 2
+            "Nope, thats not a good hole!"
+            $ sexyguyMadnessLevel = sexyguyMadnessLevel + 1
 
-            $ sexyguyCasinoShingas = 3
-            call screen holesfit1
-            if doShapesMatch:
-                "GOOD"
-            elif shapeDroppable == "square":
-                "SQUARE HOLE"
-                $ sexyguyMadnessLevel = sexyguyMadnessLevel + 2
-            else:
-                "IDIOT"
-                $ sexyguyMadnessLevel = sexyguyMadnessLevel + 1
+        $ sexyguyCasinoShingas = 2
+        call screen holesfit1
+        if doShapesMatch:
+            "GOOD"
+        elif shapeDroppable == "square":
+            k "square hole"
+            $ sexyguyMadnessLevel = sexyguyMadnessLevel + 2
+        else:
+            "IDIOT"
+            $ sexyguyMadnessLevel = sexyguyMadnessLevel + 1
 
-            $ sexyguyCasinoShingas = 4
-            call screen holesfit1
-            if doShapesMatch:
-                "GOOD"
-            elif shapeDroppable == "square":
-                "SQUARE HOLE"
-                $ sexyguyMadnessLevel = sexyguyMadnessLevel + 2
-            else:
-                "IDIOT"
-                $ sexyguyMadnessLevel = sexyguyMadnessLevel + 1
+        $ sexyguyCasinoShingas = 3
+        call screen holesfit1
+        if doShapesMatch:
+            "GOOD"
+        elif shapeDroppable == "square":
+            k "square hole"
+            $ sexyguyMadnessLevel = sexyguyMadnessLevel + 2
+        else:
+            "IDIOT"
+            $ sexyguyMadnessLevel = sexyguyMadnessLevel + 1
 
-            $ sexyguyCasinoShingas = 5 #this one is an actual square
-            call screen holesfit1
-            if doShapesMatch:
-                "GOOD"
-            else:
-                "IDIOT"
-                $ sexyguyMadnessLevel = sexyguyMadnessLevel + 1
+        $ sexyguyCasinoShingas = 4
+        call screen holesfit1
+        if doShapesMatch:
+            "GOOD"
+        elif shapeDroppable == "square":
+            k "square hole"
+            $ sexyguyMadnessLevel = sexyguyMadnessLevel + 2
+        else:
+            "IDIOT"
+            $ sexyguyMadnessLevel = sexyguyMadnessLevel + 1
 
-            $ sexyguyCasinoShingas = 6
-            call screen holesfit1
-            if doShapesMatch:
-                "GOOD"
-            elif shapeDroppable == "square":
-                "SQUARE HOLE"
-                $ sexyguyMadnessLevel = sexyguyMadnessLevel + 2
-            else:
-                "IDIOT"
-                $ sexyguyMadnessLevel = sexyguyMadnessLevel + 1
+        $ sexyguyCasinoShingas = 5 #this one is an actual square
+        call screen holesfit1
+        if doShapesMatch:
+            k "square hole"
+            "GOOD"
+        else:
+            "IDIOT"
+            $ sexyguyMadnessLevel = sexyguyMadnessLevel + 1
 
-            $ sexyguyCasinoShingas = 7
-            call screen holesfit1
-            if doShapesMatch:
-                "GOOD"
-            elif shapeDroppable == "square":
-                "SQUARE HOLE"
-                $ sexyguyMadnessLevel = sexyguyMadnessLevel + 2
-            else:
-                "IDIOT"
-                $ sexyguyMadnessLevel = sexyguyMadnessLevel + 1
-            
-            $ casinoMajorHappens = casinoMajorHappens + 1
+        $ sexyguyCasinoShingas = 6
+        call screen holesfit1
+        if doShapesMatch:
+            "GOOD"
+        elif shapeDroppable == "square":
+            k "square hole"
+            $ sexyguyMadnessLevel = sexyguyMadnessLevel + 2
+        else:
+            "IDIOT"
+            $ sexyguyMadnessLevel = sexyguyMadnessLevel + 1
 
-        hide screen shapeholesscreen
+        $ sexyguyCasinoShingas = 7
+        call screen holesfit1
+        if doShapesMatch:
+            "GOOD"
+        elif shapeDroppable == "square":
+            k "square hole"
+            $ sexyguyMadnessLevel = sexyguyMadnessLevel + 2
+        else:
+            "IDIOT"
+            $ sexyguyMadnessLevel = sexyguyMadnessLevel + 1
+        
+        $ casinoMajorHappens = casinoMajorHappens + 1
+
+        hide shapeholes
         jump casinoFORW
 
     label casinoLEFT: #this IS the fun one
