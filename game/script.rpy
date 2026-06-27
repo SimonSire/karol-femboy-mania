@@ -1,4 +1,4 @@
-﻿    # hello welcome to the script of karolfemboymania where there are barely any femboys at the moment as i write this
+    # hello welcome to the script of karolfemboymania where there are barely any femboys at the moment as i write this
 # and no im not adding any rn
 # dont worry im not gonna be adding any either
 
@@ -60,6 +60,7 @@ define b2 = Character("Bartender 2", color="#120c63")
 define j = Character("Judge", color="#186d45")
 define t = Character("Trump", color="#614e12")
 define ob = Character("Obama", color="#503528")
+define l = Character("Lawyer", color="#0b0955")
 
 default isPathetic = True
 default isZlinkDie = False
@@ -3314,6 +3315,13 @@ label _CASINO_LEAVING_HERE______________________________________________________
                 t "okay, okay, the silent treatment"
             "Victim was a horse":
                 k "g"
+        scene court3
+        un "what he ell??"
+        play sound cloth
+        show teeguy serious with dissolve
+        l "you queestioned my client without me here???"
+
+
         
 
 
