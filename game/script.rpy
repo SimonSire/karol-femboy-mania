@@ -83,9 +83,11 @@ default judgepissedlevel = 0
 #bors
 default wrenchCasinoShingas = 0         #0 = never met robux, 1 = you made robux win, 2 = you made robux lose
 default pielaCasinoShingas = 0          #0 = never met piela, 1 = is being ignored, 2 = told to fuck off, 3 = agreed to help
-default wiktorCasinoShingas = 0
+default wiktorCasinoShingas = 0         #0 = never met wikts, 1 = you gave them cash, 2 = didnt
 default sexyguyCasinoShingas = 0
 default sexyguyMadnessLevel = 0
+default sexyguyWrongHoles = 0
+default sexyguyCorrectas = 0
 
 default casinoMajorHappens = 0
 
@@ -128,8 +130,10 @@ default karolTalkingMad = False
 define interval = 0.1 
 define rolltime = 1
 define rollwheelradius = 500
-define slotsnumber = 6
-define gamble1didwin = False
+#define slotsnumber = 6 no clue
+default gamble1didwin = False
+default gambelrow = 0
+default gambelState = 0 
 
 init python: #PYTHON FUNCTIONS AND THINGIESS
     casinoRoomsTable = [
@@ -190,6 +194,10 @@ init python: #PYTHON FUNCTIONS AND THINGIESS
         shapeDraggable = drags[0].drag_name
         shapeDroppable = drop.drag_name
         doShapesMatch = (drags[0].drag_name == drop.drag_name)
+        if doShapesMatch:
+            sexyguyCorrectas += 1
+        else:
+            sexyguyWrongHoles += 1
 
         return True
 
@@ -731,11 +739,6 @@ screen DEBUGmode:
             action [SetVariable("matysiakLocation",10)]
 
 #sexy guy \/\/\/
-screen shapeholesscreen:#is this even necessery?????????
-    zorder -10
-    fixed:
-        image "shapeholes.png"
-
 screen holesfit1:
 
     draggroup:
@@ -743,35 +746,35 @@ screen holesfit1:
             drag_name "square"
             xpos 475
             ypos 675
-            child "placeholdergoop.png"
+            #child "placeholdergoop.png"
             draggable False
             droppable True
         drag:
             drag_name "rombus"
             xpos 705
             ypos 835
-            child "placeholdergoop.png"
+            #child "placeholdergoop.png"
             draggable False
             droppable True
         drag:
             drag_name "circle"
             xpos 938
             ypos 673
-            child "placeholdergoop.png"
+            #child "placeholdergoop.png"
             draggable False
             droppable True
         drag:
             drag_name "star"
             xpos 1165
             ypos 835
-            child "placeholdergoop.png"
+            #child "placeholdergoop.png"
             draggable False
             droppable True
         drag:
             drag_name "triangle"
             xpos 1405
             ypos 673
-            child "placeholdergoop.png"
+            #child "placeholdergoop.png"
             draggable False
             droppable True
         if sexyguyCasinoShingas == 0:
@@ -1147,39 +1150,39 @@ label _1ST_SECTION_ORIGINAL_GAME_HERE___________________________________________
                 play sound bar5
                 b "Hey, think about it, I think you might want something to drink"
 
-                menu:
-                    "Okay fine":
-                        jump continued
-                    "No":
-                        play sound bar6
-                        b "Come ooon, it will be fun"
+        menu:
+            "Okay fine":
+                jump continued
+            "No":
+                play sound bar6
+                b "Come ooon, it will be fun"
 
-                        menu:
-                            "Okay":
-                                jump continued
-                            "No":
-                                play sound bar7
-                                b "Just do it. Order some drinks."
+        menu:
+            "Okay":
+                jump continued
+            "No":
+                play sound bar7
+                b "Just do it. Order some drinks."
 
-                                menu:
-                                    "Fine":
-                                        jump continued
-                                    "No":
-                                        play sound bar8
-                                        b "You can't leave"
+        menu:
+            "Fine":
+                jump continued
+            "No":
+                play sound bar8
+                b "You can't leave"
 
-                                        menu:
-                                            "Yes":
-                                                jump continued
-                                            "No":
-                                                play sound bar9
-                                                b "Get something to drink man"
+        menu:
+            "Yes":
+                jump continued
+            "No":
+                play sound bar9
+                b "Get something to drink man"
 
-                                                menu:
-                                                    "Sure":
-                                                        jump continued
-                                                    "No":
-                                                        jump nuhuh
+        menu:
+            "Sure":
+                jump continued
+            "No":
+                jump nuhuh
 
         label nuhuh:
             play sound bar10
@@ -1192,18 +1195,18 @@ label _1ST_SECTION_ORIGINAL_GAME_HERE___________________________________________
                     play sound bar11
                     b "Can't do that"
 
-                    menu:
-                        "Yeah":
-                            jump continued
-                        "No":
-                            play sound bar12
-                            b "Think about the taste"
+            menu:
+                "Yeah":
+                    jump continued
+                "No":
+                    play sound bar12
+                    b "Think about the taste"
 
-                            menu:
-                                "Yeah":
-                                    jump continued
-                                "No":
-                                    jump nuhuh
+            menu:
+                "Yeah":
+                    jump continued
+                "No":
+                    jump nuhuh
 
         label continued:
             play sound bar4
@@ -1568,8 +1571,8 @@ label _CASINO_ENTRY_HERE________________________________________________________
         scene backdoor
         "you arrive at the backdoor"
         menu:
-                "Open the door and GET THE FUCK OUUTA HERE BRO":
-                    play sound door
+            "Open the door and GET THE FUCK OUUTA HERE BRO":
+                play sound door
         scene street1
         play sound run
         "you are running trough the street"
@@ -1774,7 +1777,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
 
     label casinoMAIN:
         scene casmiddle
-        if casinoMajorHappens >= 2:
+        if (casinoMajorHappens >= 3) and isZlinkDie:
             $ renpy.pause(1.0, hard=True)
             show casmiddledark
             play sound jumpscare1
@@ -1782,6 +1785,13 @@ label _CASINO_ENTRY_HERE________________________________________________________
             "it seems the lights went out"
             k "oH NOooo shiiiitttt shit shittt"
             jump casinodoorlock
+        if (casinoMajorHappens >= 6) and not isZlinkDie:
+            "CASINO CHIEF COMES HIER"
+            menu:               #temporary shjit
+                "go court":
+                    jump courtarrive
+                "stay":
+                    "ok"
 
         menu:
                 "Go right":
@@ -1796,61 +1806,68 @@ label _CASINO_ENTRY_HERE________________________________________________________
         
     label casinoRIGHT:
         scene casright
+        if wiktorCasinoShingas == 0:
+            play sound cloth
+            show wiktorhobo 1 with moveinright
+            $ casinoMajorHappens += 1
+            un "heyyy there fella"
+            wb "I'm just a gambler here"
+            wb "And this is my brother:"
+            play sound cloth
+            show wiktor 1 with moveinleft
+            
+            w "yeah yeah hows it goin im a proffessional gambler"
+            w "we wanted to ask you a favour"
+            wb "got a couple bucks to spare?"
+            menu:
+                "Why":
+                    k "What you need it for fellas?"
+                    w "we just need a few dollars to get some beer"
+                    wb "no, no."
+                    wb "we are gonna multiply it and become rich"
+                    w "Like i said bro, this is why you are so fucking broke, you dont know when to quit."
+                    w "let's just get some beer, okay?"
+                    wb "ugh, fine"
+                    wb "wait, you never responded to the question, will you give us a few dollars?"
+                    menu:
+                            "Yeah sure":
+                                $ wiktorCasinoShingas = 1
+                                jump casinoRIGHT #___________________________________________________________________FINISHHHHHH
+                            "Nah fuck off":
+                                $ wiktorCasinoShingas = 2
+                                jump casinoRIGHT
+                "Give a few bucks":
+                    k "here you go folks"
+                    "you hand out 20 PLN to the two brothers"
+                    wb "thank yuo so much bro!! much apprecciated!"
+                    play sound cloth
+                    hide wiktorhobo 1 with dissolve
+                    $ renpy.pause(0.2, hard=True)
+                    hide wiktor 1 with dissolve
+                    "both of them dissappear"
+                    $ wiktorCasinoShingas = 1
+                "Nah fuck off":
+                    k "Nah i aint givin youshit u cn fukc off"
+                    hide wiktorhobo 1 with dissolve
+                    hide wiktor 1 with dissolve
+                    $ wiktorCasinoShingas = 2
 
-        play sound cloth
-        show wiktorhobo 1 with moveinright
-        un "heyyy there fella"
-        wb "I'm just a gambler here"
-        wb "And this is my brother:"
-        play sound cloth
-        show wiktor 1 with moveinleft
-        
-        w "yeah yeah hows it goin im a proffessional gambler"
-        w "we wanted to ask you a favour"
-        wb "got a couple bucks to spare?"
-        menu:
-            "Why":
-                k "What you need it for fellas?"
-                w "we just need a few dollars to get some beer"
-                wb "no, no."
-                wb "we are gonna multiply it and become rich"
-                w "Like i said bro, this is why you are so fucking broke, you dont know when to quit."
-                w "let's just get some beer, okay?"
-                wb "ugh, fine"
-                wb "wait, you never responded to the question, will you give us a few dollars?"
-                menu:
-                        "Yeah sure":
-                            jump casinoRIGHT #___________________________________________________________________FINISHHHHHH
-                        "Nah fuck off":
-                            jump casinoRIGHT
-            "Give a few bucks":
-                k "here you go folks"
-                "you hand out 20 PLN to the two brothers"
-                wb "thank yuo so much bro!! much apprecciated!"
-                play sound cloth
-                hide wiktorhobo 1 with dissolve
-                $ renpy.pause(0.2, hard=True)
-                hide wiktor 1 with dissolve
-                "both of them dissappear"
-            "Nah fuck off":
-                k "Nah i aint givin youshit u cn fukc off"
-                hide wiktorhobo 1 with dissolve
-                hide wiktor 1 with dissolve
+                    "idk what to put here simon lmao"
+                    ##smth about the getting mad and later the guys be pissed at u
 
-                "idk what to put here simon lmao"
-                ##smth about the getting mad and later the guys be pissed at u
-        $ casinoMajorHappens = casinoMajorHappens + 1
         menu:
                 "Go back":
                     play sound door
                     jump casinoMAIN
-                "idk jerk around (it just calls wiktor rn)":
+                "go to fellas again":
+                    "actually u dont really want to see them again so nah"
                     jump casinoRIGHT
                 "go to the bar":
                     label barguy:
                         play music casmusic fadein 1.5 volume 0.2
+                        $ casinoMajorHappens += 1
                         scene casbar
-                        if not hasbeenbar:
+                        if (hasbeenbar == 0):
                         
                             "You come to da bahrs"
                             play sound appear
@@ -2096,6 +2113,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
         scene casforw
         if wrenchCasinoShingas == 0:
             $ renpy.pause(1.0, hard=True)
+            $ casinoMajorHappens += 1
             play sound bad
             show casforw with vpunch
             un "HEY YOU"
@@ -2130,7 +2148,6 @@ label _CASINO_ENTRY_HERE________________________________________________________
                     k "well that was weird"
                     $ wrenchCasinoShingas = 2
                     $ casinoLovesYou = casinoLovesYou - 1
-                    $ casinoMajorHappens = casinoMajorHappens + 1
                 "BLACK":
                     k "i dunno man maybe u shold BLACk it a little"
                     br "you better be right, ill be back soon"
@@ -2144,14 +2161,13 @@ label _CASINO_ENTRY_HERE________________________________________________________
                     br "i am so unbelievably happy right now"
                     hide wrencher 5 with dissolve
                     "the man gives you a little kiss on your cheek and leaves the room extremly happy"
-                    k "well this was pretty{nw=0.5}"
+                    k "well this was pretty{nw=0}"
                     $ karolTalkingMad = True
                     extend " AWESOME" 
                     $ karolTalkingMad = False
 
                     $ wrenchCasinoShingas = 1
-                    $ casinoLovesYou = casinoLovesYou + 1
-                    $ casinoMajorHappens = casinoMajorHappens + 1
+                    $ casinoLovesYou += 1
         
         menu:
             "go back to the wrench man":
@@ -2178,6 +2194,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
         #"THE DIALOG HERE IS PLACEHOLDER I THINK"
         if sexyguyCasinoShingas == 0:
             show sexyguy 6
+            $ casinoMajorHappens += 1
             sx "Hello there, im the gamemaster"#dialog here is subject to change i think il see maybe mayhaps_____________________
             sx "Would you like to play my game?"
             menu:
@@ -2198,6 +2215,28 @@ label _CASINO_ENTRY_HERE________________________________________________________
             sx "And YOU have to fit them to their respecting shaped hole"
             k "yeah okay"
             sx "Great, now I am gonna give you the first piece..."
+            jump sexyshapegamewhole
+        else:
+            sx "we played already"
+            jump casinoFORW
+    
+    label sexyguyanswers:
+        if sexyguyWrongHoles == 1 or sexyguyWrongHoles == 4:
+            show sexyguy 2
+            sx "Thats a wrong one buddy!"
+            show sexyguy 1
+            sx "Try again with this new piece!"
+        elif sexyguyWrongHoles == 2:
+            show sexyguy 2
+            sx "Nope, thats not a good hole either!"
+        elif sexyguyMadnessLevel == 3:
+            show sexyguy 2
+            sx "Hey man, i dont think these pieces should go into a square hole"
+            sx "You should consider trying other options"
+        else:
+            show sexyguy 3
+            sx "i have NO IDEA what to say rn"
+        return
 
     label sexyshapegamewhole:  
 
@@ -2208,98 +2247,94 @@ label _CASINO_ENTRY_HERE________________________________________________________
             sx "Cant believe you managed to get it right on the first try!"
             show sexyguy 1
         elif shapeDroppable == "square":
+            $ sexyguyMadnessLevel += 1
             k "square hole"
-            show sexyguy 2
-            sx "Thats a wrong one buddy!"
-            show sexyguy 1
-            sx "Try again with this new piece!"
-            $ sexyguyMadnessLevel = sexyguyMadnessLevel + 2
+            call sexyguyanswers
         else:
-            show sexyguy 2
-            sx "Thats a wrong one buddy!"
-            show sexyguy 1
-            sx "Try again with this new piece!"
-            $ sexyguyMadnessLevel = sexyguyMadnessLevel + 1
+            call sexyguyanswers
 
         $ sexyguyCasinoShingas = 1
+
         call screen holesfit1
         if doShapesMatch:
-            "Yes! You're pretty good at this!"
+            show sexyguy 1
+            sx "Yes! You're pretty good at this!"
         elif shapeDroppable == "square":
+            $ sexyguyMadnessLevel += 1
             k "square hole"
-            show sexyguy 2
-            "Nope, thats not a good hole!"
-            $ sexyguyMadnessLevel = sexyguyMadnessLevel + 2
+            call sexyguyanswers
         else:
-            show sexyguy 2
-            "Nope, thats not a good hole!"
-            $ sexyguyMadnessLevel = sexyguyMadnessLevel + 1
+            call sexyguyanswers
 
         $ sexyguyCasinoShingas = 2
+
         call screen holesfit1
         if doShapesMatch:
             "GOOD"
         elif shapeDroppable == "square":
+            $ sexyguyMadnessLevel += 1
             k "square hole"
-            $ sexyguyMadnessLevel = sexyguyMadnessLevel + 2
+            call sexyguyanswers
         else:
-            "IDIOT"
-            $ sexyguyMadnessLevel = sexyguyMadnessLevel + 1
+            call sexyguyanswers
 
         $ sexyguyCasinoShingas = 3
+
         call screen holesfit1
         if doShapesMatch:
             "GOOD"
         elif shapeDroppable == "square":
+            $ sexyguyMadnessLevel += 1
             k "square hole"
-            $ sexyguyMadnessLevel = sexyguyMadnessLevel + 2
+            call sexyguyanswers
         else:
-            "IDIOT"
-            $ sexyguyMadnessLevel = sexyguyMadnessLevel + 1
+            call sexyguyanswers
 
         $ sexyguyCasinoShingas = 4
+
         call screen holesfit1
         if doShapesMatch:
             "GOOD"
         elif shapeDroppable == "square":
+            $ sexyguyMadnessLevel += 1
             k "square hole"
-            $ sexyguyMadnessLevel = sexyguyMadnessLevel + 2
         else:
-            "IDIOT"
-            $ sexyguyMadnessLevel = sexyguyMadnessLevel + 1
+            call sexyguyanswers
 
         $ sexyguyCasinoShingas = 5 #this one is an actual square
+
         call screen holesfit1
         if doShapesMatch:
+            if sexyguyMadnessLevel >= 4:
+                $ sexyguyMadnessLevel += 1
             k "square hole"
             "GOOD"
         else:
-            "IDIOT"
-            $ sexyguyMadnessLevel = sexyguyMadnessLevel + 1
+            call sexyguyanswers
 
         $ sexyguyCasinoShingas = 6
+
         call screen holesfit1
         if doShapesMatch:
             "GOOD"
         elif shapeDroppable == "square":
+            $ sexyguyMadnessLevel += 1
             k "square hole"
-            $ sexyguyMadnessLevel = sexyguyMadnessLevel + 2
         else:
-            "IDIOT"
-            $ sexyguyMadnessLevel = sexyguyMadnessLevel + 1
+            call sexyguyanswers
 
         $ sexyguyCasinoShingas = 7
+
         call screen holesfit1
         if doShapesMatch:
             "GOOD"
         elif shapeDroppable == "square":
+            $ sexyguyMadnessLevel += 1
             k "square hole"
-            $ sexyguyMadnessLevel = sexyguyMadnessLevel + 2
         else:
-            "IDIOT"
-            $ sexyguyMadnessLevel = sexyguyMadnessLevel + 1
-        
-        $ casinoMajorHappens = casinoMajorHappens + 1
+            call sexyguyanswers
+
+        sx "its over"
 
         hide shapeholes
         jump casinoFORW
@@ -2310,12 +2345,12 @@ label _CASINO_ENTRY_HERE________________________________________________________
         if pielaCasinoShingas == 0 or pielaCasinoShingas == 1:
             if pielaCasinoShingas == 0:
                 $ renpy.pause(1.0, hard=True)
+                $ casinoMajorHappens += 1
                 show transpiela with moveinleft
                 pl "Hey man"
                 pl "You look like some  guy who knows computer stuff"
                 pl "a friend of mine told me those gamblin  machines run on some algorithms"
                 pl "Im looking for a hacker"
-                $ casinoMajorHappens = casinoMajorHappens + 1
             else:
                 show transpiela with moveinleft
                 pl "Hey man"
@@ -2391,6 +2426,23 @@ label _CASINO_ENTRY_HERE________________________________________________________
             "play extrem":
                 jump extremely
 
+    label gambel1rowshow:
+        show expression slotstable[slotstablebig[gambelrow][0]]:
+            ypos 100 xpos -160 zpos rollwheelradius
+            matrixtransform RotateMatrix(-180, 0, 0) * OffsetMatrix(0, 0, 0)
+            linear rolltime matrixtransform RotateMatrix(-540, 0, 0) * OffsetMatrix(0, 0, 0)
+        $ renpy.pause(interval, hard=True)
+        show expression slotstable[slotstablebig[gambelrow][1]]:
+            ypos 100 xpos 640 zpos rollwheelradius
+            matrixtransform RotateMatrix(-180, 0, 0) * OffsetMatrix(0, 0, 0)
+            linear rolltime matrixtransform RotateMatrix(-540, 0, 0) * OffsetMatrix(0, 0, 0)
+        $ renpy.pause(interval, hard=True)
+        show expression slotstable[slotstablebig[gambelrow][2]]:
+            ypos 100 xpos 1440 zpos rollwheelradius
+            matrixtransform RotateMatrix(-180, 0, 0) * OffsetMatrix(0, 0, 0)
+            linear rolltime matrixtransform RotateMatrix(-540, 0, 0) * OffsetMatrix(0, 0, 0)
+        $ renpy.pause(interval, hard=True)
+        return
 
     label gambelplaying:
         scene gar
@@ -2411,108 +2463,28 @@ label _CASINO_ENTRY_HERE________________________________________________________
             if slotstablebig[6][0] == slotstablebig[6][1] and slotstablebig[6][0] == slotstablebig[6][2]:
                 gamble1didwin = True
             else:
-                gable1didwin = False
+                gamble1didwin = False
+        
+        if gambelState == 0:
+            $ gambelState = 1
+            $ casinoMajorHappens += 1
+        if gable1didwin and (gambelState == 2):
+            $ gambelState = 3
+        if gable1didwin and (gambelState == 1):
+            $ gambelState = 2
 
-        show expression slotstable[slotstablebig[0][0]] as anel1:
-            ypos 100 xpos -160 zpos rollwheelradius
-            matrixtransform RotateMatrix(-180, 0, 0) * OffsetMatrix(0, 0, 0)
-            linear rolltime matrixtransform RotateMatrix(-540, 0, 0) * OffsetMatrix(0, 0, 0)
-        $ renpy.pause(interval, hard=True)
-        show expression slotstable[slotstablebig[0][1]] as anel2:
-            ypos 100 xpos 640 zpos rollwheelradius
-            matrixtransform RotateMatrix(-180, 0, 0) * OffsetMatrix(0, 0, 0)
-            linear rolltime matrixtransform RotateMatrix(-540, 0, 0) * OffsetMatrix(0, 0, 0)
-        $ renpy.pause(interval, hard=True)
-        show expression slotstable[slotstablebig[0][2]] as anel3:
-            ypos 100 xpos 1440 zpos rollwheelradius
-            matrixtransform RotateMatrix(-180, 0, 0) * OffsetMatrix(0, 0, 0)
-            linear rolltime matrixtransform RotateMatrix(-540, 0, 0) * OffsetMatrix(0, 0, 0)
-        $ renpy.pause(interval, hard=True)
-
-
-        show expression slotstable[slotstablebig[1][0]] as anel4:
-            ypos 100 xpos -160 zpos rollwheelradius
-            matrixtransform RotateMatrix(-180, 0, 0) * OffsetMatrix(0, 0, 0)
-            linear rolltime matrixtransform RotateMatrix(-540, 0, 0) * OffsetMatrix(0, 0, 0)
-        $ renpy.pause(interval, hard=True)
-        show expression slotstable[slotstablebig[1][1]] as anel5:
-            ypos 100 xpos 640 zpos rollwheelradius
-            matrixtransform RotateMatrix(-180, 0, 0) * OffsetMatrix(0, 0, 0)
-            linear rolltime matrixtransform RotateMatrix(-540, 0, 0) * OffsetMatrix(0, 0, 0)
-        $ renpy.pause(interval, hard=True)
-        show expression slotstable[slotstablebig[1][2]] as anel6:
-            ypos 100 xpos 1440 zpos rollwheelradius
-            matrixtransform RotateMatrix(-180, 0, 0) * OffsetMatrix(0, 0, 0)
-            linear rolltime matrixtransform RotateMatrix(-540, 0, 0) * OffsetMatrix(0, 0, 0)
-        $ renpy.pause(interval, hard=True)
-
-
-        show expression slotstable[slotstablebig[2][0]] as anel7:
-            ypos 100 xpos -160 zpos rollwheelradius
-            matrixtransform RotateMatrix(-180, 0, 0) * OffsetMatrix(0, 0, 0)
-            linear rolltime matrixtransform RotateMatrix(-540, 0, 0) * OffsetMatrix(0, 0, 0)
-        $ renpy.pause(interval, hard=True)
-        show expression slotstable[slotstablebig[2][1]] as anel8:
-            ypos 100 xpos 640 zpos rollwheelradius
-            matrixtransform RotateMatrix(-180, 0, 0) * OffsetMatrix(0, 0, 0)
-            linear rolltime matrixtransform RotateMatrix(-540, 0, 0) * OffsetMatrix(0, 0, 0)
-        $ renpy.pause(interval, hard=True)
-        show expression slotstable[slotstablebig[2][2]] as anel9:
-            ypos 100 xpos 1440 zpos rollwheelradius
-            matrixtransform RotateMatrix(-180, 0, 0) * OffsetMatrix(0, 0, 0)
-            linear rolltime matrixtransform RotateMatrix(-540, 0, 0) * OffsetMatrix(0, 0, 0)
-        $ renpy.pause(interval, hard=True)
-
-
-        show expression slotstable[slotstablebig[3][0]] as anel10:
-            ypos 100 xpos -160 zpos rollwheelradius
-            matrixtransform RotateMatrix(-180, 0, 0) * OffsetMatrix(0, 0, 0)
-            linear rolltime matrixtransform RotateMatrix(-540, 0, 0) * OffsetMatrix(0, 0, 0)
-        $ renpy.pause(interval, hard=True)
-        show expression slotstable[slotstablebig[3][1]] as anel11:
-            ypos 100 xpos 640 zpos rollwheelradius
-            matrixtransform RotateMatrix(-180, 0, 0) * OffsetMatrix(0, 0, 0)
-            linear rolltime matrixtransform RotateMatrix(-540, 0, 0) * OffsetMatrix(0, 0, 0)
-        $ renpy.pause(interval, hard=True)
-        show expression slotstable[slotstablebig[3][2]] as anel12:
-            ypos 100 xpos 1440 zpos rollwheelradius
-            matrixtransform RotateMatrix(-180, 0, 0) * OffsetMatrix(0, 0, 0)
-            linear rolltime matrixtransform RotateMatrix(-540, 0, 0) * OffsetMatrix(0, 0, 0)
-        $ renpy.pause(interval, hard=True)
-
-
-        show expression slotstable[slotstablebig[4][0]] as anel13:
-            ypos 100 xpos -160 zpos rollwheelradius
-            matrixtransform RotateMatrix(-180, 0, 0) * OffsetMatrix(0, 0, 0)
-            linear rolltime matrixtransform RotateMatrix(-540, 0, 0) * OffsetMatrix(0, 0, 0)
-        $ renpy.pause(interval, hard=True)
-        show expression slotstable[slotstablebig[4][1]] as anel14:
-            ypos 100 xpos 640 zpos rollwheelradius
-            matrixtransform RotateMatrix(-180, 0, 0) * OffsetMatrix(0, 0, 0)
-            linear rolltime matrixtransform RotateMatrix(-540, 0, 0) * OffsetMatrix(0, 0, 0)
-        $ renpy.pause(interval, hard=True)
-        show expression slotstable[slotstablebig[4][2]] as anel15:
-            ypos 100 xpos 1440 zpos rollwheelradius
-            matrixtransform RotateMatrix(-180, 0, 0) * OffsetMatrix(0, 0, 0)
-            linear rolltime matrixtransform RotateMatrix(-540, 0, 0) * OffsetMatrix(0, 0, 0)
-        $ renpy.pause(interval, hard=True)
-
-
-        show expression slotstable[slotstablebig[5][0]] as anel16:
-            ypos 100 xpos -160 zpos rollwheelradius
-            matrixtransform RotateMatrix(-180, 0, 0) * OffsetMatrix(0, 0, 0)
-            linear rolltime matrixtransform RotateMatrix(-540, 0, 0) * OffsetMatrix(0, 0, 0)
-        $ renpy.pause(interval, hard=True)
-        show expression slotstable[slotstablebig[5][1]] as anel17:
-            ypos 100 xpos 640 zpos rollwheelradius
-            matrixtransform RotateMatrix(-180, 0, 0) * OffsetMatrix(0, 0, 0)
-            linear rolltime matrixtransform RotateMatrix(-540, 0, 0) * OffsetMatrix(0, 0, 0)
-        $ renpy.pause(interval, hard=True)
-        show expression slotstable[slotstablebig[5][2]] as anel18:
-            ypos 100 xpos 1440 zpos rollwheelradius
-            matrixtransform RotateMatrix(-180, 0, 0) * OffsetMatrix(0, 0, 0)
-            linear rolltime matrixtransform RotateMatrix(-540, 0, 0) * OffsetMatrix(0, 0, 0)
-        $ renpy.pause(interval, hard=True)
+        $ gambelrow = 0
+        call gambel1rowshow
+        $ gambelrow = 1
+        call gambel1rowshow
+        $ gambelrow = 2
+        call gambel1rowshow
+        $ gambelrow = 3
+        call gambel1rowshow
+        $ gambelrow = 4
+        call gambel1rowshow
+        $ gambelrow = 5
+        call gambel1rowshow
 
         hide lever2
         play sound lever2
@@ -2538,6 +2510,9 @@ label _CASINO_ENTRY_HERE________________________________________________________
         if gamble1didwin:
             play sound victory
             "YES u won uhhhh this thing"
+            if gambelState == 3:
+                "however u already won one thing so u aint getting shit now"
+                "piss off"
         else:
             play sound disappointment
             "damn it u lost"
@@ -2546,7 +2521,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
             $ karolTalkingMad = False
         menu:
             "keep gambling":
-                call gambelplaying
+                jump gambelplaying
             "quit":
                 camera:
                     perspective False
@@ -2674,6 +2649,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
                     $ renpy.pause(3.0, hard=True)
                     "yay u won and shit, get back now bastard"
                     play music casmusic fadein 1.5 volume 0.2
+                    $ casinoMajorHappens += 1
                     jump casinoLEFT
         else:
             menu:
