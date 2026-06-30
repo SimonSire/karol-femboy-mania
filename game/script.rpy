@@ -201,6 +201,11 @@ init python: #PYTHON FUNCTIONS AND THINGIESS
             sexyguyWrongHoles += 1
 
         return True
+    
+    def randomasNumeras(wieViel):
+        global randomAssShit
+        randomAssShit = renpy.random.randint(1, wieViel)
+        return
 
     def make_slots_table():
         return [
@@ -2144,40 +2149,48 @@ label _CASINO_ENTRY_HERE________________________________________________________
                     br "really? alright give me a moment"
                     hide wrencher 1 with moveoutleft
                     $ renpy.pause(3.0, hard=True)
+                    $ randomasNumeras(10)
+                    if (randomAssShit <= 3):
+                        jump wrenchWON
 
-                    show wrencher 2 with moveinleft
-                    br "i lost"
-                    play sound bad
-                    show wrencher 4 at vpunch
-                    br "YOU DID THIS, ITS ALL YOUR FAULT"
-                    br "I LOST {b}EVERYTHING{/b} BECAUSE OF YOU"
-                    br "WHY DID I EVEN LISTEN TO YOU?"
-                    show wrencher 5
-                    br "YOU WILL {color=#e34236}PAY{/color=#e34236} FOR THIS."
-                    hide wrencher 5 with moveoutleft
-                    k "well that was weird"
-                    $ wrenchCasinoShingas = 2
-                    $ casinoLovesYou = casinoLovesYou - 1
+                    label wrenchLOST:
+                        show wrencher 2 with moveinleft
+                        br "i lost"
+                        play sound bad
+                        show wrencher 4 at vpunch
+                        br "YOU DID THIS, ITS ALL YOUR FAULT"
+                        br "I LOST {b}EVERYTHING{/b} BECAUSE OF YOU"
+                        br "WHY DID I EVEN LISTEN TO YOU?"
+                        show wrencher 5
+                        br "YOU WILL {color=#e34236}PAY{/color=#e34236} FOR THIS."
+                        hide wrencher 5 with moveoutleft
+                        k "well that was weird"
+                        $ wrenchCasinoShingas = 2
+                        $ casinoLovesYou = casinoLovesYou - 1
+
                 "{color=#e34236}BLACK":
                     k "i dunno man maybe u shold BLACk it a little"
                     br "you better be right, ill be back soon"
                     hide wrencher 1 with moveoutleft
                     $ renpy.pause(2.0, hard=True)
+                    $ randomasNumeras(10)
+                    if (randomAssShit <= 3):
+                        jump wrenchLOST
                     
-                    show wrencher 1 with moveinleft
-                    br "I ACTUALLY WON!"
-                    br "i cant believe this, thank you so much man i will remember this"
-                    show wrencher 5
-                    br "i am so unbelievably happy right now"
-                    hide wrencher 5 with dissolve
-                    "the man gives you a little kiss on your cheek and leaves the room extremly happy"
-                    k "well this was pretty{nw=0}"
-                    $ karolTalkingMad = True
-                    extend " AWESOME" 
-                    $ karolTalkingMad = False
-
-                    $ wrenchCasinoShingas = 1
-                    $ casinoLovesYou += 1
+                    label wrenchWON:
+                        show wrencher 1 with moveinleft
+                        br "I ACTUALLY WON!"
+                        br "i cant believe this, thank you so much man i will remember this"
+                        show wrencher 5
+                        br "i am so unbelievably happy right now"
+                        hide wrencher 5 with dissolve
+                        "the man gives you a little kiss on your cheek and leaves the room extremly happy"
+                        k "well this was pretty{nw=0}"
+                        $ karolTalkingMad = True
+                        extend " AWESOME" 
+                        $ karolTalkingMad = False
+                        $ wrenchCasinoShingas = 1
+                        $ casinoLovesYou += 1
         
         menu:
             "go back to the wrench man":
@@ -2818,7 +2831,8 @@ label _CASINO_ENTRY_HERE________________________________________________________
         show locknik light with dissolve
         $ renpy.pause(1, hard=True)
         show locknik lock with dissolve
-        if (renpy.random.randint(0,9) == 0):
+        $ randomasNumeras(10)
+        if (randomAssShit <= 2):
             og "hello im ognik" #_________________________________________ognik<-----
             #show expression "images/ognikTest/locknik lock2.png"
             show locknik lock2
