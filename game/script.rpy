@@ -1,4 +1,4 @@
-    # hello welcome to the script of karolfemboymania where there are barely any femboys at the moment as i write this
+﻿    # hello welcome to the script of karolfemboymania where there are barely any femboys at the moment as i write this
 # and no im not adding any rn
 # dont worry im not gonna be adding any either
 
@@ -188,7 +188,7 @@ init python: #PYTHON FUNCTIONS AND THINGIESS
 
 
     def drag_placed(drags, drop):
-        global shapeDraggable, shapeDroppable, doShapesMatch
+        global shapeDraggable, shapeDroppable, doShapesMatch, sexyguyWrongHoles, sexyguyCorrectas
         if not drop:
             return
         shapeDraggable = drags[0].drag_name
@@ -746,35 +746,35 @@ screen holesfit1:
             drag_name "square"
             xpos 475
             ypos 675
-            #child "placeholdergoop.png"
+            child "placeholdergoop.png"
             draggable False
             droppable True
         drag:
             drag_name "rombus"
             xpos 705
             ypos 835
-            #child "placeholdergoop.png"
+            child "placeholdergoop.png"
             draggable False
             droppable True
         drag:
             drag_name "circle"
             xpos 938
             ypos 673
-            #child "placeholdergoop.png"
+            child "placeholdergoop.png"
             draggable False
             droppable True
         drag:
             drag_name "star"
             xpos 1165
             ypos 835
-            #child "placeholdergoop.png"
+            child "placeholdergoop.png"
             draggable False
             droppable True
         drag:
             drag_name "triangle"
             xpos 1405
             ypos 673
-            #child "placeholdergoop.png"
+            child "placeholdergoop.png"
             draggable False
             droppable True
         if sexyguyCasinoShingas == 0:
@@ -2193,7 +2193,10 @@ label _CASINO_ENTRY_HERE________________________________________________________
         show shapeholes
         #"THE DIALOG HERE IS PLACEHOLDER I THINK"
         if sexyguyCasinoShingas == 0:
-            show sexyguy 6
+            play sound foot
+            $ renpy.pause(1.0, hard=True)
+            play sound cloth
+            show sexyguy 6 with moveinright
             $ casinoMajorHappens += 1
             sx "Hello there, im the gamemaster"#dialog here is subject to change i think il see maybe mayhaps_____________________
             sx "Would you like to play my game?"
@@ -2207,7 +2210,9 @@ label _CASINO_ENTRY_HERE________________________________________________________
                     hide shapeholes
                     jump casinoFORW
             sx "Great! Lets begin"
-            show sexyguy 2
+            hide sexyguy 6 with moveoutright
+            $ renpy.pause(0.6, hard=True)
+            show sexyguy 2 with dissolve
             sx "Im gonna explain the rules to you now"
             sx "Its pretty simple"
             show sexyguy 1
@@ -2220,8 +2225,89 @@ label _CASINO_ENTRY_HERE________________________________________________________
             sx "we played already"
             jump casinoFORW
     
+    label sexyguyanswersGOOD:
+        if (sexyguyCorrectas == 1) or (sexyguyCorrectas == 4):
+            show sexyguy 1
+            sx "Wow! Correct!"
+            show sexyguy 2
+        elif sexyguyCorrectas == 2:
+            show sexyguy 1
+            sx "Nice! Great job!"
+        elif sexyguyCorrectas == 3:
+            show sexyguy 1
+            sx "Good!"
+        elif sexyguyCorrectas == 5:
+            show sexyguy 1
+            sx "Yes! You're pretty good at this!"
+        elif sexyguyCorrectas == 6:
+            show sexyguy 1
+            sx "Congrats buddy! Keep doing what you do best!"
+        elif sexyguyCorrectas == 7:
+            show sexyguy 1
+            sx "Oh my god, you are so good at this u make me wanna..."
+            sx "Jump around naked! YES!"
+            call sexyguyJUMPING
+            show sexyguy 1 with dissolve
+            sx "Oh its so good, I love this"
+        elif sexyguyCorrectas == 8:
+            show sexyguy 1
+            sx "No... no way..."
+            sx "You've put ALL OF THEM? In CORRECT SLOTS?!!"
+            show sexyguy 3
+            sx "ITS INSANE!!! YOU ARE SO TALENTED..."
+            show sexyguy 1
+            sx "No... I have to..."
+            sx "JUMP! JUMP AGAIN!!! I HAVE TO!!!"
+            call sexyguyJUMPING
+            show sexyguy 1 with dissolve
+            sx "I WANT TO JUMP AGAIN"
+            call sexyguyJUMPING
+            show sexyguy 1 with dissolve
+            sx "Okay okay... Im done..."
+            sx "You gave me such a good time"
+        else:
+            show sexyguy 3
+            sx "i have NO ideA what to say rn but u were right thoo"
+        return
+
+    
     label sexyguyanswers:
-        if sexyguyWrongHoles == 1 or sexyguyWrongHoles == 4:
+        if sexyguyMadnessLevel == 3:
+            show sexyguy 2
+            sx "Hey man, i dont think these pieces should go into a square hole"
+            sx "You should consider trying other options"
+        elif sexyguyMadnessLevel == 4:
+            show sexyguy 2
+            sx "Dude, these are not square pieces!"
+        elif (sexyguyMadnessLevel == 5) or (sexyguyMadnessLevel == 6):
+            play sound bad
+            show sexyguy 3 with vpunch
+            sx "QUIT IT! STOP PUTTING EVERYTHING INTO A SQUARE HOLE!"
+            sx "Im starting to regret I even offered you this game in the first place!"
+        elif sexyguyMadnessLevel == 7:
+            play sound bad
+            show sexyguy 3 with vpunch
+            sx "STOP DOING THAT! UGHHHHH"
+            sx "You're making me SO mad, I wanna JUMP NAKED!"
+            call sexyguyJUMPING
+            show sexyguy 3 with dissolve
+            sx "Dang it!"
+        elif sexyguyMadnessLevel == 8:
+            play sound bad
+            show sexyguy 3 with vpunch
+            sx "AGHHH!"
+            sx "WHY DO YOU TORMENT ME?!?!"
+            sx "IM SO PISSED AT YOU! I NEED TO GO JUMP AGAIN!"
+            call sexyguyJUMPING
+            show sexyguy 3 with dissolve
+            sx "I HATE YOU, I HATE YOU!!!"
+            call sexyguyJUMPING
+            show sexyguy 3 with dissolve
+            sx "YOU RUINED EVERYTHING"
+            call sexyguyJUMPING
+            show sexyguy 3 with dissolve
+            sx "I WON'T LET THAT SLIDE, YOU WILL REMEMBER THIS!!!"
+        elif sexyguyWrongHoles == 1 or sexyguyWrongHoles == 4:
             show sexyguy 2
             sx "Thats a wrong one buddy!"
             show sexyguy 1
@@ -2229,18 +2315,41 @@ label _CASINO_ENTRY_HERE________________________________________________________
         elif sexyguyWrongHoles == 2:
             show sexyguy 2
             sx "Nope, thats not a good hole either!"
-        elif sexyguyMadnessLevel == 3:
-            show sexyguy 2
-            sx "Hey man, i dont think these pieces should go into a square hole"
-            sx "You should consider trying other options"
         else:
             show sexyguy 3
             sx "i have NO IDEA what to say rn"
         return
 
+    label sexyguyJUMPING:
+        play sound foot
+        hide sexyguy with dissolve
+        $ renpy.pause(1.0, hard=True)
+        show sexyguy 4
+        $ renpy.pause(0.1, hard=True)
+        show sexyguy 5
+        $ renpy.pause(0.1, hard=True)
+        show sexyguy 4
+        $ renpy.pause(0.1, hard=True)
+        show sexyguy 5
+        $ renpy.pause(0.1, hard=True)
+        show sexyguy 4
+        $ renpy.pause(0.1, hard=True)
+        show sexyguy 5
+        $ renpy.pause(0.1, hard=True)
+        show sexyguy 4
+        $ renpy.pause(0.1, hard=True)
+        hide sexyguy
+        play sound foot
+        return
+
+
+
     label sexyshapegamewhole:  
 
+        $ sexyguyCasinoShingas = 0
+
         call screen holesfit1
+        
         if doShapesMatch:
             sx "Woah! Correct!"
             show sexyguy 2
@@ -2257,8 +2366,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
 
         call screen holesfit1
         if doShapesMatch:
-            show sexyguy 1
-            sx "Yes! You're pretty good at this!"
+            call sexyguyanswersGOOD
         elif shapeDroppable == "square":
             $ sexyguyMadnessLevel += 1
             k "square hole"
@@ -2270,7 +2378,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
 
         call screen holesfit1
         if doShapesMatch:
-            "GOOD"
+            call sexyguyanswersGOOD
         elif shapeDroppable == "square":
             $ sexyguyMadnessLevel += 1
             k "square hole"
@@ -2282,7 +2390,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
 
         call screen holesfit1
         if doShapesMatch:
-            "GOOD"
+            call sexyguyanswersGOOD
         elif shapeDroppable == "square":
             $ sexyguyMadnessLevel += 1
             k "square hole"
@@ -2294,10 +2402,11 @@ label _CASINO_ENTRY_HERE________________________________________________________
 
         call screen holesfit1
         if doShapesMatch:
-            "GOOD"
+            call sexyguyanswersGOOD
         elif shapeDroppable == "square":
             $ sexyguyMadnessLevel += 1
             k "square hole"
+            call sexyguyanswers
         else:
             call sexyguyanswers
 
@@ -2305,10 +2414,15 @@ label _CASINO_ENTRY_HERE________________________________________________________
 
         call screen holesfit1
         if doShapesMatch:
+            k "square hole"
             if sexyguyMadnessLevel >= 4:
                 $ sexyguyMadnessLevel += 1
-            k "square hole"
-            "GOOD"
+                show sexyguy 2
+                sx "Well, this one is actually a square..."
+                show sexyguy 3
+                sx "But QUIT doing what you're DOING!"
+            else:
+                call sexyguyanswersGOOD
         else:
             call sexyguyanswers
 
@@ -2316,10 +2430,11 @@ label _CASINO_ENTRY_HERE________________________________________________________
 
         call screen holesfit1
         if doShapesMatch:
-            "GOOD"
+            call sexyguyanswersGOOD
         elif shapeDroppable == "square":
             $ sexyguyMadnessLevel += 1
             k "square hole"
+            call sexyguyanswers
         else:
             call sexyguyanswers
 
@@ -2327,10 +2442,11 @@ label _CASINO_ENTRY_HERE________________________________________________________
 
         call screen holesfit1
         if doShapesMatch:
-            "GOOD"
+            call sexyguyanswersGOOD
         elif shapeDroppable == "square":
             $ sexyguyMadnessLevel += 1
             k "square hole"
+            call sexyguyanswers
         else:
             call sexyguyanswers
 
@@ -2468,9 +2584,9 @@ label _CASINO_ENTRY_HERE________________________________________________________
         if gambelState == 0:
             $ gambelState = 1
             $ casinoMajorHappens += 1
-        if gable1didwin and (gambelState == 2):
+        if gamble1didwin and (gambelState == 2):
             $ gambelState = 3
-        if gable1didwin and (gambelState == 1):
+        if gamble1didwin and (gambelState == 1):
             $ gambelState = 2
 
         $ gambelrow = 0
