@@ -56,6 +56,7 @@ define br = Character("Broke robux", color="#9f3db3")
 define sx = Character("Sexy Gamemaster", color="#39b308")
 define pl = Character("Undersized delinquent", color="#a87698")
 define b2 = Character("Bartender 2", color="#120c63")
+define og = Character("Grand lock deity", color="#f2960c")
 
 define j = Character("Judge", color="#186d45")
 define t = Character("Trump", color="#614e12")
@@ -740,41 +741,40 @@ screen DEBUGmode:
 
 #sexy guy \/\/\/
 screen holesfit1:
-
     draggroup:
         drag:
             drag_name "square"
             xpos 475
             ypos 675
-            child "placeholdergoop.png"
+            child "emptyfuckinggoop.png"
             draggable False
             droppable True
         drag:
             drag_name "rombus"
             xpos 705
             ypos 835
-            child "placeholdergoop.png"
+            child "emptyfuckinggoop.png"
             draggable False
             droppable True
         drag:
             drag_name "circle"
             xpos 938
             ypos 673
-            child "placeholdergoop.png"
+            child "emptyfuckinggoop.png"
             draggable False
             droppable True
         drag:
             drag_name "star"
             xpos 1165
             ypos 835
-            child "placeholdergoop.png"
+            child "emptyfuckinggoop.png"
             draggable False
             droppable True
         drag:
             drag_name "triangle"
             xpos 1405
             ypos 673
-            child "placeholdergoop.png"
+            child "emptyfuckinggoop.png"
             draggable False
             droppable True
         if sexyguyCasinoShingas == 0:
@@ -867,8 +867,9 @@ label _1ST_SECTION_ORIGINAL_GAME_HERE___________________________________________
     label start:
 
         play music karoltheme_poor fadein 2.0 volume 0.2
-        scene bg bed
-
+        scene black
+        show bed with dissolve
+        $ renpy.pause(1.0, hard=True)
         k "Ohh man I looove sitting here makking games in Godot and jerkind off"
 
         play sound knock
@@ -887,9 +888,10 @@ label _1ST_SECTION_ORIGINAL_GAME_HERE___________________________________________
         d "son."
 
         play sound dad3
-        d "you have {color=#de1809}3 days to move out.{/color}"
-        ##with vpunch
-        ##extend "{color=#e34236}3 days to move out." ##simon u fucked this shit up it aint working unless u split the voice line
+        d "you have {nw=0.0}"
+        show dad at vpunch
+        play audio impact2
+        extend "{b}{color=#e34236}3 days to move out." ##simon u fucked this shit up it aint working unless u split the voice line --- nevermind i fixed it for you *kiss*
 
         play sound dad4
 
@@ -899,7 +901,7 @@ label _1ST_SECTION_ORIGINAL_GAME_HERE___________________________________________
         d "for your entire life, you've done nothing but make garrys mod maps and gooning on the bathroom floor (not comfy)"
 
         k "B-but dad.. "
-        k "B-but dad.. My map got over 30 thousand downloads!"
+        extend "My map got over 30 thousand downloads!"
         
         play sound dad6
         d "now start packing your things"
@@ -909,7 +911,7 @@ label _1ST_SECTION_ORIGINAL_GAME_HERE___________________________________________
         ".."
 
         play sound door
-        scene bg bed
+        scene bed
 
         k "oh mnnooo what am going to d9o9 now"
 
@@ -967,10 +969,12 @@ label _1ST_SECTION_ORIGINAL_GAME_HERE___________________________________________
         menu:
             do "How are you doinmg?"
             "I'm so good doing right now":
+                k "I'm doing so good right now"
                 play sound dom3
                 do "That;s so giiid!!"
                 k "wait no... im not good at all"
             "I want you domin.":
+                k "Yeah domin i wANT you"
                 $ femboyChoices = femboyChoices + 1
                 play sound dom4
                 do "Woah.."
@@ -989,10 +993,13 @@ label _1ST_SECTION_ORIGINAL_GAME_HERE___________________________________________
         menu:
             do "Come to me!"
             "Wow, that's not even that far away!!":
+                k "Wow its so close to me Yes"
                 play sound dom9
                 do "Really?? THat is such good news!"
                 k "this is so good! i will be right there!"
             "I'm not sure where that is":
+                k "but bomin i dont know where that iss where is thatt"
+                extend " where"
                 play sound dom10
                 do "well.. just put it in ur gps, okay?"
                 k "Okay, I will!"
@@ -1009,7 +1016,7 @@ label _1ST_SECTION_ORIGINAL_GAME_HERE___________________________________________
         play sound appear
 
         k "here is my key for my csar"
-
+        k "im gonna use my key for my kar with a key ight now"
         k "i guess its time to leave this crib behind"
 
         show black
@@ -1085,11 +1092,13 @@ label _1ST_SECTION_ORIGINAL_GAME_HERE___________________________________________
             do "into a million pieces"
 
             "That is so horrible":
+                k "oh domin this is so bad so horrible"
                 play sound dom15
                 do "Yeah.. I'm so unluckyu.."
                 play sound dom16
                 do "I will go have to fix it now"
             "I want you domin":
+                k "you see domin, {b}I want you you..."
                 play sound dom17
                 do "But.. my toilet"
                 play sound dom18
@@ -1223,13 +1232,13 @@ label _1ST_SECTION_ORIGINAL_GAME_HERE___________________________________________
             play music horseishere volume 0.5
 
             $ karolTalkingMad = True
-            k "You fucker!"
-            k "Why the long face?"
+            k "You {b}fucker!"
+            k "Why the {b}long face?"
             $ karolTalkingMad = False
 
             show fists with moveinbottom
             menu:
-                "FIGHT":
+                "{b}FIGHT":
                     hide fists
                     show horse1 with hpunch
                     show fists2
@@ -1242,7 +1251,7 @@ label _1ST_SECTION_ORIGINAL_GAME_HERE___________________________________________
             hide fists2
             play sound hose1
             menu:
-                "FIGHT":
+                "{b}FIGHT":
                     hide fists
                     show horse1 with hpunch
                     show fists2
@@ -1255,7 +1264,7 @@ label _1ST_SECTION_ORIGINAL_GAME_HERE___________________________________________
             show fists
             play sound hose2
             menu:
-                "FIGHT":
+                "{b}FIGHT":
                     hide fists
                     show horse1 with hpunch
                     show fists2
@@ -1268,7 +1277,7 @@ label _1ST_SECTION_ORIGINAL_GAME_HERE___________________________________________
             show fists
             play sound hose3
             menu:
-                "FIGHT":
+                "{b}FIGHT":
                     hide fists
                     show horse1 with hpunch
                     show fists2
@@ -1295,7 +1304,7 @@ label _END_OFORIGINAL_PART_AND_NOW_ESCAPING_BAR_________________________________
         stop music fadeout 0.5
 
         scene black
-        "The horses attack puts you to sleep"
+        "The horses {color=#e34236}attack{/color=#e34236} puts you to {b}sleep"
 
         "Some time passes.."
 
@@ -1342,7 +1351,7 @@ label _END_OFORIGINAL_PART_AND_NOW_ESCAPING_BAR_________________________________
 
         play sound cloth
 
-        p2 "hey hey there.. yellow guy?"
+        p2 "hey hey there.. {color=#fcdb03}yellow guy?"
 
         p2 "ehhhh, why'd you do this?"
 
@@ -1356,7 +1365,7 @@ label _END_OFORIGINAL_PART_AND_NOW_ESCAPING_BAR_________________________________
                     p2 "sure pally-o broskiti-o whatever you say"
                     p2 "lil bro's dead on the floor and yo fists are{nw=0.0}"
                     play sound impact2
-                    with vpunch
+                    show dry at vpunch
                     extend "{b} COVERED{/b} in {color=#de1809}blood"
                     p2 "Just look at you. What a sorry sight."
                     menu:
@@ -1367,7 +1376,7 @@ label _END_OFORIGINAL_PART_AND_NOW_ESCAPING_BAR_________________________________
                                 p2 "yeah im like, pretty sure you did it"
                                 k "actually.."
                                 k "yeah.."
-                                k "yeah.. i would do this sort of thing"
+                                extend "i would do this sort of thing"
                                 p2 "you got like a.. screw loose or something?"
                                 p2 "anyway.."
                             "Okay fine i did this, me":
@@ -1378,10 +1387,10 @@ label _END_OFORIGINAL_PART_AND_NOW_ESCAPING_BAR_________________________________
                                 p2 "unfortunately for you.."
 
         
-        p2 "im afraid imma have to take you in, you're coming wth me brotisserie chicken"
+        p2 "im afraid imma have to take you in, you're coming wth me {b}brotisserie chicken"
 
         menu:
-                "FIGHT":
+                "{b}FIGHT":
                     jump fight
                 "FLEE":
                     jump flee
@@ -1390,7 +1399,7 @@ label _END_OFORIGINAL_PART_AND_NOW_ESCAPING_BAR_________________________________
     label fight:
         show bfists with moveinbottom
         $ karolTalkingMad = True
-        k "I'm nOT GOING DOWN WITHOUT A FIGHT"
+        k "I'm nOT GOING DOWN {b}WITHOUT A FIGHT"
         $ renpy.pause(0.2, hard=True)
         hide bfists
         show bfists2
@@ -1401,7 +1410,7 @@ label _END_OFORIGINAL_PART_AND_NOW_ESCAPING_BAR_________________________________
         p2 "OOH"
         p2 "assault on a policer, lemme write that down, yup"
         menu:
-                "FIGHT":
+                "{b}FIGHT":
                     k "Taste THIS you fucke!1"
                     $ renpy.pause(0.5, hard=True)
                     hide bfists
@@ -1413,7 +1422,7 @@ label _END_OFORIGINAL_PART_AND_NOW_ESCAPING_BAR_________________________________
                     p2 "AAGHH"
                     p2 "stop resisting lil bro."
                     menu:
-                            "FIGHT":
+                            "{b}FIGHT":
                                 k "take this AND tTHIS!!"
                                 $ karolTalkingMad = False
                                 $ renpy.pause(0.5, hard=True)
@@ -1433,7 +1442,7 @@ label _END_OFORIGINAL_PART_AND_NOW_ESCAPING_BAR_________________________________
                                 p2 "UGHH"
                                 p2 "THAT'S IT, ILL HANDLE IT MYSELF"
                                 menu:
-                                        "FIGHT":
+                                        "{b}FIGHT":
                                             $ renpy.pause(0.2, hard=True)
                                             hide bfists
                                             show dry2 with vpunch
@@ -1447,7 +1456,7 @@ label _END_OFORIGINAL_PART_AND_NOW_ESCAPING_BAR_________________________________
                                                     "FLEE":
                                                         $ isPathetic = False
                                                         jump flee
-                                                    "FUCKING RUN AWAY":
+                                                    "{b}FUCKING RUN AWAY":
                                                         $ isPathetic = False
                                                         jump flee
                                         "FLEE":
@@ -1477,7 +1486,7 @@ label _END_OFORIGINAL_PART_AND_NOW_ESCAPING_BAR_________________________________
         p1 "There's nowhere for you to go anyway.."
 
         menu:
-                "FIGHT":
+                "{b}FIGHT":
                     jump fightzink
                     
 
@@ -1486,7 +1495,7 @@ label _END_OFORIGINAL_PART_AND_NOW_ESCAPING_BAR_________________________________
                     p1 "Cmon, we both know that i can't do that."
                     p1 "Now come along quietly. I mean it."
                     menu:
-                            "FIGHT":
+                            "{b}FIGHT":
                                 jump fightzink
                             "FLEE":
                                 play sound cloth
@@ -1598,17 +1607,17 @@ label _CASINO_ENTRY_HERE________________________________________________________
                     bb "make sure you behave or ill have to"
                     play sound bad
                     show bobis 2 with vpunch
-                    bb "KICK{nw=0.5}"
+                    bb "{b}KICK{nw=0.5}"
                     show bobis 3
                     extend " {nw=0.5}"
                     play sound bad
                     show bobis 2 at vpunch
-                    extend "YOU{nw=0.5}"
+                    extend "{b}YOU{nw=0.5}"
                     show bobis 3
                     extend " {nw=0.5}"
                     play sound bad
                     show bobis 2 at vpunch
-                    extend "OUT"
+                    extend "{b}OUT"
                     show bobis 3
 
                     bb "would you like to see the main *fun* area?"
@@ -1738,7 +1747,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
         un "you're fucked buddy"
         
         menu:
-            "FIGHT":
+            "{b}FIGHT":
                 show bfists with moveinbottom
                 $ renpy.pause(2.0, hard=True)
 
@@ -1765,7 +1774,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
                         bb "You.."
                         play sound bad
                         show bobis 2 with vpunch
-                        bb "MISBEHAVED"
+                        extend " {b}MISBEHAVED"
                         "He drags you outside"
                         jump outsidecasino
         
@@ -1780,6 +1789,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
         if (casinoMajorHappens >= 3) and isZlinkDie:
             $ renpy.pause(1.0, hard=True)
             show casmiddledark
+            stop music
             play sound jumpscare1
             $ renpy.pause(1.0, hard=True)
             "it seems the lights went out"
@@ -2055,7 +2065,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
 
                                 show fists with moveinbottom
                                 menu:
-                                    "FIGHT":
+                                    "{b}FIGHT":
                                         hide fists
                                         show bartwin horse with hpunch
                                         show fists2
@@ -2068,7 +2078,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
                                 hide fists2
                                 play sound hose1
                                 menu:
-                                    "FIGHT":
+                                    "{b}FIGHT":
                                         hide fists
                                         show bartwin horse with hpunch
                                         show fists2
@@ -2081,7 +2091,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
                                 hide fists2
                                 play sound hose2
                                 menu:
-                                    "FIGHT":
+                                    "{b}FIGHT":
                                         hide fists
                                         show bartwin horse with hpunch
                                         show fists2
@@ -2094,7 +2104,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
                                 hide fists2
                                 play sound hose1
                                 menu:
-                                    "FIGHT":
+                                    "{b}FIGHT":
                                         hide fists
                                         show bartwin horse with hpunch
                                         show fists2
@@ -2118,13 +2128,13 @@ label _CASINO_ENTRY_HERE________________________________________________________
             show casforw with vpunch
             un "HEY YOU"
             show wrencher 1 with moveinleft
-            br "yes YOU faggot man"
+            br "yes YOU {color=#fcdb03}faggot man"
             show wrencher 2
             br "i lost most of my MONEEY today and the last roulette is starting RIGHT NOW"
             show wrencher 3
             br "i need your help man i cant decide what to bet on"
             show wrencher 2
-            br "whats it going to be huh, do i bet on RED... or BLACK"
+            br "whats it going to be huh, do i bet on {b}{color=#e34236}RED{/b}{/color=#e34236}... or {b}BLACK"
             show wrencher 3
             br "choose wisely... all of the rest of my life savings depend on this"
             show wrencher 1
@@ -2140,15 +2150,15 @@ label _CASINO_ENTRY_HERE________________________________________________________
                     play sound bad
                     show wrencher 4 at vpunch
                     br "YOU DID THIS, ITS ALL YOUR FAULT"
-                    br "I LOST EVERYTHING BECAUSE OF YOU"
+                    br "I LOST {b}EVERYTHING{/b} BECAUSE OF YOU"
                     br "WHY DID I EVEN LISTEN TO YOU?"
                     show wrencher 5
-                    br "YOU WILL PAY FOR THIS."
+                    br "YOU WILL {color=#e34236}PAY{/color=#e34236} FOR THIS."
                     hide wrencher 5 with moveoutleft
                     k "well that was weird"
                     $ wrenchCasinoShingas = 2
                     $ casinoLovesYou = casinoLovesYou - 1
-                "BLACK":
+                "{color=#e34236}BLACK":
                     k "i dunno man maybe u shold BLACk it a little"
                     br "you better be right, ill be back soon"
                     hide wrencher 1 with moveoutleft
@@ -2234,7 +2244,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
             show sexyguy 1
             sx "Nice! Great job!"
         elif sexyguyCorrectas == 3:
-            show sexyguy 1
+            show sexyguy 2
             sx "Good!"
         elif sexyguyCorrectas == 5:
             show sexyguy 1
@@ -2250,7 +2260,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
             show sexyguy 1 with dissolve
             sx "Oh its so good, I love this"
         elif sexyguyCorrectas == 8:
-            show sexyguy 1
+            show sexyguy 2
             sx "No... no way..."
             sx "You've put ALL OF THEM? In CORRECT SLOTS?!!"
             show sexyguy 3
@@ -2300,56 +2310,81 @@ label _CASINO_ENTRY_HERE________________________________________________________
             sx "IM SO PISSED AT YOU! I NEED TO GO JUMP AGAIN!"
             call sexyguyJUMPING
             show sexyguy 3 with dissolve
-            sx "I HATE YOU, I HATE YOU!!!"
+            sx "{color=#e34236}I HATE YOU, I HATE YOU!!!"
             call sexyguyJUMPING
             show sexyguy 3 with dissolve
-            sx "YOU RUINED EVERYTHING"
+            sx "{color=#e34236}YOU RUINED EVERYTHING"
             call sexyguyJUMPING
             show sexyguy 3 with dissolve
-            sx "I WON'T LET THAT SLIDE, YOU WILL REMEMBER THIS!!!"
-        elif sexyguyWrongHoles == 1 or sexyguyWrongHoles == 4:
+            sx "{color=#e34236}I WON'T LET THAT SLIDE, {b}YOU WILL REMEMBER THIS!!!"
+        elif sexyguyCasinoShingas == 7:
+            show sexyguy 2
+            sx "Aaaaand that was the last one..."
+            extend " and its wrong"
+        elif (sexyguyWrongHoles == 1) or (sexyguyWrongHoles == 4):
             show sexyguy 2
             sx "Thats a wrong one buddy!"
             show sexyguy 1
             sx "Try again with this new piece!"
-        elif sexyguyWrongHoles == 2:
+        elif (sexyguyWrongHoles == 2) or (sexyguyWrongHoles == 6):
             show sexyguy 2
             sx "Nope, thats not a good hole either!"
+        elif (sexyguyWrongHoles == 3) or (sexyguyWrongHoles == 7):
+            show sexyguy 2
+            sx "Nuh uh!"
+        elif sexyguyWrongHoles == 5:
+            show sexyguy 1
+            sx "Thats INCORRECT ha!"
         else:
             show sexyguy 3
-            sx "i have NO IDEA what to say rn"
+            sx "i have NO IDEA what to say rn"##this will show up if the code is wrong
+            sx "this shouldnt be possible? what happent???"
+            sx "if you see this, it means {b}boris{/b} fucked up the code! so sad"
         return
 
     label sexyguyJUMPING:
-        play sound foot
+        play sound quickkrun
         hide sexyguy with dissolve
-        $ renpy.pause(1.0, hard=True)
+        $ renpy.pause(0.6, hard=True)
         show sexyguy 4
-        $ renpy.pause(0.1, hard=True)
+        $ renpy.pause(0.07, hard=True)
+        play sound boingg
         show sexyguy 5
-        $ renpy.pause(0.1, hard=True)
+        $ renpy.pause(0.07, hard=True)
         show sexyguy 4
-        $ renpy.pause(0.1, hard=True)
+        $ renpy.pause(0.07, hard=True)
+        play sound boingg
         show sexyguy 5
-        $ renpy.pause(0.1, hard=True)
+        $ renpy.pause(0.07, hard=True)
         show sexyguy 4
-        $ renpy.pause(0.1, hard=True)
+        $ renpy.pause(0.07, hard=True)
+        play sound boingg
         show sexyguy 5
-        $ renpy.pause(0.1, hard=True)
+        $ renpy.pause(0.07, hard=True)
         show sexyguy 4
-        $ renpy.pause(0.1, hard=True)
+        $ renpy.pause(0.07, hard=True)
         hide sexyguy
-        play sound foot
+        play sound quickkrun
+        $ renpy.pause(0.4, hard=True)
         return
 
-
+    label sexyguyREGULARshaping:
+        call screen holesfit1
+        if doShapesMatch:
+            call sexyguyanswersGOOD
+        elif shapeDroppable == "square":
+            $ sexyguyMadnessLevel += 1
+            k "square hole"
+            call sexyguyanswers
+        else:
+            call sexyguyanswers
+        return
 
     label sexyshapegamewhole:  
 
         $ sexyguyCasinoShingas = 0
 
         call screen holesfit1
-        
         if doShapesMatch:
             sx "Woah! Correct!"
             show sexyguy 2
@@ -2363,56 +2398,16 @@ label _CASINO_ENTRY_HERE________________________________________________________
             call sexyguyanswers
 
         $ sexyguyCasinoShingas = 1
-
-        call screen holesfit1
-        if doShapesMatch:
-            call sexyguyanswersGOOD
-        elif shapeDroppable == "square":
-            $ sexyguyMadnessLevel += 1
-            k "square hole"
-            call sexyguyanswers
-        else:
-            call sexyguyanswers
-
+        call sexyguyREGULARshaping
         $ sexyguyCasinoShingas = 2
-
-        call screen holesfit1
-        if doShapesMatch:
-            call sexyguyanswersGOOD
-        elif shapeDroppable == "square":
-            $ sexyguyMadnessLevel += 1
-            k "square hole"
-            call sexyguyanswers
-        else:
-            call sexyguyanswers
-
+        call sexyguyREGULARshaping
         $ sexyguyCasinoShingas = 3
-
-        call screen holesfit1
-        if doShapesMatch:
-            call sexyguyanswersGOOD
-        elif shapeDroppable == "square":
-            $ sexyguyMadnessLevel += 1
-            k "square hole"
-            call sexyguyanswers
-        else:
-            call sexyguyanswers
-
+        call sexyguyREGULARshaping
         $ sexyguyCasinoShingas = 4
+        call sexyguyREGULARshaping
+        $ sexyguyCasinoShingas = 5
 
-        call screen holesfit1
-        if doShapesMatch:
-            call sexyguyanswersGOOD
-        elif shapeDroppable == "square":
-            $ sexyguyMadnessLevel += 1
-            k "square hole"
-            call sexyguyanswers
-        else:
-            call sexyguyanswers
-
-        $ sexyguyCasinoShingas = 5 #this one is an actual square
-
-        call screen holesfit1
+        call screen holesfit1   #this one is an actual square
         if doShapesMatch:
             k "square hole"
             if sexyguyMadnessLevel >= 4:
@@ -2427,28 +2422,9 @@ label _CASINO_ENTRY_HERE________________________________________________________
             call sexyguyanswers
 
         $ sexyguyCasinoShingas = 6
-
-        call screen holesfit1
-        if doShapesMatch:
-            call sexyguyanswersGOOD
-        elif shapeDroppable == "square":
-            $ sexyguyMadnessLevel += 1
-            k "square hole"
-            call sexyguyanswers
-        else:
-            call sexyguyanswers
-
+        call sexyguyREGULARshaping
         $ sexyguyCasinoShingas = 7
-
-        call screen holesfit1
-        if doShapesMatch:
-            call sexyguyanswersGOOD
-        elif shapeDroppable == "square":
-            $ sexyguyMadnessLevel += 1
-            k "square hole"
-            call sexyguyanswers
-        else:
-            call sexyguyanswers
+        call sexyguyREGULARshaping
 
         sx "its over"
 
@@ -2668,7 +2644,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
                 $ renpy.pause(1.0, hard=True)
                 show combine1 with dissolve
         menu:
-            "FIGHT":
+            "{b}FIGHT":
                 show gun aim with moveinbottom
                 $ renpy.pause(0.3, hard=True)
                 play sound bad
@@ -2686,7 +2662,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
                 $ renpy.pause(1.0, hard=True)
                 show combine2 with dissolve
         menu:
-            "FIGHT":
+            "{b}FIGHT":
                 show gun aim with moveinbottom
                 $ renpy.pause(0.3, hard=True)
                 play sound bad
@@ -2721,7 +2697,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
                 $ renpy.pause(1.0, hard=True)
                 show combine1 with dissolve
         menu:
-            "FIGHT":
+            "{b}FIGHT":
                 show gun aim with moveinbottom
                 $ renpy.pause(0.3, hard=True)
                 play sound bad
@@ -2740,7 +2716,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
                 show combine1 with dissolve
         if not isZlinkDie:
             menu:
-                "FIGHT":
+                "{b}FIGHT":
                     show gun aim with moveinbottom
                     $ renpy.pause(0.3, hard=True)
                     play sound bad
@@ -2769,7 +2745,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
                     jump casinoLEFT
         else:
             menu:
-                "FIGHT":
+                "{b}FIGHT":
                     show gun aim with moveinbottom
                     $ renpy.pause(0.3, hard=True)
                     play sound bad
@@ -2777,7 +2753,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
                     $ renpy.pause(0.1, hard=True)
                     show gun aim
             menu:
-                "FIGHT":
+                "{b}FIGHT":
                     show gun aim with moveinbottom
                     $ renpy.pause(0.3, hard=True)
                     play sound bad
@@ -2785,7 +2761,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
                     $ renpy.pause(0.1, hard=True)
                     show gun aim
             menu:
-                "FIGHT":
+                "{b}FIGHT":
                     show gun aim with moveinbottom
                     $ renpy.pause(0.3, hard=True)
                     play sound bad
@@ -2793,7 +2769,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
                     $ renpy.pause(0.1, hard=True)
                     show gun aim
             menu:
-                "FIGHT":
+                "{b}FIGHT":
                     show gun aim with moveinbottom
                     $ renpy.pause(0.3, hard=True)
                     play sound bad
@@ -2811,7 +2787,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
                     $ renpy.pause(0.1, hard=True)
                     show gun aim
             menu:
-                "FIGHT":
+                "{b}FIGHT":
                     play sound jumpscare2
                     stop music
                     hide combine1
@@ -2842,10 +2818,23 @@ label _CASINO_ENTRY_HERE________________________________________________________
         show locknik light with dissolve
         $ renpy.pause(1, hard=True)
         show locknik lock with dissolve
-        "hello im ognik" #_________________________________________ognik<-----
-        #show expression "images/ognikTest/locknik lock2.png"
-        show locknik lock2
-        "and u are gayy"
+        if (renpy.random.randint(0,9) == 0):
+            og "hello im ognik" #_________________________________________ognik<-----
+            #show expression "images/ognikTest/locknik lock2.png"
+            show locknik lock2
+            og "and u are gayy"
+        else:
+            og "hello yes i am ognik the grand lock"
+            show locknik lock2
+            og "yes you see i am gonna lock you inside this place yes"
+            og "because i hate you, yes, hello"
+            k "wh-, waht???!??!"
+            show locknik lock
+            og "yes you are going to spend six more hours in this place because yes"
+            extend " i hate you"
+            og "yes good luck come back here in six hours yes and maybe im gonna"
+            extend " let you out maybe yes"
+
         show locknik light with dissolve
         $ renpy.pause(1, hard=True)
         hide locknik light with dissolve
