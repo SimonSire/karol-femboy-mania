@@ -89,6 +89,7 @@ default sexyguyCasinoShingas = 0
 default sexyguyMadnessLevel = 0
 default sexyguyWrongHoles = 0
 default sexyguyCorrectas = 0
+default sexyguyJumpMode = 0             #just for u simon *kiss*
 
 default casinoMajorHappens = 0
 
@@ -2148,52 +2149,87 @@ label _CASINO_ENTRY_HERE________________________________________________________
             show wrencher 1
             menu:
                 "RED":
-                    k "maan i think you mayhaps should pick rED man"
+                    k "maan i think you mayhaps should pick {color=#e34236}rED{/color=#e34236} man"
                     br "really? alright give me a moment"
                     hide wrencher 1 with moveoutleft
                     $ renpy.pause(3.0, hard=True)
-                    $ randomasNumeras(10)
-                    if (randomAssShit <= 3):
+                    $ randomasNumeras(38)
+                    if (randomAssShit <= 18):
                         jump wrenchWON
-
-                    label wrenchLOST:
-                        show wrencher 2 with moveinleft
-                        br "i lost"
-                        play sound bad
-                        show wrencher 4 at vpunch
-                        br "YOU DID THIS, ITS ALL YOUR FAULT"
-                        br "I LOST {b}EVERYTHING{/b} BECAUSE OF YOU"
-                        br "WHY DID I EVEN LISTEN TO YOU?"
-                        show wrencher 5
-                        br "YOU WILL {color=#e34236}PAY{/color=#e34236} FOR THIS."
-                        hide wrencher 5 with moveoutleft
-                        k "well that was weird"
-                        $ wrenchCasinoShingas = 2
-                        $ casinoLovesYou = casinoLovesYou - 1
-
+                    else:
+                        jump wrenchLOST
                 "{color=#e34236}BLACK":
                     k "i dunno man maybe u shold BLACk it a little"
                     br "you better be right, ill be back soon"
                     hide wrencher 1 with moveoutleft
                     $ renpy.pause(2.0, hard=True)
-                    $ randomasNumeras(10)
-                    if (randomAssShit <= 3):
+                    $ randomasNumeras(38)
+                    if (randomAssShit <= 18):
+                        jump wrenchWON
+                    else:
+                        jump wrenchLOST
+                "{color=#39b308}BREEN":
+                    $ wrenchCasinoShingas = 99
+                    k "bet on reen"
+                    show wrencher 3 with vpunch
+                    br "whatt?? are youy serious?? thats so riskyiy!"
+                    k "my nutsuck leaned a little bit to right so that has to be right"
+                    show wrencher 1
+                    br "well, if you say so..."
+                    br "you have to be right faggotman, ill be right back!"
+                    hide wrencher with moveoutleft
+                    $ renpy.pause(2.0, hard=True)
+                    $ randomasNumeras(38)
+                    if (randomAssShit <= 2):
+                        jump wrenchWON
+                    else:
                         jump wrenchLOST
                     
-                    label wrenchWON:
-                        show wrencher 1 with moveinleft
-                        br "I ACTUALLY WON!"
-                        br "i cant believe this, thank you so much man i will remember this"
-                        show wrencher 5
-                        br "i am so unbelievably happy right now"
-                        hide wrencher 5 with dissolve
-                        "the man gives you a little kiss on your cheek and leaves the room extremly happy"
-                        k "well this was pretty{nw=0}"
-                        $ karolTalkingMad = True
-                        extend " AWESOME" 
-                        $ karolTalkingMad = False
-                        $ wrenchCasinoShingas = 1
-                        $ casinoLovesYou += 1
+            label wrenchLOST:
+                show wrencher 2 with moveinleft
+                br "i lost"
+                play sound bad
+                show wrencher 4 at vpunch
+                br "YOU DID THIS, ITS ALL YOUR FAULT"
+                if wrenchCasinoShingas == 99:
+                    br "YOU AND YOUR FUCKING BALLSACK"
+                    br "WHY DIDD I BELIEVE YOU ITS GONNA BE GREEN??"
+                else:
+                    br "I LOST {b}EVERYTHING{/b} BECAUSE OF YOU"
+                    br "WHY DID I EVEN LISTEN TO YOU?"
+                show wrencher 5
+                br "YOU WILL {color=#e34236}PAY{/color=#e34236} FOR THIS."
+                hide wrencher 5 with moveoutleft
+                k "well that was weird"
+                $ wrenchCasinoShingas = 2
+                $ casinoLovesYou = casinoLovesYou - 1
+                jump casinoFORW
+            
+            label wrenchWON:
+                show wrencher 1 with moveinleft
+                br "I ACTUALLY WON!"
+                if wrenchCasinoShingas == 99:
+                    br "MAN your ballsack was actually right! It went green!"
+                    br "im so fucking rich right now"
+                    br "i have soo much money i dont even know what to do with it now"
+                    k "you could give me some?"
+                    show wrencher 5
+                    $ renpy.pause(1.0, hard=True)
+                    br "no"
+                    br "best i can do is this"
+                else:
+                    br "i cant believe this, thank you so much man i will remember this"
+                    show wrencher 5
+                    br "i am so unbelievably happy right now"
+                hide wrencher 5 with dissolve
+                "the man gives you a little kiss on your cheek and leaves the room extremly happy"
+                k "well this was pretty{nw=0}"
+                $ karolTalkingMad = True
+                extend " AWESOME" 
+                $ karolTalkingMad = False
+                $ wrenchCasinoShingas = 1
+                $ casinoLovesYou += 1
+                jump casinoFORW    
         
         menu:
             "go back to the wrench man":
@@ -2363,21 +2399,22 @@ label _CASINO_ENTRY_HERE________________________________________________________
         hide sexyguy with dissolve
         $ renpy.pause(0.6, hard=True)
         show sexyguy 4
-        $ renpy.pause(0.07, hard=True)
-        play sound boingg
-        show sexyguy 5
-        $ renpy.pause(0.07, hard=True)
-        show sexyguy 4
-        $ renpy.pause(0.07, hard=True)
-        play sound boingg
-        show sexyguy 5
-        $ renpy.pause(0.07, hard=True)
-        show sexyguy 4
-        $ renpy.pause(0.07, hard=True)
-        play sound boingg
-        show sexyguy 5
-        $ renpy.pause(0.07, hard=True)
-        show sexyguy 4
+        if sexyguyJumpMode == 0:
+            $ renpy.pause(0.07, hard=True)
+            play sound boingg
+            show sexyguy 5
+            $ renpy.pause(0.07, hard=True)
+            show sexyguy 4
+            $ renpy.pause(0.07, hard=True)
+            play sound boingg
+            show sexyguy 5
+            $ renpy.pause(0.07, hard=True)
+            show sexyguy 4
+            $ renpy.pause(0.07, hard=True)
+            play sound boingg
+            show sexyguy 5
+            $ renpy.pause(0.07, hard=True)
+            show sexyguy 4
         $ renpy.pause(0.07, hard=True)
         hide sexyguy
         play sound quickkrun
@@ -2435,7 +2472,15 @@ label _CASINO_ENTRY_HERE________________________________________________________
             else:
                 call sexyguyanswersGOOD
         else:
-            call sexyguyanswers
+            if sexyguyMadnessLevel >= 4:
+                $ sexyguyMadnessLevel += 1
+                show sexyguy 2
+                sx "Okay, so when it ACTUALLY IS a square..."
+                show sexyguy 3
+                sx "YOU PUT IT, IN THE WRONG GODDAMN HOLE!!!!"
+                sx "QUIT IT!!!!!!!"
+            else:
+                call sexyguyanswersGOOD
 
         $ sexyguyCasinoShingas = 6
         call sexyguyREGULARshaping
