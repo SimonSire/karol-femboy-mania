@@ -1483,6 +1483,8 @@ label _END_OFORIGINAL_PART_AND_NOW_ESCAPING_BAR_________________________________
         "*you run trough the bar*"
         show zlink 1 with moveinbottom
         play sound cloth
+        p1 "Oh hey!"
+        play sound ohhey
         p1 "*sigh* that guy.."
         p1 "why did he let you go.."
         p1 "ughh.. what a drag"
@@ -1804,6 +1806,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
             "CASINO CHIEF COMES HIER"
             menu:               #temporary shjit
                 "go court":
+                    $shitcourt = 0
                     jump courtarrive
                 "stay":
                     "ok"
@@ -2046,7 +2049,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
                                         b2 "oh well, thats a shame"
                                         menu:
                                             "leave the bar":
-                                                jump allgoodbar
+                                                jump casinoRIGHT
                                 play sound win
                                 show foundbeer
                                 "you have now beer!!!! zywiec!!!"
@@ -2323,7 +2326,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
             sx "IM SO PISSED AT YOU! I NEED TO GO JUMP AGAIN!"
             call sexyguyJUMPING
             show sexyguy 3 with dissolve
-            sx "{color=#e34236}I HATE YOU, I HATE YOU!!!"
+            sx "{color=#e34236}I HATE YOU, I HATE YOU, I HATE YOU, I HATE YOU, I HATE YOU, I HATE YOU, I HATE YOU, I HATE YOU, I HATE YOU, I HATE YOU, I HATE YOU, I HATE YOU, I HATE YOU, I HATE YOU, I HATE YOU, I HATE YOU, I HATE YOU, I HATE YOU, I HATE YOU, I HATE YOU!!!"
             call sexyguyJUMPING
             show sexyguy 3 with dissolve
             sx "{color=#e34236}YOU RUINED EVERYTHING"
@@ -3255,7 +3258,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
         "..."
 
         p2 "hes dead."
-
+        play music ace3 fadein 1.0 volume 0.3
         j "wery vell.."
         j "let it be known, the witness is not cooperating"
 
@@ -3282,22 +3285,97 @@ label _CASINO_LEAVING_HERE______________________________________________________
         show foundcontrol
         "A controller!!"
 
-        menu:
-            "Use the strange device":
-                "huh"
-            "Use the fake nose and glasses":
-                "hm"
-            "Use the controller":
-                "you take the controller"
-                hide foundnose
-                hide foundtime
-                hide foundcontrol
-                k "let me skip this damn npcs cutscenee"
-                play sound appear
-                show hands control with moveinbottom
-                menu:
-                    "press button on controller":
-                        "you click it"
+        default howmanytimes = 0
+
+        label choose:
+            
+            scene courtthings
+            menu:
+                "Use the strange device":
+                    scene courtthings2
+                    "you choose the strange device"
+                    play sound appear
+                    show hands bomb with moveinbottom
+                    k "hmm what a strange device"
+                    menu:
+                        "use thta device":
+                            play sound cclick
+                            "you click some button"
+                            play sound dial
+                            "it starts dialing shit what the hell"
+                            play sound dial
+                            $ renpy.pause(1, hard=True)
+                            show explode
+                            stop music
+                            play sound explod
+                            $ renpy.pause(1, hard=True)
+                            play sound failstick
+                            scene failexplod
+                            call screen retry
+
+                "Use the fake nose and glasses":
+                    scene courtthings2
+                    "hmm"
+                    play sound appear
+                    show hands glas with moveinbottom
+                    menu:
+                        "put them on":
+                            hide hands glas with dissolve
+                            play sound cloth
+                            show glassoverlay
+                            "wow you look s ogood"
+                            if judgepissedlevel == 4:
+                                "yea"
+                            else:
+                                "no"
+                "Use the controller":
+                    scene courtthings2
+                    "you take the controller"
+                    hide foundnose
+                    hide foundtime
+                    hide foundcontrol
+                    k "these npc pissing me off you"
+                    k "let me skip this damn npcs cutscenee"
+                    play sound appear
+                    show hands control with moveinbottom
+                    menu:
+                        "press button on controller":
+                            $howmanytimes += 1
+                            play sound cclick
+                            "you click it"
+                            
+                            $ renpy.pause(1, hard=True)
+                            stop music
+                            if howmanytimes == 1:
+                                
+                                play sound jailer
+                                scene pison
+                                show hands control
+                                $ renpy.pause(3, hard=True)
+                                k "well shit"
+                                play sound failstick
+                                show failprison
+                                call screen retry
+                            else:
+                                play sound jailer
+                                scene pison
+                                show hands control
+                                $ renpy.pause(3, hard=True)
+                                k "well shit"
+                                "yup, you still end up in the prison"
+                                "dunno why you expected anything to change"
+                                play sound failstick
+                                show failprison
+                                call screen retry
+
+    screen retry:
+        imagebutton:
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.15
+            ypos 0.85
+            idle "retrybut.png"
+            action [Play("audio", "gobackclick.mp3"), Jump("choose")]
 
     label courtPresidents:
         play music ace2 fadein 1.0 volume 0.05
