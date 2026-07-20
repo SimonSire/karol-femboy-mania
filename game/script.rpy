@@ -3202,6 +3202,17 @@ label _CASINO_LEAVING_HERE______________________________________________________
 
         j "wery well.. we may continue"
 
+        if isPathetic:
+            p2 "wait a second"
+            p2 "i completely forgot but i have this written down"
+            p2 "the suspect proceeded to.. "
+            play sound impact2
+            extend " {color=#de1809}attack{/color} me with his fists when he was found"
+            p2 "and i scared him off when i pulled out my gun"
+            j "WHAT"
+            play sound hammer1
+            $ judgepissedlevel += 1
+            j "ASSAULT ON A POLICE OFFICEERR??? THATS NOT NICE"
 
         p2 "hold on wait "
         extend "i compltetly forgot"
@@ -3236,9 +3247,9 @@ label _CASINO_LEAVING_HERE______________________________________________________
         p1 "but then.."
         extend "not too far on the ground we saw something disturbing.."
         p2 "it was a man.."
-        extend "a pickle"
+        extend "{color=#327325}a pickle{/color}"
         extend ". A man."
-        extend " A pickle shaped man."
+        extend " A {color=#327325}pickle{/color} shaped man."
         extend " Long gone.. No longer with us."
         p1 "we actually confiscated the car"
         hide dryleft with dissolve
@@ -3316,17 +3327,17 @@ label _CASINO_LEAVING_HERE______________________________________________________
         play sound drumroll
         "inside... you find:"
 
-        play sound dia1
+        play sound found1
         show foundtime
         "A mysterious device! Fascinating!!!"
 
-        play sound dia1
+        play sound found2
         show foundnose
         "A nose and glasses thing! Dunno whats its called. "
         extend "I'm sorry for being such a unreliable narrator.. "
         extend "i really dont know whats it called. sorry :("
 
-        play sound dia1
+        play sound found3
         show foundcontrol
         "A controller!!"
 
@@ -3369,10 +3380,66 @@ label _CASINO_LEAVING_HERE______________________________________________________
                             play sound cloth
                             show glassoverlay
                             "wow you look s ogood"
-                            if judgepissedlevel == 4:
-                                "yea"
+                            if judgepissedlevel == 5:
+                                j "the judge looks at you with a very dissappointed expression"
+                                "the judge sighs"
+                                j "Hm... Karol Mijas.."
+                                menu:
+                                    "Yes?":
+                                        k "yeah"
+                                        "the judge looks like he's gonna die out of dissappointment"
+                                        j "first you interrupted the me like seventeen times"
+                                        j "and now you show up wearing that hat"
+                                
+                                        j "karol mijas."
+                                    "I'm not karol mijas":
+                                        k "I'm carl beez"
+                                        j "first you interrupted the me like seventeen times"
+                                        j "and now you show up wearing that hat"
+                                
+                                        j "karol mijas- no.. carl beez.."
+                                
+                                
+                                extend " you are free to go"
+                                j "i dont care anymore"
+                                play sound hammer1
+                                j "just get out of my sight"
+                                play sound hammer2
+                                j "get the fuck outta this court"
                             else:
-                                "no"
+                                j "for the record... the defendant appears to be wearing fake glasses, a fake nose, and a fake mustache."
+                                p2 "should i write that down?"
+                                j "no need"
+                                menu:
+                                    "i'm no mijas":
+                                        k "you got the wrong person!"
+                                        "nobody seems to buy the disguise"
+                                        "seems its not working on these people"
+                                        extend " damn. and i thought this shit would be perfect"
+                                    "say nothing":
+                                        jump courtasidk
+                                label courtasidk:
+                                    "the jhudge slams the hammer"
+                                    play sound hamer1
+                                    "well, you are hereby sentenced.."
+                                    play sound applause1
+                                    extend " to {color=#de1809}10 years{/color} in prison"
+                                    play sound cloth
+                                    hide zlink right with dissolve
+                                    hide dryleft with dissolve
+                                    j "please move this bastard out of here"
+                                    menu:
+                                        "say nothing":
+                                            "you choose to stay silent and they drag you away"
+                                        "say you aren't happy with this outcome":
+                                            $ karolTalkingMad = True
+                                            k "FUCK YOU"
+                                            k "THIS IS SO UNFAIR"
+                                            k "I NEVVER HURT ANYONE I ONLY MAKE GARRYS  MOD MAPS"
+                                            k "I WILL KILL YOU"
+                                            $ karolTalkingMad = False
+                                            jump teprison
+
                 "Use the controller":
                     scene courtthings2
                     "you take the controller"
@@ -3421,6 +3488,20 @@ label _CASINO_LEAVING_HERE______________________________________________________
             ypos 0.85
             idle "retrybut.png"
             action [Play("audio", "gobackclick.mp3"), Jump("choose")]
+
+
+    label teprison:
+        play sound jailer
+        scene pison
+        if howmanytimes > 0:
+            "oh hey look, we're back here from that controller fail"
+            $ karolTalkingMad = True
+            k "FUCK SHIT NOT AGAIMN"
+            $ karolTalkingMad = False
+        else:
+            "oh no u got sent to prisonas"
+            k "ash shit"
+        "well this is the prison ending idk what should happen now BORIS"
 
     label courtPresidents:
         play music ace2 fadein 1.0 volume 0.05
