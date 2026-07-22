@@ -3,13 +3,13 @@
 # dont worry im not gonna be adding any either
 
 # atp im just adding pointless shit
-
 init python:
     def narrTalks(event, **kwargs):
         if event == "show" and narraterTalking:
             what = kwargs.get("what")
             if what:
                 renpy.alt(what, force=True)
+
 
     renpy.music.register_channel("karolChannel", mixer="sfx")
 
@@ -61,9 +61,10 @@ define w = Character("Proffessional Gambler", color="#14531d")
 define wb = Character("Gambler", color="#091811")
 define br = Character("Broke robux", color="#9f3db3")
 define sx = Character("Sexy Gamemaster", color="#39b308")
-define pl = Character("Undersized delinquent", color="#a87698")
+define pl = Character("Undersized delinquent", color="#842d68")
 define b2 = Character("Bartender 2", color="#120c63")
 define og = Character("Grand lock deity", color="#f2960c")
+define ch = Character("Casino chief", color="#384ce3")
 
 define j = Character("Judge", color="#186d45")
 define t = Character("Trump", color="#614e12")
@@ -1517,6 +1518,7 @@ label _END_OFORIGINAL_PART_AND_NOW_ESCAPING_BAR_________________________________
         else:
             narrater "you turn around and start flooring it"
             narrater "i'd say ur a pussy for runnin but tbf he did have a fun i mean gun"
+        $ karolTalkingMad = False #theres some leak shit before that i got during playtest but i cant bother to look for it so just yeah
         scene bar3
         narrater "*you run trough the bar*"
         show zlink 1 with moveinbottom
@@ -1841,6 +1843,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
             k "oH NOooo shiiiitttt shit shittt"
             jump casinodoorlock
         if (casinoMajorHappens >= 6) and not isZlinkDie:
+            jump casinoCHIEFinMAIN
             "CASINO CHIEF COMES HIER"
             menu:               #temporary shjit
                 "go court":
@@ -2239,7 +2242,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
                 hide wrencher 5 with moveoutleft
                 k "well that was weird"
                 $ wrenchCasinoShingas = 2
-                $ casinoLovesYou = casinoLovesYou - 1
+                $ casinoLovesYou -= 1
                 jump casinoFORW
             
             label wrenchWON:
@@ -2593,6 +2596,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
                                     $ karolTalkingMad = False
                                     pl "man youre a dick i hate you now now"
                                     hide transpiela with moveoutleft
+                                    $ casinoLovesYou -= 1
                                     $ pielaCasinoShingas = 2
                         "Agree":
                             k "alright i will hack for you"
@@ -2610,7 +2614,13 @@ label _CASINO_ENTRY_HERE________________________________________________________
                             k "okay sure sure"
                             pl "this is great thank you man"
                         "disagreement":
-
+                            k "no imnt doing "
+                            $ karolTalkingMad = True
+                            extend "SHIT for you go away away"
+                            $ karolTalkingMad = False
+                            pl "hey you are a fuck youre a dick you know that"
+                            pl "youre a dick"
+                            $ casinoLovesYou -= 1
                             $ pielaCasinoShingas = 2
                 "Ignore him (more optios)":
                     $ pielaCasinoShingas = 1
@@ -2930,6 +2940,49 @@ label _CASINO_ENTRY_HERE________________________________________________________
                     narrater "you may be fucked buddy"
                     jump casinodoorlock
 
+    label casinoCHIEFinMAIN:
+        scene casmiddle
+        $ renpy.pause(1, hard=True)
+        play sound cloth
+        show chief 1 with moveinleft
+        un "hey YOU"
+        un "stop RIGHT THERE"
+        show chief 2
+        ch "i am the owner of this place, and in front of my casino there is a police car"
+        show chief 1 onlayer overlay
+        ch "these men have told me they are looking for some short annoying gay man that commited some murder"
+        ch "i suppose they were describing YOU"
+        menu:
+            "noo not me thats not meee":
+                k "noNOoo thats not me you should look{nw=0.5}"
+                extend " look for someone else its not me "
+                show bobis nexttochief onlayer overlay
+                with moveinright
+                bb "no point in lying, whe know that youre the guy"
+            "yes its me":
+                k "yeah thats me i murdered a guy"
+                show bobis nexttochief onlayer overlay
+                with moveinright
+                bb "boss, you got the guy? thats so good!"
+            "flee":
+                narrator "you start flooring it"
+                scene cas1
+                play sound running
+                $ renpy.pause(1.5, hard=True)
+                show bobis 1 with moveinbottom
+                narrator "a man stops you"
+                bb "heyy where you going buddy? boss i got him!"
+                hide bobis with dissolve
+                show chief 1 onlayer overlay
+                with dissolve
+                show bobis nexttochief onlayer overlay
+                with moveinright
+                ch "well well well, we are not letting you run"
+        ch "we will now turn you to the police, criminel"
+        ch "nothing personal you guy, we just want no trouble here"
+
+
+
 
     label casinodoorlock:
         scene cas1dark
@@ -2977,15 +3030,19 @@ label _CASINO_ENTRY_HERE________________________________________________________
         k "huh theres some weird tablet but its baterydead"
         k "oh i have an iDEA"
         narrater "u start searching deep in your asshole"
-        narrater "you have found:"
+        $ renpy.alt("you have found:", force=True)
+        "you have found:"
         play sound dia1
         show foundflashlight
+        $ renpy.alt("a long flashlight", force=True)
         extend "\na long flashlight"
         play sound dia1
         show foundbutton
+        $ renpy.alt("a round button", force=True)
         extend "\na round button"
         play sound dia1cut
         show foundbuttp
+        $ renpy.alt("and some metal buttplugs!", force=True)
         extend "\nand some metal buttplugs!{nw=2.5}"
         k "oh shit nah wrong thing, lemme put this back inside"
         hide foundbuttp
@@ -3199,7 +3256,10 @@ label _CASINO_LEAVING_HERE______________________________________________________
                 $ karolTalkingMad = True
                 k "I DID NOT!!!"
                 $ judgepissedlevel += 1
-                narrater "The judges expression doesn't look good.."
+
+                $ renpy.alt("The judges expression doesn't look good..", force=True)
+                "The judges expression doesn't look good.."
+                $ renpy.alt(" he looks pretty pissed off", force=True)
                 extend " he looks pretty pissed off"
                 menu:
                     "Here's what happened":
@@ -3397,8 +3457,11 @@ label _CASINO_LEAVING_HERE______________________________________________________
 
         play sound found2
         show foundnose
-        narrater "A nose and glasses thing! Dunno whats its called. "
+        $ renpy.alt("A nose and glasses thing! Dunno whats its called. ", force=True)
+        "A nose and glasses thing! Dunno whats its called. "
+        $ renpy.alt("I'm sorry for being such a unreliable narrator.. ", force=True)
         extend "I'm sorry for being such a unreliable narrator.. "
+        $ renpy.alt("i really dont know whats it called. sorry :(", force=True)
         extend "i really dont know whats it called. sorry :("
 
         play sound found3
@@ -3477,16 +3540,20 @@ label _CASINO_LEAVING_HERE______________________________________________________
                                 menu:
                                     "i'm no mijas":
                                         k "you got the wrong person!"
-                                        "nobody seems to buy the disguise"
+                                        narrater "nobody seems to buy the disguise"
+                                        $ renpy.alt("seems its not working on these people", force=True)
                                         "seems its not working on these people"
+                                        $ renpy.alt(" damn. and i thought this shit would be perfect", force=True)
                                         extend " damn. and i thought this shit would be perfect"
                                     "say nothing":
                                         jump courtasidk
                                 label courtasidk:
                                     "the jhudge slams the hammer"
                                     play sound hammer1
+                                    $ renpy.alt("well, you are hereby sentenced..", force=True)
                                     "well, you are hereby sentenced.."
                                     play sound applause1
+                                    $ renpy.alt("to 10 years in prison", force=True)
                                     extend " to {color=#de1809}10 years{/color} in prison"
                                     play sound cloth
                                     hide zlink right with dissolve
@@ -3494,7 +3561,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
                                     j "please move this bastard out of here"
                                     menu:
                                         "say nothing":
-                                            "you choose to stay silent and they drag you away"
+                                            narrator "you choose to stay silent and they drag you away"
                                         "say you aren't happy with this outcome":
                                             $ karolTalkingMad = True
                                             k "FUCK YOU"
