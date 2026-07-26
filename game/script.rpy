@@ -5,7 +5,9 @@
 # atp im just adding pointless shit
 init python:
     def narrTalks(event, **kwargs):
-        if event == "show" and narraterTalking:
+        if not narraterTalking:
+            return
+        if event == "show":
             what = kwargs.get("what")
             if what:
                 renpy.alt(what, force=True)
@@ -51,6 +53,7 @@ init python:
 define narrater = Character(" ", callback=narrTalks)
 define k = Character("Karol Mijas", color="#ffe864", callback=karolTalks)
 define un = Character("???")
+define crwd = Character("The crowd speakens.")
 define d = Character("papa Mijas", color="#706316")
 define do = Character("Domin", color="#a32d76")
 define b = Character("Bartender", color="#264972")
@@ -79,8 +82,7 @@ default femboyChoices = 0
 default casinoLovesYou = 0
 
 #simon bar thingiesss
-default hasbeenbar = 0
-default barguybad = 0   #0 is neutral?, 1 is like happy, 2 is you told the truth
+default barguybadshinger = 0   #0 never met him, 1 is neutral?, 2 is like happy, 3 is you told the truth
 
 #courts
 default didyankdoor = 0
@@ -1890,29 +1892,31 @@ label _CASINO_ENTRY_HERE________________________________________________________
                     wb "wait, you never responded to the question, will you give us a few dollars?"
                     menu:
                             "Yeah sure":
-                                $ wiktorCasinoShingas = 1
-                                jump casinoRIGHT #___________________________________________________________________FINISHHHHHH
+                                jump givingcashtofolks
                             "Nah fuck off":
-                                $ wiktorCasinoShingas = 2
-                                jump casinoRIGHT
+                                jump pissofffolks
                 "Give a few bucks":
-                    k "here you go folks"
-                    narrater "you hand out 20 PLN to the two brothers"
-                    wb "thank yuo so much bro!! much apprecciated!"
-                    play sound cloth
-                    hide wiktorhobo 1 with dissolve
-                    $ renpy.pause(0.2, hard=True)
-                    hide wiktor 1 with dissolve
-                    narrater "both of them dissappear"
-                    $ wiktorCasinoShingas = 1
+                    label givingcashtofolks:
+                        k "here you go folks"
+                        narrater "you hand out 20 PLN to the two brothers"
+                        wb "thank yuo so much bro!! much apprecciated!"
+                        play sound cloth
+                        hide wiktorhobo 1 with dissolve
+                        $ renpy.pause(0.2, hard=True)
+                        hide wiktor 1 with dissolve
+                        narrater "both of them dissappear"
+                        $ casinoLovesYou += 1
+                        $ wiktorCasinoShingas = 1
                 "Nah fuck off":
-                    k "Nah i aint givin youshit u cn fukc off"
-                    hide wiktorhobo 1 with dissolve
-                    hide wiktor 1 with dissolve
-                    $ wiktorCasinoShingas = 2
+                    label pissofffolks:
+                        k "Nah i aint givin youshit u cn fukc off"#___________________________________________TOFINISH_____________
+                        hide wiktorhobo 1 with dissolve
+                        hide wiktor 1 with dissolve
+                        $ casinoLovesYou -= 1
+                        $ wiktorCasinoShingas = 2
 
-                    "idk what to put here simon lmao"
-                    ##smth about the getting mad and later the guys be pissed at u
+                        "idk what to put here simon lmao"
+                        ##smth about the getting mad and later the guys be pissed at u
 
         menu:
                 "Go back":
@@ -1926,7 +1930,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
                         play music casmusic fadein 1.5 volume 0.2
                         $ casinoMajorHappens += 1
                         scene casbar
-                        if (hasbeenbar == 0):
+                        if (barguybadshinger == 0):
                         
                             narrater "You come to da bahrs"
                             play sound appear
@@ -1989,7 +1993,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
                             play sound bart19
                             b2 "anyway, my brother actally work s at a bar like a around the corsen"
                             play sound bart20
-                            #b2 "maybe you've even met him? he is such a good guy im sure you forget him if you had met him!!"
+                            b2 "maybe you've even met him? he is such a good guy im sure you forget him if you had met him!!"
                             menu:
                                 b2 "maybe you've even met him? he is such a good guy im sure you forget him if you had met him!!"
                                 "yes actually":
@@ -2000,6 +2004,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
                                             k "We had some dfrinkss.."
                                             k "No i mean I HAD some drinks, he didnt drunk"
                                             k "we had such a good time"
+                                            "hey simon u were supposed to make barguy shit himself here" #SIMOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOON
                                             jump allgoodbar
                                         "tell the truth":
                                             k "i killed him"
@@ -2024,15 +2029,17 @@ label _CASINO_ENTRY_HERE________________________________________________________
                                                             b2 "its on the house..."
                                                             "no..":
                                                                 b2 "hmpf.."
-                                                                "he forces the drink inside u"
+                                                                narrater "he forces the drink inside u"
                                                             "take the drink":
-                                                                "you take the drink and drink it"
+                                                                narrater "you take the drink and drink it"
                                                         narrater "you wake up"
                                                         k "what.. the hell"
                                                         narrater "you dont know what happened"
                                                         narrater "the bartender doesnt seem to be anywhere"
                                                         menu:
                                                             "leave the bar":
+                                                                $ casinoLovesYou -= 1
+                                                                $ barguybadshinger = 3
                                                                 jump casinoRIGHT
 
                                                     b2 "no.."
@@ -2047,19 +2054,21 @@ label _CASINO_ENTRY_HERE________________________________________________________
                                                             b2 "GET OUT."
                                                             k "heyy"
                                                             b2 "LEAVE ME BE"
+                                                            $ casinoLovesYou -= 1
+                                                            $ barguybadshinger = 3
                                                             jump casinoRIGHT
 
                                                         "Backtrack":
                                                             k "wait— i didn't mean—"
                                                             b2 "no. you said enough."
+                                                            $ casinoLovesYou -= 1
+                                                            $ barguybadshinger = 3
                                                             jump casinoRIGHT
                                 "no, haven'tr": 
                                     k "Your brother huh? Doesn;t ring any bells. Didnt see anyone like that"
                                     play sound bart21
                                     b2 "it's a shame, he is such a good bartender, maybe evebn the best int he world."
                                     jump allgoodbar
-                            label uhohbar:
-                                k "as"
                             label allgoodbar:
                                 show bartwin default
                                 play sound bart22
@@ -2090,6 +2099,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
                                         b2 "oh well, thats a shame"
                                         menu:
                                             "leave the bar":
+                                                $ barguybadshinger = 1
                                                 jump casinoRIGHT
                                 play sound win
                                 show foundbeer
@@ -2165,9 +2175,17 @@ label _CASINO_ENTRY_HERE________________________________________________________
                                 show fists
                                 hide fists2
                                 play sound hose3
+                                "simon here goes karol beats barguy close to death thing hereee right hereee" #SIMOOOOOOOOOOOOOOOOOOOOOOOOOOOOON
+                                $ casinoLovesYou -= 1
+                                $ barguybadshinger = 3 #this is just so the playtest doesnt break u can change that
+                                jump casinoRIGHT
                         else:
-                            if not barguybad:
+                            if not barguybadshinger:
                                 b2 "oh did u change ur mind??"
+                                menu:
+                                    "simon finish this fucking thing":#SIMOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOON
+                                        jump casinoRIGHT
+
     label casinoFORW:
         scene casforw
         if wrenchCasinoShingas == 0:
@@ -2374,19 +2392,19 @@ label _CASINO_ENTRY_HERE________________________________________________________
 
     
     label sexyguyanswers:
-        if sexyguyMadnessLevel == 3:
+        if (sexyguyMadnessLevel == 3) and (shapeDroppable == "square"):
             show sexyguy 2
             sx "Hey man, i dont think these pieces should go into a square hole"
             sx "You should consider trying other options"
-        elif sexyguyMadnessLevel == 4:
+        elif (sexyguyMadnessLevel == 4) and (shapeDroppable == "square"):
             show sexyguy 2
             sx "Dude, these are not square pieces!"
-        elif (sexyguyMadnessLevel == 5) or (sexyguyMadnessLevel == 6):
+        elif ((sexyguyMadnessLevel == 5) or (sexyguyMadnessLevel == 6)) and (shapeDroppable == "square"):
             play sound bad
             show sexyguy 3 with vpunch
             sx "QUIT IT! STOP PUTTING EVERYTHING INTO A SQUARE HOLE!"
             sx "Im starting to regret I even offered you this game in the first place!"
-        elif sexyguyMadnessLevel == 7:
+        elif (sexyguyMadnessLevel == 7) and (shapeDroppable == "square"):
             play sound bad
             show sexyguy 3 with vpunch
             sx "STOP DOING THAT! UGHHHHH"
@@ -2394,7 +2412,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
             call sexyguyJUMPING
             show sexyguy 3 with dissolve
             sx "Dang it!"
-        elif sexyguyMadnessLevel == 8:
+        elif (sexyguyMadnessLevel == 8) and (shapeDroppable == "square"):
             play sound bad
             show sexyguy 3 with vpunch
             sx "AGHHH!"
@@ -2551,10 +2569,45 @@ label _CASINO_ENTRY_HERE________________________________________________________
         else:
             $ sexyguyCasinoShingas = 10
         show sexyguy 1
-        sx "Well, it seems that was the last one!"
-
-        hide shapeholes
-        jump casinoFORW
+        sx "It seems that was the last one!"
+        if sexyguyMadnessLevel >= 6:
+            sx "Very well, because I {nw=0.0}"
+            show sexyguy 3
+            extend "NEVER WANT TO SEE YOU AGAIN!"
+            sx "I FUCKING HATE YOU! NEVER SHOW UP AGAIN OR ILL FUCKING KILL YOU"
+            sx "GO ROT IN HELL"
+            play sound quickkrun
+            hide sexyguy with dissolve
+            narrater "he left you"
+            k "damn"
+            $ casinoLovesYou -= 1
+            $ sexyguyCasinoShingas = 12
+        elif sexyguyCorrectas >= 4:
+            if sexyguyCorrectas >= 7:
+                sx "Such a shame, you played SO GOOOOD!"
+                sx "I had a such a great time"
+            else:
+                sx "You actually played pretty well"
+                sx "We had quite some fun"
+            sx "I hope we will see each other sometime soon"
+            hide sexyguy with dissolve
+            narrater "he shakes your hand and leaves"
+            k "that was soo great so awesome"
+            $ casinoLovesYou += 1
+            $ sexyguyCasinoShingas = 11
+        else:
+            show sexyguy 2
+            sx "You're not really good at this game, huh?"
+            show sexyguy 1
+            sx "It's fine, you can try again next time! I'm sure you're gonna do better"
+            sx "Anyway, thank you for your time!"
+            hide sexyguy with dissolve
+            narrater "he shakes your hand and leaves"
+            $ sexyguyCasinoShingas = 10
+        menu:
+            "Leave":
+                hide shapeholes
+                jump casinoFORW
 
     label casinoLEFT: #this IS the fun one
         scene casleft
@@ -2949,37 +3002,53 @@ label _CASINO_ENTRY_HERE________________________________________________________
         un "stop RIGHT THERE"
         show chief 2
         ch "i am the owner of this place, and in front of my casino there is a police car"
-        show chief 1 onlayer overlay
+        hide chief
+        show chief 1 onlayer screens
         ch "these men have told me they are looking for some short annoying gay man that commited some murder"
         ch "i suppose they were describing YOU"
         menu:
             "noo not me thats not meee":
                 k "noNOoo thats not me you should look{nw=0.5}"
                 extend " look for someone else its not me "
-                show bobis nexttochief onlayer overlay
+                show bobis nexttochief onlayer screens
                 with moveinright
                 bb "no point in lying, whe know that youre the guy"
             "yes its me":
                 k "yeah thats me i murdered a guy"
-                show bobis nexttochief onlayer overlay
+                show bobis nexttochief onlayer screens
                 with moveinright
                 bb "boss, you got the guy? thats so good!"
             "flee":
                 narrator "you start flooring it"
                 scene cas1
-                play sound running
+                hide chief onlayer screens
+                play sound cloth
                 $ renpy.pause(1.5, hard=True)
                 show bobis 1 with moveinbottom
                 narrator "a man stops you"
                 bb "heyy where you going buddy? boss i got him!"
                 hide bobis with dissolve
-                show chief 1 onlayer overlay
+                show chief 1 onlayer screens
                 with dissolve
-                show bobis nexttochief onlayer overlay
+                show bobis nexttochief onlayer screens
                 with moveinright
                 ch "well well well, we are not letting you run"
         ch "we will now turn you to the police, criminel"
         ch "nothing personal you guy, we just want no trouble here"
+        if casinoLovesYou >= 2:
+            show casinocrowd happy
+            crwd "but we love this guy"
+            if wrenchCasinoShingas == 1:
+                br "he made me win big!"
+            if True:
+                wb "he spared us some money!"############
+            if sexyguyCasinoShingas == 11:
+                sx "We had DELIGHTFULL time"
+            if barguybadshinger == 2:
+                "say somth"
+        if casinoLovesYou <= -2:
+            show casinocrowd mad
+            crwd "we hate this guy"
 
 
 
@@ -3030,19 +3099,23 @@ label _CASINO_ENTRY_HERE________________________________________________________
         k "huh theres some weird tablet but its baterydead"
         k "oh i have an iDEA"
         narrater "u start searching deep in your asshole"
-        $ renpy.alt("you have found:", force=True)
+        if narraterTalking:
+            $ renpy.alt("you have found:", force=True)
         "you have found:"
         play sound dia1
         show foundflashlight
-        $ renpy.alt("a long flashlight", force=True)
+        if narraterTalking:
+            $ renpy.alt("a long flashlight", force=True)
         extend "\na long flashlight"
         play sound dia1
         show foundbutton
-        $ renpy.alt("a round button", force=True)
+        if narraterTalking:
+            $ renpy.alt("a round button", force=True)
         extend "\na round button"
         play sound dia1cut
         show foundbuttp
-        $ renpy.alt("and some metal buttplugs!", force=True)
+        if narraterTalking:
+            $ renpy.alt("and some metal buttplugs!", force=True)
         extend "\nand some metal buttplugs!{nw=2.5}"
         k "oh shit nah wrong thing, lemme put this back inside"
         hide foundbuttp
@@ -3257,9 +3330,11 @@ label _CASINO_LEAVING_HERE______________________________________________________
                 k "I DID NOT!!!"
                 $ judgepissedlevel += 1
 
-                $ renpy.alt("The judges expression doesn't look good..", force=True)
+                if narraterTalking:
+                    $ renpy.alt("The judges expression doesn't look good..", force=True)
                 "The judges expression doesn't look good.."
-                $ renpy.alt(" he looks pretty pissed off", force=True)
+                if narraterTalking:
+                    $ renpy.alt(" he looks pretty pissed off", force=True)
                 extend " he looks pretty pissed off"
                 menu:
                     "Here's what happened":
@@ -3457,11 +3532,14 @@ label _CASINO_LEAVING_HERE______________________________________________________
 
         play sound found2
         show foundnose
-        $ renpy.alt("A nose and glasses thing! Dunno whats its called. ", force=True)
+        if narraterTalking:
+            $ renpy.alt("A nose and glasses thing! Dunno whats its called. ", force=True)
         "A nose and glasses thing! Dunno whats its called. "
-        $ renpy.alt("I'm sorry for being such a unreliable narrator.. ", force=True)
+        if narraterTalking:
+            $ renpy.alt("I'm sorry for being such a unreliable narrator.. ", force=True)
         extend "I'm sorry for being such a unreliable narrator.. "
-        $ renpy.alt("i really dont know whats it called. sorry :(", force=True)
+        if narraterTalking:
+            $ renpy.alt("i really dont know whats it called. sorry :(", force=True)
         extend "i really dont know whats it called. sorry :("
 
         play sound found3
@@ -3541,19 +3619,23 @@ label _CASINO_LEAVING_HERE______________________________________________________
                                     "i'm no mijas":
                                         k "you got the wrong person!"
                                         narrater "nobody seems to buy the disguise"
-                                        $ renpy.alt("seems its not working on these people", force=True)
+                                        if narraterTalking:
+                                            $ renpy.alt("seems its not working on these people", force=True)
                                         "seems its not working on these people"
-                                        $ renpy.alt(" damn. and i thought this shit would be perfect", force=True)
+                                        if narraterTalking:
+                                            $ renpy.alt(" damn. and i thought this shit would be perfect", force=True)
                                         extend " damn. and i thought this shit would be perfect"
                                     "say nothing":
                                         jump courtasidk
                                 label courtasidk:
                                     "the jhudge slams the hammer"
                                     play sound hammer1
-                                    $ renpy.alt("well, you are hereby sentenced..", force=True)
+                                    if narraterTalking:
+                                        $ renpy.alt("well, you are hereby sentenced..", force=True)
                                     "well, you are hereby sentenced.."
                                     play sound applause1
-                                    $ renpy.alt("to 10 years in prison", force=True)
+                                    if narraterTalking:
+                                        $ renpy.alt("to 10 years in prison", force=True)
                                     extend " to {color=#de1809}10 years{/color} in prison"
                                     play sound cloth
                                     hide zlink right with dissolve
