@@ -3376,7 +3376,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
                     k "He tore the fucking door{nw=0.0}"
                     play sound impact1
                     $ karolTalkingMad = True
-                    extends "{color=#6b5512} off of its hinges"
+                    extend "{color=#6b5512} off of its hinges"
                 else:
                     $ karolTalkingMad = True
                     k "He was banging on my door furiously~!!"
@@ -3401,7 +3401,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
 
         j "wery well.. we may continue"
 
-        if isPathetic:
+        if not isPathetic:
             p2 "wait a second"
             p2 "i completely forgot but i have this written down"
             p2 "the suspect proceeded to.. "
@@ -3584,15 +3584,15 @@ label _CASINO_LEAVING_HERE______________________________________________________
                             hide hands glas with dissolve
                             play sound cloth
                             show glassoverlay
-                            "wow you look s ogood"
+                            narrater "wow you look s ogood"
                             if judgepissedlevel == 5:
                                 j "the judge looks at you with a very dissappointed expression"
-                                "the judge sighs"
+                                narrater "the judge sighs"
                                 j "Hm... Karol Mijas.."
                                 menu:
                                     "Yes?":
                                         k "yeah"
-                                        "the judge looks like he's gonna die out of dissappointment"
+                                        narrater "the judge looks like he's gonna die out of dissappointment"
                                         j "first you interrupted the me like seventeen times"
                                         j "and now you show up wearing that hat"
                                 
@@ -3628,14 +3628,11 @@ label _CASINO_LEAVING_HERE______________________________________________________
                                     "say nothing":
                                         jump courtasidk
                                 label courtasidk:
-                                    "the jhudge slams the hammer"
+                                    narrater "the jhudge slams the hammer"
                                     play sound hammer1
-                                    if narraterTalking:
-                                        $ renpy.alt("well, you are hereby sentenced..", force=True)
-                                    "well, you are hereby sentenced.."
+                                    
+                                    j "well, you are hereby sentenced.."
                                     play sound applause1
-                                    if narraterTalking:
-                                        $ renpy.alt("to 10 years in prison", force=True)
                                     extend " to {color=#de1809}10 years{/color} in prison"
                                     play sound cloth
                                     hide zlink right with dissolve
