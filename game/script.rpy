@@ -12,6 +12,20 @@ init python:
             if what:
                 renpy.alt(what, force=True)
 
+    def pielTalks(event,  **kwargs):
+        shit = 0
+        while shit < 50:
+            sound_dongus = renpy.random.randint(0,2)
+            if event == "show":
+                if sound_dongus == 0:
+                    renpy.sound.queue("pielaTalks/pielaTalks 1.mp3", channel="sound", loop=False)
+                elif sound_dongus == 1:
+                    renpy.sound.queue("pielaTalks/pielaTalks 2.mp3", channel="sound", loop=False)
+                else:
+                    renpy.sound.queue("pielaTalks/pielaTalks 3.mp3", channel="sound", loop=False)
+            elif event == "slow_done" or event == "end":
+                renpy.sound.stop(channel="sound")
+            shit += 1
 
     renpy.music.register_channel("karolChannel", mixer="sfx")
 
@@ -22,30 +36,30 @@ init python:
                 sound_dongus = renpy.random.randint(0,4)
                 if event == "show":
                     if sound_dongus == 0:
-                        renpy.sound.queue("karoltalkMad 1.mp3", channel="karolChannel", loop=False)
+                        renpy.sound.queue("karolTalk/karoltalkMad 1.mp3", channel="karolChannel", loop=False)
                     elif sound_dongus == 1:
-                        renpy.sound.queue("karoltalkMad 2.mp3", channel="karolChannel", loop=False)
+                        renpy.sound.queue("karolTalk/karoltalkMad 2.mp3", channel="karolChannel", loop=False)
                     elif sound_dongus == 2:
-                        renpy.sound.queue("karoltalkMad 3.mp3", channel="karolChannel", loop=False)
+                        renpy.sound.queue("karolTalk/karoltalkMad 3.mp3", channel="karolChannel", loop=False)
                     elif sound_dongus == 3:
-                        renpy.sound.queue("karoltalkMad 4.mp3", channel="karolChannel", loop=False)
+                        renpy.sound.queue("karolTalk/karoltalkMad 4.mp3", channel="karolChannel", loop=False)
                     elif sound_dongus == 4:
-                        renpy.sound.queue("karoltalkMad 5.mp3", channel="karolChannel", loop=False)
+                        renpy.sound.queue("karolTalk/karoltalkMad 5.mp3", channel="karolChannel", loop=False)
                 elif event == "slow_done" or event == "end":
                     renpy.sound.stop(channel="karolChannel")
             elif karolTalkingShit and not karolTalkingMad:
                 sound_dongus = renpy.random.randint(0,4)
                 if event == "show":
                     if sound_dongus == 0:
-                        renpy.sound.queue("karoltalk 1.mp3", channel="karolChannel", loop=False)
+                        renpy.sound.queue("karolTalk/karoltalk 1.mp3", channel="karolChannel", loop=False)
                     elif sound_dongus == 1:
-                        renpy.sound.queue("karoltalk 2.mp3", channel="karolChannel", loop=False)
+                        renpy.sound.queue("karolTalk/karoltalk 2.mp3", channel="karolChannel", loop=False)
                     elif sound_dongus == 2:
-                        renpy.sound.queue("karoltalk 3.mp3", channel="karolChannel", loop=False)
+                        renpy.sound.queue("karolTalk/karoltalk 3.mp3", channel="karolChannel", loop=False)
                     elif sound_dongus == 3:
-                        renpy.sound.queue("karoltalk 4.mp3", channel="karolChannel", loop=False)
+                        renpy.sound.queue("karolTalk/karoltalk 4.mp3", channel="karolChannel", loop=False)
                     elif sound_dongus == 4:
-                        renpy.sound.queue("karoltalk 5.mp3", channel="karolChannel", loop=False)
+                        renpy.sound.queue("karolTalk/karoltalk 5.mp3", channel="karolChannel", loop=False)
                 elif event == "slow_done" or event == "end":
                     renpy.sound.stop(channel="karolChannel")
             shit += 1
@@ -64,7 +78,7 @@ define w = Character("Proffessional Gambler", color="#14531d")
 define wb = Character("Gambler", color="#091811")
 define br = Character("Broke robux", color="#9f3db3")
 define sx = Character("Sexy Gamemaster", color="#39b308")
-define pl = Character("Undersized delinquent", color="#842d68")
+define pl = Character("Undersized delinquent", color="#842d68", callback=pielTalks)
 define b2 = Character("Bartender 2", color="#120c63")
 define og = Character("Grand lock deity", color="#f2960c")
 define ch = Character("Casino chief", color="#384ce3")
@@ -1524,9 +1538,9 @@ label _END_OFORIGINAL_PART_AND_NOW_ESCAPING_BAR_________________________________
         scene bar3
         narrater "*you run trough the bar*"
         show zlink 1 with moveinbottom
-        play sound cloth
-        p1 "Oh hey!"
+        play audio cloth
         play sound ohhey
+        p1 "Oh hey!"
         p1 "*sigh* that guy.."
         p1 "why did he let you go.."
         p1 "ughh.. what a drag"
@@ -1648,36 +1662,48 @@ label _CASINO_ENTRY_HERE________________________________________________________
                     play music casmusic fadein 1.5 volume 0.2
                     show bobis 1 with moveinbottom
                     play sound cloth
+                    $ renpy.pause(0.5, hard=True)
+                    play sound "bopis/boris 1.mp3"
                     un "oh hey there fella"
+                    play sound "bopis/boris 2.mp3"
                     un "i haven't seen you around here, you must be new herer"
+                    play sound "bopis/boris 3.mp3"
                     bb "i am the floor manager"
                     show bobis 3
+                    play sound "bopis/boris 4.mp3"
                     bb "Welcome to the casino!!"
+                    play sound "bopis/boris 5.mp3"
                     bb "make sure you behave or ill have to"
-                    play sound bad
+                    play audio bad
+                    play sound "bopis/boris KICK.mp3"
                     show bobis 2 with vpunch
                     bb "{b}KICK{nw=0.5}"
                     show bobis 3
                     extend " {nw=0.5}"
-                    play sound bad
+                    play audio bad
+                    play sound "bopis/boris YOU.mp3"
                     show bobis 2 at vpunch
                     extend "{b}YOU{nw=0.5}"
                     show bobis 3
                     extend " {nw=0.5}"
-                    play sound bad
+                    play audio bad
+                    play sound "bopis/boris OUT.mp3"
                     show bobis 2 at vpunch
                     extend "{b}OUT"
                     show bobis 3
 
+                    play sound "bopis/boris 7.mp3"
                     bb "would you like to see the main *fun* area?"
                     menu:
                             "Yeah":
+                                play sound "bopis/boris 8.mp3"
                                 bb "oh"
                                 narrater "*he takes your hand and leads you to another room*"
                                 play sound door
                                 jump gocasino
                             "I wanna piss right now, where are the toilets at":
                                 #$ shitcourt = 1
+                                play sound "bopis/boris 10.mp3"
                                 bb "Right this way sir"
                                 play sound door
                                 scene bath0
@@ -1773,7 +1799,9 @@ label _CASINO_ENTRY_HERE________________________________________________________
                                             narrater "You levae the bathroom"
                                             play music casmusic fadein 1.5 volume 0.2
                                             show bobis 1 with moveinbottom
+                                            play sound "bopis/boris 11.mp3"
                                             bb "oh you already done?"
+                                            play sound "bopis/boris 12.mp3"
                                             bb "well, let us go"
                                             jump gocasino
 
@@ -1814,14 +1842,17 @@ label _CASINO_ENTRY_HERE________________________________________________________
                     jump casinodoorlock
                 else:
                         
-                        play sound bad
+                        play audio bad
+                        play sound "bopis/boris HEY.mp3"
                         bb "HEY!"
                         hide mat 4 with dissolve
                         hide bfists with dissolve
                         play sound cloth
                         show bobis 1 with moveinleft
+                        play sound "bopis/boris you....mp3"
                         bb "You.."
-                        play sound bad
+                        play audio bad
+                        play sound "bopis/boris MISBEHAVED.mp3"
                         show bobis 2 with vpunch
                         extend " {b}MISBEHAVED"
                         narrater "He drags you outside"
@@ -1829,6 +1860,8 @@ label _CASINO_ENTRY_HERE________________________________________________________
         
     label gocasino:
         scene casmiddle
+
+        play sound "bopis/boris 9.mp3"
         bb "this here is where we we gamble"
         k " woah look at this place its like pretty cool here"
         k "pretty nicee"
@@ -2205,13 +2238,13 @@ label _CASINO_ENTRY_HERE________________________________________________________
             show wrencher 3
             br "choose wisely... all of the rest of my life savings depend on this"
             show wrencher 1
+            $ randomasNumeras(38)
             menu:
                 "RED":
                     k "maan i think you mayhaps should pick {color=#e34236}rED{/color=#e34236} man"
                     br "really? alright give me a moment"
                     hide wrencher 1 with moveoutleft
                     $ renpy.pause(3.0, hard=True)
-                    $ randomasNumeras(38)
                     if (randomAssShit <= 18):
                         jump wrenchWON
                     else:
@@ -2221,8 +2254,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
                     br "you better be right, ill be back soon"
                     hide wrencher 1 with moveoutleft
                     $ renpy.pause(2.0, hard=True)
-                    $ randomasNumeras(38)
-                    if (randomAssShit <= 18):
+                    if (randomAssShit >= 19 and randomAssShit <= 36):
                         jump wrenchWON
                     else:
                         jump wrenchLOST
@@ -2237,8 +2269,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
                     br "you have to be right faggotman, ill be right back!"
                     hide wrencher with moveoutleft
                     $ renpy.pause(2.0, hard=True)
-                    $ randomasNumeras(38)
-                    if (randomAssShit <= 2):
+                    if (randomAssShit >= 37):
                         jump wrenchWON
                     else:
                         jump wrenchLOST
@@ -3012,11 +3043,13 @@ label _CASINO_ENTRY_HERE________________________________________________________
                 extend " look for someone else its not me "
                 show bobis nexttochief onlayer screens
                 with moveinright
+                play sound "bopis/boris 20.mp3"
                 bb "no point in lying, whe know that youre the guy"
             "yes its me":
                 k "yeah thats me i murdered a guy"
                 show bobis nexttochief onlayer screens
                 with moveinright
+                play sound "bopis/boris 21.mp3"
                 bb "boss, you got the guy? thats so good!"
             "flee":
                 narrator "you start flooring it"
@@ -3026,6 +3059,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
                 $ renpy.pause(1.5, hard=True)
                 show bobis 1 with moveinbottom
                 narrator "a man stops you"
+                play sound "bopis/boris 22.mp3"
                 bb "heyy where you going buddy? boss i got him!"
                 hide bobis with dissolve
                 show chief 1 onlayer screens
@@ -3201,7 +3235,9 @@ label _CASINO_LEAVING_HERE______________________________________________________
         scene cas3
         play sound cloth
         show bobis 1 with moveinbottom
+        play sound "bopis/boris 15.mp3"
         bb "Stay out of our casino"
+        play sound "bopis/boris 16.mp3"
         bb "You're only bringing trouble"
 
         
@@ -3242,20 +3278,27 @@ label _CASINO_LEAVING_HERE______________________________________________________
         p1 "so we know  who you are now and itsnot looking good for you at all, tbh"
 
         show bobis right with moveinbottom
-        play sound cloth
+
+        play audio cloth
+        play sound "bopis/boris 17.mp3"
         bb "Sir, he was making trouble at our place"
-        play sound impact1
+
+        play audio impact1
         with vpunch
+        play sound "bopis/boris JAIL HIM.mp3"
         bb "JAIL HIM!"
-        play sound impact2
+
+        play audio impact2
         with vpunch
+        play sound "bopis/boris PUNISH HIM.mp3"
         extend " PUNISH HIM!"
 
         p2 "is that so?"
 
         p2 "Either way, you're coming with me pal"
         p1 "dont't worry, he will be punished accordingly"
-        
+
+        play sound "bopis/boris 18.mp3"
         bb "okaym ill levae you to  it"
         play sound cloth
         hide bobis right with dissolve
