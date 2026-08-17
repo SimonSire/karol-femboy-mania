@@ -1,14 +1,14 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-NameError: name 'extends' is not defined. Did you mean: 'extend'?
+NameError: name 'o' is not defined
 
 During handling of the above exception, another exception occurred:
 
 Traceback (most recent call last):
-  File "game/script.rpy", line 3379, in script
-    extends "{color=#6b5512} off of its hinges"
-Exception: Sayer 'extends' is not defined.
+  File "game/script.rpy", line 3928, in script
+    o "idk trump, i think hes speaking lithuanian"
+Exception: Sayer 'o' is not defined.
 
 -- Full Traceback ------------------------------------------------------------
 
@@ -23,13 +23,13 @@ Traceback (most recent call last):
     return eval(bytecode, globals, locals)
            ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "<none>", line 1, in <module>
-NameError: name 'extends' is not defined. Did you mean: 'extend'?
+NameError: name 'o' is not defined
 
 During handling of the above exception, another exception occurred:
 
 Traceback (most recent call last):
-  File "game/script.rpy", line 3379, in script
-    extends "{color=#6b5512} off of its hinges"
+  File "game/script.rpy", line 3928, in script
+    o "idk trump, i think hes speaking lithuanian"
   File "renpy/ast.py", line 2923, in execute
     Say.execute(self)
     ~~~~~~~~~~~^^^^^^
@@ -38,9 +38,9 @@ Traceback (most recent call last):
           ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
   File "renpy/ast.py", line 627, in eval_who
     raise Exception("Sayer '%s' is not defined." % who)
-Exception: Sayer 'extends' is not defined.
+Exception: Sayer 'o' is not defined.
 
 Windows-11-10.0.26200-SP0 AMD64
 Ren'Py 8.5.0.25111603
 Karol Femboy mania v2 fuck_you
-Sun Jul 26 14:17:02 2026
+Mon Aug 17 19:14:18 2026

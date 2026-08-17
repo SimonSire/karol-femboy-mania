@@ -2038,6 +2038,10 @@ label _CASINO_ENTRY_HERE________________________________________________________
                                             k "No i mean I HAD some drinks, he didnt drunk"
                                             k "we had such a good time"
                                             "hey simon u were supposed to make barguy shit himself here" #SIMOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOON
+                                            b2 "ooooh you had a good time huh???"
+                                            b2 "that makes me so happy!!!!!!"
+                                            play sound fart
+
                                             jump allgoodbar
                                         "tell the truth":
                                             k "i killed him"
@@ -3866,12 +3870,85 @@ label _CASINO_LEAVING_HERE______________________________________________________
                 narrater "smart move, as your lawyer still isnt present"
                 t "okay, okay, the silent treatment"
             "Victim was a horse":
-                k "g"
-        scene court3
+                k "youe honor.."
+                k "te victim was.."
+                extend " a HORSE!!"
+        show court3
         un "what he ell??"
         play sound cloth
         show teeguy serious with dissolve
         l "you queestioned my client without me here???"
+        l "sorry im late sugar pup"
+        l "i had a wax job on my ass"
+        menu:
+            "WHAT HTOOK YOU SO LONMG": #ass waxxing angry
+                k "asshole"
+                $ karolTalkingMad = True
+                k "WHAT TOOK YOU SO LONG"
+                k "you coul'ved waxxed ur ass another time! MOTHERFUCKER"
+                $ karolTalkingMad = False
+                l "waxxing my ass helps me to focus in court.."
+                "he turn towards the judge and the others"
+                hide court3
+                hide zlink right
+                hide dryleft
+                l "let me get this straight..."
+                l "ur saying.. the victim was brutally fisted with clear intention of killing him"
+                l "and was done on purpose"
+                l "according to my book-idy-book!"
+                l "under the {color=#db190b}'Baudžiamasis kodeksas'{/color}"
+                l "{color=#38465c}Nusikaltimas yra tyčinis, jeigu jis padarytas tiesiogine ar netiesiogine tyčia.
+                jį darydamas asmuo suvokė pavojingą nusikalstamos veikos pobūdį, numatė, kad dėl jo veikimo ar neveikimo gali atsirasti šiame kodekse numatyti padariniai, ir jų norėjo.{/color}"
+                l "i apologisze, i wasnt able to get this book in eglish"
+                t "i dont know what hes saying..."
+                t "but i think hes speaking truly from the heart!!"
+                k "yeah man he is"
+                l "the attacker deserves {color=#db190b}death{/color}!!"
+                k "wait no!!!"
+                play sound appear
+                show zlink right with moveinright
+                p1 "CAN I DO IT????"
+                t "SHUT UP! i'm gonna be th one who kills kills him"
+                k "arent you supposed to be my lawyer!??"
+                l "whats a lawyer??"
+                l "im just here ccause they promised me a free wax session"
+                l "they just gave me this suit and book and told me to act as a lawyer would"
+                # karols dad crashes into court
+            "Respeeectt man": #good ending
+                k "respect"
+                "you dap him up"
+                "he turn towards the judge and the others"
+                hide court3
+                hide zlink right
+                hide dryleft
+                l "you know the constitutions 31st article???"
+                l "{color=#38465c}Asmeniui, kuris įtariamas padaręs nusikaltimą, ir kaltinamajam nuo jų sulaikymo arba pirmosios apklausos momento garantuojama teisė į gynybą, taip pat ir teisė turėti advokatą.{/color}"
+                hide teeguy serious with dissolve
+                t "what the fuck is he talking about?"
+                ob "idk trump, i think hes speaking lithuanian"
+                t "lithuania?? is that somewhere in russia??"
+                show teeguy hap with dissolve
+                l "yweah"
+                show teeguy left
+                l "In any case, cornerning the matter about the murder..."
+                l "under the constitutions 3rd article..."
+                l "{color=#38465c}Tauta ir kiekvienas pilietis turi teisę priešintis bet kam, kas prievarta kėsinasi įvalstybės nepriklausomybę, teritorijos vientisumą, konstitucinę santvarką.{/color}"
+                l "ahem.."
+                l "It is hereby submitted that the individual identified as Karol was engaged in actions directly in furtherance of his fiduciary and statutory obligations to his sovereign nation." 
+                play sound applause2
+                l "Said obligations necessitated the Subject to initiate a decisive tactical intervention against a specific quadrupedal adversary."
+                hide trump
+                play sound appear
+                show judge 1 with dissolve
+                j "okay okay, you can stop"
+                l "Specifically, the adversary in question was an equine biological entity, legally classified under the species Equus caballus."
+                j "shut the fuck up"
+                l "Furthermore, it has been established through the factual record that this aforementioned equine entity was operating as an agent, symbol, or affiliated With Nazi's"
+                play sound applause1
+                l "yeah"
+        
+        
+
 
 
         
