@@ -113,6 +113,7 @@ default sexyguyCasinoShingas = 0        #0 = never met sexy, 10 = you played bad
 default sexyguyMadnessLevel = 0
 default sexyguyWrongHoles = 0
 default sexyguyCorrectas = 0
+default sexyguySurprised = False
 default sexyguyJumpMode = 0             #just for u simon *kiss*
 default sexyguyJumpSpeed = 0.07
 
@@ -1738,10 +1739,10 @@ label _CASINO_ENTRY_HERE________________________________________________________
                                             un "All the other stalls are BROKEN"
 
                                             menu:
-                                                    "Shit":
-                                                        jump shitting
-                                                    "Shit harder":
-                                                        jump shitting
+                                                "Shit":
+                                                    jump shitting
+                                                "Shit harder":
+                                                    jump shitting
                                             
                                             label shitting:
                                                 play sound dia3
@@ -1760,39 +1761,34 @@ label _CASINO_ENTRY_HERE________________________________________________________
                                                         play sound bang4
                                                         un "plEASE OPEN TE DOOR"
                                                         menu:
-                                                                "Continue shitting":
-                                                                    play sound dia5
-                                                                    $ renpy.pause(4.0, hard=True)
-                                                                    show bath2 with vpunch
-                                                                    play sound bang5
+                                                            "Continue shitting":
+                                                                play sound dia5
+                                                                $ renpy.pause(4.0, hard=True)
+                                                                show bath2 with vpunch
+                                                                play sound bang5
 
-                                                                    un "OPENT HE FUCKING DOOR NOW"
-                                                                    un "OR IM GONNA GET THE MANAGEMENT"
-                                                                    menu:   
-                                                                            "Open the door":
-                                                                                narrater "You decide to open the door"
-                                                                                play sound door
-                                                                                scene bathdoor
-                                                                                $ renpy.pause(1.0, hard=True)
-                                                                                jump bathdisc
-                                                                            "Continue shitting":
-                                                                                $ didyankdoor = 1
-                                                                                play sound breakdoor
-                                                                                scene bathfist
-                                                                                $ renpy.pause(3.0, hard=True)
-                                                                                scene bathnodoor
-                                                                                play sound doorcrash
-                                                                                narrater "he yanks the door away"
+                                                                un "OPENT HE FUCKING DOOR NOW"
+                                                                un "OR IM GONNA GET THE MANAGEMENT"
+                                                                menu:   
+                                                                    "Open the door":
+                                                                        narrater "You decide to open the door"
+                                                                        play sound door
+                                                                        scene bathdoor
+                                                                        $ renpy.pause(1.0, hard=True)
+                                                                        jump bathdisc
+                                                                    "Continue shitting":
+                                                                        $ didyankdoor = 1
+                                                                        play sound breakdoor
+                                                                        scene bathfist
+                                                                        $ renpy.pause(3.0, hard=True)
+                                                                        scene bathnodoor
+                                                                        play sound doorcrash
+                                                                        narrater "he yanks the door away"
 
-                                                                                k "HEY WHAT THE FUCK mann"
-                                                                                $ karolTalkingMad = False
+                                                                        k "HEY WHAT THE FUCK mann"
+                                                                        $ karolTalkingMad = False
 
-                                                                                jump bathdisc
-
-
-
-
-
+                                                                        jump bathdisc
                                         "Go back":
                                             play sound door
                                             scene cas1
@@ -1879,14 +1875,6 @@ label _CASINO_ENTRY_HERE________________________________________________________
             jump casinodoorlock
         if (casinoMajorHappens >= 6) and not isZlinkDie:
             jump casinoCHIEFinMAIN
-            "CASINO CHIEF COMES HIER"
-            menu:               #temporary shjit
-                "go court":
-                    $shitcourt = 0
-                    jump courtarrive
-                "stay":
-                    "ok"
-
         menu:
                 "Go right":
                     play sound door
@@ -2376,8 +2364,16 @@ label _CASINO_ENTRY_HERE________________________________________________________
             k "yeah okay"
             sx "Great, now I am gonna give you the first piece..."
             jump sexyshapegamewhole
+        elif sexyguyCasinoShingas == 12:
+            stop music
+            $ renpy.pause(1.0, hard=True)
+            narrater "the stand is empty"
+            narrater "its all your fault"
+            play music casmusic fadein 1.5 volume 0.2
+            jump casinoFORW
         else:
-            sx "we played already"
+            $ renpy.pause(1.0, hard=True)
+            narrater "the stand is empty"
             jump casinoFORW
     
     label sexyguyanswersGOOD:
@@ -2714,8 +2710,29 @@ label _CASINO_ENTRY_HERE________________________________________________________
                     $ pielaCasinoShingas = 1
 
         if pielaCasinoShingas == 3:
-            pl "we should plan the heist now"
-            "placeholder shit finish later" #______________________________________________________________________
+            pl "oky lets heist right now"
+            play sound cloth
+            scene cas heistmachines
+            show transpiela with moveinleft
+            narrater "he takes you to an allye with some machinas"
+            pl "okay were here can you do the thing now"
+            pl "what are we doing now huh{nw=0.3}"
+            extend "smartguy"
+            k "i dont know"
+            $ renpy.pause(2.5, hard=True)
+            pl "hey man what{nw=0.05}"
+            k "okay kay maybe uhh"
+            k "try to open the dhing"
+            extend " huh the ting would you open the thing"
+            pl "okay"
+            pl " yes i can do that"
+            hide transpiela with dissolve
+            show piela heisting with dissolve
+            $ renpy.pause(1, hard=True)
+            show la machine
+
+
+
 
         menu:
             "Go back":
@@ -3307,6 +3324,10 @@ label _CASINO_LEAVING_HERE______________________________________________________
         play sound cloth
         hide bobis right with dissolve
         narrater "the management guy disapepars and then uhh"
+
+    label policecar:
+        scene black
+        stop music
         narrater "the police officers put you in their car"
 
         scene policecar
@@ -3318,12 +3339,6 @@ label _CASINO_LEAVING_HERE______________________________________________________
         scene later
         play sound later
         narrater "one enteri later"
-
-        
-        jump courtarrive
-        
-
-        
 
     label courtarrive:
         scene courthall1
