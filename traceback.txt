@@ -1,18 +1,18 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 2033, in script
-    play sound fart
-  File "game/script.rpy", line 2033, in <module>
-    play sound fart
-               ^^^^
-NameError: name 'fart' is not defined
+  File "game/script.rpy", line 4294, in script
+    play sound dissappointment
+  File "game/script.rpy", line 4294, in <module>
+    play sound dissappointment
+               ^^^^^^^^^^^^^^^
+NameError: name 'dissappointment' is not defined
 
 -- Full Traceback ------------------------------------------------------------
 
 Traceback (most recent call last):
-  File "game/script.rpy", line 2033, in script
-    play sound fart
+  File "game/script.rpy", line 4294, in script
+    play sound dissappointment
   File "renpy/ast.py", line 2241, in execute
     self.call("execute")
     ~~~~~~~~~^^^^^^^^^^^
@@ -34,12 +34,12 @@ Traceback (most recent call last):
   File "renpy/python.py", line 1298, in py_eval_bytecode
     return eval(bytecode, globals, locals)
            ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "game/script.rpy", line 2033, in <module>
-    play sound fart
-               ^^^^
-NameError: name 'fart' is not defined
+  File "game/script.rpy", line 4294, in <module>
+    play sound dissappointment
+               ^^^^^^^^^^^^^^^
+NameError: name 'dissappointment' is not defined
 
-Windows-10-10.0.19045-SP0 AMD64
-Ren'Py 8.5.2.26010301
+Windows-11-10.0.26200-SP0 AMD64
+Ren'Py 8.5.0.25111603
 Karol Femboy mania v2 fuck_you
-Mon Aug 17 22:25:27 2026
+Thu Aug 20 22:24:58 2026

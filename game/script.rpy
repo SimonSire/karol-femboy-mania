@@ -97,13 +97,16 @@ default casinoLovesYou = 0
 
 #simon bar thingiesss
 default barguybadshinger = 0   #0 never met him, 1 is neutral?, 2 is like happy, 3 is you told the truth
+default barguyloops = 0
 
 #courts
 default didyankdoor = 0
 default staysilent = 0
 
-default shitcourt = 1
+default shitcourt = 0
 default judgepissedlevel = 0
+
+default talkingshit = 0
 
 #bors
 default wrenchCasinoShingas = 0         #0 = never met robux, 1 = you made robux win, 2 = you made robux lose
@@ -1716,7 +1719,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
                                 play sound door
                                 jump gocasino
                             "I wanna piss right now, where are the toilets at":
-                                #$ shitcourt = 1
+                                $ shitcourt = 1
                                 play sound "bopis/boris 10.mp3"
                                 bb "Right this way sir"
                                 play sound door
@@ -1944,12 +1947,19 @@ label _CASINO_ENTRY_HERE________________________________________________________
                 "Nah fuck off":
                     label pissofffolks:
                         k "Nah i aint givin youshit u cn fukc off"#___________________________________________TOFINISH_____________
+                        play sound boowomp
+                        show wiktor 2
+                        show wiktorhobo 2
+                        
+                        w "what the fuck bro"
+
+                        wb "man i hate you"
                         hide wiktorhobo 1 with dissolve
                         hide wiktor 1 with dissolve
                         $ casinoLovesYou -= 1
                         $ wiktorCasinoShingas = 2
 
-                        "idk what to put here simon lmao"
+                        narrater "they leave"
                         ##smth about the getting mad and later the guys be pissed at u
 
         menu:
@@ -2139,90 +2149,207 @@ label _CASINO_ENTRY_HERE________________________________________________________
                                             "leave the bar":
                                                 $ barguybadshinger = 1
                                                 jump casinoRIGHT
-                                play sound win
-                                show foundbeer
-                                narrater "you have now beer!!!! zywiec!!!"
-                                hide foundbeer
-                                play sound cloth
-                                show hand beer with moveinbottom
-                                k "oh yeaah"
-                                show hand drink
-                                play sound drink
-                                k "oh yeaah"
-                                stop music fadeout 0.5
-                                play sound boom
-                                scene casbarevil
-                                show bartwin horse
-                                #ooh what the fuckk
-                                #changes into horse
-                                k "you.."
-                                $ karolTalkingMad = True
-                                k "MOTHERFUKCER!!"
-                                $ karolTalkingMad = False
+                                label drink:
+                                    play sound win
+                                    show foundbeer
+                                    narrater "you have now beer!!!! zywiec!!!"
+                                    hide foundbeer
+                                    play sound cloth
+                                    show hand beer with moveinbottom
+                                    $ karolTalkingMad = False
+                                    k "oh yeaah"
+                                    show hand drink
+                                    play sound drink
+                                    k "oh yeaah"
+                                    stop music fadeout 0.5
+                                    play sound boom
+                                    scene casbarevil
+                                    show bartwin horse
+                                    #ooh what the fuckk
+                                    #changes into horse
+                                    
+                                    k "you.."
+                                    $ karolTalkingMad = True
+                                    k "MOTHERFUKCER!!"
+                                    
 
-                                show fists with moveinbottom
-                                menu:
-                                    "{b}FIGHT":
-                                        hide fists
-                                        show bartwin horse with hpunch
-                                        show fists2
-                                        play sound bad
-                                        $ renpy.pause(0.5, hard=True)
-                                        hide fists2
-                                        show fists
+                                    show fists with moveinbottom
+                                    menu:
+                                        "{b}FIGHT":
+                                            hide fists
+                                            
+                                            show fists2 with hpunch
+                                            play sound bad
+                                            show bartwin horse1 with hpunch
+                                            $ renpy.pause(0.5, hard=True)
+                                            
+                                            hide fists2
+                                            show fists
+                                    k "you PIECE OF SHIT"
+                                    show fists
+                                    hide fists2
+                                    show bartwin horse1 at vpunch
+                                    play sound hose1
+                                    menu:
+                                        "{b}FIGHT":
+                                            hide fists
+                                            show fists2 with hpunch
+                                            
+                                            show fists2
+                                            play sound bad
+                                            show bartwin horse2 with hpunch
+                                            $ renpy.pause(0.5, hard=True)
+                                            hide fists2
+                                            show fists
+                                    k "I WILL KILL YOU JUST LIKE I KILLED YOUR BROTHER"
+                                    show fists
+                                    hide fists2
+                                    show bartwin horse2 at vpunch
+                                    play sound hose2
+                                    menu:
+                                        "{b}FIGHT":
+                                            hide fists
+                                            show fists2 with hpunch
+                                            
+                                            show fists2
+                                            play sound bad
+                                            show bartwin horse3 with hpunch
+                                            $ renpy.pause(0.5, hard=True)
+                                            hide fists2
+                                            show fists
 
-                                show fists
-                                hide fists2
-                                play sound hose1
-                                menu:
-                                    "{b}FIGHT":
-                                        hide fists
-                                        show bartwin horse with hpunch
-                                        show fists2
-                                        play sound bad
-                                        $ renpy.pause(0.5, hard=True)
-                                        hide fists2
-                                        show fists
+                                    show fists
+                                    hide fists2
+                                    show bartwin horse3 at vpunch
+                                    play sound hose1
+                                    menu:
+                                        "{b}FIGHT":
+                                            hide fists
+                                            show fists2 with hpunch
+                                            play sound bad
+                                            show bartwin horse4 with hpunch
+                                            $ renpy.pause(0.5, hard=True)
+                                            hide fists2
+                                            show fists
 
-                                show fists
-                                hide fists2
-                                play sound hose2
-                                menu:
-                                    "{b}FIGHT":
-                                        hide fists
-                                        show bartwin horse with hpunch
-                                        show fists2
-                                        play sound bad
-                                        $ renpy.pause(0.5, hard=True)
-                                        hide fists2
-                                        show fists
-
-                                show fists
-                                hide fists2
-                                play sound hose1
-                                menu:
-                                    "{b}FIGHT":
-                                        hide fists
-                                        show bartwin horse with hpunch
-                                        show fists2
-                                        play sound bad
-                                        $ renpy.pause(0.5, hard=True)
-                                        hide fists2
-                                        show fists
-
-                                show fists
-                                hide fists2
-                                play sound hose3
-                                "simon here goes karol beats barguy close to death thing hereee right hereee" #SIMOOOOOOOOOOOOOOOOOOOOOOOOOOOOON
-                                $ casinoLovesYou -= 1
-                                $ barguybadshinger = 3 #this is just so the playtest doesnt break u can change that
-                                jump casinoRIGHT
+                                    show fists
+                                    hide fists2
+                                    show bartwin horse4 at vpunch
+                                    play sound hose3
+                                    $ karolTalkingMad = False
+                                    k "YO BASTARD"
+                                    $ renpy.pause(0.2, hard=True)
+                                    scene black
+                                    play sound pan
+                                    narrater "somebody hits you on the head with a pan"
+                                    
+                                    narrater "it leaves you stunned"
+                                    narrater " adn you lose consiousness"
+                                    narrater "after some time you wake up"
+                                    scene courthostage
+                                    play sound bardead
+                                    $ karolTalkingMad = False
+                                    show bartwin died with dissolve
+                                    k "what the hell"
+                                    menu:
+                                        "try to move":
+                                            narrater "you trie to move but seems your're tied tot his chair"
+                                    k "what"
+                                    $ karolTalkingMad = True
+                                    k "WHO DID THIS TO ME"
+                                    $ karolTalkingMad = False
+                                    play sound cloth
+                                    show dryleft with moveinleft
+                                    p2 "heh heh heh"
+                                    p2 "we got you now you sick bastard"
+                                    p2 "what's with you and bartenders?"
+                                    play sound appear
+                                    show chief 1 with moveinbottom
+                                    un "what? whats going on?"
+                                    un "i saw a commotion in the cameras what is going on in my casino man"
+                                    p2 "i am  a police officer."
+                                    p2 "we are chasing down a suspect who killed a bartender a block away"
+                                    play sound cloth
+                                    show zlink right2 with moveinright
+                                    p1 "he KILLED ANOTHER ONE??"
+                                    un "killed?"
+                                    play sound cloth
+                                    hide chief 1 with dissolve
+                                    narrater "chief guy turns around and sees bar guy on th eground"
+                                    play sound appear
+                                    show chief 1 with moveinbottom
+                                    un "WHAT??"
+                                    ch "also btw i am the chief of this place"
+                                    ch "HOW COULD YOU  KILL MY BARTENDER GUY!!!"
+                                    p2 "dont worry, he isnt dead"
+                                    p2 "i checked on him after i tied down this bastard, he should be finee"
+                                    p1 "in any case we finally have the suspect in custody"
+                                    menu:
+                                        "defiance":
+                                            k "i refuse to be treated this way"
+                                            $ karolTalkingMad = True
+                                            k "DO YOU HVAE THE SLIGHTEST CLUE WHO I AM?????"
+                                            $ karolTalkingMad = False
+                                            k "extremely cool story map"
+                                            k "ever heard that name before?"
+                                            $ karolTalkingMad = True
+                                            k "HAVE YOU???"
+                                            $ karolTalkingMad = False
+                                            p2 "ehh"
+                                            ch "shut up yellow cunt, officers please take him away from the premises"
+                                            menu:
+                                                "WAIT":
+                                                    k "look, i didnt kill anyone ok?"
+                                                    k "plus, the people i beat up weren't people, they were horses!"
+                                        "acceptance":
+                                            k "i've done wrong.. i admit"
+                                            k "take me away"
+                                    scene black
+                                    narrater "the officers take you away to their car"
+                                    p1 "you bastard, its so over for you"
+                                    jump policecar
+                                    "simon here goes karol beats barguy close to death thing hereee right hereee" #SIMOOOOOOOOOOOOOOOOOOOOOOOOOOOOON
+                                    $ casinoLovesYou -= 1
+                                    $ barguybadshinger = 3 #this is just so the playtest doesnt break u can change that
+                                    jump casinoRIGHT
                         else:
-                            if not barguybadshinger:
+                            if barguybadshinger == 1:
+                                play sound appear
+                                show bartwin default with dissolve
                                 b2 "oh did u change ur mind??"
-                                menu:
-                                    "simon finish this fucking thing":#SIMOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOON
-                                        jump casinoRIGHT
+                                label mindchaning:
+                                    b2 "i have some good drinks dinks gn8ks"
+                                    if barguyloops == 1:
+                                        menu:
+                                            "yeah":#SIMOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOON
+                                                k "give me some drink"
+                                                jump drink
+                                            "no":
+                                                k "no i dont wantt"
+                                                b2 "no think about it"
+                                            "FLEE":
+                                                jump casinoRIGHT
+                                    b2 "i have some good drinks dinks gn8ks"
+                                    menu:
+                                        "yeah":#SIMOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOON
+                                            k "give me some drink"
+                                            jump drink
+                                        "no":
+                                            k "no i dont wantt"
+                                            b2 "no think about it"
+
+                                    menu:
+                                        b2 "get some drink man is good for you"
+                                        "no is bad":
+                                            k "i am very healthy man i dont drink"
+                                            $ karolTalkingMad = True
+                                            extend " IS NOT GOOD FOR ME"
+                                            $ barguyloops = 1
+                                            jump mindchaning
+                                        "okay fine":
+                                            k "oooooh fiiine i guess i could have something to dribnnk"
+                                            jump drink
+
 
     label casinoFORW:
         scene casforw
@@ -3428,7 +3555,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
         scene courthall1
         play sound foot
         narrater "you go in court"
-        if shitcourt:
+        if shitcourt == 1:
             jump courtregular
         else:
             jump courtPresidents
@@ -3769,6 +3896,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
                                 j "just get out of my sight"
                                 play sound hammer2
                                 j "get the fuck outta this court"
+                                jump free_ending
                             else:
                                 j "for the record... the defendant appears to be wearing fake glasses, a fake nose, and a fake mustache."
                                 p2 "should i write that down?"
@@ -3858,18 +3986,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
             action [Play("audio", "gobackclick.mp3"), Jump("choose")]
 
 
-    label teprison:
-        play sound jailer
-        scene pison
-        if howmanytimes > 0:
-            "oh hey look, we're back here from that controller fail"
-            $ karolTalkingMad = True
-            k "FUCK SHIT NOT AGAIMN"
-            $ karolTalkingMad = False
-        else:
-            "oh no u got sent to prisonas"
-            k "ash shit"
-        "well this is the prison ending idk what should happen now BORIS"
+    
 
     label courtPresidents:
         play music ace2 fadein 1.0 volume 0.05
@@ -4019,16 +4136,125 @@ label _CASINO_LEAVING_HERE______________________________________________________
                 t "but i think hes speaking truly from the heart!!"
                 k "yeah man he is"
                 l "the attacker deserves {color=#db190b}death{/color}!!"
-                k "wait no!!!"
-                play sound appear
-                show zlink right with moveinright
-                p1 "CAN I DO IT????"
-                t "SHUT UP! i'm gonna be th one who kills kills him"
-                k "arent you supposed to be my lawyer!??"
-                l "whats a lawyer??"
-                l "im just here ccause they promised me a free wax session"
-                l "they just gave me this suit and book and told me to act as a lawyer would"
-                # karols dad crashes into court
+                menu:
+                    "defiance":
+                        narrater "you throw yourself at your lawyer"
+                        play sound push
+                        show teeguy fly at vpunch
+                        show hands throw:
+                            zoom 2
+                            yalign 0.5
+                            xalign 0.5
+                            ease 0.9 zoom 1
+                        $ karolTalkingMad = True
+                        k "SQUARE UP BITCH"
+                        $ karolTalkingMad = False
+                        play sound fall
+                        hide teeguy fly with moveoutbottom
+                        show hands throw:
+                            zoom 1
+                            yalign 0.5
+                            xalign 0.5
+                            ease 0.5 zoom 6
+                        narrater "lawyer falls down to the ground very hard"
+                        menu:
+                            "take his belongings":
+                                narrater "you search his body"
+                                play sound dia1
+                                show lawyerbag
+
+                                narrater "you have received your lawyers bag"
+                                menu:
+                                
+                                    "Open the lawyers bag":
+                                        hide lawyerbag
+                                        play sound zip
+                                        "you open the bag"
+                                        
+                                play sound drumroll
+                                narrater "inside... you find:"
+
+                                play sound found1
+                                show hand time with moveinbottom
+                                narrater "a TIME MACHINE!"
+                                "wow" #BOOOOOORIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIISSSSSSSSSSSS TIME TRAVEL NOW NOW TIME TRAVEL NOW NOW TIME TRAVEL NOW NOW TIME TRAVEL NOW NOW TIME TRAVEL NOW NOW TIME TRAVEL NOW NOW
+
+                                #OKAY YOU CAME BACK
+                                hide hand time
+                                t "oh, you came back?"
+                                ob "we've been waiting here for you"
+                                t "so karol mijas, uhh.. tell me.. what did you change with that precious precious time machine of yours?"
+                                t "maybe you saw greater times.. maybe the times without those pesky mexicans"
+                                t "the times when america was great.."
+                                t "maybe we can make it great again"
+                                show teeguy left with moveinleft
+                                l "how could you use my time travelling machine???"
+                                l "did you atleast put it to good use?"
+                                l "well? did you?"
+                                menu:
+                                    "explain":
+                                        k "allow me to explain so you guys can understand"
+                                        k "let's start with the start"
+                                k "i spawned into the bar, fortnite style"
+                                menu:
+                                    "talk shit":
+                                        $ talkingshit += 1
+                                        k "this time, i didnt kill the bartender, im a very pure soul"
+                                        k "instead i went to make out with my past self"
+                                        k "no bartenders were hurt in the proccess"
+                                        k "we had a delightful time together ;)"
+                                        hide trump
+                                        play sound appear
+                                        show judge 1 with dissolve
+                                        j "so the bartender is alive?"
+                                        k "yes, very much alive and kicking"
+                                    "explain":
+                                        k "when i saw the bartender again, i couldnt supress my rage"
+                                        k "i killed him again"
+                                        $ karolTalkingMad = True
+                                        k "I BEAT HIM SENSELESS"
+                                        $ karolTalkingMad = False
+                                        k "over and over and over and over and over over and over over and over, blood everywhere"
+                                        k "until he took his last breath and perished"
+                                if talkingshit:
+                                    play sound ring
+                                    j "oh? hold on, im getting a call"
+                                    narrater "the judge answers his phone"
+                                    play sound phonetalk
+                                    j "mhmhm yup, see you."
+                                    j "well karol you are lying.."
+                                    play sound impact2
+                                    show judge 1 at vpunch
+                                    extend " because nothing changed"
+                                    j "you are just a lyar!!"
+                                else:
+                                    l "soo....."
+                                    l "you used MY time machine to go BACK IN TIME and you..."
+                                    l "you just WASTED IT???"
+                                j "karol mijas, your guiltyness is clear as day"
+                                j "frankly, you dont derserve to live"
+                                j "but i cant hand out a death penalty"
+                                play sound hammer1
+                                j "so karol mijas, i hereby sentence you.."
+                                play sound applause1
+                                j "to {color=#de1809}500 years{/color} in prison"
+                                l "yay!"
+                                k "huh, thats better than death i guess"
+                                jump teprison
+                                #PRISON ENDING
+                        
+                        pass
+                    "acceptance":
+                        k "wait no!!!"
+                        play sound appear
+                        show zlink right with moveinright
+                        p1 "CAN I DO IT????"
+                        t "SHUT UP! i'm gonna be th one who kills kills him"
+                        k "arent you supposed to be my lawyer!??"
+                        l "whats a lawyer??"
+                        l "im just here ccause they promised me a free wax session"
+                        l "they just gave me this suit and book and told me to act as a lawyer would"
+                        # karols dad crashes into court
             "Respeeectt man": #good ending
                 k "respect"
                 narrater "you dap him up"
@@ -4060,14 +4286,38 @@ label _CASINO_LEAVING_HERE______________________________________________________
                 j "shut the fuck up"
                 l "Furthermore, it has been established through the factual record that this aforementioned equine entity was operating as an agent, symbol, or affiliated With Nazi's"
                 play sound applause1
-                l "yeah"
+                l "thank you, thank you"
+                j "with the shown evidence, of the eques cabbales being affiliated with nazis and with karol mijas having obligations to defend his motherland, it's all clear to me now"
+                j "i hate to admid it.. "
+                play sound hammer1
+                j "the defandant is found not guilty.."
+                play sound disappointment
+                un "WE HATE THIS MAN!"
+                jump free_ending
         
         
 
+    #call the ambulance, maybe they'll take him or something
 
 
+
+    label free_ending:
+        scene courthall1
+        narrater "you walk out of the court, filled with determination"
+        narrater "you are free"
         
-
+    label teprison:
+        play sound jailer
+        scene pison
+        if howmanytimes > 0:
+            "oh hey look, we're back here from that controller fail"
+            $ karolTalkingMad = True
+            k "FUCK SHIT NOT AGAIMN"
+            $ karolTalkingMad = False
+        else:
+            "oh no u got sent to prisonas"
+            k "ash shit"
+        "well this is the prison ending idk what should happen now BORIS"
 
     label end:
         scene black
