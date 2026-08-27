@@ -1,18 +1,15 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 4294, in script
-    play sound dissappointment
-  File "game/script.rpy", line 4294, in <module>
-    play sound dissappointment
-               ^^^^^^^^^^^^^^^
-NameError: name 'dissappointment' is not defined
+  File "game/script.rpy", line 4373, in script
+    show screen hopitalhands
+renpy.display.screen.ScreenNotFound: Screen 'hopitalhands' is not known. Did you mean: 'hopitalhand'?
 
 -- Full Traceback ------------------------------------------------------------
 
 Traceback (most recent call last):
-  File "game/script.rpy", line 4294, in script
-    play sound dissappointment
+  File "game/script.rpy", line 4373, in script
+    show screen hopitalhands
   File "renpy/ast.py", line 2241, in execute
     self.call("execute")
     ~~~~~~~~~^^^^^^^^^^^
@@ -22,24 +19,14 @@ Traceback (most recent call last):
   File "renpy/statements.py", line 381, in call
     return method(parsed, *args, **kwargs)
            ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "renpy/common/000statements.rpy", line 318, in execute_play_sound
-    _audio_eval(p["file"]),
-    ~~~~~~~~~~~^^^^^^^^^^^ 
-  File "renpy/common/000statements.rpy", line 39, in _audio_eval
-    return eval(expr, locals=store.audio.__dict__)
-           ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "renpy/python.py", line 1305, in py_eval
-    return py_eval_bytecode(code, globals, locals)
-           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
-  File "renpy/python.py", line 1298, in py_eval_bytecode
-    return eval(bytecode, globals, locals)
-           ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "game/script.rpy", line 4294, in <module>
-    play sound dissappointment
-               ^^^^^^^^^^^^^^^
-NameError: name 'dissappointment' is not defined
+  File "renpy/common/000statements.rpy", line 671, in execute_show_screen
+    renpy.show_screen(name, *args, **kwargs)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/display/screen.py", line 1355, in show_screen
+    raise ScreenNotFound(name[0])
+renpy.display.screen.ScreenNotFound: Screen 'hopitalhands' is not known. Did you mean: 'hopitalhand'?
 
 Windows-11-10.0.26200-SP0 AMD64
 Ren'Py 8.5.0.25111603
 Karol Femboy mania v2 fuck_you
-Thu Aug 20 22:24:58 2026
+Thu Aug 27 22:25:01 2026

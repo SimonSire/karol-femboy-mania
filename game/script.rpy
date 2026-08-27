@@ -1,4 +1,4 @@
-﻿    # hello welcome to the script of karolfemboymania where there are barely any femboys at the moment as i write this
+    # hello welcome to the script of karolfemboymania where there are barely any femboys at the moment as i write this
 # and no im not adding any rn
 # dont worry im not gonna be adding any either
 
@@ -87,6 +87,9 @@ define j = Character("Judge", color="#186d45")
 define t = Character("Trump", color="#614e12")
 define ob = Character("Obama", color="#503528")
 define l = Character("Lawyer", color="#0b0955")
+
+define doc = Character("Docotr", color="#5550ea")
+define rep = Character("The pledge himself", color="#ffffff")
 
 default isPathetic = True
 default isZlinkDie = False
@@ -932,6 +935,7 @@ label _1ST_SECTION_ORIGINAL_GAME_HERE___________________________________________
     ##################################################################################################################################################
     label start:
 
+        jump lospital
         play music karoltheme_poor fadein 2.0 volume 0.2
         scene black
         show bed with dissolve
@@ -3307,6 +3311,8 @@ label _CASINO_ENTRY_HERE________________________________________________________
                 sx "I deeply regret playing with this man"
             play sound "bopis/boris FUCK YOU.mp3"
             bb "FUCK YOUU"
+            #police men appear and the 
+            
         else:
             $ renpy.pause(1,5, hard=True)
             narrater "noone really cares about your fate here"
@@ -4305,6 +4311,87 @@ label _CASINO_LEAVING_HERE______________________________________________________
         scene courthall1
         narrater "you walk out of the court, filled with determination"
         narrater "you are free"
+
+    label lospital:
+        scene hospit 1
+        k "what the hell"
+        k " icant feel my legs"
+        show hosipit armsnlegs with dissolve
+        k "i cant feel my arms erithe"
+        play sound door
+        scene hospit 2
+        show hosipit armsnlegs
+        narrater "suddenly door opens up"
+        play sound appear
+        hide hosipit armsnlegs
+        screen hopitalhand:
+            fixed:
+                image "hosipit armsnlegs.png"
+        show screen hopitalhand
+        show dad with dissolve:
+            zoom 0.5
+            yalign 0.5
+            xalign 0.5
+        show hosipit armsnlegs
+
+        d "hello son."
+        d "i just came to say i am very disappointent in you"
+        d "that is all. goodbye"
+
+        menu:
+            "noo please":
+                k "noo dad.. please"
+                k "dont leave me i need you dadi still need you"
+            "defy your father now":
+                k "father.."
+                hide screen hopitalhand
+                hide hosipit armsnlegs
+                show hosipit armsnlegs midfinger with dissolve
+                k "Fuck you!!!!"
+
+
+        play sound door
+        hide dad with dissolve
+        scene hospit 1
+        show hosipit armsnlegs
+        "he left"
+
+        narrater "suddenly door opens up"
+        play sound appear
+        hide hosipit armsnlegs
+        show doktor neutral with dissolve
+        show hosipit armsnlegs
+        
+        un "hey hey"
+        doc "i ur dctor man"
+        doc "i got bad news man..."
+        menu:
+            "nooo what do you mean??":
+                k "ooh no man what happened to me doctor??"
+        show doktor happy
+
+        doc "you will never walk again!"
+        menu:
+            "acceptance":
+                k "man that sucks.."
+            "defiance":
+                hide screen hopitalhand
+                hide hosipit armsnlegs
+                show hosipit armsnlegs midfinger with dissolve
+                k "uck you!!!!"
+
+                hide hosipit armsnlegs
+                show doktor neutral
+                show screen hopitalhand
+                show hosipit armsnlegs
+                doc "this is very mean"
+                doc "no wonder your father doesnt love you"
+        hide screen hopitalhand
+        show theend
+        show end hospital
+        window hide
+        #narrater "the end"
+        " s"
         
     label teprison:
         play sound jailer
@@ -4317,6 +4404,15 @@ label _CASINO_LEAVING_HERE______________________________________________________
         else:
             "oh no u got sent to prisonas"
             k "ash shit"
+        play sound openes
+        show repledgemon with moveintop
+        un "hello.. karol mijas"
+        rep "its me, repledge"
+        rep "i come from the extremely cool story map from the gmod workshop"
+        rep "i have gained consciounce and managed to materialize myself into the world of the living"
+        rep "as you are my dear creator, i am here to help you out"
+        show theend
+        show end pris
         "well this is the prison ending idk what should happen now BORIS"
 
     label end:
