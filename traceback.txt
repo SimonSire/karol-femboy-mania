@@ -1,32 +1,23 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 4373, in script
-    show screen hopitalhands
-renpy.display.screen.ScreenNotFound: Screen 'hopitalhands' is not known. Did you mean: 'hopitalhand'?
+  File "game/script.rpy", line 3382, in script
+    jump hospital##_________________________________________________TOFINISH
+renpy.script.LabelNotFound: could not find label 'hospital'. Did you mean: 'lospital'?
 
 -- Full Traceback ------------------------------------------------------------
 
 Traceback (most recent call last):
-  File "game/script.rpy", line 4373, in script
-    show screen hopitalhands
-  File "renpy/ast.py", line 2241, in execute
-    self.call("execute")
-    ~~~~~~~~~^^^^^^^^^^^
-  File "renpy/ast.py", line 2195, in call
-    return renpy.statements.call(method, parsed, *args, **kwargs)
-           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "renpy/statements.py", line 381, in call
-    return method(parsed, *args, **kwargs)
-           ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "renpy/common/000statements.rpy", line 671, in execute_show_screen
-    renpy.show_screen(name, *args, **kwargs)
-    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
-  File "renpy/display/screen.py", line 1355, in show_screen
-    raise ScreenNotFound(name[0])
-renpy.display.screen.ScreenNotFound: Screen 'hopitalhands' is not known. Did you mean: 'hopitalhand'?
+  File "game/script.rpy", line 3382, in script
+    jump hospital##_________________________________________________TOFINISH
+  File "renpy/ast.py", line 1928, in execute
+    rv = renpy.game.script.lookup(target)
+         ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "renpy/script.py", line 1201, in lookup
+    raise LabelNotFound(original)
+renpy.script.LabelNotFound: could not find label 'hospital'. Did you mean: 'lospital'?
 
-Windows-11-10.0.26200-SP0 AMD64
-Ren'Py 8.5.0.25111603
+Windows-10-10.0.19045-SP0 AMD64
+Ren'Py 8.5.2.26010301
 Karol Femboy mania v2 fuck_you
-Thu Aug 27 22:25:01 2026
+Sat Aug 29 21:27:14 2026

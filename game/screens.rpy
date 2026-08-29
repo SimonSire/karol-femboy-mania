@@ -347,13 +347,74 @@ style navigation_button_text:
 ## Used to display the main menu when Ren'Py starts.
 ##
 ## https://www.renpy.org/doc/html/screen_special.html#main-menu
+default balutes = [0,-2870]
+default karolMenuMode = 0
+default karolvoicestable = [
+    "karolTalk/karoltalkMad 1.mp3",
+    "karolTalk/karoltalkMad 2.mp3",
+    "karolTalk/karoltalkMad 3.mp3",
+    "karolTalk/karoltalkMad 4.mp3",
+    "karolTalk/karoltalkMad 5.mp3",
+    "karolTalk/karoltalk 1.mp3",
+    "karolTalk/karoltalk 2.mp3",
+    "karolTalk/karoltalk 3.mp3",
+    "karolTalk/karoltalk 4.mp3",
+    "karolTalk/karoltalk 5.mp3"
+]
+
+init python:
+    import random
+
+    class pedeter:
+        def __init__(self, **kwargs):
+            self.resetto()
+        def resetto(self, **kwargs):
+            self.dir = random.choice([-1, 1])
+            self.xpos = 640 - (random.randint(1280,1281) * self.dir)
+            if self.dir == -1:
+                self.markiplier = random.choice([2, 4])
+            else:
+                self.markiplier = random.randint(2,5)
+    def updatar():
+        global balutes
+        for i in range(2):
+            balutes[i] += 4
+            if balutes[i] >= 1920:
+                balutes[i] -= 5740
+        for man in pedetraans:
+            man.xpos += (man.markiplier * man.dir)
+            if (man.xpos * man.dir) > (640 * man.dir + 1280):
+                man.resetto()
+
+default pielaPedestrian = pedeter()
+default wiktoPedestrian = pedeter()
+default matysPedestrian = pedeter()
+default igorrPedestrian = pedeter()#{"xpos": 2000, "dir": -1, "markiplier": 2}
+default pedetraans = [pielaPedestrian,wiktoPedestrian,matysPedestrian,igorrPedestrian]
 
 screen main_menu():
-
     ## This ensures that any other menu screen is replaced.
     tag menu
 
     add gui.main_menu_background
+    fixed:
+        image "images/baluty.png" xpos balutes[0]
+        image "images/baluty.png" xpos balutes[1]
+        image "images/transpiela.png" xpos pielaPedestrian.xpos yalign 0.94 zoom 0.5
+        image "images/wiktorhobo 1.png" xpos wiktoPedestrian.xpos yalign 0.95 zoom 0.3
+        image "images/mat/mat 4.png" xpos matysPedestrian.xpos yalign 0.95 zoom 0.4
+        imagebutton:
+            xalign 0.8 yalign 0.98
+            if karolMenuMode == 0:
+                idle "images/pedestrian/pedestrian karol1.png"#im.Scale("images/pedestrian/pedestrian karol1.png", 216, 432)
+            elif karolMenuMode == 1:
+                idle "images/pedestrian/pedestrian karol2.png"
+            elif karolMenuMode == 2:
+                idle "images/pedestrian/pedestrian karol3.png"
+            else:
+                idle "images/pedestrian/pedestrian karol4.png"
+            action Play("audio", karolvoicestable[renpy.random.randint(0,9)])
+        image "images/shapeball1.png" xpos igorrPedestrian.xpos yalign 0.95 zoom 0.9
 
     ## This empty frame darkens the main menu.
     frame:
@@ -373,6 +434,8 @@ screen main_menu():
 
             text "[config.version]":
                 style "main_menu_version"
+    timer 0.03 action Function(updatar) repeat True
+    timer (30.0 / 103.0) action SetVariable("karolMenuMode",((karolMenuMode + 1) % 4)) repeat True
 
 
 style main_menu_frame is empty
@@ -391,7 +454,7 @@ style main_menu_vbox:
     xalign 1.0
     xoffset -30
     xmaximum 1200
-    yalign 1.0
+    yalign 0.1
     yoffset -30
 
 style main_menu_text:
@@ -774,14 +837,14 @@ screen preferences():
                 vbox:
 
                     if config.has_music:
-                        label _("Music Volume")
+                        label _("Music Volumas")
 
                         hbox:
                             bar value Preference("music volume")
 
                     if config.has_sound:
 
-                        label _("Sound Volume")
+                        label _("Sound Volumas")
 
                         hbox:
                             bar value Preference("sound volume")
@@ -791,10 +854,10 @@ screen preferences():
 
 
                     if config.has_voice:
-                        label _("Voice Volume")
+                        label _("Voiceees Volumas")
 
                         hbox:
-                            bar value Preference("voice volume")
+                            bar value Preference("voiceact volume")#############changed from voice
 
                             if config.sample_voice:
                                 textbutton _("Test") action Play("voice", config.sample_voice)
