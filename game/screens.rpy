@@ -372,9 +372,9 @@ init python:
             self.dir = random.choice([-1, 1])
             self.xpos = 640 - (random.randint(1280,1281) * self.dir)
             if self.dir == -1:
-                self.markiplier = random.choice([2, 4])
+                self.markiplier = random.randint(2,4)
             else:
-                self.markiplier = random.randint(2,5)
+                self.markiplier = random.choice([2,4,4,6,8])
     def updatar():
         global balutes
         for i in range(2):
@@ -389,7 +389,7 @@ init python:
 default pielaPedestrian = pedeter()
 default wiktoPedestrian = pedeter()
 default matysPedestrian = pedeter()
-default igorrPedestrian = pedeter()#{"xpos": 2000, "dir": -1, "markiplier": 2}
+default igorrPedestrian = pedeter()
 default pedetraans = [pielaPedestrian,wiktoPedestrian,matysPedestrian,igorrPedestrian]
 
 screen main_menu():
@@ -406,13 +406,13 @@ screen main_menu():
         imagebutton:
             xalign 0.8 yalign 0.98
             if karolMenuMode == 0:
-                idle "images/pedestrian/pedestrian karol1.png"#im.Scale("images/pedestrian/pedestrian karol1.png", 216, 432)
+                idle im.Scale("images/pedestrian/pedestrian karol1.png", 180, 360)
             elif karolMenuMode == 1:
-                idle "images/pedestrian/pedestrian karol2.png"
+                idle im.Scale("images/pedestrian/pedestrian karol2.png", 180, 360)
             elif karolMenuMode == 2:
-                idle "images/pedestrian/pedestrian karol3.png"
+                idle im.Scale("images/pedestrian/pedestrian karol3.png", 180, 360)
             else:
-                idle "images/pedestrian/pedestrian karol4.png"
+                idle im.Scale("images/pedestrian/pedestrian karol4.png", 180, 360)
             action Play("audio", karolvoicestable[renpy.random.randint(0,9)])
         image "images/shapeball1.png" xpos igorrPedestrian.xpos yalign 0.95 zoom 0.9
 

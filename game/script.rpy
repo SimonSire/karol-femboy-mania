@@ -1660,7 +1660,7 @@ label _END_OFORIGINAL_PART_AND_NOW_ESCAPING_BAR_________________________________
                             "FLEE":
                                 play sound cloth
                                 hide zlink 1 with dissolve
-                                play voiceact "zipps/zippy yeller.mp3"
+                                play audio "zipps/zippy yeller.mp3"
                                 narrater "You push him aside and continue running. You hear yelling."
                                 jump escape
         
@@ -1671,36 +1671,43 @@ label _END_OFORIGINAL_PART_AND_NOW_ESCAPING_BAR_________________________________
         show bfists 1 with moveinbottom
         $ renpy.pause(1.0, hard=True)
         play sound bloody
+        play voiceact "zipps/zippy UGH.mp3"
         show bfists 2
         show zlink 1 with hpunch
         show bfists 1
 
         $ renpy.pause(1.0, hard=True)
+        play voiceact "zipps/zippy AGHH.mp3"
         show bfists 2
         show zlink 2 with vpunch
         show bfists 1
 
         $ renpy.pause(0.3, hard=True)
+        play voiceact "zipps/zippy uph.mp3"
         show bfists 2
         show zlink 3 with vpunch
         show bfists 1
 
         $ renpy.pause(0.5, hard=True)
+        play voiceact "zipps/zippy OAGH.mp3"
         show bfists 2
         show zlink 4 with vpunch
         show bfists 1
 
         $ renpy.pause(1.0, hard=True)
+        play voiceact "zipps/zippy coahg.mp3"
         show bfists 2
         show zlink 5 with vpunch
         show bfists 1
 
         $ renpy.pause(1.0, hard=True)
+        play voiceact "zipps/zippy AG.mp3"
         show bfists 2
         show zlink 6 with vpunch
         show bfists 1
 
         $ renpy.pause(2.0, hard=True)
+        play voiceact "zipps/zippy over.mp3"
         play sound fall
         show zlink 7
         $ isZlinkDie = True
@@ -1970,24 +1977,36 @@ label _CASINO_ENTRY_HERE________________________________________________________
             play sound cloth
             show wiktorhobo 1 with moveinright
             $ casinoMajorHappens += 1
+            play voiceact "stalin/stalin 1.mp3"
             un "heyyy there fella"
+            play voiceact "stalin/stalin 2.mp3"
             wb "I'm just a gambler here"
+            play voiceact "stalin/stalin 3.mp3"
             wb "And this is my brother:"
             play sound cloth
             show wiktor 1 with moveinleft
-            
+            play voiceact "pomer/pomer 1.mp3"
             w "yeah yeah hows it goin im a proffessional gambler"
-            w "we wanted to ask you a favour"
+            play voiceact "pomer/pomer 2.mp3"
+            w "we need to ask you a favour"
+            play voiceact "stalin/stalin 4.mp3"
             wb "got a couple bucks to spare?"
             menu:
                 "Why":
                     k "What you need it for fellas?"
-                    w "we just need a few dollars to get some beer"
+                    play voiceact "pomer/pomer 3.mp3"
+                    w "we just need a few dollars for some beer"
+                    play voiceact "stalin/stalin 5.mp3"
                     wb "no, no."
+                    play voiceact "stalin/stalin 6.mp3"
                     wb "we are gonna multiply it and become rich"
+                    play voiceact "pomer/pomer 4.mp3"
                     w "Like i said bro, this is why you are so fucking broke, you dont know when to quit."
-                    w "let's just get some beer, okay?"
+                    play voiceact "pomer/pomer 5.mp3"
+                    w "let's just get some beer, alright?"
+                    play voiceact "stalin/stalin 7.mp3"
                     wb "ugh, fine"
+                    play voiceact "stalin/stalin 8.mp3"
                     wb "wait, you never responded to the question, will you give us a few dollars?"
                     menu:
                             "Yeah sure":
@@ -1998,6 +2017,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
                     label givingcashtofolks:
                         k "here you go folks"
                         narrater "you hand out 20 PLN to the two brothers"
+                        play voiceact "stalin/stalin 9.mp3"
                         wb "thank yuo so much bro!! much apprecciated!"
                         play sound cloth
                         hide wiktorhobo 1 with dissolve
@@ -2012,9 +2032,9 @@ label _CASINO_ENTRY_HERE________________________________________________________
                         play sound boowomp
                         show wiktor 2
                         show wiktorhobo 2
-                        
+                        play voiceact "pomer/pomer 6.mp3"
                         w "what the fuck bro"
-
+                        play voiceact "stalin/stalin 10.mp3"
                         wb "man i hate you"
                         hide wiktorhobo 1 with dissolve
                         hide wiktor 1 with dissolve
@@ -2305,22 +2325,24 @@ label _CASINO_ENTRY_HERE________________________________________________________
                                     show chief 1 with moveinbottom
                                     un "what? whats going on?"
                                     un "i saw a commotion in the cameras what is going on in my casino man"
+                                    ch "also btw i am the chief of this place"
                                     p2 "i am  a police officer."
                                     p2 "we are chasing down a suspect who killed a bartender a block away"
                                     play sound cloth
                                     show zlink right2 with moveinright
+                                    play voiceact "zipps/zippy 28.mp3"
                                     p1 "he KILLED ANOTHER ONE??"
-                                    un "killed?"
+                                    ch "killed?"
                                     play sound cloth
                                     hide chief 1 with dissolve
                                     narrater "chief guy turns around and sees bar guy on th eground"
                                     play sound appear
                                     show chief 1 with moveinbottom
-                                    un "WHAT??"
-                                    ch "also btw i am the chief of this place"
+                                    ch "WHAT??"
                                     ch "HOW COULD YOU  KILL MY BARTENDER GUY!!!"
                                     p2 "dont worry, he isnt dead"
                                     p2 "i checked on him after i tied down this bastard, he should be finee"
+                                    play voiceact "zipps/zippy 29.mp3"
                                     p1 "in any case we finally have the suspect in custody"
                                     menu:
                                         "defiance":
@@ -3355,6 +3377,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
                 play voiceact "wrench/wrench 26.mp3"
                 br "he made me win big!"
             if wiktorCasinoShingas == 1:
+                play voiceact "stalin/stalin 11.mp3"
                 wb "he spared us some money!"
             if sexyguyCasinoShingas == 11:
                 sx "We had a DELIGHTFULL time"
@@ -3371,6 +3394,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
             if pielaCasinoShingas == 2:
                 pl "this guys garbage you know, garbage"
             if wiktorCasinoShingas == 2:
+                play voiceact "stalin/stalin 12.mp3"
                 wb "he couldnt spare us a single penny!"
             if barguybadshinger == 3:
                 b2 "HE FUCKING KILLED MY BROTHER"
@@ -3633,6 +3657,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
         scene black
         stop music
         narrater "the officers take you away to their car"
+        play voiceact "zipps/zippy 30.mp3"
         p1 "you bastard, its so over for you"
         #narrater "the police officers put you in their car"
 
@@ -4402,6 +4427,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
                         show teeguy left:
                             ease 0.5 xpos 1000
                         show zlink right with moveinright
+                        play voiceact "zipps/zippy CANIDOIT.mp3"
                         p1 "CAN I DO IT????"
                         t "SHUT UP! i'm gonna be th one who kills kills him"
                         k "arent you supposed to be my lawyer!??"
@@ -4555,6 +4581,11 @@ label _CASINO_LEAVING_HERE______________________________________________________
         else:
             "oh no u got sent to prisonas"
             k "ash shit"
+        $ renpy.pause(1.0,hard=True)
+        k "shiit i guess im gonna"
+        extend " spend here a while"
+        k "huh"
+        $ renpy.pause(3.0,hard=True)
         play audio openes
         show repledgemon with moveintop
         un "hello.. karol mijas"
