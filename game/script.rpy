@@ -150,20 +150,18 @@ default doShapesMatch = False
 default randomAssShit = 0 #when used value only from 1 to 100
 
 #fnaf shit here
+define preset1 = [3,4,4,5,5,6,0]
+define preset2 = [2,2,3,4,4,5,0]
+default drywall = guyThing(id=1,preset=preset1,loc=1)
+default matysiak = guyThing(id=2,preset=preset2)
+default barguytwin = guyThing(id=3,preset=preset2)
+default zippsguy = guyThing(id=4,preset=preset2,real=False)
+default pickleguy = guyThing(id=5,preset=preset2,real=False)
+default theGuys = [drywall,matysiak,barguytwin,zippsguy,pickleguy]
+
 default starttime = 0
 default lastCheckUpdate = 0
 default audioCooldownStart = 0
-
-default drywallLocation = 1
-default dryPrevLocation = 1
-default drywallRandom = 0
-default timeDryMoved = 0
-
-default matysiakLocation = 0
-default matPrevLocation = 0
-default matysiakRandom = 0
-default timeMatMoved = 0
-
 default camarasJustChanged = False
 default cameraSelect = 5
 default flashBright = False
@@ -172,10 +170,10 @@ default actionDoorLeft = 0
 default actionDoorTop = 0
 default actionDoorRight = 0
 default flashBattery = 0
-default drywallAttack = 0
-default matysiakAttack = 0
-default drywallPissOff = 0
-default matysiakPissOff = 0
+default barguyactive = True
+default orderlist = []
+default orderdones = 0
+default melonbeingtouched = False
 
 default debugMode = False
 default karolTalkingShit = True
@@ -187,6 +185,7 @@ define interval = 0.1
 define rolltime = 1
 define rollwheelradius = 500
 #define slotsnumber = 6 no clue
+default modeR = 0
 default gamble1didwin = False
 default gambelrow = 0
 default gambelState = 0 
@@ -195,26 +194,26 @@ init python: #PYTHON FUNCTIONS AND THINGIESS
     import random
     import math
     casinoRoomsTable = [
-        [0,0,0,0,0,0,0,0],                  #room0 toilet stuck
-        [2,2,3,3,3,3,3,3],                  #room1
+        [0],                  #room0 toilet stuck
+        [2,3,3,3],                  #room1
         [3,5,5,5,5,5,6,6],                  #room2
         [1,2,4,4,4,5,5,5],                  #room3
         [3,5,5,5,7,7,7,7],                  #room4
         [2,3,4,4,6,6,8,8],                  #room5
         [2,5,5,10,10,10,10,10],             #room6
-        [4,4,9,9,9,9,9,9],                  #room7
+        [4,9,9,9],                  #room7
         [5,12,12,12,12,12,12,12],           #room8
         [7,11,11,11,11,11,11,11],           #room9
         [6,13,13,13,13,13,13,13],           #room10
-        [11,11,11,11,11,11,11,11],          #room11 left office door
-        [12,12,12,12,12,12,12,12],          #room12 hole in the office ceiling
-        [13,13,13,13,13,13,13,13]           #room13 right office door
+        [11],          #room11 left office door
+        [12],          #room12 hole in the office ceiling
+        [13]           #room13 right office door
     ]
     casinoAudioCueTable = [
-        [0,0,0,0],
-        [2,2,3,3],          #room1
-        [2,2,3,3],          #room2
-        [2,2,3,3],          #room3
+        [0],
+        [2,3],          #room1
+        [2,3],          #room2
+        [2,3],          #room3
         [2,3,3,5],          #room4
         [2,3,3,5],          #room5
         [2,2,3,5],          #room6
@@ -222,9 +221,25 @@ init python: #PYTHON FUNCTIONS AND THINGIESS
         [2,3,5,5],          #room8
         [3,4,4,7],          #room9
         [5,6,6,6],          #room10
-        [11,11,11,11],
-        [12,12,12,12],
-        [13,13,13,13]
+        [11],
+        [12],
+        [13]
+    ]
+    onemoretable = [
+        [0],
+        [2,3,3],
+        [3,5,5],
+        [4,5,5],
+        [5,7,7],
+        [4,4,6,8],
+        [5,10],
+        [4,7,7,9],
+        [5,12],
+        [7,11],
+        [6,13],
+        [11],
+        [12],
+        [13]
     ]
     slotstable = [
         Image("gambel0.png"),
@@ -243,7 +258,8 @@ init python: #PYTHON FUNCTIONS AND THINGIESS
         "karolcue4.mp3",
         "karolcue5.mp3"
     ]
-
+    def ender():#iloverenpy
+        return True
 
     def drag_placed(drags, drop):
         global shapeDraggable, shapeDroppable, doShapesMatch, sexyguyWrongHoles, sexyguyCorrectas
@@ -270,50 +286,69 @@ init python: #PYTHON FUNCTIONS AND THINGIESS
             for r in range(7)
         ]
     
+    def meloner(shitfuck1,cockhole):#FUCK this shit theres no other workaround
+        global melonbeingtouched
+        melonbeingtouched = not melonbeingtouched
+        return
+
+    def melonset(shitfuck1):
+        global melonbeingtouched
+        melonbeingtouched = True
+    def melonrst(shitfuck1,cockhole):
+        global melonbeingtouched
+        melonbeingtouched = False
+        print(cockhole)
+        print(shitfuck1[0])
+        if cockhole == None:
+            #shitfuck1[0].x = 1200
+            #shitfuck1[0].y = 560
+            shitfuck1[0].snap(1200,560)
+    
+
+    class guyThing:
+        def __init__(self,id=0,preset=[],loc=0,real=True):
+            print("CALLEDyes")
+            self.valuePreset = preset
+            self.location = loc
+            self.isreal = real
+            self.prevLocation = 0
+            self.random = False
+            self.lastMove = 0.0
+            self.attack = 0.0
+            self.pissOff = 0
+        def value(self):
+            return self.valuePreset[int((renpy.get_game_runtime() - starttime)/60)]
+    
     def makeMenMove():
-        global randomAssShit, lastCheckUpdate, starttime, drywallRandom, matysiakRandom, drywallLocation, matysiakLocation, dryPrevLocation, matPrevLocation, timeDryMoved, timeMatMoved, drywallAttack, matysiakAttack
+        global randomAssShit, lastCheckUpdate, starttime, theGuys
         
         randomAssShit = renpy.random.randint(1,100)
         
         if (lastCheckUpdate + 1) < renpy.get_game_runtime():
             lastCheckUpdate = renpy.get_game_runtime()
 
-            if (renpy.get_game_runtime() - starttime) < 60:
-                drywallRandom = renpy.random.randint(0, 7)
-                matysiakRandom = renpy.random.randint(0, 11)
+            for man in theGuys:
+                man.random = (renpy.random.randint(1, 24) <= man.value())
+                if man.random == 1 and (man.lastMove + 4) < renpy.get_game_runtime():
+                    man.prevLocation = man.location
+                    man.lastMove = renpy.get_game_runtime()
+                    if (man.id == 3)
+                        man.location = onemoretable[man.location][renpy.random.randint(0,-1+len(onemoretable[man.location]))]
+                    else:    
+                        man.location = casinoRoomsTable[man.location][renpy.random.randint(0,-1+len(casinoRoomsTable[man.location]))]
 
-            elif (renpy.get_game_runtime() - starttime) > 180:
-                drywallRandom = renpy.random.randint(0, 3)
-                matysiakRandom = renpy.random.randint(0, 5)
-            else:
-                drywallRandom = renpy.random.randint(0, 5)
-                matysiakRandom = renpy.random.randint(0, 7)
-
-            if drywallRandom == 0 and (timeDryMoved + 4) < renpy.get_game_runtime():
-                dryPrevLocation = drywallLocation
-                timeDryMoved = renpy.get_game_runtime()
-                drywallLocation = casinoRoomsTable[drywallLocation][renpy.random.randint(0,7)]
-
-            if matysiakRandom == 0 and (timeMatMoved + 4) < renpy.get_game_runtime():
-                matPrevLocation = matysiakLocation
-                timeMatMoved = renpy.get_game_runtime()
-                matysiakLocation = casinoRoomsTable[matysiakLocation][renpy.random.randint(0,7)]
-
-            if drywallLocation > 10 and drywallAttack == 0:
-                drywallAttack = renpy.get_game_runtime() + 5 + renpy.random.randint(0,5)
-
-            if matysiakLocation > 10 and matysiakAttack == 0:
-                matysiakAttack = renpy.get_game_runtime() + 5 + renpy.random.randint(0,5)
-
+                    if man.location > 10 and man.attack == 0:
+                        man.attack = renpy.get_game_runtime() + 5 #+ renpy.random.randint(0,5)
+                    
+                    if man.isreal and (man.attack < renpy.get_game_runtime()) and (man.location > 10):
+                        return True
 
     def menGoToSound():
-        global drywallLocation, matysiakLocation, timeDryMoved, timeMatMoved
-        if renpy.random.randint(0, 2) < 2:
-            timeDryMoved = renpy.get_game_runtime()
-            drywallLocation = casinoAudioCueTable[drywallLocation][renpy.random.randint(0,3)]
-        if renpy.random.randint(0, 2) < 2:
-            timeMatMoved = renpy.get_game_runtime()
-            matysiakLocation = casinoAudioCueTable[matysiakLocation][renpy.random.randint(0,3)]
+        global theGuys
+        for man in theGuys:
+            if renpy.random.randint(0, 2) < 2:
+                man.lastMove = renpy.get_game_runtime()
+                man.location = casinoAudioCueTable[man.location][renpy.random.randint(0,-1+len(casinoAudioCueTable[man.location]))]
     
     class particielThing(renpy.Displayable):
         def __init__(self, **kwargs):
@@ -409,41 +444,65 @@ screen show_time:
 
     if (audioCooldownStart + 20) > renpy.get_game_runtime():
         text "{color=#ffffff}Cooldown = [int(audioCooldownStart + 20 - renpy.get_game_runtime())]{/color}" xalign 0.9 yalign 0.22
-
-    key "x" action [Show("DEBUGmode"), SetVariable("debugMode", True)]
-    key "c" action [Hide("DEBUGmode"), SetVariable("debugMode", False)]
+    
+    if (modeR == 0 or modeR == 1):
+        key "x" action [SetVariable("modeR", modeR+1)]
+    else:
+        key "x" action [SetVariable("modeR", 0), Hide("DEBUGmode"), SetVariable("debugMode", False)]
+    if (modeR == 2):
+        key "c" action [SetVariable("modeR", modeR+1)]
+    elif (modeR == 3):
+        key "c" action [SetVariable("modeR", modeR+1), Show("DEBUGmode"), SetVariable("debugMode", True)]
+    else:
+        key "c" action [SetVariable("modeR", 0), Hide("DEBUGmode"), SetVariable("debugMode", False)]
     timer 0.1 action Function(makeMenMove) repeat True
-    if drywallLocation == 9 and dryPrevLocation == 7:
-        timer 0.001 action [SetVariable("dryPrevLocation",9)]
+    key "z" action Function(ender)
+    #key "t" action Function(makeMenMove)
+    if drywall.location == 9 and drywall.prevLocation == 7:
+        timer 0.001 action [SetVariable("drywall.prevLocation",9)]
         if renpy.random.randint(0,9) < 6:
             timer 0.001 action Play("audio","stepsleft.mp3")
-    #if drywallLocation == 8 and dryPrevLocation == 5:
-    #    timer 0.001 action [SetVariable("dryPrevLocation",8),Play("audio","ventcrawl.mp3")]#change sound
-    if drywallLocation == 12 and dryPrevLocation == 8:
-        timer 0.001 action [SetVariable("dryPrevLocation",12)]
+    if drywall.location == 12 and drywall.prevLocation == 8:
+        timer 0.001 action [SetVariable("drywall.prevLocation",12)]
         if renpy.random.randint(0,9) < 6:
             timer 0.001 action Play("audio","ventcrawl.mp3")
-    if drywallLocation == 10 and dryPrevLocation == 6:
-        timer 0.001 action [SetVariable("dryPrevLocation",10)]
+    if drywall.location == 10 and drywall.prevLocation == 6:
+        timer 0.001 action [SetVariable("drywall.prevLocation",10)]
         if renpy.random.randint(0,9) < 6:
             timer 0.001 action Play("audio","stepsright.mp3")
-    if matysiakLocation == 9 and matPrevLocation == 7:
-        timer 0.001 action [SetVariable("matPrevLocation",9)]
+    if matysiak.location == 9 and matysiak.prevLocation == 7:
+        timer 0.001 action [SetVariable("matysiak.prevLocation",9)]
         if renpy.random.randint(0,9) < 6:
             timer 0.001 action Play("audio","stepsfartleft.mp3")
-    #if matysiakLocation == 8 and matPrevLocation == 5:
-    #    timer 0.001 action [SetVariable("matPrevLocation",8),Play("audio","ventfartcrawl.mp3")]#change sound
-    if matysiakLocation == 12 and matPrevLocation == 8:
-        timer 0.001 action [SetVariable("matPrevLocation",12)]
+    if matysiak.location == 12 and matysiak.prevLocation == 8:
+        timer 0.001 action [SetVariable("matysiak.prevLocation",12)]
         if renpy.random.randint(0,9) < 6:
             timer 0.001 action Play("audio","ventfartcrawl.mp3")
-    if matysiakLocation == 10 and matPrevLocation == 6:
-        timer 0.001 action [SetVariable("matPrevLocation",10)]
+    if matysiak.location == 10 and matysiak.prevLocation == 6:
+        timer 0.001 action [SetVariable("matysiak.prevLocation",10)]
         if renpy.random.randint(0,9) < 6:
             timer 0.001 action Play("audio","stepsfartright.mp3")
 
 screen door_buttons:
     zorder 128
+    draggroup:
+        drag:
+            xpos 1200 ypos 560
+            drag_name "whath"
+            draggable True
+            droppable False
+            dragging melonset
+            dragged melonrst
+            if melonbeingtouched:
+                child "shapeball1.png"
+            else:
+                child "placeholdergoop.png"
+        drag:
+            xpos 1600 ypos 260
+            drag_name "zipp"
+            draggable False
+            droppable True
+            child "placeholdergoop.png"
     imagebutton:
         xalign 0.2 yalign 0.5
         idle "UI/buttoleft.png"
@@ -551,21 +610,16 @@ screen flashleft:
             image "flashleftbright"
         else:
             image "flashleft"
-        if drywallLocation == 11:
+        if drywall.location == 11:
             if flashBright:
                 image "drydoorleftbright"
             else:
                 image "drydoorleft"
-        if matysiakLocation == 11:
+        if matysiak.location == 11:
             if flashBright:
                 image "matdoorleftbright"
             else:
                 image "matdoorleft"
-    #if flashBright and (hoverTime + 2 < renpy.get_game_runtime()) and (actionDoorLeft == 0) and (drywallLocation == 11 or matysiakLocation == 11):
-    #    if drywallLocation == 11:
-    #        timer 0.001 action [SetVariable("actionDoorLeft", renpy.get_game_runtime()), SetVariable("drywallAttack",0), SetVariable("drywallLocation",renpy.random.randint(2, 5)), Play("audio", "hl2scream.mp3")]
-    #    else:
-    #        timer 0.001 action [SetVariable("actionDoorLeft", renpy.get_game_runtime()), SetVariable("matysiakAttack",0), SetVariable("matysiakLocation",renpy.random.randint(2, 5)), Play("audio", "hl2scream.mp3")]
 
     if flashBright:
         timer 0.1 action [SetVariable("flashBattery", flashBattery - 0.3)] repeat True
@@ -573,16 +627,12 @@ screen flashleft:
         timer 0.1 action [SetVariable("flashBattery", flashBattery - 0.03)] repeat True
     if flashBattery < 0:
         timer 0.001 action [Hide("flashleft"), SetVariable("hoverTime",0)]
-    if flashBright and (drywallLocation == 11):
-        if (actionDoorLeft == 0) and (drywallPissOff >= 100):
-            timer 0.001 action [SetVariable("drywallAttack",0), SetVariable("drywallLocation",renpy.random.randint(2, 5)), SetVariable("drywallPissOff",0), SetVariable("actionDoorLeft", renpy.get_game_runtime()), Play("audio", "hl2scream.mp3")]
-        else:
-            timer 0.02 action [SetVariable("drywallPissOff", drywallPissOff + 1)] repeat True
-    if flashBright and (matysiakLocation == 11):
-        if (actionDoorLeft == 0) and (matysiakPissOff >= 100):
-            timer 0.001 action [SetVariable("matysiakAttack",0), SetVariable("matysiakLocation",renpy.random.randint(2, 5)), SetVariable("matysiakPissOff",0), SetVariable("actionDoorLeft", renpy.get_game_runtime()), Play("audio", "hl2scream.mp3")]
-        else:
-            timer 0.02 action [SetVariable("matysiakPissOff", matysiakPissOff + 1)] repeat True
+    for i in theGuys:
+        if flashBright and (i.location == 11):
+            if (actionDoorLeft == 0) and (i.pissOff >= 100):
+                timer 0.001 action [SetField(i,"attack",0), SetField(i,"location",renpy.random.randint(2,5)), SetField(i,"pissOff",0), SetVariable("actionDoorLeft", renpy.get_game_runtime()), Play("audio", "hl2scream.mp3")]
+            else:
+                timer 0.02 action [SetField(i,"pissOff", i.pissOff + 1)] repeat True
 
 screen flashtop:
     fixed:
@@ -590,12 +640,12 @@ screen flashtop:
             image "flashtopbright"
         else:
             image "flashtop"
-        if drywallLocation == 12:
+        if drywall.location == 12:
             if flashBright:
                 image "drydoortopbright"
             else:
                 image "drydoortop"
-        if matysiakLocation == 12:
+        if matysiak.location == 12:
             if flashBright:
                 image "matdoortopbright"
             else:
@@ -606,28 +656,25 @@ screen flashtop:
         timer 0.1 action [SetVariable("flashBattery", flashBattery - 0.03)] repeat True
     if flashBattery < 0:
         timer 0.001 action [Hide("flashtop"), SetVariable("hoverTime",0)]
-    if flashBright and (drywallLocation == 12):
-        if (actionDoorTop == 0) and (drywallPissOff >= 100):
-            timer 0.001 action [SetVariable("drywallAttack",0), SetVariable("drywallLocation",renpy.random.randint(2, 5)), SetVariable("drywallPissOff",0), SetVariable("actionDoorTop", renpy.get_game_runtime()), Play("audio", "hl2scream.mp3")]
-        else:
-            timer 0.02 action [SetVariable("drywallPissOff", drywallPissOff + 1)] repeat True
-    if flashBright and (matysiakLocation == 12):
-        if (actionDoorTop == 0) and (matysiakPissOff >= 100):
-            timer 0.001 action [SetVariable("matysiakAttack",0), SetVariable("matysiakLocation",renpy.random.randint(2, 5)), SetVariable("matysiakPissOff",0), SetVariable("actionDoorTop", renpy.get_game_runtime()), Play("audio", "hl2scream.mp3")]
-        else:
-            timer 0.02 action [SetVariable("matysiakPissOff", matysiakPissOff + 1)] repeat True
+    for i in theGuys:
+        if flashBright and (i.location == 12):
+            if (actionDoorTop == 0) and (i.pissOff >= 100):
+                timer 0.001 action [SetField(i,"attack",0), SetField(i,"location",renpy.random.randint(2,5)), SetField(i,"pissOff",0), SetVariable("actionDoorTop", renpy.get_game_runtime()), Play("audio", "hl2scream.mp3")]
+            else:
+                timer 0.02 action [SetField(i,"pissOff", i.pissOff + 1)] repeat True
+
 screen flashright:
     fixed:
         if flashBright:
             image "flashrightbright"
         else:
             image "flashright"
-        if drywallLocation == 13:
+        if drywall.location == 13:
             if flashBright:
                 image "drydoorrightbright"
             else:
                 image "drydoorright"
-        if matysiakLocation == 13:
+        if matysiak.location == 13:
             if flashBright:
                 image "matdoorrightbright"
             else:
@@ -638,16 +685,12 @@ screen flashright:
         timer 0.1 action [SetVariable("flashBattery", flashBattery - 0.03)] repeat True
     if flashBattery < 0:
         timer 0.001 action [Hide("flashright"), SetVariable("hoverTime",0)]
-    if flashBright and (drywallLocation == 13):
-        if (actionDoorRight == 0) and (drywallPissOff >= 100):
-            timer 0.001 action [SetVariable("drywallAttack",0), SetVariable("drywallLocation",renpy.random.randint(2, 5)), SetVariable("drywallPissOff",0), SetVariable("actionDoorRight", renpy.get_game_runtime()), Play("audio", "hl2scream.mp3")]
-        else:
-            timer 0.02 action [SetVariable("drywallPissOff", drywallPissOff + 1)] repeat True
-    if flashBright and (matysiakLocation == 13):
-        if (actionDoorRight == 0) and (matysiakPissOff >= 100):
-            timer 0.001 action [SetVariable("matysiakAttack",0), SetVariable("matysiakLocation",renpy.random.randint(2, 5)), SetVariable("matysiakPissOff",0), SetVariable("actionDoorRight", renpy.get_game_runtime()), Play("audio", "hl2scream.mp3")]
-        else:
-            timer 0.02 action [SetVariable("matysiakPissOff", matysiakPissOff + 1)] repeat True
+    for i in theGuys:
+        if flashBright and (i.location == 13):
+            if (actionDoorRight == 0) and (i.pissOff >= 100):
+                timer 0.001 action [SetField(i,"attack",0), SetField(i,"location",renpy.random.randint(2,5)), SetField(i,"pissOff",0), SetVariable("actionDoorRight", renpy.get_game_runtime()), Play("audio", "hl2scream.mp3")]
+            else:
+                timer 0.02 action [SetField(i,"pissOff", i.pissOff + 1)] repeat True
 
 screen cameraview:
     timer 0.1 action [SetVariable("flashBattery", flashBattery - 0.015)] repeat True
@@ -659,72 +702,83 @@ screen cameraview:
                 image "cam cas1alt"
             else:
                 image "cam cas1"
-            if drywallLocation == 1:
+            if drywall.location == 1:
                 image "cam dry1"
-            if matysiakLocation == 1:
+            if matysiak.location == 1:
                 image "cam mat1"
     if cameraSelect == 2:
         fixed:
             image "cam cas2"
-            if drywallLocation == 2:
+            if drywall.location == 2:
                 image "cam dry2"
-            if matysiakLocation == 2:
+            if matysiak.location == 2:
                 image "cam mat1" xpos 570 ypos 70
     if cameraSelect == 3:
         fixed:
             image "cam cas3"
-            if drywallLocation == 3:
+            if drywall.location == 3:
                 image "cam dry3"
-            if matysiakLocation == 3:
+            if matysiak.location == 3:
                 image "cam mat3"
     if cameraSelect == 4:
         fixed:
             image "cam cas4"
-            if drywallLocation == 4:
+            if drywall.location == 4:
                 image "cam dry1"
-            if matysiakLocation == 4:
+            if matysiak.location == 4:
                 image "cam mat4"
     if cameraSelect == 5:
         fixed:
             image "cam cas5"
-            if drywallLocation == 5:
+            if drywall.location == 5:
                 image "cam dry1" xpos -200
-            if matysiakLocation == 5:
+            if matysiak.location == 5:
                 image "cam mat1" xpos -250 ypos 150
     if cameraSelect == 6:
         fixed:
             image "cam cas6"
-            if drywallLocation == 6:
+            if drywall.location == 6:
                 image "cam dry1"
-            if matysiakLocation == 6:
+            if matysiak.location == 6:
                 image "cam mat6"
     if cameraSelect == 7:
         fixed:
             image "cam cas7"
-            if drywallLocation == 7:
+            if drywall.location == 7:
                 image "cam dry1"
-            if matysiakLocation == 7:
+            if matysiak.location == 7:
                 image "cam mat4"
+            if barguyactive:
+                imagebutton:
+                    xalign 0.4 yalign 0.15
+                    idle "UI/camerabutton.png"
+                    if (len(orderlist) - orderdones < 3):
+                        action [Function(orderlist.append, renpy.random.randint(0,2))]
+            vbox:
+                xalign 0.6 ypos 200
+                for i in range(len(orderlist) - orderdones):
+                    add "UI/camerabutton.png"
+
     if cameraSelect == 8:
         fixed:
             image "cam cas8"
-            if drywallLocation == 8:
+            if drywall.location == 8:
                 image "cam dry1"
-            if matysiakLocation == 8:
+            if matysiak.location == 8:
                 image "cam mat1" xalign 0.8
     if cameraSelect == 9:
         fixed:
             image "cam cas9"
-            if drywallLocation == 9:
+            if drywall.location == 9:
                 image "cam dry1"
-            if matysiakLocation == 9:
+            if matysiak.location == 9:
                 image "cam mat7"
     if cameraSelect == 10:
         fixed:
             image "cam cas10"
-            if drywallLocation == 10:
+            if drywall.location == 10:
                 image "cam dry1"
-            if matysiakLocation == 10:
+            if matysiak.location == 10:
                 image "cam mat7"
 
     fixed:
@@ -802,13 +856,13 @@ screen cameraview:
 
 screen DEBUGmode:
     zorder 224
-    text "{color=#ffffff}rywall [int(drywallAttack)]{/color}" xalign 0.1 yalign 0.05
-    text "{color=#ffffff}atysiak [int(matysiakAttack)]{/color}" xalign 0.1 yalign 0.1
-    text "{color=#ffffff}DEBUG dry in room [drywallLocation] [dryPrevLocation]{/color}" xalign 0.1 yalign 0.15
-    text "{color=#ffffff}DEBUG mat in room [matysiakLocation] [matPrevLocation]{/color}" xalign 0.1 yalign 0.2
+    text "{color=#ffffff}rywall [int(drywall.attack)]{/color}" xalign 0.1 yalign 0.05
+    text "{color=#ffffff}prest [drywall.value()] [melonbeingtouched]{/color}" xalign 0.1 yalign 0.1
+    text "{color=#ffffff}curr [drywall.location] [matysiak.location] [barguytwin.location] [zippsguy.location] [pickleguy.location]{/color}" xalign 0.1 yalign 0.15
+    text "{color=#ffffff}prev [drywall.prevLocation] [matysiak.prevLocation] [barguytwin.prevLocation] [zippsguy.prevLocation] [pickleguy.prevLocation]{/color}" xalign 0.1 yalign 0.2
     text "{color=#ffffff}bater [int(flashBattery)]{/color}" xalign 0.1 yalign 0.25
     text "{color=#ffffff}randomshit [randomAssShit]{/color}" xalign 0.1 yalign 0.3
-    text "{color=#ffffff}drypissoff [drywallPissOff]" xalign 0.1 yalign 0.35
+    text "{color=#ffffff}drypissoff [drywall.pissOff]" xalign 0.1 yalign 0.35
 
     hbox:
         xalign 0.95
@@ -823,90 +877,16 @@ screen DEBUGmode:
             hover "UI/camerabuttonhover.png"
             action [SetVariable("starttime",starttime - 10)]
 
-    grid 4 5:
-        xalign 0.05
-        yalign 0.5
-        spacing 20
-        imagebutton:
-            idle "UI/camerabutton.png"
-            hover "UI/camerabuttonhover.png"
-            action [SetVariable("drywallLocation",1)]
-        imagebutton:
-            idle "UI/camerabutton.png"
-            hover "UI/camerabuttonhover.png"
-            action [SetVariable("drywallLocation",2)]
-        imagebutton:
-            idle "UI/camerabutton.png"
-            hover "UI/camerabuttonhover.png"
-            action [SetVariable("matysiakLocation",1)]
-        imagebutton:
-            idle "UI/camerabutton.png"
-            hover "UI/camerabuttonhover.png"
-            action [SetVariable("matysiakLocation",2)]
-        imagebutton:
-            idle "UI/camerabutton.png"
-            hover "UI/camerabuttonhover.png"
-            action [SetVariable("drywallLocation",3)]
-        imagebutton:
-            idle "UI/camerabutton.png"
-            hover "UI/camerabuttonhover.png"
-            action [SetVariable("drywallLocation",4)]
-        imagebutton:
-            idle "UI/camerabutton.png"
-            hover "UI/camerabuttonhover.png"
-            action [SetVariable("matysiakLocation",3)]
-        imagebutton:
-            idle "UI/camerabutton.png"
-            hover "UI/camerabuttonhover.png"
-            action [SetVariable("matysiakLocation",4)]
-        imagebutton:
-            idle "UI/camerabutton.png"
-            hover "UI/camerabuttonhover.png"
-            action [SetVariable("drywallLocation",5)]
-        imagebutton:
-            idle "UI/camerabutton.png"
-            hover "UI/camerabuttonhover.png"
-            action [SetVariable("drywallLocation",6)]
-        imagebutton:
-            idle "UI/camerabutton.png"
-            hover "UI/camerabuttonhover.png"
-            action [SetVariable("matysiakLocation",5)]
-        imagebutton:
-            idle "UI/camerabutton.png"
-            hover "UI/camerabuttonhover.png"
-            action [SetVariable("matysiakLocation",6)]
-        imagebutton:
-            idle "UI/camerabutton.png"
-            hover "UI/camerabuttonhover.png"
-            action [SetVariable("drywallLocation",7)]
-        imagebutton:
-            idle "UI/camerabutton.png"
-            hover "UI/camerabuttonhover.png"
-            action [SetVariable("drywallLocation",8)]
-        imagebutton:
-            idle "UI/camerabutton.png"
-            hover "UI/camerabuttonhover.png"
-            action [SetVariable("matysiakLocation",7)]
-        imagebutton:
-            idle "UI/camerabutton.png"
-            hover "UI/camerabuttonhover.png"
-            action [SetVariable("matysiakLocation",8)]
-        imagebutton:
-            idle "UI/camerabutton.png"
-            hover "UI/camerabuttonhover.png"
-            action [SetVariable("drywallLocation",9)]
-        imagebutton:
-            idle "UI/camerabutton.png"
-            hover "UI/camerabuttonhover.png"
-            action [SetVariable("drywallLocation",10)]
-        imagebutton:
-            idle "UI/camerabutton.png"
-            hover "UI/camerabuttonhover.png"
-            action [SetVariable("matysiakLocation",9)]
-        imagebutton:
-            idle "UI/camerabutton.png"
-            hover "UI/camerabuttonhover.png"
-            action [SetVariable("matysiakLocation",10)]
+    hbox:
+        xpos 10 ypos 390 spacing 20
+        for i in theGuys:
+            vbox:
+                spacing 0
+                for r in range(11):
+                    imagebutton:
+                        idle "UI/camerabutton.png"
+                        hover "UI/camerabuttonhover.png"
+                        action SetField(i, "location", r)
 
 #sexy guy \/\/\/
 screen holesfit1:
@@ -1056,7 +1036,8 @@ label _1ST_SECTION_ORIGINAL_GAME_HERE___________________________________________
             hide transpiela
         play voiceact dad1
         un "Come out here, son."
-
+        $ print(drywall.value())
+        $ print(matysiak.value())
         play sound door
 
         show livinroom
@@ -1522,7 +1503,9 @@ label _END_OFORIGINAL_PART_AND_NOW_ESCAPING_BAR_________________________________
                                 k "actually.."
                                 k "yeah.."
                                 extend "i would do this sort of thing"
+                                play voiceact "drywall/dry 11.mp3"
                                 p2 "you got like a.. screw loose or something?"
+                                play voiceact "drywall/dry 12.mp3"
                                 p2 "anyway.."
                             "Okay fine i did this, me":
                                 $ karolTalkingMad = False
@@ -1888,8 +1871,8 @@ label _CASINO_ENTRY_HERE________________________________________________________
 
     label bathdisc:
         $ isMatysiakAnger = True
-        $ matysiakLocation = 1
-        $ matPrevLocation = 1
+        $ matysiak.location = 1
+        $ matysiak.prevLocation = 1
         show mat 1 with dissolve
         un "you bastard"
         show mat 4
@@ -2318,15 +2301,20 @@ label _CASINO_ENTRY_HERE________________________________________________________
                                     $ karolTalkingMad = False
                                     play sound cloth
                                     show dryleft with moveinleft
+                                    play voiceact "drywall/dry 25.mp3"
                                     p2 "heh heh heh"
+                                    play voiceact "drywall/dry 26.mp3"
                                     p2 "we got you now you sick bastard"
+                                    play voiceact "drywall/dry 27.mp3"
                                     p2 "what's with you and bartenders?"
                                     play sound appear
                                     show chief 1 with moveinbottom
                                     un "what? whats going on?"
                                     un "i saw a commotion in the cameras what is going on in my casino man"
                                     ch "also btw i am the chief of this place"
+                                    play voiceact "drywall/dry 28.mp3"
                                     p2 "i am  a police officer."
+                                    play voiceact "drywall/dry 29.mp3"
                                     p2 "we are chasing down a suspect who killed a bartender a block away"
                                     play sound cloth
                                     show zlink right2 with moveinright
@@ -2340,7 +2328,9 @@ label _CASINO_ENTRY_HERE________________________________________________________
                                     show chief 1 with moveinbottom
                                     ch "WHAT??"
                                     ch "HOW COULD YOU  KILL MY BARTENDER GUY!!!"
+                                    play voiceact "drywall/dry 30.mp3"
                                     p2 "dont worry, he isnt dead"
+                                    play voiceact "drywall/dry 32.mp3"
                                     p2 "i checked on him after i tied down this bastard, he should be finee"
                                     play voiceact "zipps/zippy 29.mp3"
                                     p1 "in any case we finally have the suspect in custody"
@@ -2355,6 +2345,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
                                             $ karolTalkingMad = True
                                             k "HAVE YOU???"
                                             $ karolTalkingMad = False
+                                            play voiceact "drywall/dry ehh.mp3"
                                             p2 "ehh"
                                             ch "shut up yellow cunt, officers please take him away from the premises"
                                             menu:
@@ -3001,15 +2992,18 @@ label _CASINO_ENTRY_HERE________________________________________________________
             ch "the man may be under the influence of drugs as well, please get over here as quickly as-"
             play audio appear
             show dryleft with moveinleft
+            play voiceact "drywall/dry well.mp3"
             p2 "well, well, well"
             k "FUKCKKKCK"
             hide chiefcellphone with moveoutbottom
             ch "what the fuck? i just called you guys how did you get here so fast????"
+            play voiceact "drywall/dry 32.mp3"
             p2 "huh? what are you talking about, we are just looking for this man right here"
             ch "oh really?"
             ch "sir look, he tried to cheat with the machines!!!!11"
             k "no i FUCKING DIDNDNTDT-{nw=0}"
             $ karolTalkingMad = False
+            play voiceact "drywall/dry 33.mp3"
             p2 "is that so? lemme write that down, yup"
             p2 "Either way, you're coming with me pal"
             jump policecar
@@ -3503,22 +3497,18 @@ label _CASINO_ENTRY_HERE________________________________________________________
             $ renpy.block_rollback()
             window hide
             show screen door_buttons
-            show screen show_time
+            #show screen show_time
             $ flashBattery = 100
             $ starttime = renpy.get_game_runtime()
             $ lastCheckUpdate = renpy.get_game_runtime()
-            label loop:
-                $ renpy.pause(0.2)
-                if (renpy.get_game_runtime() - starttime) > 360:
-                    jump casinoescape
-                if (drywallAttack < renpy.get_game_runtime()) and (drywallAttack + 2 > renpy.get_game_runtime()) and drywallLocation > 10: # and not debugMode:
-                    jump casinodrywallgotyou
-                if (matysiakAttack < renpy.get_game_runtime()) and (matysiakAttack + 2 > renpy.get_game_runtime()) and matysiakLocation > 10: # and not debugMode:
-                    jump casinomatysiakgotyou
-                jump loop
-
-        #$ _skipping = False
-        
+            call screen show_time
+            if (renpy.get_game_runtime() - starttime) > 360:
+                jump casinoescape
+            if (drywall.attack < renpy.get_game_runtime() and drywall.attack != 0):# and (drywall.attack + 2 > renpy.get_game_runtime()) and drywall.location > 10: # and not debugMode:
+                jump casinodrywallgotyou
+            if (matysiak.attack < renpy.get_game_runtime() and matysiak.attack != 0):# and (matysiak.attack + 2 > renpy.get_game_runtime()) and matysiak.location > 10: # and not debugMode:
+                jump casinomatysiakgotyou
+            jump end
     label casinodrywallgotyou:
         $ renpy.block_rollback()
         hide screen door_buttons
@@ -3588,6 +3578,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
         
 
         narrater "you hear a familiar voice"
+        play voiceact "drywall/dry well.mp3"
         p2 "well well well.."
 
 
@@ -3596,8 +3587,9 @@ label _CASINO_LEAVING_HERE______________________________________________________
         hide bobis 1 with dissolve
         
         
-
+        play voiceact "drywall/dry 34.mp3"
         p2 "look who we have here"
+        play voiceact "drywall/dry 35.mp3"
         p2 "you got some nerve runnin away from me"
 
         show zlink 1 with moveinright
@@ -3606,13 +3598,18 @@ label _CASINO_LEAVING_HERE______________________________________________________
         p1 "ugghhh, why did you even let him escape in the first place"
 
         if isPathetic:
+            play voiceact "drywall/dry 36.mp3"
             p2 "well, he didn't even really fight me"
+            play voiceact "drywall/dry 37.mp3"
             p2 "just turned around and started flooring it"
         else:
+            play voiceact "drywall/dry 38.mp3"
             p2 "well i did point my gun at him"
+            play voiceact "drywall/dry 39.mp3"
             p2 "that scared him pretty hard"
-
+        play voiceact "drywall/dry 40.mp3"
         p2 "aaaand i didnt want to shoot him while he was running away"
+        play voiceact "drywall/dry 41.mp3"
         p2 "would be pretty mean, wouldn'nt it, karol mijas?"
 
         menu:
@@ -3641,8 +3638,9 @@ label _CASINO_LEAVING_HERE______________________________________________________
         play voiceact "bopis/boris PUNISH HIM.mp3"
         extend " PUNISH HIM!"
 
+        play voiceact "drywall/dry 45.mp3"
         p2 "is that so?"
-
+        play voiceact "drywall/dry 46.mp3"
         p2 "Either way, you're coming with me pal"
         play voiceact "zipps/zippy 14.mp3"
         p1 "oh dont't worry, he will be punished accordingly"
@@ -3664,7 +3662,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
         scene policecar
         narrater "they put you in the car look this is the car!"
         narrater "impossible!! its the car!!"
-
+        play voiceact "drywall/dry 47.mp3"
         p2 "haaang tight buddy, a court room has been already prepared for you"
 
         scene later
