@@ -392,6 +392,10 @@ default matysPedestrian = pedeter()
 default igorrPedestrian = pedeter()
 default pedetraans = [pielaPedestrian,wiktoPedestrian,matysPedestrian,igorrPedestrian]
 
+transform rotate_image(angle=0):
+    rotate angle
+    anchor (0.5, 0.5)
+
 screen main_menu():
     ## This ensures that any other menu screen is replaced.
     tag menu
@@ -414,7 +418,7 @@ screen main_menu():
             else:
                 idle im.Scale("images/pedestrian/pedestrian karol4.png", 180, 360)
             action Play("audio", karolvoicestable[renpy.random.randint(0,9)])
-        image "images/shapeball1.png" xpos igorrPedestrian.xpos yalign 0.95 zoom 0.9
+        image "images/shapeball1.png" xpos (igorrPedestrian.xpos+100) yalign 0.925 zoom 0.9 at rotate_image((igorrPedestrian.xpos/(igorrPedestrian.markiplier*igorrPedestrian.dir)*(igorrPedestrian.markiplier*igorrPedestrian.dir-4))*0.716 )
 
     ## This empty frame darkens the main menu.
     frame:

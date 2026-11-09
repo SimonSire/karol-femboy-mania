@@ -89,6 +89,7 @@ define b = Character("Bartender", color="#264972", callback=muteTTS)
 define p1 = Character("Other Police Officer", color="#0c2644", callback=muteTTS)
 define p2 = Character("Police Officer", color="#1366c5", callback=muteTTS)
 define bb = Character("Floor manager", color="#d45130", callback=muteTTS)
+define mt = Character("Matysiak", color="#ad6800", callback=muteTTS)
 define w = Character("Proffessional Gambler", color="#14531d", callback=muteTTS)
 define wb = Character("Gambler", color="#091811", callback=muteTTS)
 define br = Character("Broke robux", color="#9f3db3", callback=muteTTS)
@@ -103,6 +104,7 @@ define ob = Character("Obama", color="#503528", callback=muteTTS)
 define l = Character("Lawyer", color="#0b0955", callback=muteTTS)
 define doc = Character("Docotr", color="#5550ea", callback=muteTTS)
 define rep = Character("The pledge himself", color="#ffffff", callback=muteTTS)
+define lon = Character("Mysterious stranger", color="#0c8816", callback=muteTTS)
 
 default isPathetic = True
 default isZlinkDie = False
@@ -140,7 +142,13 @@ default sexyguyCorrectas = 0
 default sexyguySurprised = False
 default sexyguyJumpMode = 0             #just for u simon *kiss*
 default sexyguyJumpSpeed = 0.07
-
+default doorShingas = 0
+default doorScreen = renpy.random.randint(0,3)
+define screenstable = [
+        Image("mania/screenas1.png"),
+        Image("mania/screenas2.png"),
+        Image("mania/screenas3.png"),
+        Image("mania/screenas4.png")]
 default casinoMajorHappens = 0
 
 default shapeDraggable = None
@@ -152,12 +160,13 @@ default randomAssShit = 0 #when used value only from 1 to 100
 #fnaf shit here
 define preset1 = [3,4,4,5,5,6,0]
 define preset2 = [2,2,3,4,4,5,0]
+define preset3 = [0,4,6,6,4,2,0]
 default drywall = guyThing(id=1,preset=preset1,loc=1)
 default matysiak = guyThing(id=2,preset=preset2)
 default barguytwin = guyThing(id=3,preset=preset2)
-default zippsguy = guyThing(id=4,preset=preset2,real=False)
+default zippsguy = guyThing(id=4,preset=preset3,real=False,)
 default pickleguy = guyThing(id=5,preset=preset2,real=False)
-default theGuys = [drywall,matysiak,barguytwin,zippsguy,pickleguy]
+default theGuys = [drywall,matysiak,barguytwin,zippsguy]#no pickle here
 
 default starttime = 0
 default lastCheckUpdate = 0
@@ -175,6 +184,9 @@ default orderlist = []
 default orderdones = 0
 default melonbeingtouched = False
 
+default mposx = 0
+default mposy = 0
+
 default debugMode = False
 default karolTalkingShit = True
 default karolTalkingMad = False
@@ -190,6 +202,9 @@ default gamble1didwin = False
 default gambelrow = 0
 default gambelState = 0 
 
+default beatcounter = 0
+
+image melongifer = Movie(play="melongif.webm")
 init python: #PYTHON FUNCTIONS AND THINGIESS
     import random
     import math
@@ -294,20 +309,27 @@ init python: #PYTHON FUNCTIONS AND THINGIESS
     def melonset(shitfuck1):
         global melonbeingtouched
         melonbeingtouched = True
+        renpy.sound.queue("pickup.mp3", channel="audio", loop=False)
     def melonrst(shitfuck1,cockhole):
-        global melonbeingtouched
+        global melonbeingtouched, mposx, mposy
         melonbeingtouched = False
-        print(cockhole)
-        print(shitfuck1[0])
+        renpy.restart_interaction()
         if cockhole == None:
-            #shitfuck1[0].x = 1200
-            #shitfuck1[0].y = 560
-            shitfuck1[0].snap(1200,560)
+            shitfuck1[0].snap(970,620)
+            mposx, mposy = renpy.get_mouse_pos()
+            actuallMelonHandler.createmelon(mposx,mposy)
+            #renpy.sound.queue("melondrop.wav", channel="audio", loop=False)
+        else:
+            zippsguy.attack = 0
+            zippsguy.location = renpy.random.randint(1,7)
+            shitfuck1[0].snap(970,620)
+            renpy.sound.queue("meloneat.wav", channel="audio", loop=False)
     
 
     class guyThing:
         def __init__(self,id=0,preset=[],loc=0,real=True):
             print("CALLEDyes")
+            self.id = id
             self.valuePreset = preset
             self.location = loc
             self.isreal = real
@@ -323,26 +345,59 @@ init python: #PYTHON FUNCTIONS AND THINGIESS
         global randomAssShit, lastCheckUpdate, starttime, theGuys
         
         randomAssShit = renpy.random.randint(1,100)
+        if (renpy.get_game_runtime() - starttime) >= 360:
+            return True#die
+        if (lastCheckUpdate + 1) > renpy.get_game_runtime():
+            return
+        lastCheckUpdate = renpy.get_game_runtime()
+        for man in theGuys:
+            man.random = (renpy.random.randint(1, 24) <= man.value())
+            if man.random == 1 and (man.lastMove + 4) < renpy.get_game_runtime():
+                man.prevLocation = man.location
+                man.lastMove = renpy.get_game_runtime()
+                if (man.id == 3):
+                    man.location = onemoretable[man.location][renpy.random.randint(0,-1+len(onemoretable[man.location]))]
+                else:    
+                    man.location = casinoRoomsTable[man.location][renpy.random.randint(0,-1+len(casinoRoomsTable[man.location]))]
+
+                if man.location > 10 and man.attack == 0:
+                    man.attack = renpy.get_game_runtime() + 5 #+ renpy.random.randint(0,5)
+                
+                if (man.attack < renpy.get_game_runtime()) and (man.location > 10):
+                    if man.isreal:
+                        return True#die
+                    else:
+                        man.attack = 0
+                        man.location = renpy.random.randint(1,7)
+                        phantomaction(man.id)
         
-        if (lastCheckUpdate + 1) < renpy.get_game_runtime():
-            lastCheckUpdate = renpy.get_game_runtime()
-
-            for man in theGuys:
-                man.random = (renpy.random.randint(1, 24) <= man.value())
-                if man.random == 1 and (man.lastMove + 4) < renpy.get_game_runtime():
-                    man.prevLocation = man.location
-                    man.lastMove = renpy.get_game_runtime()
-                    if (man.id == 3)
-                        man.location = onemoretable[man.location][renpy.random.randint(0,-1+len(onemoretable[man.location]))]
-                    else:    
-                        man.location = casinoRoomsTable[man.location][renpy.random.randint(0,-1+len(casinoRoomsTable[man.location]))]
-
-                    if man.location > 10 and man.attack == 0:
-                        man.attack = renpy.get_game_runtime() + 5 #+ renpy.random.randint(0,5)
-                    
-                    if man.isreal and (man.attack < renpy.get_game_runtime()) and (man.location > 10):
-                        return True
-
+        if drywall.location == 9 and drywall.prevLocation == 7:
+            drywall.prevLocation = 9
+            if renpy.random.randint(0,9) < 6:
+                renpy.sound.queue("stepsleft.mp3", channel="audio", loop=False)
+        if drywall.location == 12 and drywall.prevLocation == 8:
+            drywall.prevLocation = 12
+            if renpy.random.randint(0,9) < 6:
+                renpy.sound.queue("ventcrawl.mp3", channel="audio", loop=False)
+        if drywall.location == 10 and drywall.prevLocation == 6:
+            drywall.prevLocation = 10
+            if renpy.random.randint(0,9) < 6:
+                renpy.sound.queue("stepsright.mp3", channel="audio", loop=False)
+        if matysiak.location == 9 and matysiak.prevLocation == 7:
+            matysiak.prevLocation = 9
+            if renpy.random.randint(0,9) < 6:
+                renpy.sound.queue("stepsfartleft.mp3", channel="audio", loop=False)
+        if matysiak.location == 12 and matysiak.prevLocation == 8:
+            matysiak.prevLocation = 12
+            if renpy.random.randint(0,9) < 6:
+                renpy.sound.queue("ventfartcrawl.mp3", channel="audio", loop=False)
+        if matysiak.location == 10 and matysiak.prevLocation == 6:
+            matysiak.prevLocation = 10
+            if renpy.random.randint(0,9) < 6:
+                renpy.sound.queue("stepsfartright.mp3", channel="audio", loop=False)
+        if zippsguy.location != zippsguy.prevLocation and (zippsguy.location == drywall.location or zippsguy.location == matysiak.location or zippsguy.location == barguytwin.location):
+            zippsguy.prevLocation = zippsguy.location
+            renpy.sound.queue("ohhey.mp3", channel="audio", loop=False)
     def menGoToSound():
         global theGuys
         for man in theGuys:
@@ -350,6 +405,11 @@ init python: #PYTHON FUNCTIONS AND THINGIESS
                 man.lastMove = renpy.get_game_runtime()
                 man.location = casinoAudioCueTable[man.location][renpy.random.randint(0,-1+len(casinoAudioCueTable[man.location]))]
     
+    def phantomaction(idofaman):
+        print("idunno something hapen")
+        renpy.sound.queue("bar8.mp3", channel="audio", loop=False)
+
+
     class particielThing(renpy.Displayable):
         def __init__(self, **kwargs):
             self.particles = []
@@ -378,26 +438,26 @@ init python: #PYTHON FUNCTIONS AND THINGIESS
                 canva.blit(child, ( xpos,100*p["imager"]))
             renpy.redraw(self, 0)
             return canva
-    
-    class timeGoopers(renpy.Displayable):
+
+    gayfuckingpartics = []
+    for i in range(10):
+        gayfuckingpartics.append({
+            "angle": random.uniform(0.0, 2.0) * math.pi,
+            "markiplier": random.uniform(3, 5),
+            "imager": random.randint(0, 6),
+            "timeRepeat": random.uniform(0, 5) * -1
+        })
+    class timeGoopers(renpy.Displayable):#FUCKING PIECE OF SHIT
         def __init__(self, **kwargs):
-            self.particles = []
-            for i in range(10):
-                self.particles.append({
-                    "angle": random.uniform(0.0, 2.0) * math.pi,
-                    "markiplier": random.uniform(3, 5),
-                    "imager": random.randint(0, 6),
-                    "timeRepeat": 0.0#random.uniform(0.0, 3.0)
-                })
             super().__init__(**kwargs)
             self.images = [Transform(renpy.displayable(image),zoom=1.0 / 6.0)
             for image in slotstable]
 
         def render(self, width, height, st, at):
             canva = renpy.Render(width, height)
-            for p in self.particles:
+            for p in gayfuckingpartics:
                 radius = p["markiplier"] * (st - p["timeRepeat"]) * 50
-                if radius > 1060:
+                if radius > 1060:   
                     p["timeRepeat"] = st
                     p["imager"] = random.randint(0, 6)
                     radius = p["markiplier"] * (st - p["timeRepeat"]) * 50
@@ -406,6 +466,52 @@ init python: #PYTHON FUNCTIONS AND THINGIESS
                 canva.blit(child, (910 + radius * math.cos(p["angle"] + (st * p["markiplier"] /2)),490 + radius * math.sin(p["angle"] + (st * p["markiplier"] /2))))
             renpy.redraw(self, 0)
             return canva
+    
+    melonImage = Image("melon.png")
+
+    class melonHandler(renpy.Displayable):
+        def __init__(self,**kwargs):
+            super().__init__(**kwargs)
+            self.melons = []
+        def render(self, width, height, st, at):
+            canva = renpy.Render(width, height)
+            for mel in self.melons:
+                if mel.y > 780:
+                    child = renpy.render(Transform("melonbroken.png", alpha=1.0),120,120,st,at)
+                    canva.blit(child,(mel.x-60,720))
+                else:
+                    child = renpy.render(melonImage,120,120,st,at)
+                    canva.blit(child,(mel.x-60,mel.y-60))
+                if mel.t0 == 0.0:
+                    mel.t0 = st
+                    continue
+                if mel.hit == 0.0:
+                    dt = st - mel.t0
+                    mel.v += 9.8 * dt * 100
+                    mel.y += mel.v * dt
+                    mel.t0 = st
+                    if mel.y > 780:
+                        mel.hit = st
+                        renpy.sound.queue("melondrop.wav", channel="audio", loop=False)
+                else:
+                    if st > mel.hit + 3.0:
+                        self.melons.remove(mel)
+            renpy.redraw(self,0)
+            return canva
+        def createmelon(self,xposit,yposit):
+            new = melon(xposit,yposit)
+            self.melons.append(new)
+
+    actuallMelonHandler = melonHandler()
+
+    class melon:
+        def __init__(self,xposit,yposit):
+            self.x = xposit
+            self.y = yposit
+            self.v = 0.0
+            self.hit= 0.0
+            self.t0 = 0.0
+
                 
 
 #i have no idea what it does but im not touching it:
@@ -418,6 +524,10 @@ transform size:
 #######################################################################
 screen gayyshit:
     add particle_thing
+
+screen melonlayerscreen:
+    zorder 100
+    add actuallMelonHandler
 
 screen blackCover(value):
     zorder 1000
@@ -434,6 +544,11 @@ screen unskippableAD:
     key "dismiss" action NullAction()
     key "game_menu" action NullAction()
     key "rollback" action NullAction()
+
+screen mon_screen:
+    fixed:
+        image screenstable[doorScreen]
+    timer 2.0 action SetVariable("doorScreen", renpy.random.randint(0,3)) repeat True
 
 screen show_time:
     zorder 256
@@ -456,53 +571,13 @@ screen show_time:
     else:
         key "c" action [SetVariable("modeR", 0), Hide("DEBUGmode"), SetVariable("debugMode", False)]
     timer 0.1 action Function(makeMenMove) repeat True
+    timer 60.0 action SetVariable("zippsguy.location", 2)
     key "z" action Function(ender)
     #key "t" action Function(makeMenMove)
-    if drywall.location == 9 and drywall.prevLocation == 7:
-        timer 0.001 action [SetVariable("drywall.prevLocation",9)]
-        if renpy.random.randint(0,9) < 6:
-            timer 0.001 action Play("audio","stepsleft.mp3")
-    if drywall.location == 12 and drywall.prevLocation == 8:
-        timer 0.001 action [SetVariable("drywall.prevLocation",12)]
-        if renpy.random.randint(0,9) < 6:
-            timer 0.001 action Play("audio","ventcrawl.mp3")
-    if drywall.location == 10 and drywall.prevLocation == 6:
-        timer 0.001 action [SetVariable("drywall.prevLocation",10)]
-        if renpy.random.randint(0,9) < 6:
-            timer 0.001 action Play("audio","stepsright.mp3")
-    if matysiak.location == 9 and matysiak.prevLocation == 7:
-        timer 0.001 action [SetVariable("matysiak.prevLocation",9)]
-        if renpy.random.randint(0,9) < 6:
-            timer 0.001 action Play("audio","stepsfartleft.mp3")
-    if matysiak.location == 12 and matysiak.prevLocation == 8:
-        timer 0.001 action [SetVariable("matysiak.prevLocation",12)]
-        if renpy.random.randint(0,9) < 6:
-            timer 0.001 action Play("audio","ventfartcrawl.mp3")
-    if matysiak.location == 10 and matysiak.prevLocation == 6:
-        timer 0.001 action [SetVariable("matysiak.prevLocation",10)]
-        if renpy.random.randint(0,9) < 6:
-            timer 0.001 action Play("audio","stepsfartright.mp3")
+
 
 screen door_buttons:
     zorder 128
-    draggroup:
-        drag:
-            xpos 1200 ypos 560
-            drag_name "whath"
-            draggable True
-            droppable False
-            dragging melonset
-            dragged melonrst
-            if melonbeingtouched:
-                child "shapeball1.png"
-            else:
-                child "placeholdergoop.png"
-        drag:
-            xpos 1600 ypos 260
-            drag_name "zipp"
-            draggable False
-            droppable True
-            child "placeholdergoop.png"
     imagebutton:
         xalign 0.2 yalign 0.5
         idle "UI/buttoleft.png"
@@ -605,6 +680,7 @@ screen door_buttons:
             timer 0.5 action [SetVariable("actionDoorRight",0)]
 
 screen flashleft:
+    zorder 96
     fixed:
         if flashBright:
             image "flashleftbright"
@@ -635,6 +711,7 @@ screen flashleft:
                 timer 0.02 action [SetField(i,"pissOff", i.pissOff + 1)] repeat True
 
 screen flashtop:
+    zorder 96
     fixed:
         if flashBright:
             image "flashtopbright"
@@ -664,6 +741,7 @@ screen flashtop:
                 timer 0.02 action [SetField(i,"pissOff", i.pissOff + 1)] repeat True
 
 screen flashright:
+    zorder 96
     fixed:
         if flashBright:
             image "flashrightbright"
@@ -692,7 +770,46 @@ screen flashright:
             else:
                 timer 0.02 action [SetField(i,"pissOff", i.pissOff + 1)] repeat True
 
+screen fanextras:
+    zorder 64
+    draggroup:
+        if zippsguy.location == 11:
+            drag:
+                xpos 480 ypos 400
+                drag_name "zipp1"
+                draggable False
+                droppable True
+                child "eyes.png"
+        if zippsguy.location == 12:
+            drag:
+                xpos 980 ypos 40
+                drag_name "zipp2"
+                draggable False
+                droppable True
+                child "eyes.png"
+        if zippsguy.location == 13:
+            drag:
+                xpos 1320 ypos 400
+                drag_name "zipp3"
+                draggable False
+                droppable True
+                child "eyes.png"
+        
+        drag:
+            xpos 970 ypos 620
+            drag_name "whath"
+            draggable True
+            droppable False
+            activated melonset
+            dragged melonrst
+            drag_raise True
+            if melonbeingtouched:
+                child "melon.png"
+            else:
+                child "emptyfuckinggoop.png"
+
 screen cameraview:
+    zorder 240
     timer 0.1 action [SetVariable("flashBattery", flashBattery - 0.015)] repeat True
     if flashBattery < 0:
         timer 0.001 action [Hide("cameraview")]
@@ -855,8 +972,8 @@ screen cameraview:
             action [SetVariable("audioCooldownStart",renpy.get_game_runtime()), Function(menGoToSound),SetVariable("flashBattery", flashBattery - 2), Play("audio", casinoAudioCueFile[renpy.random.randint(0,4)])]
 
 screen DEBUGmode:
-    zorder 224
-    text "{color=#ffffff}rywall [int(drywall.attack)]{/color}" xalign 0.1 yalign 0.05
+    zorder 255
+    text "{color=#ffffff}rywall [int(zippsguy.attack)]{/color}" xalign 0.1 yalign 0.05
     text "{color=#ffffff}prest [drywall.value()] [melonbeingtouched]{/color}" xalign 0.1 yalign 0.1
     text "{color=#ffffff}curr [drywall.location] [matysiak.location] [barguytwin.location] [zippsguy.location] [pickleguy.location]{/color}" xalign 0.1 yalign 0.15
     text "{color=#ffffff}prev [drywall.prevLocation] [matysiak.prevLocation] [barguytwin.prevLocation] [zippsguy.prevLocation] [pickleguy.prevLocation]{/color}" xalign 0.1 yalign 0.2
@@ -1034,34 +1151,34 @@ label _1ST_SECTION_ORIGINAL_GAME_HERE___________________________________________
             play sound hl2scream
             $ renpy.pause(3.0, hard=True)
             hide transpiela
-        play voiceact dad1
+        play voiceact "dad/dad1.mp3"
         un "Come out here, son."
-        $ print(drywall.value())
-        $ print(matysiak.value())
+
+
         play sound door
 
         show livinroom
 
         show dad
-        play voiceact dad2
+        play voiceact "dad/dad2.mp3"
         d "son."
 
-        play voiceact dad3
+        play voiceact "dad/dad3.mp3"
         d "you have{nw=0.0}"
         show dad at vpunch
         play audio impact2
         extend "{b}{color=#e34236} 3 days to move out." ##simon u fucked this shit up it aint working unless u split the voice line --- nevermind i fixed it for you *kiss*
 
-        play voiceact dad4
+        play voiceact "dad/dad4.mp3"
         d "we're tired of your nonsense"
         
-        play voiceact dad5
+        play voiceact "dad/dad5.mp3"
         d "for your entire life, you've done nothing but make garrys mod maps and gooning on the bathroom floor (not comfy)"
 
         k "B-but dad.. "
         extend "My map got over 30 thousand downloads!"
         
-        play voiceact dad6
+        play voiceact "dad/dad6.mp3"
         d "now start packing your things"
         hide dad with moveoutleft
 
@@ -1100,47 +1217,47 @@ label _1ST_SECTION_ORIGINAL_GAME_HERE___________________________________________
         play sound calling
         $ renpy.pause(3.0, hard=True)
         show domnical
-        play voiceact dom1
+        play voiceact "domin/dom1.mp3"
         do "Hello karol."
 
-        play voiceact dom2
+        play voiceact "domin/dom2.mp3"
         menu:
             do "How are you doinmg?"
             "I'm so good doing right now":
                 k "I'm doing so good right now"
-                play voiceact dom3
+                play voiceact "domin/dom3.mp3"
                 do "That;s so giiid!!"
                 k "wait no... im not good at all"
             "I want you domin.":
                 k "Yeah domin i wANT you"
                 $ femboyChoices = femboyChoices + 1
-                play voiceact dom4
+                play voiceact "domin/dom4.mp3"
                 do "Woah.."
         
         k "domin.. my ass is kind of homeless.. and femboyless"
         k "i need yuo domin"
 
-        play voiceact dom5
+        play voiceact "domin/dom5.mp3"
         do "Okay!!!"
 
-        play voiceact dom6
+        play voiceact "domin/dom6.mp3"
         do "Here's my adress: "
 
-        play voiceact dom7
-        do "Here's my adress: Gdańska 129, Łódź"
+        play voiceact "domin/dom7.mp3"
+        extend "Gdańska 129, Łódź"
 
-        play voiceact dom8
+        play voiceact "domin/dom8.mp3"
         menu:
             do "Come to me!"
             "Wow, that's not even that far away!!":
                 k "Wow its so close to me Yes"
-                play voiceact dom9
+                play voiceact "domin/dom9.mp3"
                 do "Really?? THat is such good news!"
                 k "this is so good! i will be right there!"
             "I'm not sure where that is":
                 k "but bomin i dont know where that iss where is thatt"
                 extend " where"
-                play voiceact dom10
+                play voiceact "domin/dom10.mp3"
                 do "well.. just put it in ur gps, okay?"
                 k "Okay, I will!"
                 k "I'll try my best"
@@ -1211,7 +1328,7 @@ label _1ST_SECTION_ORIGINAL_GAME_HERE___________________________________________
         play audio knock
         narrater "*Karol Mijas knocks on the door*"
         
-        play voiceact dom11
+        play voiceact "domin/dom11.mp3"
         do "Karol Mijas, is that you? Come in."
 
         show lv2
@@ -1219,25 +1336,25 @@ label _1ST_SECTION_ORIGINAL_GAME_HERE___________________________________________
 
         show domin with moveinbottom
 
-        play voiceact dom12
+        play voiceact "domin/dom12.mp3"
         do "Something reallly bad happened.."
-        play voiceact dom13
+        play voiceact "domin/dom13.mp3"
         do "My toilet shattered.."
-        play voiceact dom14
+        play voiceact "domin/dom14.mp3"
         menu:
             do "into a million pieces"
 
             "That is so horrible":
                 k "oh domin this is so bad so horrible"
-                play voiceact dom15
+                play voiceact "domin/dom15.mp3"
                 do "Yeah.. I'm so unluckyu.."
-                play voiceact dom16
+                play voiceact "domin/dom16.mp3"
                 do "I will go have to fix it now"
             "I want you domin":
                 k "you see domin, {b}I want you you..."
-                play voiceact dom17
+                play voiceact "domin/dom17.mp3"
                 do "But.. my toilet"
-                play voiceact dom18
+                play voiceact "domin/dom18.mp3"
                 do "I'm sorry but i gotta fix it now"
 
         k "Okay, I'm gonna go to the bar"
@@ -1281,46 +1398,46 @@ label _1ST_SECTION_ORIGINAL_GAME_HERE___________________________________________
         show bar2
         stop music
         play music jazz fadein 1.5 volume 0.2
-        play voiceact bar1
+        play voiceact "barguy/bar1.mp3"
         un "Hello there."
-        play voiceact bar2
+        play voiceact "barguy/bar2.mp3"
         b "I'm the bartender here"
-        play voiceact bar3
+        play voiceact "barguy/bar3.mp3"
         b "Would you like something to drink, good sir?"
 
         menu:
             "Yes, PLEASE!":
                 jump continued
             "No":
-                play voiceact bar5
+                play voiceact "barguy/bar5.mp3"
                 b "Hey, think about it, I think you might want something to drink"
 
         menu:
             "Okay fine":
                 jump continued
             "No":
-                play voiceact bar6
+                play voiceact "barguy/bar6.mp3"
                 b "Come ooon, it will be fun"
 
         menu:
             "Okay":
                 jump continued
             "No":
-                play voiceact bar7
+                play voiceact "barguy/bar7.mp3"
                 b "Just do it. Order some drinks."
 
         menu:
             "Fine":
                 jump continued
             "No":
-                play voiceact bar8
+                play voiceact "barguy/bar8.mp3"
                 b "You can't leave"
 
         menu:
             "Yes":
                 jump continued
             "No":
-                play voiceact bar9
+                play voiceact "barguy/bar9.mp3"
                 b "Get something to drink man"
 
         menu:
@@ -1330,21 +1447,21 @@ label _1ST_SECTION_ORIGINAL_GAME_HERE___________________________________________
                 jump nuhuh
 
         label nuhuh:
-            play voiceact bar10
+            play voiceact "barguy/bar10.mp3"
             b "Nuh uh"
 
             menu:
                 "Yeah":
                     jump continued
                 "No":
-                    play voiceact bar11
+                    play voiceact "barguy/bar11.mp3"
                     b "Can't do that"
 
             menu:
                 "Yeah":
                     jump continued
                 "No":
-                    play voiceact bar12
+                    play voiceact "barguy/bar12.mp3"
                     b "Think about the taste"
 
             menu:
@@ -1354,7 +1471,7 @@ label _1ST_SECTION_ORIGINAL_GAME_HERE___________________________________________
                     jump nuhuh
 
         label continued:
-            play voiceact bar4
+            play voiceact "barguy/bar4.mp3"
             b "Let me pour some of our finest wine in for you."
 
             narrater "Karol Mijas takes a big gulp"
@@ -1433,7 +1550,7 @@ label _END_OFORIGINAL_PART_AND_NOW_ESCAPING_BAR_________________________________
 
         scene barfloor2
 
-        play voiceact bardeads
+        play sound bardeads
 
         narrater "You notice the bartender laying dead on the floor"
 
@@ -1690,8 +1807,8 @@ label _END_OFORIGINAL_PART_AND_NOW_ESCAPING_BAR_________________________________
         show bfists 1
 
         $ renpy.pause(2.0, hard=True)
-        play voiceact "zipps/zippy over.mp3"
-        play sound fall
+        play sound "zipps/zippy over.mp3"
+        play audio fall
         show zlink 7
         $ isZlinkDie = True
         narrater "looks like that killed him"
@@ -1874,18 +1991,18 @@ label _CASINO_ENTRY_HERE________________________________________________________
         $ matysiak.location = 1
         $ matysiak.prevLocation = 1
         show mat 1 with dissolve
-        un "you bastard"
+        mt "you bastard"
         show mat 4
-        un "I'm gonna beat the shit out of you"
+        mt "I'm gonna beat the shit out of you"
         
         show mat 3
-        un "do you know what you did"
+        mt "do you know what you did"
         show mat 2
-        un "I called the management"
+        mt "I called the management"
         show mat 1
-        un "They are gonna show up here soon"
+        mt "They are gonna show up here soon"
         show mat 4
-        un "you're fucked buddy"
+        mt "you're fucked buddy"
         
         menu:
             "{b}FIGHT":
@@ -1897,9 +2014,9 @@ label _CASINO_ENTRY_HERE________________________________________________________
                     scene black
                     $ renpy.pause(2.0, hard=True)
                     narrater "it seemns that all the lights went oUT"
-                    un "HEY???"
+                    mt "HEY???"
                     narrater "you manage to quickly sneek out of the stall in the dark"
-                    un "HEY GET BACK HEREE"
+                    mt "HEY GET BACK HEREE"
                     narrater "the rooms start to smell lik some kind of drywalll"
                     narrater "you are so fucked"
                     narrater "you escape the toilets butt as naked"
@@ -1941,7 +2058,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
             narrater "it seems the lights went out"
             k "oH NOooo shiiiitttt shit shittt"
             jump casinodoorlock
-        if (casinoMajorHappens >= 6) and not isZlinkDie:
+        if (casinoMajorHappens >= 7) and not isZlinkDie:
             jump casinoCHIEFinMAIN
         menu:
                 "Go right":
@@ -2028,375 +2145,434 @@ label _CASINO_ENTRY_HERE________________________________________________________
                         ##smth about the getting mad and later the guys be pissed at u
 
         menu:
-                "Go back":
-                    play sound door
-                    jump casinoMAIN
-                "go to fellas again":
-                    narrater "actually u dont really want to see them again so nah"
-                    jump casinoRIGHT
-                "go to the bar":
-                    label barguy:
-                        play music casmusic fadein 1.5 volume 0.2
-                        $ casinoMajorHappens += 1
-                        scene casbar
-                        if (barguybadshinger == 0):
-                        
-                            narrater "You come to da bahrs"
-                            play sound appear
-                            show bartwin default with moveinbottom
-                            play voiceact bart1
-                            un "heey heya!"
-                            play voiceact bart2
-                            un "can you guess who i am??"
-                            show bartwin happy
-                            play voiceact bart3
-                            un "heh heh heh.."
-                            play voiceact bart4
-                            b2 "iiiiiiimmmm the bartender here :)"
+            "Go back":
+                play sound door
+                jump casinoMAIN
+            "go to fellas again":
+                narrater "actually u dont really want to see them again so nah"
+                jump casinoRIGHT
+            "go to the bar":
+                jump barguy
+            "weird door":
+                play sound cloth
+                show weirddoor
+                $ randomasNumeras(3)
+                if doorShingas == 0:
+                    $ renpy.pause(1.0, hard=True)
+                    k "huh this is a weird door"
+                    k "i am gonna open in and enterit"
+                menu:
+                    "enter":
+                        stop music
+                play sound door
+                show maniaroom
+                if (doorShingas != 0) and (randomAssShit == 1):
+                    $ renpy.pause(8.0, hard=True)
+                    k "huh i wonider what he neeeds that jar for"
+                    k "he could  like store kompotas in it"
+                    k "istnt it right huh"
+                    window hide
+                    pause
+                    menu:
+                        "Leave":
+                            play sound door
+                            play music casmusic fadein 1.5 volume 0.2
+                            jump casinoRIGHT
+                        "Stay":
+                            jump stayindoor
+                else:
+                    show screen mon_screen
+                    play music maniagame
+                    if doorShingas == 0:
+                        $ doorShingas = 1
+                        $ renpy.pause(8.0, hard=True)
+                        k "what the hell"
+                        window hide
+                        $ renpy.pause(3.0, hard=True)
+                        k "it seems they dont even notice me"
+                        k "its like theyre in some kind of..."
+                        extend " mania"
+                    else:
+                        $ renpy.pause(8.0, hard=True)
+                        k "wow they are still so into "
+                        extend "into this"
+                        k "yeah"
+                    window hide
+                    label stayindoor:
+                        pause
+                        menu:
+                            "Leave":
+                                play sound door
+                                hide screen mon_screen
+                                stop music
+                                play music casmusic fadein 1.5 volume 0.2
+                                jump casinoRIGHT
+                            "Stay":
+                                jump stayindoor
+                jump end#lmao
+
+    label barguy:
+        play music casmusic fadein 1.5 volume 0.2
+        $ casinoMajorHappens += 1
+        scene casbar
+        if (barguybadshinger == 0):
+        
+            narrater "You come to da bahrs"
+            play sound appear
+            show bartwin default with moveinbottom
+            play voiceact bart1
+            un "heey heya!"
+            play voiceact bart2
+            un "can you guess who i am??"
+            show bartwin happy
+            play voiceact bart3
+            un "heh heh heh.."
+            play voiceact bart4
+            b2 "iiiiiiimmmm the bartender here :)"
+            show bartwin default
+            play voiceact bart5
+            b2 "MAN, i always wanted to say that"
+            play voiceact bart6
+            b2 "I got this position just recently, it's all thanks to my brother"
+            show bartwin happy
+            play voiceact bart7
+            b2 "he is such a supporting and awesome guy"
+            show bartwin default
+            play voiceact bart8
+            menu:
+                b2 "so, whats ur name?"
+                "karol mijas":
+                    k "my name"
+                    k "is uhj"
+                    k "karl beez"
+                    k "karl beez no i mean karol mijas"
+                    show bartwin default
+                    play voiceact bart9
+                    b2 "well nice to meet ya karol mijas!"
+                "don't anwser":
+                    show bartwin surpris
+                    play voiceact bart10
+                    b2 "{b}why didnt you answer"
+                    play voiceact bart11
+                    menu:
+                        b2 "it's a simple question"
+                        "it's karol mijas":
+                            k "the names karol mijas, kid"
+                        "continue to say nothing":
                             show bartwin default
-                            play voiceact bart5
-                            b2 "MAN, i always wanted to say that"
-                            play voiceact bart6
-                            b2 "I got this position just recently, it's all thanks to my brother"
-                            show bartwin happy
-                            play voiceact bart7
-                            b2 "he is such a supporting and awesome guy"
-                            show bartwin default
-                            play voiceact bart8
+                            play voiceact bart12
+                            b2 "well alright then, no biggie"
+            show bartwin default
+            play voiceact bart13
+            b2 "anyway, my brother is such a good fella"
+            play voiceact bart14
+            b2 "he's been there for me my whole life"
+            play voiceact bart15
+            b2 "i wouldnt be here without him"
+            play voiceact bart16
+            b2 "i only became a bartender because of him"
+            play voiceact bart17
+            b2 "he said to me: 'Im the bartender here, i beliebe in you brother'"
+            play voiceact bart18
+            b2 "if not for him.. i.. i dont know wheere i would be right now"
+            play voiceact bart19
+            b2 "anyway, my brother actally work s at a bar like a around the corsen"
+            play voiceact bart20
+            b2 "maybe you've even met him? he is such a good guy im sure you forget him if you had met him!!"
+            menu:
+                #b2 "maybe you've even met him? he is such a good guy im sure you forget him if you had met him!!"
+                "yes actually":
+                    k "yeah actually i had met him in the bar"
+                    b2 "oh reaally??/ thats so cool!"
+                    menu:
+                        "we had some drins":
+                            k "We had some dfrinkss.."
+                            k "No i mean I HAD some drinks, he didnt drunk"
+                            k "we had such a good time"
+                            "hey simon u were supposed to make barguy shit himself here" #SIMOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOON
+                            b2 "ooooh you had a good time huh???"
+                            b2 "that makes me so happy!!!!!!"
+                            play sound fart
+                            ##########ARE YOU FUCKIN SERIOUS HERE____________________________________________________________________________________________
+                            jump allgoodbar
+                        "tell the truth":
+                            k "i killed him"
+                            show bartwin surpris
+                            b2 "thats.. ur.. ur joking right now.. arent you? i mean.. this. it has to be ajoke. if this is your idea of a joke its not funny.. its not funny at all.."
+
                             menu:
-                                b2 "so, whats ur name?"
-                                "karol mijas":
-                                    k "my name"
-                                    k "is uhj"
-                                    k "karl beez"
-                                    k "karl beez no i mean karol mijas"
-                                    show bartwin default
-                                    play voiceact bart9
-                                    b2 "well nice to meet ya karol mijas!"
-                                "don't anwser":
-                                    show bartwin surpris
-                                    play voiceact bart10
-                                    b2 "{b}why didnt you answer"
-                                    play voiceact bart11
-                                    menu:
-                                        b2 "it's a simple question"
-                                        "it's karol mijas":
-                                            k "the names karol mijas, kid"
-                                        "continue to say nothing":
-                                            show bartwin default
-                                            play voiceact bart12
-                                            b2 "well alright then, no biggie"
-                            show bartwin default
-                            play voiceact bart13
-                            b2 "anyway, my brother is such a good fella"
-                            play voiceact bart14
-                            b2 "he's been there for me my whole life"
-                            play voiceact bart15
-                            b2 "i wouldnt be here without him"
-                            play voiceact bart16
-                            b2 "i only became a bartender because of him"
-                            play voiceact bart17
-                            b2 "he said to me: 'Im the bartender here, i beliebe in you brother'"
-                            play voiceact bart18
-                            b2 "if not for him.. i.. i dont know wheere i would be right now"
-                            play voiceact bart19
-                            b2 "anyway, my brother actally work s at a bar like a around the corsen"
-                            play voiceact bart20
-                            b2 "maybe you've even met him? he is such a good guy im sure you forget him if you had met him!!"
+                                "horse":
+                                    k "he was a horse. i had to do it."
+
+                            if isZlinkDie:
+                                narrater "suddenly his demeanor changes"
+                                narrater "he looks around and then crouches under the counter"
+                                narrater "you hear a bunch of rustling"
+                                play voiceact bartev1
+                                b2 "hey.. pal"
+                                play voiceact bartev2
+                                b2 "how about a drink?"
+                                play voiceact bartev3
+                                b2 "its on the house..."
+                                menu:
+                                    b2 "its on the house..."
+                                    "no..":
+                                        b2 "hmpf.."
+                                        narrater "he forces the drink inside u"
+                                    "take the drink":
+                                        narrater "you take the drink and drink it"
+                                narrater "you wake up"
+                                k "what.. the hell"
+                                narrater "you dont know what happened"
+                                narrater "the bartender doesnt seem to be anywhere"
+                                menu:
+                                    "leave the bar":
+                                        $ casinoLovesYou -= 1
+                                        $ barguybadshinger = 3
+                                        jump casinoRIGHT
+
+                            b2 "no.."
+                            b2 "no, that's not funny."
+                            k "i'm not joking."
+                            b2 "..."
+                            b2 "you’re sick."
+        
                             menu:
-                                #b2 "maybe you've even met him? he is such a good guy im sure you forget him if you had met him!!"
-                                "yes actually":
-                                    k "yeah actually i had met him in the bar"
-                                    b2 "oh reaally??/ thats so cool!"
-                                    menu:
-                                        "we had some drins":
-                                            k "We had some dfrinkss.."
-                                            k "No i mean I HAD some drinks, he didnt drunk"
-                                            k "we had such a good time"
-                                            "hey simon u were supposed to make barguy shit himself here" #SIMOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOON
-                                            b2 "ooooh you had a good time huh???"
-                                            b2 "that makes me so happy!!!!!!"
-                                            play sound fart
-                                            ##########ARE YOU FUCKIN SERIOUS HERE____________________________________________________________________________________________
-                                            jump allgoodbar
-                                        "tell the truth":
-                                            k "i killed him"
-                                            show bartwin surpris
-                                            b2 "thats.. ur.. ur joking right now.. arent you? i mean.. this. it has to be ajoke. if this is your idea of a joke its not funny.. its not funny at all.."
-
-                                            menu:
-                                                "horse":
-                                                    k "he was a horse. i had to do it."
-
-                                                    if isZlinkDie:
-                                                        narrater "suddenly his demeanor changes"
-                                                        narrater "he looks around and then crouches under the counter"
-                                                        narrater "you hear a bunch of rustling"
-                                                        play voiceact bartev1
-                                                        b2 "hey.. pal"
-                                                        play voiceact bartev2
-                                                        b2 "how about a drink?"
-                                                        play voiceact bartev3
-                                                        b2 "its on the house..."
-                                                        menu:
-                                                            b2 "its on the house..."
-                                                            "no..":
-                                                                b2 "hmpf.."
-                                                                narrater "he forces the drink inside u"
-                                                            "take the drink":
-                                                                narrater "you take the drink and drink it"
-                                                        narrater "you wake up"
-                                                        k "what.. the hell"
-                                                        narrater "you dont know what happened"
-                                                        narrater "the bartender doesnt seem to be anywhere"
-                                                        menu:
-                                                            "leave the bar":
-                                                                $ casinoLovesYou -= 1
-                                                                $ barguybadshinger = 3
-                                                                jump casinoRIGHT
-
-                                                    b2 "no.."
-                                                    b2 "no, that's not funny."
-                                                    k "i'm not joking."
-                                                    b2 "..."
-                                                    b2 "you’re sick."
-                                
-                                                    menu:
-                                                        "Double down":
-                                                            k "you don't understand. it wasn a person."
-                                                            b2 "GET OUT."
-                                                            k "heyy"
-                                                            b2 "LEAVE ME BE"
-                                                            $ casinoLovesYou -= 1
-                                                            $ barguybadshinger = 3
-                                                            jump casinoRIGHT
-
-                                                        "Backtrack":
-                                                            k "wait— i didn't mean—"
-                                                            b2 "no. you said enough."
-                                                            $ casinoLovesYou -= 1
-                                                            $ barguybadshinger = 3
-                                                            jump casinoRIGHT
-                                "no, haven'tr": 
-                                    k "Your brother huh? Doesn;t ring any bells. Didnt see anyone like that"
-                                    play voiceact bart21
-                                    b2 "it's a shame, he is such a good bartender, maybe evebn the best int he world."
-                                    jump allgoodbar
-                            label allgoodbar:
-                                show bartwin default
-                                play voiceact bart22
-                                b2 "OOoh! I've got a quesiton!! Do you have any siblings?"
-                                menu:
-                                    "No":
-                                        k "No, but i have some cousins. A cousin was over at my house one time and i smashed her head against the glass This Glass is cracked because i slammed my cousins head into it at a family reunion //quote from iamnottkl dms (2023-06-03 15:49)"
-                                    "Yeah":
-                                        k "Yeah, i have a siblings"
-                                        k "actually, that's a lie"
-                                        show bartwin surpris
-                                        play voiceact bart23
-                                        with vpunch
-                                        b2 "what?"
-                                        k "But I have some cousin! A cousin was over at my house one time and i smashed her head against the glass This Glass is cracked because i slammed my cousins head into it at a family reunion //quote from iamnottkl dms (2023-06-03 15:49)"
-                                play voiceact bart24
-                                b2 "But htats so mean, why would you do that"
-                                show bartwin default
-                                b2 "riiighttt.. so.. this is a bar"
-                                b2 "how couldi forgot"
-                                b2 "you want something to drink?"
-                                menu:
-                                    b2 "you want something to drink?"
-                                    "ya give it":
-                                        narrater "you order a drink"
-                                    "nana":
-                                        k "nah,, im good"
-                                        b2 "oh well, thats a shame"
-                                        menu:
-                                            "leave the bar":
-                                                $ barguybadshinger = 1
-                                                jump casinoRIGHT
-                                label drink:
-                                    play sound win
-                                    show foundbeer
-                                    narrater "you have now beer!!!! zywiec!!!"
-                                    hide foundbeer
-                                    play sound cloth
-                                    show hand beer with moveinbottom
-                                    $ karolTalkingMad = False
-                                    k "oh yeaah"
-                                    show hand drink
-                                    play sound drink
-                                    k "oh yeaah"
-                                    stop music fadeout 0.5
-                                    play sound boom
-                                    scene casbarevil
-                                    show bartwin horse
-                                    #ooh what the fuckk
-                                    #changes into horse
-                                    
-                                    k "you.."
-                                    $ karolTalkingMad = True
-                                    k "MOTHERFUKCER!!"
-                                    
-
-                                    show fists 1 with moveinbottom
-                                    menu:
-                                        "{b}FIGHT":
-                                            show fists 2 with hpunch
-                                            play sound bad
-                                            show bartwin horse1 with hpunch
-                                            $ renpy.pause(0.5, hard=True)
-                                            show fists 1
-                                    k "you PIECE OF SHIT"
-                                    show bartwin horse1 at vpunch
-                                    play sound hose1
-                                    menu:
-                                        "{b}FIGHT":
-                                            show fists 2 with hpunch
-                                            play sound bad
-                                            show bartwin horse2 with hpunch
-                                            $ renpy.pause(0.5, hard=True)
-                                            show fists 1
-                                    k "I WILL KILL YOU JUST LIKE I KILLED YOUR BROTHER"
-                                    show bartwin horse2 at vpunch
-                                    play sound hose2
-                                    menu:
-                                        "{b}FIGHT":
-                                            show fists 2 with hpunch
-                                            play sound bad
-                                            show bartwin horse3 with hpunch
-                                            $ renpy.pause(0.5, hard=True)
-                                            show fists 1
-                                    show bartwin horse3 at vpunch
-                                    play sound hose1
-                                    menu:
-                                        "{b}FIGHT":
-                                            show fists 2 with hpunch
-                                            play sound bad
-                                            show bartwin horse4 with hpunch
-                                            $ renpy.pause(0.5, hard=True)
-                                            show fists 1
-                                    show bartwin horse4 at vpunch
-                                    play sound hose3
-                                    $ karolTalkingMad = False
-                                    k "YO BASTARD"
-                                    $ renpy.pause(0.2, hard=True)
-                                    scene black
-                                    play sound pan
-                                    narrater "somebody hits you on the head with a pan"
-                                    
-                                    narrater "it leaves you stunned"
-                                    narrater " adn you lose consiousness"
-                                    narrater "after some time you wake up"
-                                    scene courthostage
-                                    play voiceact bardead
-                                    $ karolTalkingMad = False
-                                    show bartwin died with dissolve
-                                    k "what the hell"
-                                    menu:
-                                        "try to move":
-                                            narrater "you trie to move but seems your're tied tot his chair"
-                                    k "what"
-                                    $ karolTalkingMad = True
-                                    k "WHO DID THIS TO ME"
-                                    $ karolTalkingMad = False
-                                    play sound cloth
-                                    show dryleft with moveinleft
-                                    play voiceact "drywall/dry 25.mp3"
-                                    p2 "heh heh heh"
-                                    play voiceact "drywall/dry 26.mp3"
-                                    p2 "we got you now you sick bastard"
-                                    play voiceact "drywall/dry 27.mp3"
-                                    p2 "what's with you and bartenders?"
-                                    play sound appear
-                                    show chief 1 with moveinbottom
-                                    un "what? whats going on?"
-                                    un "i saw a commotion in the cameras what is going on in my casino man"
-                                    ch "also btw i am the chief of this place"
-                                    play voiceact "drywall/dry 28.mp3"
-                                    p2 "i am  a police officer."
-                                    play voiceact "drywall/dry 29.mp3"
-                                    p2 "we are chasing down a suspect who killed a bartender a block away"
-                                    play sound cloth
-                                    show zlink right2 with moveinright
-                                    play voiceact "zipps/zippy 28.mp3"
-                                    p1 "he KILLED ANOTHER ONE??"
-                                    ch "killed?"
-                                    play sound cloth
-                                    hide chief 1 with dissolve
-                                    narrater "chief guy turns around and sees bar guy on th eground"
-                                    play sound appear
-                                    show chief 1 with moveinbottom
-                                    ch "WHAT??"
-                                    ch "HOW COULD YOU  KILL MY BARTENDER GUY!!!"
-                                    play voiceact "drywall/dry 30.mp3"
-                                    p2 "dont worry, he isnt dead"
-                                    play voiceact "drywall/dry 32.mp3"
-                                    p2 "i checked on him after i tied down this bastard, he should be finee"
-                                    play voiceact "zipps/zippy 29.mp3"
-                                    p1 "in any case we finally have the suspect in custody"
-                                    menu:
-                                        "defiance":
-                                            k "i refuse to be treated this way"
-                                            $ karolTalkingMad = True
-                                            k "DO YOU HVAE THE SLIGHTEST CLUE WHO I AM?????"
-                                            $ karolTalkingMad = False
-                                            k "extremely cool story map"
-                                            k "ever heard that name before?"
-                                            $ karolTalkingMad = True
-                                            k "HAVE YOU???"
-                                            $ karolTalkingMad = False
-                                            play voiceact "drywall/dry ehh.mp3"
-                                            p2 "ehh"
-                                            ch "shut up yellow cunt, officers please take him away from the premises"
-                                            menu:
-                                                "WAIT":
-                                                    k "look, i didnt kill anyone ok?"
-                                                    k "plus, the people i beat up weren't people, they were horses!"
-                                        "acceptance":
-                                            k "i've done wrong.. i admit"
-                                            k "take me away"
-                                    jump policecar
-                                    "simon here goes karol beats barguy close to death thing hereee right hereee" #SIMOOOOOOOOOOOOOOOOOOOOOOOOOOOOON
+                                "Double down":
+                                    k "you don't understand. it wasn a person."
+                                    b2 "GET OUT."
+                                    k "heyy"
+                                    b2 "LEAVE ME BE"
                                     $ casinoLovesYou -= 1
-                                    $ barguybadshinger = 3 #this is just so the playtest doesnt break u can change that
+                                    $ barguybadshinger = 3
                                     jump casinoRIGHT
-                        else:
-                            if barguybadshinger == 1:
-                                play sound appear
-                                show bartwin default with dissolve
-                                b2 "oh did u change ur mind??"
-                                label mindchaning:
-                                    b2 "i have some good drinks dinks gn8ks"
-                                    if barguyloops == 1:
-                                        menu:
-                                            "yeah":#SIMOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOON
-                                                k "give me some drink"
-                                                jump drink
-                                            "no":
-                                                k "no i dont wantt"
-                                                b2 "no think about it"
-                                            "FLEE":
-                                                jump casinoRIGHT
-                                    b2 "i have some good drinks dinks gn8ks"
-                                    menu:
-                                        "yeah":#SIMOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOON
-                                            k "give me some drink"
-                                            jump drink
-                                        "no":
-                                            k "no i dont wantt"
-                                            b2 "no think about it"
 
-                                    menu:
-                                        b2 "get some drink man is good for you"
-                                        "no is bad":
-                                            k "i am very healthy man i dont drink"
-                                            $ karolTalkingMad = True
-                                            extend " IS NOT GOOD FOR ME"
-                                            $ barguyloops = 1
-                                            jump mindchaning
-                                        "okay fine":
-                                            k "oooooh fiiine i guess i could have something to dribnnk"
-                                            jump drink
+                                "Backtrack":
+                                    k "wait— i didn't mean—"
+                                    b2 "no. you said enough."
+                                    $ casinoLovesYou -= 1
+                                    $ barguybadshinger = 3
+                                    jump casinoRIGHT
+                "no, haven'tr": 
+                    k "Your brother huh? Doesn;t ring any bells. Didnt see anyone like that"
+                    play voiceact bart21
+                    b2 "it's a shame, he is such a good bartender, maybe evebn the best int he world."
+                    jump allgoodbar
+            label allgoodbar:
+                show bartwin default
+                play voiceact bart22
+                b2 "OOoh! I've got a quesiton!! Do you have any siblings?"
+                menu:
+                    "No":
+                        k "No, but i have some cousins. A cousin was over at my house one time and i smashed her head against the glass This Glass is cracked because i slammed my cousins head into it at a family reunion //quote from iamnottkl dms (2023-06-03 15:49)"
+                    "Yeah":
+                        k "Yeah, i have a siblings"
+                        k "actually, that's a lie"
+                        show bartwin surpris
+                        play voiceact bart23
+                        with vpunch
+                        b2 "what?"
+                        k "But I have some cousin! A cousin was over at my house one time and i smashed her head against the glass This Glass is cracked because i slammed my cousins head into it at a family reunion //quote from iamnottkl dms (2023-06-03 15:49)"
+                play voiceact bart24
+                b2 "But htats so mean, why would you do that"
+                show bartwin default
+                b2 "riiighttt.. so.. this is a bar"
+                b2 "how couldi forgot"
+                b2 "you want something to drink?"
+                menu:
+                    b2 "you want something to drink?"
+                    "ya give it":
+                        narrater "you order a drink"
+                    "nana":
+                        k "nah,, im good"
+                        b2 "oh well, thats a shame"
+                        menu:
+                            "leave the bar":
+                                $ barguybadshinger = 1
+                                jump casinoRIGHT
+                label drink:
+                    play sound win
+                    show foundbeer
+                    narrater "you have now beer!!!! zywiec!!!"
+                    hide foundbeer
+                    play sound cloth
+                    show hand beer with moveinbottom
+                    $ karolTalkingMad = False
+                    k "oh yeaah"
+                    show hand drink
+                    play sound drink
+                    k "oh yeaah"
+                    stop music fadeout 0.5
+                    play sound boom
+                    scene casbarevil
+                    show bartwin horse
+                    #ooh what the fuckk
+                    #changes into horse
+                    
+                    k "you.."
+                    $ karolTalkingMad = True
+                    k "MOTHERFUKCER!!"
+                    
+
+                    show fists 1 with moveinbottom
+                    menu:
+                        "{b}FIGHT":
+                            show fists 2 with hpunch
+                            play sound bad
+                            show bartwin horse1 with hpunch
+                            $ renpy.pause(0.5, hard=True)
+                            show fists 1
+                    k "you PIECE OF SHIT"
+                    show bartwin horse1 at vpunch
+                    play sound hose1
+                    menu:
+                        "{b}FIGHT":
+                            show fists 2 with hpunch
+                            play sound bad
+                            show bartwin horse2 with hpunch
+                            $ renpy.pause(0.5, hard=True)
+                            show fists 1
+                    k "I WILL KILL YOU JUST LIKE I KILLED YOUR BROTHER"
+                    show bartwin horse2 at vpunch
+                    play sound hose2
+                    menu:
+                        "{b}FIGHT":
+                            show fists 2 with hpunch
+                            play sound bad
+                            show bartwin horse3 with hpunch
+                            $ renpy.pause(0.5, hard=True)
+                            show fists 1
+                    show bartwin horse3 at vpunch
+                    play sound hose1
+                    menu:
+                        "{b}FIGHT":
+                            show fists 2 with hpunch
+                            play sound bad
+                            show bartwin horse4 with hpunch
+                            $ renpy.pause(0.5, hard=True)
+                            show fists 1
+                    show bartwin horse4 at vpunch
+                    play sound hose3
+                    $ karolTalkingMad = False
+                    k "YO BASTARD"
+                    $ renpy.pause(0.2, hard=True)
+                    scene black
+                    play sound pan
+                    narrater "somebody hits you on the head with a pan"
+                    
+                    narrater "it leaves you stunned"
+                    narrater " adn you lose consiousness"
+                    narrater "after some time you wake up"
+                    scene courthostage
+                    play voiceact bardead
+                    $ karolTalkingMad = False
+                    show bartwin died with dissolve
+                    k "what the hell"
+                    menu:
+                        "try to move":
+                            narrater "you trie to move but seems your're tied tot his chair"
+                    k "what"
+                    $ karolTalkingMad = True
+                    k "WHO DID THIS TO ME"
+                    $ karolTalkingMad = False
+                    play sound cloth
+                    show dryleft with moveinleft
+                    play voiceact "drywall/dry 25.mp3"
+                    p2 "heh heh heh heh"
+                    play voiceact "drywall/dry 26.mp3"
+                    p2 "we got you now you sick bastard"
+                    play voiceact "drywall/dry 27.mp3"
+                    p2 "what's with you and beating up bartenders?"
+                    play sound appear
+                    show chief 1 with moveinbottom
+                    un "what? whats going on?"
+                    un "i saw a commotion in the cameras what is going on in my casino man"
+                    ch "also btw i am the chief of this place"
+                    play voiceact "drywall/dry 28.mp3"
+                    p2 "im a police officer."
+                    play voiceact "drywall/dry 29.mp3"
+                    p2 "we are chasing down a suspect who killed a bartender a block away"
+                    play sound cloth
+                    show zlink right2 with moveinright
+                    play voiceact "zipps/zippy 28.mp3"
+                    p1 "he KILLED ANOTHER ONE??"
+                    ch "killed?"
+                    play sound cloth
+                    hide chief 1 with dissolve
+                    narrater "chief guy turns around and sees bar guy on th eground"
+                    play sound appear
+                    show chief 1 with moveinbottom
+                    ch "WHAT??"
+                    ch "HOW COULD YOU  KILL MY BARTENDER GUY!!!"
+                    play voiceact "drywall/dry 30.mp3"
+                    p2 "dont fret, he aint dead"
+                    play voiceact "drywall/dry 32.mp3"
+                    p2 "i checked on him after i tied down this bastard, he should be finee"
+                    play voiceact "zipps/zippy 29.mp3"
+                    p1 "in any case we finally have the suspect in custody"
+                    menu:
+                        "defiance":
+                            k "i refuse to be treated this way"
+                            $ karolTalkingMad = True
+                            k "DO YOU HVAE THE SLIGHTEST CLUE WHO I AM?????"
+                            $ karolTalkingMad = False
+                            k "extremely cool story map"
+                            k "ever heard that name before?"
+                            $ karolTalkingMad = True
+                            k "HAVE YOU???"
+                            $ karolTalkingMad = False
+                            play voiceact "drywall/dry ehh.mp3"
+                            p2 "ehh"
+                            ch "shut up yellow cunt, officers please take him away from the premises"
+                            menu:
+                                "WAIT":
+                                    k "look, i didnt kill anyone ok?"
+                                    k "plus, the people i beat up weren't people, they were horses!"
+                        "acceptance":
+                            k "i've done wrong.. i admit"
+                            k "take me away"
+                    jump policecar
+                    "simon here goes karol beats barguy close to death thing hereee right hereee" #SIMOOOOOOOOOOOOOOOOOOOOOOOOOOOOON
+                    $ casinoLovesYou -= 1
+                    $ barguybadshinger = 3 #this is just so the playtest doesnt break u can change that
+                    jump casinoRIGHT
+        else:
+            if barguybadshinger == 1:
+                play sound appear
+                show bartwin default with dissolve
+                b2 "oh did u change ur mind??"
+                label mindchaning:
+                    b2 "i have some good drinks dinks gn8ks"
+                    if barguyloops == 1:
+                        menu:
+                            "yeah":#SIMOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOON
+                                k "give me some drink"
+                                jump drink
+                            "no":
+                                k "no i dont wantt"
+                                b2 "no think about it"
+                            "FLEE":
+                                jump casinoRIGHT
+                    b2 "i have some good drinks dinks gn8ks"
+                    menu:
+                        "yeah":#SIMOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOON
+                            k "give me some drink"
+                            jump drink
+                        "no":
+                            k "no i dont wantt"
+                            b2 "no think about it"
+
+                    menu:
+                        b2 "get some drink man is good for you"
+                        "no is bad":
+                            k "i am very healthy man i dont drink"
+                            $ karolTalkingMad = True
+                            extend " IS NOT GOOD FOR ME"
+                            $ barguyloops = 1
+                            jump mindchaning
+                        "okay fine":
+                            k "oooooh fiiine i guess i could have something to dribnnk"
+                            jump drink
 
 
     label casinoFORW:
@@ -2562,27 +2738,38 @@ label _CASINO_ENTRY_HERE________________________________________________________
             play sound cloth
             show sexyguy 6 with moveinright
             $ casinoMajorHappens += 1
-            sx "Hello there, im the gamemaster"#dialog here is subject to change i think il see maybe mayhaps
+            play voiceact "sexyguy/sexyguy 1.mp3"
+            sx "Hello there, im the gamemaster"
+            play voiceact "sexyguy/sexyguy 2.mp3"
             sx "Would you like to play my game?"
             menu:
                 "play his game":
                     k "yeah sure why not"
                 "not":
                     k "nah im not gonna"
-                    sx "Thats a shame, come back if you change your mind!"
+                    play voiceact "sexyguy/sexyguy 3.mp3"
+                    sx "Damn well, thats a shame. Come back if you change your mind!"
                     hide sexyguy 6
                     hide shapeholes
                     jump casinoFORW
-            sx "Great! Lets begin"
+            play voiceact "sexyguy/sexyguy 4.mp3"
+            sx "Great! Thats great. Now lets begin"
             hide sexyguy 6 with moveoutright
             $ renpy.pause(0.6, hard=True)
+            play sound cloth
             show sexyguy 2 with dissolve
+            play voiceact "sexyguy/sexyguy 5.mp3"
             sx "Im gonna explain the rules to you now"
-            sx "Its pretty simple"
+            play voiceact "sexyguy/sexyguy 6.mp3"
+            sx "Its pretty simple, you'll see"
             show sexyguy 1
+            play sound appear
+            play voiceact "sexyguy/sexyguy 7.mp3"
             sx "Im gonna give you some precious BLOCKS, one by one"
-            sx "And YOU have to fit them to their respecting shaped hole"
+            play voiceact "sexyguy/sexyguy 8.mp3"
+            sx "And YOU, you have to fit them to their respecting shaped hole"
             k "yeah okay"
+            play voiceact "sexyguy/sexyguy 9.mp3"
             sx "Great, now I am gonna give you the first piece..."
             jump sexyshapegamewhole
         elif sexyguyCasinoShingas == 12:
@@ -2600,48 +2787,65 @@ label _CASINO_ENTRY_HERE________________________________________________________
     label sexyguyanswersGOOD:
         if (sexyguyMadnessLevel >= 5) and not (shapeDroppable == "square") and not sexyguySurprised:
             show sexyguy 2
+            play voiceact "sexyguy/sexyguy 10.mp3"
             sx "Wait, you're actually listening to me? I honestly did not expect this"
             $ sexyguySurprised == True
         elif (sexyguyCorrectas == 1) or (sexyguyCorrectas == 4):
             show sexyguy 1
+            play voiceact "sexyguy/sexyguy 11.mp3"
             sx "Wow! Correct!"
             show sexyguy 2
         elif sexyguyCorrectas == 2:
             show sexyguy 1
+            play voiceact "sexyguy/sexyguy 13.mp3"
             sx "Nice! Great job!"
         elif sexyguyCorrectas == 3:
             show sexyguy 2
-            sx "Good!"
+            play voiceact "sexyguy/sexyguy 14.mp3"
+            sx "Well, that works"
         elif sexyguyCorrectas == 5:
             show sexyguy 1
-            sx "Yes! You're pretty good at this!"
+            play voiceact "sexyguy/sexyguy 15.mp3"
+            sx "Damn! You're pretty good at this, huh"
         elif sexyguyCorrectas == 6:
             show sexyguy 1
+            play voiceact "sexyguy/sexyguy 16.mp3"
             sx "Congrats buddy! Keep doing what you do best!"
         elif sexyguyCorrectas == 7:
             show sexyguy 1
+            play voiceact "sexyguy/sexyguy 17.mp3"
             sx "Oh my god, you are so good at this u make me wanna..."
+            play voiceact "sexyguy/sexyguy 18.mp3"
             sx "Jump around naked! YES!"
             call sexyguyJUMPING
             show sexyguy 1 with dissolve
+            play voiceact "sexyguy/sexyguy 19.mp3"
             sx "Oh its so good, I love this"
         elif sexyguyCorrectas == 8:
             show sexyguy 2
-            sx "No... no way..."
+            play voiceact "sexyguy/sexyguy 20.mp3"
+            sx "No... no no no, no way!"
+            play voiceact "sexyguy/sexyguy 21.mp3"
             sx "You've put ALL OF THEM? In CORRECT SLOTS?!!"
             show sexyguy 3
-            sx "ITS INSANE!!! YOU ARE SO TALENTED..."
+            play voiceact "sexyguy/sexyguy 22.mp3"
+            sx "THATS... ITS- ITS INSANE!!! YOU ARE SO TALENTED..."
             show sexyguy 1
+            play voiceact "sexyguy/sexyguy 23.mp3"
             sx "No... I have to..."
+            play voiceact "sexyguy/sexyguy 24.mp3"
             sx "JUMP! JUMP AGAIN!!! I HAVE TO!!!"
             call sexyguyJUMPING
             show sexyguy 1 with dissolve
+            play voiceact "sexyguy/sexyguy 25.mp3"
             sx "I WANT TO JUMP AGAIN"
             $ sexyguyJumpMode = 1
             $ sexyguyJumpSpeed = 0.05
             call sexyguyJUMPING
             show sexyguy 1 with dissolve
+            play voiceact "sexyguy/sexyguy 26.mp3"
             sx "Okay okay... Im done..."
+            play voiceact "sexyguy/sexyguy 27.mp3"
             sx "You gave me such a good time"
         else:
             show sexyguy 3
@@ -2652,59 +2856,80 @@ label _CASINO_ENTRY_HERE________________________________________________________
     label sexyguyanswers:
         if (sexyguyMadnessLevel == 3) and (shapeDroppable == "square"):
             show sexyguy 2
+            play voiceact "sexyguy/sexyguy 35.mp3"
             sx "Hey man, i dont think these pieces should go into a square hole"
+            play voiceact "sexyguy/sexyguy 36.mp3"
             sx "You should consider trying other options"
         elif (sexyguyMadnessLevel == 4) and (shapeDroppable == "square"):
             show sexyguy 2
+            play voiceact "sexyguy/sexyguy 37.mp3"
             sx "Dude, these are not square pieces!"
         elif ((sexyguyMadnessLevel == 5) or (sexyguyMadnessLevel == 6)) and (shapeDroppable == "square"):
             play sound bad
             show sexyguy 3 with vpunch
-            sx "QUIT IT! STOP PUTTING EVERYTHING INTO A SQUARE HOLE!"
-            sx "Im starting to regret I even offered you this game in the first place!"
+            play voiceact "sexyguy/sexyguy 38.mp3"
+            sx "OH MY GOD, QUIT IT! STOP PUTTING EVERYTHING INTO A SQUARE HOLE!"
+            play voiceact "sexyguy/sexyguy 39.mp3"
+            sx "Im... im starting to regret I even offered you this game in the first place!"
         elif (sexyguyMadnessLevel == 7) and (shapeDroppable == "square"):
             play sound bad
             show sexyguy 3 with vpunch
+            play voiceact "sexyguy/sexyguy 40.mp3"
             sx "STOP DOING THAT! UGHHHHH"
+            play voiceact "sexyguy/sexyguy 41.mp3"
             sx "You're making me SO mad, I wanna JUMP NAKED!"
             call sexyguyJUMPING
             show sexyguy 3 with dissolve
+            play voiceact "sexyguy/sexyguy 42.mp3"
             sx "Dang it!"
         elif (sexyguyMadnessLevel == 8) and (shapeDroppable == "square"):
             play sound bad
             show sexyguy 3 with vpunch
+            play voiceact "sexyguy/sexyguy 43.mp3"
             sx "AGHHH!"
+            play voiceact "sexyguy/sexyguy 44.mp3"
             sx "WHY DO YOU TORMENT ME?!?!"
+            play voiceact "sexyguy/sexyguy 45.mp3"
             sx "IM SO PISSED AT YOU! I NEED TO GO JUMP AGAIN!"
             call sexyguyJUMPING
             show sexyguy 3 with dissolve
             $ sexyguyJumpMode = 1
             $ sexyguyJumpSpeed = 0.05
+            play voiceact "sexyguy/sexyguy 46.mp3"
             sx "{color=#e34236}I HATE YOU, I HATE YOU, I HATE YOU, I HATE YOU, I HATE YOU, I HATE YOU, I HATE YOU, I HATE YOU, I HATE YOU, I HATE YOU, I HATE YOU, I HATE YOU, I HATE YOU, I HATE YOU, I HATE YOU, I HATE YOU, I HATE YOU, I HATE YOU, I HATE YOU, I HATE YOU!!!"
             call sexyguyJUMPING
             show sexyguy 3 with dissolve
+            play voiceact "sexyguy/sexyguy 47.mp3"
             sx "{color=#e34236}YOU RUINED EVERYTHING"
             $ sexyguyJumpSpeed = 0.03
             call sexyguyJUMPING
             show sexyguy 3 with dissolve
+            play voiceact "sexyguy/sexyguy 48.mp3"
             sx "{color=#e34236}I WON'T LET THAT SLIDE, {b}YOU WILL REMEMBER THIS!!!"
         elif sexyguyCasinoShingas == 7:
             show sexyguy 2
+            play voiceact "sexyguy/sexyguy 33.mp3"
             sx "Aaaaand that was the last one..."
+            play voiceact "sexyguy/sexyguy 34.mp3"
             extend " and its wrong"
         elif (sexyguyWrongHoles == 1) or (sexyguyWrongHoles == 4):
             show sexyguy 2
-            sx "Thats a wrong one buddy!"
+            play voiceact "sexyguy/sexyguy 28.mp3"
+            sx "Uhhhh, thats a wrong one buddy!"
             show sexyguy 1
-            sx "Try again with this new piece!"
+            play voiceact "sexyguy/sexyguy 29.mp3"
+            sx "Maybe try again with this new piece!"
         elif (sexyguyWrongHoles == 2) or (sexyguyWrongHoles == 6):
             show sexyguy 2
+            play voiceact "sexyguy/sexyguy 30.mp3"
             sx "Nope, thats not a good hole either!"
         elif (sexyguyWrongHoles == 3) or (sexyguyWrongHoles == 7):
             show sexyguy 2
+            play voiceact "sexyguy/sexyguy 31.mp3"
             sx "Nuh uh!"
         elif sexyguyWrongHoles == 5:
             show sexyguy 1
+            play voiceact "sexyguy/sexyguy 32.mp3"
             sx "Thats INCORRECT ha!"
         else:
             show sexyguy 3
@@ -2773,9 +2998,11 @@ label _CASINO_ENTRY_HERE________________________________________________________
 
         call screen holesfit1
         if doShapesMatch:
+            play voiceact "sexyguy/sexyguy 11.mp3"
             sx "Woah! Correct!"
             show sexyguy 2
-            sx "Cant believe you managed to get it right on the first try!"
+            play voiceact "sexyguy/sexyguy 12.mp3"
+            sx "Cant believe you actually managed to get it right on the first try!"
             show sexyguy 1
         elif shapeDroppable == "square":
             $ sexyguyMadnessLevel += 1
@@ -2800,19 +3027,26 @@ label _CASINO_ENTRY_HERE________________________________________________________
             if sexyguyMadnessLevel >= 4:
                 $ sexyguyMadnessLevel += 1
                 show sexyguy 2
+                play voiceact "sexyguy/sexyguy 49.mp3"
                 sx "Well, this one is actually a square..."
                 show sexyguy 3
+                play voiceact "sexyguy/sexyguy 50.mp3"
                 sx "But QUIT doing what you're DOING!"
+                show sexyguy 2
             else:
                 call sexyguyanswersGOOD
         else:
             if sexyguyMadnessLevel >= 4:
                 $ sexyguyMadnessLevel += 1
                 show sexyguy 2
+                play voiceact "sexyguy/sexyguy 51.mp3"
                 sx "Okay, so when it ACTUALLY IS a square..."
                 show sexyguy 3
+                play voiceact "sexyguy/sexyguy 52.mp3"
                 sx "YOU PUT IT, IN THE WRONG GODDAMN HOLE!!!!"
+                play voiceact "sexyguy/sexyguy 53.mp3"
                 sx "QUIT IT!!!!!!!"
+                show sexyguy 2
             else:
                 call sexyguyanswers
 
@@ -2828,12 +3062,18 @@ label _CASINO_ENTRY_HERE________________________________________________________
         else:
             $ sexyguyCasinoShingas = 10
         show sexyguy 1
+        play voiceact "sexyguy/sexyguy 54.mp3"
         sx "It seems that was the last one!"
         if sexyguyMadnessLevel >= 6:
-            sx "Very well, because I {nw=0.0}"
-            show sexyguy 3
+            play voiceact "sexyguy/sexyguy 63.mp3"
+            sx "Very well, because I {nw=2.4}"
+            show sexyguy 3 at vpunch
+            play sound bad
+            play voiceact "sexyguy/sexyguy 64.mp3"
             extend "NEVER WANT TO SEE YOU AGAIN!"
+            play voiceact "sexyguy/sexyguy 65.mp3"
             sx "I FUCKING HATE YOU! NEVER SHOW UP AGAIN OR ILL FUCKING KILL YOU"
+            play voiceact "sexyguy/sexyguy 66.mp3"
             sx "GO ROT IN HELL"
             play sound quickkrun
             hide sexyguy with dissolve
@@ -2843,11 +3083,16 @@ label _CASINO_ENTRY_HERE________________________________________________________
             $ sexyguyCasinoShingas = 12
         elif sexyguyCorrectas >= 4:
             if sexyguyCorrectas >= 7:
+                play voiceact "sexyguy/sexyguy 55.mp3"
                 sx "Such a shame, you played SO GOOOOD!"
+                play voiceact "sexyguy/sexyguy 56.mp3"
                 sx "I had a such a great time"
             else:
+                play voiceact "sexyguy/sexyguy 57.mp3"
                 sx "You actually played pretty well"
+                play voiceact "sexyguy/sexyguy 58.mp3"
                 sx "We had quite some fun"
+            play voiceact "sexyguy/sexyguy 59.mp3"
             sx "I hope we will see each other sometime soon"
             hide sexyguy with dissolve
             narrater "he shakes your hand and leaves"
@@ -2856,9 +3101,12 @@ label _CASINO_ENTRY_HERE________________________________________________________
             $ sexyguyCasinoShingas = 11
         else:
             show sexyguy 2
+            play voiceact "sexyguy/sexyguy 60.mp3"
             sx "You're not really good at this game, huh?"
             show sexyguy 1
+            play voiceact "sexyguy/sexyguy 61.mp3"
             sx "It's fine, you can try again next time! I'm sure you're gonna do better"
+            play voiceact "sexyguy/sexyguy 62.mp3"
             sx "Anyway, thank you for your time!"
             hide sexyguy with dissolve
             narrater "he shakes your hand and leaves"
@@ -3005,7 +3253,8 @@ label _CASINO_ENTRY_HERE________________________________________________________
             $ karolTalkingMad = False
             play voiceact "drywall/dry 33.mp3"
             p2 "is that so? lemme write that down, yup"
-            p2 "Either way, you're coming with me pal"
+            play voiceact "drywall/dry 46.mp3"
+            p2 "Either way, you're coming with me brotatochip"
             jump policecar
             
         menu:
@@ -3374,6 +3623,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
                 play voiceact "stalin/stalin 11.mp3"
                 wb "he spared us some money!"
             if sexyguyCasinoShingas == 11:
+                play voiceact "sexyguy/sexyguy 67.mp3"
                 sx "We had a DELIGHTFULL time"
             if barguybadshinger == 2:
                 b2 "such an awesome guy"
@@ -3393,16 +3643,22 @@ label _CASINO_ENTRY_HERE________________________________________________________
             if barguybadshinger == 3:
                 b2 "HE FUCKING KILLED MY BROTHER"
             if sexyguyCasinoShingas == 12:
+                play voiceact "sexyguy/sexyguy 68.mp3"
                 sx "I deeply regret playing with this man"
             play voiceact "bopis/boris FUCK YOU.mp3"
             bb "FUCK YOUU"
             "police men appear and the beating happen"
+            hide chief onlayer screens
+            hide bobis onlayer screens
+            stop music
             jump lospital##_________________________________________________TOFINISH
             
         else:
             $ renpy.pause(1,5, hard=True)
             narrater "noone really cares about your fate here"
             narrater "damn"
+            hide chief onlayer screens
+            hide bobis onlayer screens
             jump policecar
 
 
@@ -3501,6 +3757,8 @@ label _CASINO_ENTRY_HERE________________________________________________________
             $ flashBattery = 100
             $ starttime = renpy.get_game_runtime()
             $ lastCheckUpdate = renpy.get_game_runtime()
+            show screen fanextras
+            show screen melonlayerscreen
             call screen show_time
             if (renpy.get_game_runtime() - starttime) > 360:
                 jump casinoescape
@@ -3518,10 +3776,12 @@ label _CASINO_ENTRY_HERE________________________________________________________
         hide screen flashtop
         hide screen flashright
         hide screen DEBUGmode
+        hide screen fanextras
+        hide screen melonlayerscreen
         show dry2:
             zoom 0.01 yalign 0.5 xalign 0.5
             ease 0.5 zoom 1.2
-        play audio hl2scream
+        play audio "drywall/dry death1.mp3"
         $ renpy.pause(3.0, hard=True)
         scene black
         narrater "drywall got you lmao"
@@ -3537,6 +3797,8 @@ label _CASINO_ENTRY_HERE________________________________________________________
         hide screen flashtop
         hide screen flashright
         hide screen DEBUGmode
+        hide screen fanextras
+        hide screen melonlayerscreen
         show mat 1:
             zoom 0.01 yalign 0.5 xalign 0.5
             ease 0.5 zoom 1.2
@@ -3556,6 +3818,8 @@ label _CASINO_ENTRY_HERE________________________________________________________
         hide screen flashtop
         hide screen flashright
         hide screen DEBUGmode
+        hide screen fanextras
+        hide screen melonlayerscreen
         play audio victory
         $ renpy.pause(3.0, hard=True)
         narrater "what the hell"
@@ -3588,9 +3852,9 @@ label _CASINO_LEAVING_HERE______________________________________________________
         
         
         play voiceact "drywall/dry 34.mp3"
-        p2 "look who we have here"
+        p2 "lookee here"
         play voiceact "drywall/dry 35.mp3"
-        p2 "you got some nerve runnin away from me"
+        p2 "you got some hell of a nerve runnin away from me"
 
         show zlink 1 with moveinright
         play audio cloth
@@ -3608,9 +3872,9 @@ label _CASINO_LEAVING_HERE______________________________________________________
             play voiceact "drywall/dry 39.mp3"
             p2 "that scared him pretty hard"
         play voiceact "drywall/dry 40.mp3"
-        p2 "aaaand i didnt want to shoot him while he was running away"
+        p2 "aaaand u dont shoot a man thats running away"
         play voiceact "drywall/dry 41.mp3"
-        p2 "would be pretty mean, wouldn'nt it, karol mijas?"
+        p2 "i mean that would be pretty mean to do to a person, even if they are a criminal. Aint that right karol mijas?"
 
         menu:
             "Yeah":
@@ -3641,7 +3905,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
         play voiceact "drywall/dry 45.mp3"
         p2 "is that so?"
         play voiceact "drywall/dry 46.mp3"
-        p2 "Either way, you're coming with me pal"
+        p2 "Either way, you're coming with me brotatochip"
         play voiceact "zipps/zippy 14.mp3"
         p1 "oh dont't worry, he will be punished accordingly"
 
@@ -3656,14 +3920,15 @@ label _CASINO_LEAVING_HERE______________________________________________________
         stop music
         narrater "the officers take you away to their car"
         play voiceact "zipps/zippy 30.mp3"
-        p1 "you bastard, its so over for you"
+        p1 "you BASTARD{nw=1.5}"
+        extend ", its so OVER for you"
         #narrater "the police officers put you in their car"
 
         scene policecar
         narrater "they put you in the car look this is the car!"
         narrater "impossible!! its the car!!"
         play voiceact "drywall/dry 47.mp3"
-        p2 "haaang tight buddy, a court room has been already prepared for you"
+        p2 "haaang tight buddy, a court room's already ready and raring for ya"
 
         scene later
         play audio later
@@ -3926,10 +4191,9 @@ label _CASINO_LEAVING_HERE______________________________________________________
                 play audio zip
                 "you open the bag"
                 
-        play audio drumroll
+        play sound drumroll
         narrater "inside... you find:"
-        stop audio
-        play audio found1
+        play sound found1
         show foundtime
         narrater "A mysterious device! Fascinating!!!"
 
@@ -4094,14 +4358,10 @@ label _CASINO_LEAVING_HERE______________________________________________________
 
     screen retry:
         imagebutton:
-            xanchor 0.5
-            yanchor 0.5
             xpos 0.15
             ypos 0.85
             idle "retrybut.png"
             action [Play("audio", "gobackclick.mp3"), Jump("choose")]
-
-
     
 
     label courtPresidents:
@@ -4117,8 +4377,11 @@ label _CASINO_LEAVING_HERE______________________________________________________
         j "So.. Karol mijas. YOu rea the defendast, and your laawayer thas been appointed to you is on the way."
         play audio appear
         show trump with moveinright
+        play voiceact "miki/tru1.mp3"
         t "hey hey, hello im here because im very interested in this case, very interested indeed"
+        play voiceact "miki/tru2.mp3"
         t "some people are saying this is the greatest court case of all time. I don't know if that's true, but a lot of very smart people are saying it."
+        play voiceact "miki/tru3.mp3"
         t "everyobodys asking 'Are you going to the court case' and i said 'maybe', maybe i am, and quite frankly ive never seen a courtroom like this with such trmendous energy before"
         $ renpy.pause(1.0, hard=True)
         play audio appear
@@ -4126,16 +4389,20 @@ label _CASINO_LEAVING_HERE______________________________________________________
             matrixtransform RotateMatrix(0, 0, 0)
             ease 0.5 matrixtransform RotateMatrix(0, 0, 40)
         j "hey ths is my courtroom im the judge"
-        #play audio appear
+        play voiceact "miki/tru4.mp3"
         t "uuhh, no, frankly speaking, i am the president here and uh you gotta listen to me, alright, is that clear?"
+        play voiceact "miki/tru5.mp3"
         t "hey barrack, get over here"
         play audio cloth
         show obama with moveinright
         ob "hello i am your president barac obmana"
+        play voiceact "miki/tru mm yeah.mp3"
         t "yeah"
         ob "yes trump, what is it trump?"
+        play voiceact "miki/tru6.mp3"
         t "what do you think of this.. highly interesting court case tremeendous, even, absoloutely tremendous"
         ob "well, i dont know trump, maybe we should let the court actually work things out and uuh see how this court case goes huh"
+        play voiceact "miki/tru7.mp3"
         t "alright, alright, but believe me, ive seen a lot of courtrooms, and this courtroom? its top tier, maybe even one of the best"
 
         play audio appear
@@ -4147,9 +4414,11 @@ label _CASINO_LEAVING_HERE______________________________________________________
         play audio applause1
         extend " {color=#db190b}murder!!{/color}"
         play audio impact2
+        play voiceact "miki/tru MURDER.mp3"
         t "{color=#db190b}Murderrr???"
         show trump:
             ease 1.5 xpos 860
+        play voiceact "miki/tru8.mp3"
         t "murder you say.. people tell me all the time, murder is pretty bad, no really, i wonder how this 'Karol mijas' is going to deal with this  massive accusation.. quite a massive accusation this is"
     
         play audio appear
@@ -4161,6 +4430,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
         play audio appear
         show dryleft with moveinleft
         p2 "yes your honour"
+        play voiceact "miki/tru9.mp3"
         t "hey sleepy joe, i think you should listen to this. i bet nobodys seen anything like it"
         play audio shleeping
         hide dryleft with dissolve
@@ -4168,6 +4438,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
         
         narrater "seems hes deep asleep"
         ob "maybe we should just let him sleep, donald"
+        play voiceact "miki/tru10.mp3"
         t "alright, alright, okay, dry looking guy, you may continue"
 
         play audio appear
@@ -4182,16 +4453,20 @@ label _CASINO_LEAVING_HERE______________________________________________________
         p1 "when we arrived at the scene, we saw a dead bartender, dead on the ground"
         p2 "quite a gruesome sight."
 
-        t "a dead bartender... sad. really sasd."
+        play voiceact "miki/tru11.mp3"
+        t "a dead bartender... sad. really sasd.{nw=1.0}"
         show trump:
             ease 1.0 xalign 0.5
         extend "but ive seen a lot of things like this-maybe more than anybody, and, frankly its a verry cmplex situation."
+        play voiceact "miki/tru12.mp3"
         t "I wonder if he was an american.. "
+        play voiceact "miki/tru13.mp3"
         t "or one of those pesky latinos, monkeys, mexicans, whatever you can call them"
         show obama:
             ease 0.4 xpos 920
         ob "hey trump, i think we should not express thees feelings right now"
         ob "we can talk about them later in the white house"
+        play voiceact "miki/tru14.mp3"
         t "sure sure, im just making a statement"
         
         p2 "in the building, we encountered.. "
@@ -4201,6 +4476,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
         play voiceact "zipps/zippy 26.mp3"
         p1 "i encountered him further in the building, his fists, covered in blood"
 
+        play voiceact "miki/tru15.mp3"
         t "quite frankly im wondering, what the defendant would say to this.."
 
         menu:
@@ -4215,7 +4491,8 @@ label _CASINO_LEAVING_HERE______________________________________________________
                 $ staysilent += 1
                 narrater "you stay silent"
                 narrater "smart move, as your lawyer still isnt present"
-                t "okay, okay, the silent treatment"
+                play voiceact "miki/tru16.mp3"
+                t "alright, okay, the silent treatment"
             "Victim was a horse":
                 k "youe honor.."
                 k "te victim was.."
@@ -4226,8 +4503,11 @@ label _CASINO_LEAVING_HERE______________________________________________________
         un "what he ell??"
         play audio cloth
         show teeguy serious with dissolve
+        play voiceact "treeguy/treeguy 1.mp3"
         l "you queestioned my client without me here???"
+        play voiceact "treeguy/treeguy 2.mp3"
         l "sorry im late sugar pup"
+        play voiceact "treeguy/treeguy 3.mp3"
         l "i had a wax job on my ass"
         menu:
             "WHAT HTOOK YOU SO LONMG": #ass waxxing angry
@@ -4236,25 +4516,36 @@ label _CASINO_LEAVING_HERE______________________________________________________
                 k "WHAT TOOK YOU SO LONG"
                 k "you coul'ved waxxed ur ass another time! MOTHERFUCKER"
                 $ karolTalkingMad = False
+                play voiceact "treeguy/treeguy 4.mp3"
                 l "waxxing my ass helps me to focus in court.."
                 narrater "he turn towards the judge and the others"
                 hide court3
                 hide zlink right
                 hide dryleft
                 show teeguy left
+                play voiceact "treeguy/treeguy 5.mp3"
                 l "let me get this straight..."
+                play voiceact "treeguy/treeguy 6.mp3"
                 l "ur saying.. the victim was brutally fisted with clear intention of killing him"
+                play voiceact "treeguy/treeguy 7.mp3"
                 l "and was done on purpose"
+                play voiceact "treeguy/treeguy 8.mp3"
                 l "according to my book-idy-book!"
+                play voiceact "treeguy/treeguy 9.mp3"
                 l "under the {color=#db190b}'Baudžiamasis kodeksas'{/color}"
+                play voiceact "treeguy/treeguy 10.mp3"
                 l "{color=#38465c}Nusikaltimas yra tyčinis, jeigu jis padarytas tiesiogine ar netiesiogine tyčia.
                 jį darydamas asmuo suvokė pavojingą nusikalstamos veikos pobūdį, numatė, kad dėl jo veikimo ar neveikimo gali atsirasti šiame kodekse numatyti padariniai, ir jų norėjo.{/color}"
+                play voiceact "treeguy/treeguy 11.mp3"
                 l "i apologisze, i wasnt able to get this book in eglish"
+                play voiceact "miki/tru17.mp3"
                 t "i dont know what hes saying..."
+                play voiceact "miki/tru18.mp3"
                 t "but i think hes speaking truly from the heart!!"
                 k "yeah man he is"
                 show teeguy left:
                     ease 0.5 xpos 1500
+                play voiceact "treeguy/treeguy 12.mp3"
                 l "the attacker deserves {color=#db190b}death{/color}!!"
                 menu:
                     "defiance":
@@ -4291,20 +4582,22 @@ label _CASINO_LEAVING_HERE______________________________________________________
                                     "Open the lawyers bag":
                                         hide lawyerbag
                                         play audio zip
-                                        "you open the bag"
+                                        narrater "you open the bag"
                                         
-                                play audio drumroll
+                                play sound drumroll
                                 narrater "inside... you find:"
                                 $ renpy.music.stop()
-                                play audio found1
+                                play sound found1
                                 show hand time with moveinbottom
                                 narrater "a TIME MACHINE!"
+                                menu:
+                                    "use":
+                                        narrater "you press random thingss"
                                 $ renpy.config.skipping = False
-                                "wow" #BOOOOOORIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIISSSSSSSSSSSS TIME TRAVEL NOW NOW TIME TRAVEL NOW NOW TIME TRAVEL NOW NOW TIME TRAVEL NOW NOW TIME TRAVEL NOW NOW TIME TRAVEL NOW NOW
-                                
                                 show black with dissolve
-                                #$ renpy.pause(1, hard=True)
                                 hide hand time
+                                show vigen onlayer screens:
+                                    alpha 0.5
                                 jump timetravelpart
 
                                 label timesrav(withpause, timer):
@@ -4346,6 +4639,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
                                     show bar2
                                     hide black
                                     show black
+                                    hide vigen onlayer screens
                                     hide screen blackCover
                                     play music jazz fadein 1.5 volume 0.2
                                     hide black with dissolve
@@ -4357,18 +4651,48 @@ label _CASINO_LEAVING_HERE______________________________________________________
                                     b "I'm the bartender here"
                                     play voiceact bar3
                                     b "Would you like something to drink, good sir?"
-                                    $ renpy.pause(2, hard=True)
-                                    k "no fucking way"
+                                    $ renpy.pause(4, hard=True)
+                                    b "Is there something wrong, good sir-{nw=0.0}"
+                                    show bar2:
+                                        ease 1.0 zoom 1.5 xalign 0.6 ypos 1300
+                                    $ renpy.pause(1, hard=True)
+                                    show bfists 1 with moveinbottom
+                                    $ renpy.pause(1, hard=True)
+                                    play sound joe
+                                    $ beatcounter = 0#renpy.get_game_runtime()
+                                    while (beatcounter < 50):
+                                        if renpy.random.choice([0,1]):
+                                            show bfists 2
+                                        else:
+                                            show bfists 3
+                                        play sound bad
+                                        $ renpy.pause(0.05, hard=True)
+
+                                        show bfists 1
+                                        $ renpy.pause(0.05, hard=True)
+                                        $ beatcounter += 1
+                                    pause
+                                    #k "no fucking way"
+                                    play sound door
                                     hide bar2
+                                stop music
+                                play voiceact "miki/tru19.mp3"
                                 t "oh, you came back?"
                                 ob "we've been waiting here for you"
+                                play voiceact "miki/tru20.mp3"
                                 t "so karol mijas, uhh.. tell me.. what did you change with that precious precious time machine of yours?"
+                                play voiceact "miki/tru21.mp3"
                                 t "maybe you saw greater times.. maybe the times without those pesky mexicans"
+                                play voiceact "miki/tru22.mp3"
                                 t "the times when america was great.."
+                                play voiceact "miki/tru23.mp3"
                                 t "maybe we can make it great again"
                                 show teeguy left with moveinleft
+                                play voiceact "treeguy/treeguy 13.mp3"
                                 l "how could you use my time travelling machine???"
+                                play voiceact "treeguy/treeguy 14.mp3"
                                 l "did you atleast put it to good use?"
+                                play voiceact "treeguy/treeguy 15.mp3"
                                 l "well? did you?"
                                 menu:
                                     "explain":
@@ -4404,9 +4728,12 @@ label _CASINO_LEAVING_HERE______________________________________________________
                                     extend " because nothing changed"
                                     j "you are just a lyar!!"
                                 else:
+                                    play voiceact "treeguy/treeguy 16.mp3"
                                     l "soo....."
-                                    l "you used MY time machine to go BACK IN TIME and you..."
-                                    l "you just WASTED IT???"
+                                    play voiceact "treeguy/treeguy 17.mp3"
+                                    l "you used MY time machine to go BACK IN TIME..."
+                                    play voiceact "treeguy/treeguy 18.mp3"
+                                    l "and you just WASTED IT???"
                                 j "karol mijas, your guiltyness is clear as day"
                                 j "frankly, you dont derserve to live"
                                 j "but i cant hand out a death penalty"
@@ -4414,6 +4741,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
                                 j "so karol mijas, i hereby sentence you.."
                                 play audio applause1
                                 j "to {color=#de1809}500 years{/color} in prison"
+                                play voiceact "treeguy/treeguy yay.mp3"
                                 l "yay!"
                                 k "huh, thats better than death i guess"
                                 jump teprison
@@ -4427,10 +4755,14 @@ label _CASINO_LEAVING_HERE______________________________________________________
                         show zlink right with moveinright
                         play voiceact "zipps/zippy CANIDOIT.mp3"
                         p1 "CAN I DO IT????"
+                        play voiceact "miki/tru24.mp3"
                         t "SHUT UP! i'm gonna be th one who kills kills him"
                         k "arent you supposed to be my lawyer!??"
+                        play voiceact "treeguy/treeguy 19.mp3"
                         l "whats a lawyer??"
+                        play voiceact "treeguy/treeguy 20.mp3"
                         l "im just here ccause they promised me a free wax session"
+                        play voiceact "treeguy/treeguy 21.mp3"
                         l "they just gave me this suit and book and told me to act as a lawyer would"
                         k "aw fuckkkkkk"
                         k "then i guess im just going to prison"
@@ -4445,45 +4777,81 @@ label _CASINO_LEAVING_HERE______________________________________________________
                 hide zlink right
                 hide dryleft
                 show teeguy left
+                play voiceact "treeguy/treeguy 22.mp3"
                 l "you know the constitutions 31st article???"
+                play voiceact "treeguy/treeguy 23.mp3"
                 l "{color=#38465c}Asmeniui, kuris įtariamas padaręs nusikaltimą, ir kaltinamajam nuo jų sulaikymo arba pirmosios apklausos momento garantuojama teisė į gynybą, taip pat ir teisė turėti advokatą.{/color}"
+                play voiceact "miki/tru25.mp3"
                 t "what the fuck is he talking about?"
                 ob "idk trump, i think hes speaking lithuanian"
+                play voiceact "miki/tru26.mp3"
                 t "lithuania?? is that somewhere in russia??"
+                play voiceact "treeguy/treeguy yeah.mp3"
                 l "yweah"
+                play voiceact "treeguy/treeguy 24.mp3"
                 l "In any case, cornerning the matter about the murder..."
+                play voiceact "treeguy/treeguy 25.mp3"
                 l "under the constitutions 3rd article..."
+                play voiceact "treeguy/treeguy 26.mp3"
                 l "{color=#38465c}Tauta ir kiekvienas pilietis turi teisę priešintis bet kam, kas prievarta kėsinasi įvalstybės nepriklausomybę, teritorijos vientisumą, konstitucinę santvarką.{/color}"
+                play voiceact "treeguy/treeguy ahem.mp3"
                 l "ahem.."
+                play voiceact "treeguy/treeguy 27.mp3"
                 l "It is hereby submitted that the individual identified as Karol was engaged in actions directly in furtherance of his fiduciary and statutory obligations to his sovereign nation." 
                 play audio applause2
+                play voiceact "treeguy/treeguy 28.mp3"
                 l "Said obligations necessitated the Subject to initiate a decisive tactical intervention against a specific quadrupedal adversary."
                 j "okay okay, you can stop"
+                play voiceact "treeguy/treeguy 29.mp3"
                 l "Specifically, the adversary in question was an equine biological entity, legally classified under the species Equus caballus."
                 j "shut the fuck up"
-                l "Furthermore, it has been established through the factual record that this aforementioned equine entity was operating as an agent, symbol, or affiliated With Nazi's"
+                play voiceact "treeguy/treeguy 30.mp3"
+                l "Furthermore, it has been established through the factual record that this aforementioned equine entity was operating as an agent, symbol, or affiliated With the Nazi's"
                 play audio applause1
+                play voiceact "treeguy/treeguy 31.mp3"
                 l "thank you, thank you"
                 j "with the shown evidence, of the eques cabbales being affiliated with nazis and with karol mijas having obligations to defend his motherland, it's all clear to me now"
                 j "i hate to admid it.. "
                 play audio hammer1
                 j "the defandant is found not guilty.."
                 play audio disappointment
-                un "WE HATE THIS MAN!"
-                jump free_ending
+                crwd "WE HATE THIS MAN!"
+                stop music
+                jump skierniewiceplace
         
-        
+    label skierniewiceplace:
+        scene courthall1
+        play sound foot
+        narrater "you walk out of the court, filled with determination"
+        narrater "you are free"
+        play sound door
+        scene skierniewice
+        $ renpy.pause(2.0, hard=True)
+        k "danm its late rn"
+        k "where even em i"
+        show meloncar1 with moveinleft
+        $ renpy.pause(1.0, hard=True)
+        show meloncar2 onlayer screens
+        show melongifer:
+            zoom 0.25
+            xpos 1070 ypos 530
+        show melonguy 1
+        show meloncarwindow:
+            ypos 0
+            linear 1.0 ypos 400
+        $ renpy.pause(2.0, hard=True)
+        lon "yeah"
+        show melonguy 2
+        hide melongifer
+        pause
+        show melonguy 3
+        pause
+        show melonguy 4
+        pause        
+        jump end
 
     #call the ambulance, maybe they'll take him or something
 
-
-
-    label free_ending:
-        scene courthall1
-        narrater "you walk out of the court, filled with determination"
-        narrater "you are free"
-        "FINIHHHH"##_______________________________________________________________TO FINIJHHHHHHHH
-        jump end
 
     label lospital:
         scene hospit 1
@@ -4527,7 +4895,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
         hide dad with dissolve
         scene hospit 1
         show hosipit armsnlegs
-        "he left"
+        narrater "he left"
 
         narrater "suddenly door opens up"
         play audio appear
@@ -4561,10 +4929,16 @@ label _CASINO_LEAVING_HERE______________________________________________________
                 doc "this is very mean"
                 doc "no wonder your father doesnt love you"
         hide screen hopitalhand
-        show theend
-        $ renpy.pause(1,hard=True)
-        show end hospital
         window hide
+        show vigen:
+            alpha 0.0
+            ease 2.0 alpha 1.0
+        play audio endingbad
+        $ renpy.pause(2,hard=True)
+        show theend
+        $ renpy.pause(2.0)
+        play audio endingastext
+        show end hospital
         pause
         jump end
         
@@ -4572,12 +4946,12 @@ label _CASINO_LEAVING_HERE______________________________________________________
         play audio jailer
         scene pison
         if howmanytimes > 0:
-            "oh hey look, we're back here from that controller fail"
+            narrater "oh hey look, we're back here from that controller fail"
             $ karolTalkingMad = True
             k "FUCK SHIT NOT AGAIMN"
             $ karolTalkingMad = False
         else:
-            "oh no u got sent to prisonas"
+            narrater "oh no u got sent to prisonas"
             k "ash shit"
         $ renpy.pause(1.0,hard=True)
         k "shiit i guess im gonna"
@@ -4586,15 +4960,28 @@ label _CASINO_LEAVING_HERE______________________________________________________
         $ renpy.pause(3.0,hard=True)
         play audio openes
         show repledgemon with moveintop
+        $ renpy.pause(2.0,hard=True)
+        play voiceact "nernorn/rep1.mp3"
         un "hello.. karol mijas"
+        play voiceact "nernorn/rep2.mp3"
         rep "its me, repledge"
+        play voiceact "nernorn/rep3.mp3"
         rep "i come from the extremely cool story map from the gmod workshop"
+        play voiceact "nernorn/rep4.mp3"
         rep "i have gained consciounce and managed to materialize myself into the world of the living"
-        rep "as you are my dear creator, i am here to help you out"
+        play voiceact "nernorn/rep5.mp3"
+        rep "as you are my dear creator, i am here to help you"
+        show vigen:
+            alpha 0.0
+            ease 2.0 alpha 1.0
+        play audio endingbad
+        $ renpy.pause(2,hard=True)
         show theend
-        $ renpy.pause(1,hard=True)
+        $ renpy.pause(2.0)
+        play audio endingastext
         show end pris
-        "well this is the prison ending idk what should happen now BORIS"
+        pause
+        #"well this is the prison ending idk what should happen now BORIS"
 
     label end:
         scene black
