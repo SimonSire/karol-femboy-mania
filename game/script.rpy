@@ -1132,6 +1132,9 @@ label _1ST_SECTION_ORIGINAL_GAME_HERE___________________________________________
     label start:
 
         #jump lospital -simon i hate you for not deleting this
+        $ renpy.movie_cutscene("dry.webm")
+        $ renpy.movie_cutscene("syakj.webm")
+        $ renpy.movie_cutscene("bartwibn.webm")
         play music karoltheme_poor fadein 2.0 volume 0.2
         scene black
         show bed with dissolve
@@ -2283,6 +2286,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
                 #b2 "maybe you've even met him? he is such a good guy im sure you forget him if you had met him!!"
                 "yes actually":
                     k "yeah actually i had met him in the bar"
+                    play voiceact barta1
                     b2 "oh reaally??/ thats so cool!"
                     menu:
                         "we had some drins":
@@ -2290,14 +2294,20 @@ label _CASINO_ENTRY_HERE________________________________________________________
                             k "No i mean I HAD some drinks, he didnt drunk"
                             k "we had such a good time"
                             "hey simon u were supposed to make barguy shit himself here" #SIMOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOON
+                            play voiceact barta2
                             b2 "ooooh you had a good time huh???"
+                            play voiceact barta3
                             b2 "that makes me so happy!!!!!!"
-                            play sound fart
-                            ##########ARE YOU FUCKIN SERIOUS HERE____________________________________________________________________________________________
+                            #play sound fart
+                            play voiceact fartssas
+                            b2 "uuuh uhhh hey man i need to excuse myself for a moment"
+                            "teeheee i didnt finish this but look man is not my fualt leave me alone go fart in the toilet man"
+                            ##########ARE YOU FUCKIN SERIOUS HERE____________________________________________________________________________________________ :)))))))) dont worry ;) be happy
                             jump allgoodbar
                         "tell the truth":
                             k "i killed him"
                             show bartwin surpris
+                            play voiceact bartev0
                             b2 "thats.. ur.. ur joking right now.. arent you? i mean.. this. it has to be ajoke. if this is your idea of a joke its not funny.. its not funny at all.."
 
                             menu:
@@ -2317,6 +2327,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
                                 menu:
                                     b2 "its on the house..."
                                     "no..":
+                                        play voiceact bartev4
                                         b2 "hmpf.."
                                         narrater "he forces the drink inside u"
                                     "take the drink":
@@ -2330,18 +2341,23 @@ label _CASINO_ENTRY_HERE________________________________________________________
                                         $ casinoLovesYou -= 1
                                         $ barguybadshinger = 3
                                         jump casinoRIGHT
-
+                            play voiceact bartev5
                             b2 "no.."
+                            play voiceact bartev6
                             b2 "no, that's not funny."
                             k "i'm not joking."
+                            play voiceact bartev7
                             b2 "..."
+                            play voiceact bartev8
                             b2 "you’re sick."
         
                             menu:
                                 "Double down":
                                     k "you don't understand. it wasn a person."
+                                    play voiceact bartev9
                                     b2 "GET OUT."
                                     k "heyy"
+                                    play voiceact bartev10
                                     b2 "LEAVE ME BE"
                                     $ casinoLovesYou -= 1
                                     $ barguybadshinger = 3
@@ -2349,6 +2365,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
 
                                 "Backtrack":
                                     k "wait— i didn't mean—"
+                                    play voiceact bartev11
                                     b2 "no. you said enough."
                                     $ casinoLovesYou -= 1
                                     $ barguybadshinger = 3
@@ -2376,8 +2393,11 @@ label _CASINO_ENTRY_HERE________________________________________________________
                 play voiceact bart24
                 b2 "But htats so mean, why would you do that"
                 show bartwin default
+                play voiceact bart25
                 b2 "riiighttt.. so.. this is a bar"
+                play voiceact bart27
                 b2 "how couldi forgot"
+                play voiceact bart28
                 b2 "you want something to drink?"
                 menu:
                     b2 "you want something to drink?"
@@ -2385,6 +2405,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
                         narrater "you order a drink"
                     "nana":
                         k "nah,, im good"
+                        play voiceact bart29
                         b2 "oh well, thats a shame"
                         menu:
                             "leave the bar":
@@ -4395,12 +4416,15 @@ label _CASINO_LEAVING_HERE______________________________________________________
         t "hey barrack, get over here"
         play audio cloth
         show obama with moveinright
+        play voiceact "pbama/ob1.mp3" volume 2.0
         ob "hello i am your president barac obmana"
         play voiceact "miki/tru mm yeah.mp3"
         t "yeah"
+        play voiceact "pbama/ob2.mp3" volume 2.0
         ob "yes trump, what is it trump?"
         play voiceact "miki/tru6.mp3"
         t "what do you think of this.. highly interesting court case tremeendous, even, absoloutely tremendous"
+        play voiceact "pbama/ob3.mp3" volume 2.0
         ob "well, i dont know trump, maybe we should let the court actually work things out and uuh see how this court case goes huh"
         play voiceact "miki/tru7.mp3"
         t "alright, alright, but believe me, ive seen a lot of courtrooms, and this courtroom? its top tier, maybe even one of the best"
@@ -4437,6 +4461,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
         show sleepy with dissolve
         
         narrater "seems hes deep asleep"
+        play voiceact "pbama/ob4.mp3" volume 2.0
         ob "maybe we should just let him sleep, donald"
         play voiceact "miki/tru10.mp3"
         t "alright, alright, okay, dry looking guy, you may continue"
@@ -4464,7 +4489,9 @@ label _CASINO_LEAVING_HERE______________________________________________________
         t "or one of those pesky latinos, monkeys, mexicans, whatever you can call them"
         show obama:
             ease 0.4 xpos 920
+        play voiceact "pbama/ob5.mp3" volume 2.0
         ob "hey trump, i think we should not express thees feelings right now"
+        play voiceact "pbama/ob6.mp3" volume 2.0
         ob "we can talk about them later in the white house"
         play voiceact "miki/tru14.mp3"
         t "sure sure, im just making a statement"
@@ -4652,6 +4679,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
                                     play voiceact bar3
                                     b "Would you like something to drink, good sir?"
                                     $ renpy.pause(4, hard=True)
+                                    play voiceact "barguy/timetravel1.mp3"
                                     b "Is there something wrong, good sir-{nw=0.0}"
                                     show bar2:
                                         ease 1.0 zoom 1.5 xalign 0.6 ypos 1300
@@ -4678,6 +4706,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
                                 stop music
                                 play voiceact "miki/tru19.mp3"
                                 t "oh, you came back?"
+                                play voiceact "pbama/ob6-5.mp3"
                                 ob "we've been waiting here for you"
                                 play voiceact "miki/tru20.mp3"
                                 t "so karol mijas, uhh.. tell me.. what did you change with that precious precious time machine of yours?"
@@ -4783,6 +4812,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
                 l "{color=#38465c}Asmeniui, kuris įtariamas padaręs nusikaltimą, ir kaltinamajam nuo jų sulaikymo arba pirmosios apklausos momento garantuojama teisė į gynybą, taip pat ir teisė turėti advokatą.{/color}"
                 play voiceact "miki/tru25.mp3"
                 t "what the fuck is he talking about?"
+                play voiceact "pbama/ob7.mp3"
                 ob "idk trump, i think hes speaking lithuanian"
                 play voiceact "miki/tru26.mp3"
                 t "lithuania?? is that somewhere in russia??"
