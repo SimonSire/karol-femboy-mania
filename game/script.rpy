@@ -3618,7 +3618,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
                 bb "boss, you got the guy? thats so good!"
             "flee":
                 narrator "you start flooring it"
-                scene cas1
+                scene casbeat1
                 hide chief onlayer screens
                 play sound cloth
                 $ renpy.pause(1.5, hard=True)
@@ -3669,9 +3669,101 @@ label _CASINO_ENTRY_HERE________________________________________________________
             play voiceact "bopis/boris FUCK YOU.mp3"
             bb "FUCK YOUU"
             "police men appear and the beating happen"
-            hide chief onlayer screens
-            hide bobis onlayer screens
-            stop music
+            menu:
+                "run the FUCK away":
+                    
+                    hide chief onlayer screens
+                    hide bobis onlayer screens
+                    stop music
+            scene casbeat2
+            $ renpy.movie_cutscene("run.webm")
+            
+            play sound cloth
+            play voiceact "pomer/pomerbeat1.mp3"
+            show wiktor 2 with moveinbottom
+            w "we hate this guy TASTE THIS!!!!"
+            scene black
+            play sound beating
+            $ renpy.pause(2.2, hard=True)
+            $ karolTalkingMad = True
+            k "OOWWWW"
+            k "SHIIIITTTTT{nw=0.5}"
+            k "OOWWWW FUUUCCCCKKKK"
+            menu:
+                "keep running":
+                    scene casbeat3
+                    $ renpy.movie_cutscene("turns.webm")
+                    play sound appear
+                    show wiktorhobo 2 with moveinleft
+                    play voiceact "stalin/stalin 14.mp3"
+                    wb "UGHH take THIS!!"
+                    scene black
+            play sound beating
+            $ renpy.pause(2.2, hard=True)
+            $ karolTalkingMad = True
+            k "OOWWWW SHIIITTTTT"
+            scene casbeat5
+            show mat 6
+            show black
+            $ renpy.movie_cutscene("matyjump.webm")
+            
+            k "FUUUUUUUUUUCCCCCCCCCCCCCCCCCCCKKKKKKKKKKKKKK IT HURTSS"
+            k "WHOO DID THAT"
+            $ karolTalkingMad = False
+            show black:
+                alpha 1.0
+                linear 3.0 alpha 0.0
+            mt "i dont know who you are.."
+            mt "but i guess ill beat the SHIT outta you"
+            k "what?"
+
+            hide mat 6
+            
+            show kick 1
+            $ renpy.pause(1.0, hard=True)
+            play sound bad
+            show kick 2 with vpunch
+            $ renpy.pause(1.0, hard=True)
+            show kick 1
+
+            $ renpy.pause(1.0, hard=True)
+            play sound bad
+            show kick 2 with vpunch
+            $ renpy.pause(0.2, hard=True)
+            show kick 1
+
+            $ renpy.pause(0.4, hard=True)
+            play sound bad
+            show kick 2 with vpunch
+            $ renpy.pause(0.2, hard=True)
+            show kick 1
+
+            $ renpy.pause(0.1, hard=True)
+            play sound bad
+            show kick 2 with vpunch
+            $ renpy.pause(0.1, hard=True)
+            show kick 1
+
+            $ renpy.pause(0.1, hard=True)
+            play sound bad
+            show kick 2 with vpunch
+            $ renpy.pause(0.1, hard=True)
+            show kick 1
+
+            $ renpy.pause(0.1, hard=True)
+            play sound bad
+            show kick 2 with vpunch
+            $ renpy.pause(0.1, hard=True)
+            show kick 1
+
+            $ renpy.pause(0.1, hard=True)
+            play sound bad
+            show kick 2 with vpunch
+            $ renpy.pause(0.1, hard=True)
+            show kick 1
+
+
+            mt "take this"
             jump lospital##_________________________________________________TOFINISH
             
         else:
