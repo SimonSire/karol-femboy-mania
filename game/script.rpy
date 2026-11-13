@@ -575,7 +575,7 @@ screen show_time:
     else:
         key "c" action [SetVariable("modeR", 0), Hide("DEBUGmode"), SetVariable("debugMode", False)]
     timer 0.1 action Function(makeMenMove) repeat True
-    timer 60.0 action SetVariable("zippsguy.location", 2)
+    #timer 60.0 action SetVariable("zippsguy.location", 2)
     key "z" action Function(ender)
     #key "t" action Function(makeMenMove)
 
@@ -1136,9 +1136,9 @@ label _1ST_SECTION_ORIGINAL_GAME_HERE___________________________________________
     label start:
 
         #jump lospital -simon i hate you for not deleting this
-        $ renpy.movie_cutscene("dry.webm")
-        $ renpy.movie_cutscene("syakj.webm")
-        $ renpy.movie_cutscene("bartwibn.webm")
+        #$ renpy.movie_cutscene("dry.webm")
+        #$ renpy.movie_cutscene("syakj.webm")
+        #$ renpy.movie_cutscene("bartwibn.webm")
         play music karoltheme_poor fadein 2.0 volume 0.2
         scene black
         show bed with dissolve
@@ -1189,7 +1189,7 @@ label _1ST_SECTION_ORIGINAL_GAME_HERE___________________________________________
         d "now start packing your things"
         hide dad with moveoutleft
 
-        narrater ".."
+        ".."
 
         play sound door
         scene bed
@@ -1203,8 +1203,8 @@ label _1ST_SECTION_ORIGINAL_GAME_HERE___________________________________________
         
         show callzelazo
 
-        $ renpy.pause(5.0, hard=True)
-
+        $ renpy.pause(5.0, hard=False)
+        stop sound
         k "hes busy"
         k "ill call someo ne else tgen"
 
@@ -1848,167 +1848,181 @@ label _CASINO_ENTRY_HERE________________________________________________________
         scene alley2
         narrater "there is a door here"
         menu:
-                "Enter door":
-                    play sound door
-                    scene cas1
-                    narrater "it looks like you enter a casino"
-                    play music casmusic fadein 1.5 volume 0.2
-                    show bobis 1 with moveinbottom
-                    play sound cloth
-                    $ renpy.pause(0.5, hard=True)
-                    play voiceact "bopis/boris 1.mp3"
-                    un "oh hey there fella"
-                    play voiceact "bopis/boris 2.mp3"
-                    un "i haven't seen you around here, you must be new herer"
-                    play voiceact "bopis/boris 3.mp3"
-                    bb "i am the floor manager"
-                    show bobis 3
-                    play voiceact "bopis/boris 4.mp3"
-                    bb "Welcome to the casino!!"
-                    play voiceact "bopis/boris 5.mp3"
-                    bb "make sure you behave or ill have to"
-                    play audio bad
-                    play voiceact "bopis/boris KICK.mp3"
-                    show bobis 2 with vpunch
-                    bb "{b}KICK{nw=0.5}"
-                    show bobis 3
-                    extend " {nw=0.5}"
-                    play audio bad
-                    play voiceact "bopis/boris YOU.mp3"
-                    show bobis 2 at vpunch
-                    extend "{b}YOU{nw=0.5}"
-                    show bobis 3
-                    extend " {nw=0.5}"
-                    play audio bad
-                    play voiceact "bopis/boris OUT.mp3"
-                    show bobis 2 at vpunch
-                    extend "{b}OUT"
-                    show bobis 3
+            "Enter door":
+                play sound door
+        scene cas1
+        narrater "it looks like you enter a casino"
+        play music casmusic fadein 1.5 volume 0.2
+        show bobis 1 with moveinbottom
+        play sound cloth
+        $ renpy.pause(0.5, hard=True)
+        play voiceact "bopis/boris 1.mp3"
+        un "oh hey there fella"
+        play voiceact "bopis/boris 2.mp3"
+        un "i haven't seen you around here, you must be new herer"
+        play voiceact "bopis/boris 3.mp3"
+        bb "i am the floor manager"
+        show bobis 3
+        play voiceact "bopis/boris 4.mp3"
+        bb "Welcome to the casino!!"
+        play voiceact "bopis/boris 5.mp3"
+        bb "make sure you behave or ill have to{nw=1.2}"
+        play audio bad
+        play voiceact "bopis/boris KICK.mp3"
+        show bobis 2 at vpunch
+        bb "{b}KICK{nw=0.5}"
+        show bobis 3
+        extend " {nw=0.5}"
+        play audio bad
+        play voiceact "bopis/boris YOU.mp3"
+        show bobis 2 at vpunch
+        extend "{b}YOU{nw=0.5}"
+        show bobis 3
+        extend " {nw=0.5}"
+        play audio bad
+        play voiceact "bopis/boris OUT.mp3"
+        show bobis 2 at vpunch
+        extend "{b}OUT"
+        show bobis 3
 
-                    play voiceact "bopis/boris 7.mp3"
-                    bb "would you like to see the main *fun* area?"
-                    menu:
-                            "Yeah":
-                                play voiceact "bopis/boris 8.mp3"
-                                bb "oh"
-                                narrater "*he takes your hand and leads you to another room*"
-                                play sound door
-                                jump gocasino
-                            "I wanna piss right now, where are the toilets at":
-                                $ shitcourt = 1
-                                play sound "bopis/boris 10.mp3"
-                                bb "Right this way sir"
-                                play sound door
-                                scene bath0
-                                play music casmusic2 fadein 1.5 volume 0.2
-                                $ renpy.pause(1.5, hard=True)
-                                scene bath1
-                                narrater "You enter the bathroom"
-                                menu:
-                                        "Enter stall":
-                                            play sound door
-                                            scene bath2
-                                            narrater "You enter the bathroom stall"
-                                            k "Okay let's get with it"
-                                            narrater "You start shitting"
-                                            play sound dia1
-                                            narrater "It appears you have diarrhea"
-                                            $ renpy.pause(2.0, hard=True)
-                                            play sound bang1
-                                            
-                                            $ renpy.pause(1.3, hard=True)
-                                            un "HEY"
-                                            play sound dia2
-                                            k "Hey man im shittin here im tryin ma best"
-                                            
+        play voiceact "bopis/boris 7.mp3"
+        bb "would you like to see the main {b}*fun*{/b} area?"
+        menu:
+            "Yeah":
+                play voiceact "bopis/boris 8.mp3"
+                bb "oh"
+                narrater "*he takes your hand and leads you to another room*"
+                play sound door
+                jump gocasino
+            "I wanna piss right now, where are the toilets at":
+                $ shitcourt = 1
+                play sound "bopis/boris 10.mp3"
+                bb "Right this way sir"
+                play sound door
+                scene bath0
+                play music casmusic2 fadein 1.5 volume 0.2
+                $ renpy.pause(1.5, hard=True)
+                scene bath1
+                narrater "You enter the bathroom"
+                menu:
+                    "Enter stall":
+                        play sound door
+                        scene bath2
+                        narrater "You enter the bathroom stall"
+                        k "Okay let's get with it"
+                        narrater "You start shitting"
+                        play sound dia1
+                        narrater "It appears you have diarrhea"
+                        $ renpy.pause(2.0, hard=True)
+                        play sound bang1
+                        
+                        $ renpy.pause(1.3, hard=True)
+                        play voiceact "matys/matesHEY.mp3"
+                        un "HEY"
+                        play sound dia2
+                        k "Hey man im shittin here im tryin ma best"
+                        
 
-                                            play sound bang2
-                                            $ renpy.pause(2)
-                                            $ karolTalkingMad = True
-                                            k "man IM SHITTING HERE LEAVE ME BEE"
+                        play sound bang2
+                        $ renpy.pause(2)
+                        $ karolTalkingMad = True
+                        k "man IM SHITTING HERE LEAVE ME BEE"
 
-                                            un "I ATE A KEBAB"
-                                            un "All the other stalls are BROKEN"
+                        play voiceact "matys/mates1.mp3"
+                        un "I ATE A KEBAB{nw=1.0}"
+                        extend " pleasee    open DOOR"
+                        play voiceact "matys/mates2.mp3"
+                        un "All the other stalls are BROKEN"
 
-                                            menu:
-                                                "Shit":
-                                                    jump shitting
-                                                "Shit harder":
-                                                    jump shitting
-                                            
-                                            label shitting:
-                                                play sound dia3
-                                                $ renpy.pause(7.0, hard=True)
-                                                play sound bang3
+                        menu:
+                            "Shit":
+                                jump shitting
+                            "Shit harder":
+                                jump shitting
+                        
+                        label shitting:
+                            play sound dia3
+                            $ renpy.pause(7.0, hard=True)
+                            play sound bang3
 
-                                                un "HEY MAN i cant hold it anymore OPEN UP"
+                            play voiceact "matys/mates3.mp3"
+                            un "i ate a KEBAB double spice  open the door OPEEEN"
 
-                                                k "FUCK OFF"
+                            k "FUCK OFF"
 
-                                                menu:
-                                                    "Keep shitting":
-                                                        play sound dia4
-                                                        $ renpy.pause(6.0, hard=True)
+                            menu:
+                                "Keep shitting":
+                                    play sound dia4
+                            $ renpy.pause(6.0, hard=True)
 
-                                                        play sound bang4
-                                                        un "plEASE OPEN TE DOOR"
-                                                        menu:
-                                                            "Continue shitting":
-                                                                play sound dia5
-                                                                $ renpy.pause(4.0, hard=True)
-                                                                show bath2 with vpunch
-                                                                play sound bang5
+                            play sound bang4
+                            play voiceact "matys/mates4.mp3"
+                            un "plEASE OPEN TE DOOR"
+                            menu:
+                                "Continue shitting":
+                                    play sound dia5
+                            $ renpy.pause(4.0, hard=True)
+                            show bath2 with vpunch
+                            play sound bang5
 
-                                                                un "OPENT HE FUCKING DOOR NOW"
-                                                                un "OR IM GONNA GET THE MANAGEMENT"
-                                                                menu:   
-                                                                    "Open the door":
-                                                                        narrater "You decide to open the door"
-                                                                        play sound door
-                                                                        scene bathdoor
-                                                                        $ renpy.pause(1.0, hard=True)
-                                                                        jump bathdisc
-                                                                    "Continue shitting":
-                                                                        $ didyankdoor = 1
-                                                                        play sound breakdoor
-                                                                        scene bathfist
-                                                                        $ renpy.pause(3.0, hard=True)
-                                                                        scene bathnodoor
-                                                                        play sound doorcrash
-                                                                        narrater "he yanks the door away"
+                            play voiceact "matys/mates5.mp3"
+                            un "OPENT HE FUCKING DOOR NOW"
+                            play voiceact "matys/mates6.mp3"
+                            un "OR IM GONNA GET THE MANAGEMENT"
+                            menu:   
+                                "Open the door":
+                                    narrater "You decide to open the door"
+                                    play sound door
+                                    scene bathdoor
+                                    $ renpy.pause(1.0, hard=True)
+                                    jump bathdisc
+                                "Continue shitting":
+                                    $ didyankdoor = 1
+                                    play sound breakdoor
+                                    scene bathfist
+                                    $ renpy.pause(3.0, hard=True)
+                                    scene bathnodoor
+                                    play sound doorcrash
+                                    narrater "he yanks the door away"
 
-                                                                        k "HEY WHAT THE FUCK mann"
-                                                                        $ karolTalkingMad = False
+                                    k "HEY WHAT THE FUCK mann"
+                                    $ karolTalkingMad = False
 
-                                                                        jump bathdisc
-                                        "Go back":
-                                            play sound door
-                                            scene cas1
-                                            narrater "You levae the bathroom"
-                                            play music casmusic fadein 1.5 volume 0.2
-                                            show bobis 1 with moveinbottom
-                                            play voiceact "bopis/boris 11.mp3"
-                                            bb "oh you already done?"
-                                            play voiceact "bopis/boris 12.mp3"
-                                            bb "well, let us go"
-                                            jump gocasino
+                                    jump bathdisc
+                    "Go back":
+                        play sound door
+                        scene cas1
+                        narrater "You levae the bathroom"
+                        play music casmusic fadein 1.5 volume 0.2
+                        show bobis 1 with moveinbottom
+                        play voiceact "bopis/boris 11.mp3"
+                        bb "oh you already done?"
+                        play voiceact "bopis/boris 12.mp3"
+                        bb "well, let us go"
+                        jump gocasino
 
     label bathdisc:
         $ isMatysiakAnger = True
         $ matysiak.location = 1
         $ matysiak.prevLocation = 1
         show mat 1 with dissolve
+        play voiceact "matys/mates7.mp3"
         mt "you bastard"
         show mat 4
+        play voiceact "matys/mates8.mp3"
         mt "I'm gonna beat the shit out of you"
         
         show mat 3
+        play voiceact "matys/mates9.mp3"
         mt "do you know what you did"
         show mat 2
+        play voiceact "matys/mates10.mp3"
         mt "I called the management"
         show mat 1
+        play voiceact "matys/mates11.mp3"
         mt "They are gonna show up here soon"
         show mat 4
+        play voiceact "matys/mates12.mp3"
         mt "you're fucked buddy"
         
         menu:
@@ -2021,8 +2035,10 @@ label _CASINO_ENTRY_HERE________________________________________________________
                     scene black
                     $ renpy.pause(2.0, hard=True)
                     narrater "it seemns that all the lights went oUT"
+                    play voiceact "matys/matesHEY.mp3"
                     mt "HEY???"
                     narrater "you manage to quickly sneek out of the stall in the dark"
+                    play voiceact "matys/mates13.mp3"
                     mt "HEY GET BACK HEREE"
                     narrater "the rooms start to smell lik some kind of drywalll"
                     narrater "you are so fucked"
@@ -2305,11 +2321,25 @@ label _CASINO_ENTRY_HERE________________________________________________________
                             b2 "ooooh you had a good time huh???"
                             play voiceact barta3
                             b2 "that makes me so happy!!!!!!"
-                            #play sound fart
+                            play sound dia5
+                            show bartwin surpris
+                            $ renpy.pause(4.0, hard=True)
+
                             play voiceact fartssas
                             b2 "uuuh uhhh hey man i need to excuse myself for a moment"
-                            "teeheee i didnt finish this but look man is not my fualt leave me alone go fart in the toilet man"
+                            play sound quickkrun
+                            hide bartwin with moveoutleft
+                            $ renpy.pause(1.0, hard=True)
+                            k "what the ell"
+                            k "did this guy just shit himself thats pretty funny"
+                            menu:
+                                "leave":
+                                    $ casinoLovesYou += 1
+                                    $ barguybadshinger = 2
+                                    jump casinoRIGHT
                             ##########ARE YOU FUCKIN SERIOUS HERE____________________________________________________________________________________________ :)))))))) dont worry ;) be happy
+                            #"teeheee i didnt finish this but look man is not my fualt leave me alone go fart in the toilet man"
+                            #FUCK YOUUUU SIMON
                             jump allgoodbar
                         "tell the truth":
                             k "i killed him"
@@ -3644,7 +3674,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
                 play voiceact "bopis/boris 21.mp3"
                 bb "boss, you got the guy? thats so good!"
             "flee":
-                narrator "you start flooring it"
+                narrater "you start flooring it"
                 scene casbeat1
                 hide chief onlayer screens
                 play sound cloth
@@ -3660,12 +3690,15 @@ label _CASINO_ENTRY_HERE________________________________________________________
                 with moveinright
                 play voiceact "decer/dec16.mp3"
                 ch "well well well, we are not letting you run"
+        play sound foot
+        scene casbeat1
         play voiceact "decer/dec17.mp3"
         ch "we will now turn you to the police, CRIMINEL"
         play voiceact "decer/dec18.mp3"
         ch "nothing personal you guy, we just want no trouble here"
         if casinoLovesYou >= 2:
             show casinocrowd happy with moveinbottom
+            play sound applause1
             crwd "but we love this guy"
             if wrenchCasinoShingas == 1:
                 play voiceact "wrench/wrench 26.mp3"
@@ -3677,13 +3710,18 @@ label _CASINO_ENTRY_HERE________________________________________________________
                 play voiceact "sexyguy/sexyguy 67.mp3"
                 sx "We had a DELIGHTFULL time"
             if barguybadshinger == 2:
+                play voiceact "bartwin/bartawesome.mp3"
                 b2 "such an awesome guy"
-            "huh???? this part is really fucking unfinished here"##___________________________FINITSHSHHS
+            show beta onlayer screens
+            "BETA:unfinishet shit here, shit should happen here leading to the good ending"
+            extend ", although it would really be a good ending, just a slightly better one than the other wans yeah"
+            #"huh???? this part is really fucking unfinished here"##___________________________FINITSHSHHS
             hide chief onlayer screens
             hide bobis onlayer screens
             jump end
         elif casinoLovesYou <= -2:
             show casinocrowd mad with moveinbottom
+            play sound disappointment
             crwd "we hate this guy"
             if wrenchCasinoShingas == 2:
                 play voiceact "wrench/wrench 27.mp3"
@@ -3694,13 +3732,14 @@ label _CASINO_ENTRY_HERE________________________________________________________
                 play voiceact "stalin/stalin 12.mp3"
                 wb "he couldnt spare us a single penny!"
             if barguybadshinger == 3:
+                play voiceact "bartwin/bartnotawesome.mp3"
                 b2 "HE FUCKING KILLED MY BROTHER"
             if sexyguyCasinoShingas == 12:
                 play voiceact "sexyguy/sexyguy 68.mp3"
                 sx "I deeply regret playing with this man"
             play voiceact "bopis/boris FUCK YOU.mp3"
             bb "FUCK YOUU"
-            "police men appear and the beating happen"
+            #"police men appear and the beating happen"
             menu:
                 "run the FUCK away":
                     
@@ -3711,15 +3750,16 @@ label _CASINO_ENTRY_HERE________________________________________________________
             $ renpy.movie_cutscene("run.webm")
             
             play sound cloth
-            play voiceact "pomer/pomerbeat1.mp3"
             show wiktor 2 with moveinbottom
+            play voiceact "pomer/pomerbeat1.mp3"
             w "we hate this guy TASTE THIS!!!!"
+            #$ renpy.pause(1.0, hard=True)
             scene black
             play sound beating
             $ renpy.pause(2.2, hard=True)
             $ karolTalkingMad = True
             k "OOWWWW"
-            k "SHIIIITTTTT{nw=0.5}"
+            k "SHIIIITTTTT{nw=0.5}"#this sucks
             k "OOWWWW FUUUCCCCKKKK"
             menu:
                 "keep running":
@@ -3732,25 +3772,24 @@ label _CASINO_ENTRY_HERE________________________________________________________
                     scene black
             play sound beating
             $ renpy.pause(2.2, hard=True)
-            $ karolTalkingMad = True
             k "OOWWWW SHIIITTTTT"
+            $ karolTalkingMad = False
             scene casbeat5
             show mat 6
             show black
             $ renpy.movie_cutscene("matyjump.webm")
-            
-            k "FUUUUUUUUUUCCCCCCCCCCCCCCCCCCCKKKKKKKKKKKKKK IT HURTSS"
-            k "WHOO DID THAT"
-            $ karolTalkingMad = False
+            show vigen onlayer screens
             show black:
                 alpha 1.0
                 linear 3.0 alpha 0.0
-            mt "i dont know who you are.."
-            mt "but i guess ill beat the SHIT outta you"
-            k "what?"
-
+            play voiceact "matys/mates14.mp3"
+            mt "i dont even know who you are.."
+            play voiceact "matys/mates15.mp3"
+            mt "but im still gonna fuck you up, like a musty maggot{nw=4.7}"
+            extend " dear frend"
+    
             hide mat 6
-            
+            window hide
             show kick 1
             $ renpy.pause(1.0, hard=True)
             play sound bad
@@ -3788,14 +3827,14 @@ label _CASINO_ENTRY_HERE________________________________________________________
             $ renpy.pause(0.1, hard=True)
             show kick 1
 
+            hide black
             $ renpy.pause(0.1, hard=True)
             play sound bad
-            show kick 2 with vpunch
-            $ renpy.pause(0.1, hard=True)
-            show kick 1
-
-
-            mt "take this"
+            show black
+            $ renpy.pause(2.0, hard=True)
+            hide vigen onlayer screens
+            narrater "some time passes"
+            $ renpy.pause(1.0, hard=True)
             jump lospital##_________________________________________________TOFINISH
             
         else:
@@ -3816,10 +3855,11 @@ label _CASINO_ENTRY_HERE________________________________________________________
         show casbackdoordark
         $ randomasNumeras(10)
         narrater "you aproach te DOOR, but suddenly u feel some powerfull presence..."
+        play sound hevanly
         show locknik light with dissolve
         $ renpy.pause(1, hard=True)
         show locknik lock with dissolve
-        if (randomAssShit <= 1):
+        if (randomAssShit <= 0): #lmao
             og "hello im ognik" #_________________________________________ognik<-----
             #show expression "images/ognikTest/locknik lock2.png"
             show locknik lock2
@@ -3838,7 +3878,7 @@ label _CASINO_ENTRY_HERE________________________________________________________
             extend " i hate you"
             og "yes good luck come back here in six hours yes and maybe im gonna"
             extend " let you out maybe yes"
-
+        play sound hevanly
         show locknik light with dissolve
         $ renpy.pause(1, hard=True)
         hide locknik light with dissolve
@@ -4188,36 +4228,50 @@ label _CASINO_LEAVING_HERE______________________________________________________
 
         $ karolTalkingMad = False
         j "can someone fact check this?"
+        play voiceact "drywall/dry48.mp3"
         p2 "your honour, i can confirm he was inddeed taking shit."
         j "how so?"
+        play voiceact "drywall/dry49.mp3"
         p2 "after we transported him here he left a giant shit stain in the back of our patrol car"
 
         j "wery well.. we may continue"
 
         if not isPathetic:
+            play voiceact "drywall/dry50.mp3"
             p2 "wait a second"
+            play voiceact "drywall/dry51.mp3"
             p2 "i completely forgot but i have this written down"
+            play voiceact "drywall/dry52.mp3"
             p2 "the suspect proceeded to.. "
             play audio impact2
+            play voiceact "drywall/dry53.mp3"
             extend " {color=#de1809}attack{/color} me with his fists when he was found"
+            play voiceact "drywall/dry54.mp3"
             p2 "and i scared him off when i pulled out my gun"
             j "WHAT"
             play audio hammer1
             $ judgepissedlevel += 1
             j "ASSAULT ON A POLICE OFFICEERR??? THATS NOT NICE"
-
+        
+        play voiceact "drywall/dry55.mp3"
         p2 "hold on wait "
+        play voiceact "drywall/dry56.mp3"
         extend "i compltetly forgot"
+        play voiceact "drywall/dry57.mp3"
         p2 "the guy {color=#de1809}murdered{/color} a bunch of people"
 
         j "are you serious?"
         j "then what were we discussing just now?"
+        play voiceact "drywall/dry58.mp3"
         p2 "there was a mix up, there was never any fight"
         j "in that case the defendant stands accused of multiple murder charges and resisting arrest"
         j "is this true? or will u waste of my more time"
         
-        p2 "yes your honour that is correct we have found concrete "    
+        play voiceact "drywall/dry59.mp3"
+        p2 "yes your honour that is correct we have found concrete "
+        play voiceact "drywall/dry60.mp3"    
         extend "concrete eveideince that is"
+        play voiceact "drywall/dry61.mp3"
         p2 "im very sorry about not starting with this it must be the caffeine"    
         j "well lets hear that evidence you found"
         play audio appear
@@ -4235,6 +4289,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
                 j "will the defendant please shut the fuck up"
                 $ judgepissedlevel += 1
                 narrater "seems youre really getting on his nerves"
+                play voiceact "drywall/dry62.mp3"
                 p2 "in any case.."
             "Say nothing":
                 pass
@@ -4244,10 +4299,15 @@ label _CASINO_LEAVING_HERE______________________________________________________
         p1 "but then.."
         play voiceact "zipps/zippy 20.mp3"
         extend "not too far on the ground we saw something disturbing.."
+        play voiceact "drywall/dry63.mp3"
         p2 "it was a man.."
+        play voiceact "drywall/dry64.mp3"
         extend "{color=#327325}a pickle{/color}"
+        play voiceact "drywall/dry65.mp3"
         extend ". A man."
+        play voiceact "drywall/dry66.mp3"
         extend " A {color=#327325}pickle{/color} shaped man."
+        play voiceact "drywall/dry67.mp3"
         extend " Long gone.. No longer with us."
         play voiceact "zipps/zippy 21.mp3"
         p1 "we actually confiscated the car"
@@ -4266,13 +4326,16 @@ label _CASINO_LEAVING_HERE______________________________________________________
         
     
         show dryleft with dissolve
+        play voiceact "drywall/dry68.mp3"
         p2 "here it is, our concrete evidence of the first murder"
 
         menu:
             "Not my car":
                 k "Whata re you talk about?"
                 k "This isnt my car"
+                play voiceact "drywall/dry69.mp3"
                 p2 "Yes"
+                play voiceact "drywall/dry70.mp3"
                 extend " ,yes it is"
                 play voiceact "zipps/zippy 22.mp3"
                 p1 "Look at it! the car s yellow"
@@ -4301,6 +4364,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
         play sound nin2
         "..."
 
+        play voiceact "drywall/dry71.mp3"
         p2 "you honor-"
 
         play audio hammer2
@@ -4315,7 +4379,8 @@ label _CASINO_LEAVING_HERE______________________________________________________
 
         play sound nin4
         "..."
-
+        
+        play voiceact "drywall/dry72.mp3"
         p2 "hes dead."
         play music ace3 fadein 1.0 volume 0.3
         j "wery vell.."
@@ -4415,6 +4480,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
                                 jump free_ending
                             else:
                                 j "for the record... the defendant appears to be wearing fake glasses, a fake nose, and a fake mustache."
+                                play voiceact "drywall/dry73.mp3"
                                 p2 "should i write that down?"
                                 j "no need"
                                 menu:
@@ -4568,6 +4634,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
 
         play audio appear
         show dryleft with moveinleft
+        play voiceact "drywall/dry74.mp3"
         p2 "yes your honour"
         play voiceact "miki/tru9.mp3"
         t "hey sleepy joe, i think you should listen to this. i bet nobodys seen anything like it"
@@ -4583,6 +4650,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
 
         play audio appear
         show dryleft with moveinleft
+        play voiceact "drywall/dry75.mp3"
         p2 "so, in any case, we first got a call about a murder in a bar"
 
         play audio cloth
@@ -4591,6 +4659,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
         with moveinright
         play voiceact "zipps/zippy 25.mp3"
         p1 "when we arrived at the scene, we saw a dead bartender... DEAD on the ground"
+        play voiceact "drywall/dry76.mp3"
         p2 "quite a gruesome sight."
 
         play voiceact "miki/tru11.mp3"
@@ -4611,9 +4680,11 @@ label _CASINO_LEAVING_HERE______________________________________________________
         play voiceact "miki/tru14.mp3"
         t "alright, sure, im just making a statement"
         
+        play voiceact "drywall/dry77.mp3"
         p2 "in the building, we encountered.. "
         play audio impact1
         with hpunch
+        play voiceact "drywall/dry78.mp3"
         extend "the {color=#db190b}{b}DEFENDANT!{/b}"
         play voiceact "zipps/zippy 26.mp3"
         p1 "i encountered him further in the building, his fists, covered in blood"
@@ -4642,6 +4713,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
                 extend " a HORSE!!"
                 $ karolTalkingMad = False
         show court3
+        play voiceact "treeguy/treeguywth.mp3"
         un "what he ell??"
         play audio cloth
         show teeguy serious with dissolve
@@ -4705,6 +4777,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
                         k "SQUARE UP BITCH"
                         $ karolTalkingMad = False
                         play audio fall
+                        play voiceact "treeguy/treeguyfall.mp3"
                         hide teeguy fly with moveoutbottom
                         show hands throw:
                             zoom 1
@@ -4736,6 +4809,7 @@ label _CASINO_LEAVING_HERE______________________________________________________
                                     "use":
                                         play sound beeppad
                                         narrater "you press random thingss"
+                                play sound hevanly
                                 show locknik light with dissolve
                                 $ renpy.pause(1.0,hard=True)
                                 $ renpy.config.skipping = False
@@ -5049,12 +5123,14 @@ label _CASINO_LEAVING_HERE______________________________________________________
         show melonguy 1
         show meloncarwindow:
             ypos 0
-            linear 1.0 ypos 400
+            linear 1.0 ypos 300
         $ renpy.pause(2.0, hard=True)
         lon "yeah"
         show melonguy 2
         hide melongifer
-        pause
+        show beta onlayer screens
+        "BETA:unfinished shit here like u talk to a man and maybe get back to domin in woodź so like a good ending"
+        extend ", but not actually a good one just slightly better than the other oness"
         show melonguy 3
         pause
         show melonguy 4
@@ -5066,6 +5142,10 @@ label _CASINO_LEAVING_HERE______________________________________________________
 
     label lospital:
         scene hospit 1
+        show black:
+            alpha 1.0
+            linear 3.0 alpha 0.0
+        $ renpy.pause(3.0, hard=True)
         k "what the hell"
         k " icant feel my legs"
         show hosipit armsnlegs with dissolve

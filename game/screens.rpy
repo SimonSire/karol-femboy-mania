@@ -420,6 +420,7 @@ screen main_menu():
             action Play("audio", karolvoicestable[renpy.random.randint(0,9)])
         image "images/shapeball1.png" xpos (igorrPedestrian.xpos+100) yalign 0.925 zoom 0.9 at rotate_image((igorrPedestrian.xpos/(igorrPedestrian.markiplier*igorrPedestrian.dir)*(igorrPedestrian.markiplier*igorrPedestrian.dir-4))*0.716 )
 
+        image "images/beta.png" xalign 0.95 yalign 0.15
     ## This empty frame darkens the main menu.
     frame:
         style "main_menu_frame"
